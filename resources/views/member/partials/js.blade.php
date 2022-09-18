@@ -1,8 +1,10 @@
 <!-- jquery -->
 <script data-cfasync="false"
 src="{{asset('member/assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script> <!-- jquery library js -->
-<script type="text/javascript" src="{{asset('member/assets/js/bootstrap.min.js')}}"></script> <!-- bootstrap js -->
+<script type="text/javascript" src="{{asset('member/assets/js/jquery.min.js')}}"></script>
+<!-- jquery library js -->
+<script type="text/javascript" src="{{asset('member/assets/js/bootstrap.min.js')}}"></script>
+<!-- bootstrap js -->
 <script type="text/javascript" src="{{asset('member/assets/js/owl.carousel.js')}}"></script>
 <!-- owl carousel js -->
 <script type="text/javascript" src="{{asset('member/assets/js/jquery.ajaxchimp.js')}}"></script>
@@ -15,7 +17,7 @@ src="{{asset('member/assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-dec
 <!-- facts count js required for jquery.counterup.js file -->
 <script type="text/javascript" src="{{asset('member/assets/js/jquery.counterup.js')}}"></script>
 <!-- facts count js-->
-<script type="text/javascript" src="{{asset('member/assets/js/menumaker.js"></')}}"></script>
+<script type="text/javascript" src="{{asset('member/assets/js/menumaker.js')}}"></script>
 <!-- menu js-->
 <script type="text/javascript" src="{{asset('member/assets/js/jquery.appear.js')}}"></script>
 <!-- progress bar js -->
