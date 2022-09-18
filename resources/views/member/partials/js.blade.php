@@ -34,7 +34,7 @@ src="{{asset('member/assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-dec
 jQuery(function ($) {
     // Asynchronously Load the map API
     var script = document.createElement('script');
-    script.src = "http://maps.googleapis.com/maps/api/js?sensor=false&amp;callback=initialize";
+    script.src = "http://maps.googleapis.com/maps/api/js?sensor=false/callback=initialize";
     document.body.appendChild(script);
 });
 

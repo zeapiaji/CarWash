@@ -1,5 +1,6 @@
 @extends('member.app')
 @section('index')
+
 <body>
     <!-- preloader -->
     <div class="preloader" style="display: none;">
@@ -150,138 +151,51 @@
     </div>
     <!--  end navigation -->
     <!--  slider -->
-    <div id="home-slider" class="home-slider owl-carousel owl-theme owl-loaded">
-
-        <div class="owl-stage-outer">
-            <div class="owl-stage"
-                style="transform: translate3d(-5876px, 0px, 0px); transition: all 2s ease 0s; width: 10283px;">
-                <div class="owl-item cloned" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item cloned" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-3.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-1.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item active" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-3.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item cloned" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-1.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item cloned" style="width: 1469px; margin-right: 0px;">
-                    <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
-                        <div class="container">
-                            <div class="slider-dtl">
-                                <h4 class="slider-sub-heading">We Care</h4>
-                                <h1 class="slider-heading">For Your Car</h1>
-                                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis
-                                    ipsum sed aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.
-                                </p>
-                                <div class="slider-btn">
-                                    <a href="#" class="btn btn-orange">Read More</a>
-                                    <a href="#" class="btn btn-default">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
+    <div id="home-slider" class="home-slider">
+        <div class="item home-slider-bg"
+            style="background-image: url('{{asset('member/assets/images/slider-1.jpg')}}')">
+            <div class="container">
+                <div class="slider-dtl">
+                    <h4 class="slider-sub-heading">We Care</h4>
+                    <h1 class="slider-heading">For Your Car</h1>
+                    <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
+                        aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                    <div class="slider-btn">
+                        <a href="#" class="btn btn-orange">Read More</a>
+                        <a href="#" class="btn btn-default">Contact Us</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="owl-controls">
-            <div class="owl-nav">
-                <div class="owl-prev" style="display: block;"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                <div class="owl-next" style="display: block;"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+        <div class="item home-slider-bg"
+            style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
+            <div class="container">
+                <div class="slider-dtl">
+                    <h4 class="slider-sub-heading">We Care</h4>
+                    <h1 class="slider-heading">For Your Car</h1>
+                    <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
+                        aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                    <div class="slider-btn">
+                        <a href="#" class="btn btn-orange">Read More</a>
+                        <a href="#" class="btn btn-default">Contact Us</a>
+                    </div>
+                </div>
             </div>
-            <div class="owl-dots" style="display: none;"></div>
+        </div>
+        <div class="item home-slider-bg"
+            style="background-image: url('{{asset('member/assets/images/slider-3.jpg')}}')">
+            <div class="container">
+                <div class="slider-dtl">
+                    <h4 class="slider-sub-heading">We Care</h4>
+                    <h1 class="slider-heading">For Your Car</h1>
+                    <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
+                        aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                    <div class="slider-btn">
+                        <a href="#" class="btn btn-orange">Read More</a>
+                        <a href="#" class="btn btn-default">Contact Us</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--  end slider -->
@@ -350,7 +264,8 @@
                 </div>
                 <div class="col-md-4 hidden-sm">
                     <div class="who-we-are-img">
-                        <img src="{{asset('member/assets/images/who-we-are.jpg')}}" class="img-responsive" alt="who-we-are">
+                        <img src="{{asset('member/assets/images/who-we-are.jpg')}}" class="img-responsive"
+                            alt="who-we-are">
                     </div>
                 </div>
             </div>
@@ -368,8 +283,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-01.png')}}"
-                                    class="img-responsive" alt="service-01"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-01.png')}}" class="img-responsive"
+                                    alt="service-01"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -383,8 +299,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-02.png')}}"
-                                    class="img-responsive" alt="service-02"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-02.png')}}" class="img-responsive"
+                                    alt="service-02"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -398,8 +315,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-03.png')}}"
-                                    class="img-responsive" alt="service-03"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-03.png')}}" class="img-responsive"
+                                    alt="service-03"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -413,8 +331,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-04.png')}}"
-                                    class="img-responsive" alt="service-04"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-04.png')}}" class="img-responsive"
+                                    alt="service-04"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -428,8 +347,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-05.png')}}"
-                                    class="img-responsive" alt="service-05"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-05.png')}}" class="img-responsive"
+                                    alt="service-05"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -443,8 +363,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-06.png')}}"
-                                    class="img-responsive" alt="service-06"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-06.png')}}" class="img-responsive"
+                                    alt="service-06"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -458,8 +379,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-07.png')}}"
-                                    class="img-responsive" alt="service-07"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-07.png')}}" class="img-responsive"
+                                    alt="service-07"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -473,8 +395,9 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="service-block text-center">
                         <div class="service-icon">
-                            <a href="services-details.html"><img src="{{asset('member/assets/images/icons/service-08.png')}}"
-                                    class="img-responsive" alt="service-08"></a>
+                            <a href="services-details.html"><img
+                                    src="{{asset('member/assets/images/icons/service-08.png')}}" class="img-responsive"
+                                    alt="service-08"></a>
                         </div>
                         <div class="service-dtl">
                             <a href="services-details.html">
@@ -500,119 +423,42 @@
                     <p class="sub-heading">Donec pede justo fringilla vel aliquet nec vulputate eget arcu enim rhoncus
                     </p>
                 </div>
-                <div id="work-gallery-slider" class="work-gallery-slider owl-carousel owl-theme owl-loaded">
-
-                    <div class="owl-stage-outer">
-                        <div class="owl-stage"
-                            style="transform: translate3d(-2632.5px, 0px, 0px); transition: all 2s ease 0s; width: 4095px;">
-                            <div class="owl-item cloned" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-03.jpg')}}" class="img-responsive" alt="gallery-03">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-03.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-04.jpg')}}" class="img-responsive" alt="gallery-04">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-04.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-05.jpg')}}" class="img-responsive" alt="gallery-05">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-05.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-06.jpg')}}" class="img-responsive" alt="gallery-06">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-06.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-01.jpg')}}" class="img-responsive" alt="gallery-01">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-01.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-02.jpg')}}" class="img-responsive" alt="gallery-02">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-02.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-03.jpg')}}" class="img-responsive" alt="gallery-03">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-03.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-04.jpg')}}" class="img-responsive" alt="gallery-04">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-04.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-05.jpg')}}" class="img-responsive" alt="gallery-05">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-05.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-06.jpg')}}" class="img-responsive" alt="gallery-06">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-06.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-01.jpg')}}" class="img-responsive" alt="gallery-01">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-01.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-02.jpg')}}" class="img-responsive" alt="gallery-02">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-02.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-03.jpg')}}" class="img-responsive" alt="gallery-03">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-03.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 262.5px; margin-right: 30px;">
-                                <div class="item work-gallery-block">
-                                    <img src="{{asset('member/assets/images/gallery/gallery-04.jpg')}}" class="img-responsive" alt="gallery-04">
-                                    <div class="overlay-bg"><a href="images/gallery/gallery-04.jpg"
-                                            title="Your Image Title"><i class="fa fa-plus"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
+                <div id="work-gallery-slider" class="work-gallery-slider">
+                    <div class="item work-gallery-block">
+                        <img src="{{asset('member/assets/images/gallery/gallery-01.jpg')}}" class="img-responsive"
+                            alt="gallery-01">
+                        <div class="overlay-bg"><a href="{{asset('member/assets/images/gallery/gallery-01.jpg')}}"
+                                title="Your Image Title"><i class="fa fa-plus"></i></a></div>
                     </div>
-                    <div class="owl-controls">
-                        <div class="owl-nav">
-                            <div class="owl-prev" style="display: block;"><i class="fa fa-angle-left"
-                                    aria-hidden="true"></i></div>
-                            <div class="owl-next" style="display: block;"><i class="fa fa-angle-right"
-                                    aria-hidden="true"></i></div>
-                        </div>
-                        <div class="owl-dots" style="display: none;"></div>
+                    <div class="item work-gallery-block">
+                        <img src="{{asset('member/assets/images/gallery/gallery-02.jpg')}}" class="img-responsive"
+                            alt="gallery-02">
+                        <div class="overlay-bg"><a href="{{asset('member/assets/images/gallery/gallery-02.jpg')}}"
+                                title="Your Image Title"><i class="fa fa-plus"></i></a></div>
+                    </div>
+                    <div class="item work-gallery-block">
+                        <img src="{{asset('member/assets/images/gallery/gallery-03.jpg')}}" class="img-responsive"
+                            alt="gallery-03">
+                        <div class="overlay-bg"><a href="{{asset('member/assets/images/gallery/gallery-03.jpg')}}"
+                                title="Your Image Title"><i class="fa fa-plus"></i></a></div>
+                    </div>
+                    <div class="item work-gallery-block">
+                        <img src="{{asset('member/assets/images/gallery/gallery-04.jpg')}}" class="img-responsive"
+                            alt="gallery-04">
+                        <div class="overlay-bg"><a href="{{asset('member/assets/images/gallery/gallery-04.jpg')}}"
+                                title="Your Image Title"><i class="fa fa-plus"></i></a></div>
+                    </div>
+                    <div class="item work-gallery-block">
+                        <img src="{{asset('member/assets/images/gallery/gallery-05.jpg')}}" class="img-responsive"
+                            alt="gallery-05">
+                        <div class="overlay-bg"><a href="{{asset('member/assets/images/gallery/gallery-05.jpg')}}"
+                                title="Your Image Title"><i class="fa fa-plus"></i></a></div>
+                    </div>
+                    <div class="item work-gallery-block">
+                        <img src="{{asset('member/assets/images/gallery/gallery-06.jpg')}}" class="img-responsive"
+                            alt="gallery-06">
+                        <div class="overlay-bg"><a href="{{asset('member/assets/images/gallery/gallery-06.jpg')}}"
+                                title="Your Image Title"><i class="fa fa-plus"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -630,8 +476,8 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="team-block text-center">
                         <div class="team-img">
-                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/1.jpg')}}" class="img-responsive"
-                                    alt="team-01">
+                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/1.jpg')}}"
+                                    class="img-responsive" alt="team-01">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -654,8 +500,8 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="team-block text-center">
                         <div class="team-img">
-                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/2.jpg')}}" class="img-responsive"
-                                    alt="team-02">
+                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/2.jpg')}}"
+                                    class="img-responsive" alt="team-02">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -678,8 +524,8 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="team-block text-center">
                         <div class="team-img">
-                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/3.jpg')}}" class="img-responsive"
-                                    alt="team-03">
+                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/3.jpg')}}"
+                                    class="img-responsive" alt="team-03">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -702,8 +548,8 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="team-block text-center">
                         <div class="team-img">
-                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/4.jpg')}}" class="img-responsive"
-                                    alt="team-04">
+                            <a href="team-details.html"><img src="{{asset('admin/assets/img/team/4.jpg')}}"
+                                    class="img-responsive" alt="team-04">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -1345,150 +1191,41 @@
                 <div class="section text-center">
                     <h3 class="section-heading">Testimonials</h3>
                 </div>
-                <div id="testimonials-slider" class="testimonials-slider owl-carousel owl-theme owl-loaded">
-
-
-                    <div class="owl-stage-outer">
-                        <div class="owl-stage"
-                            style="transform: translate3d(-3420px, 0px, 0px); transition: all 2s ease 0s; width: 6840px;">
-                            <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                                <div class="item testimonials-block">
-                                    <div class="testimonials-dtl text-center">
-                                        <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo
-                                            maecenas malesuada praesent congue erat at massa sed cursus turpis vitae
-                                            tortor donec posuere vulputate arcu phasellus accumsan cursus velit
-                                            vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                            cubilia. ”</p>
-                                    </div>
-                                    <div class="testimonials-client">
-                                        <div class="testimonials-client-img">
-                                            <img src="{{asset('member/assets/images/testimonials-client-01.jpg')}}" class="img-responsive"
-                                                alt="client-01">
-                                        </div>
-                                        <div class="testimonials-client-dtl">
-                                            <h6 class="client-name">Sarah Cesaro</h6>
-                                            <div class="client-since">Platinum user from 3 years</div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div id="testimonials-slider" class="testimonials-slider">
+                    <div class="item testimonials-block">
+                        <div class="testimonials-dtl text-center">
+                            <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo maecenas
+                                malesuada praesent congue erat at massa sed cursus turpis vitae tortor donec posuere
+                                vulputate arcu phasellus accumsan cursus velit vestibulum ante ipsum primis in faucibus
+                                orci luctus et ultrices posuere cubilia. ”</p>
+                        </div>
+                        <div class="testimonials-client">
+                            <div class="testimonials-client-img">
+                                <img src="{{asset('member/assets/images/testimonials-client-01.jpg')}}"
+                                    class="img-responsive" alt="client-01">
                             </div>
-                            <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                                <div class="item testimonials-block">
-                                    <div class="testimonials-dtl text-center">
-                                        <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo
-                                            maecenas malesuada praesent congue erat at massa sed cursus turpis vitae
-                                            tortor donec posuere vulputate arcu phasellus accumsan cursus velit
-                                            vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                            cubilia. ”</p>
-                                    </div>
-                                    <div class="testimonials-client">
-                                        <div class="testimonials-client-img">
-                                            <img src="{{asset('member/assets/images/testimonials-client-02.jpg')}}" class="img-responsive"
-                                                alt="client-02">
-                                        </div>
-                                        <div class="testimonials-client-dtl">
-                                            <h6 class="client-name">Smith Cesaro</h6>
-                                            <div class="client-since">Platinum user from 2 years</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 1140px; margin-right: 0px;">
-                                <div class="item testimonials-block">
-                                    <div class="testimonials-dtl text-center">
-                                        <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo
-                                            maecenas malesuada praesent congue erat at massa sed cursus turpis vitae
-                                            tortor donec posuere vulputate arcu phasellus accumsan cursus velit
-                                            vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                            cubilia. ”</p>
-                                    </div>
-                                    <div class="testimonials-client">
-                                        <div class="testimonials-client-img">
-                                            <img src="{{asset('member/assets/images/testimonials-client-01.jpg')}}" class="img-responsive"
-                                                alt="client-01">
-                                        </div>
-                                        <div class="testimonials-client-dtl">
-                                            <h6 class="client-name">Sarah Cesaro</h6>
-                                            <div class="client-since">Platinum user from 3 years</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 1140px; margin-right: 0px;">
-                                <div class="item testimonials-block">
-                                    <div class="testimonials-dtl text-center">
-                                        <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo
-                                            maecenas malesuada praesent congue erat at massa sed cursus turpis vitae
-                                            tortor donec posuere vulputate arcu phasellus accumsan cursus velit
-                                            vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                            cubilia. ”</p>
-                                    </div>
-                                    <div class="testimonials-client">
-                                        <div class="testimonials-client-img">
-                                            <img src="{{asset('member/assets/images/testimonials-client-02.jpg')}}" class="img-responsive"
-                                                alt="client-02">
-                                        </div>
-                                        <div class="testimonials-client-dtl">
-                                            <h6 class="client-name">Smith Cesaro</h6>
-                                            <div class="client-since">Platinum user from 2 years</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                                <div class="item testimonials-block">
-                                    <div class="testimonials-dtl text-center">
-                                        <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo
-                                            maecenas malesuada praesent congue erat at massa sed cursus turpis vitae
-                                            tortor donec posuere vulputate arcu phasellus accumsan cursus velit
-                                            vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                            cubilia. ”</p>
-                                    </div>
-                                    <div class="testimonials-client">
-                                        <div class="testimonials-client-img">
-                                            <img src="{{asset('member/assets/images/testimonials-client-01.jpg')}}" class="img-responsive"
-                                                alt="client-01">
-                                        </div>
-                                        <div class="testimonials-client-dtl">
-                                            <h6 class="client-name">Sarah Cesaro</h6>
-                                            <div class="client-since">Platinum user from 3 years</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                                <div class="item testimonials-block">
-                                    <div class="testimonials-dtl text-center">
-                                        <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo
-                                            maecenas malesuada praesent congue erat at massa sed cursus turpis vitae
-                                            tortor donec posuere vulputate arcu phasellus accumsan cursus velit
-                                            vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                                            cubilia. ”</p>
-                                    </div>
-                                    <div class="testimonials-client">
-                                        <div class="testimonials-client-img">
-                                            <img src="{{asset('member/assets/images/testimonials-client-02.jpg')}}" class="img-responsive"
-                                                alt="client-02">
-                                        </div>
-                                        <div class="testimonials-client-dtl">
-                                            <h6 class="client-name">Smith Cesaro</h6>
-                                            <div class="client-since">Platinum user from 2 years</div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="testimonials-client-dtl">
+                                <h6 class="client-name">Sarah Cesaro</h6>
+                                <div class="client-since">Platinum user from 3 years</div>
                             </div>
                         </div>
                     </div>
-                    <div class="owl-controls">
-                        <div class="owl-nav">
-                            <div class="owl-prev" style="display: none;"><i class="fa fa-angle-left"
-                                    aria-hidden="true"></i></div>
-                            <div class="owl-next" style="display: none;"><i class="fa fa-angle-right"
-                                    aria-hidden="true"></i></div>
+                    <div class="item testimonials-block">
+                        <div class="testimonials-dtl text-center">
+                            <p>“ Curabitur ligula sapien tincidunt non euismod vitae posuere imperdiet leo maecenas
+                                malesuada praesent congue erat at massa sed cursus turpis vitae tortor donec posuere
+                                vulputate arcu phasellus accumsan cursus velit vestibulum ante ipsum primis in faucibus
+                                orci luctus et ultrices posuere cubilia. ”</p>
                         </div>
-                        <div class="owl-dots" style="display: block;">
-                            <div class="owl-dot"><span></span></div>
-                            <div class="owl-dot active"><span></span></div>
+                        <div class="testimonials-client">
+                            <div class="testimonials-client-img">
+                                <img src="{{asset('member/assets/images/testimonials-client-02.jpg')}}"
+                                    class="img-responsive" alt="client-02">
+                            </div>
+                            <div class="testimonials-client-dtl">
+                                <h6 class="client-name">Smith Cesaro</h6>
+                                <div class="client-since">Platinum user from 2 years</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1502,7 +1239,8 @@
             <div class="row">
                 <div class="col-md-4 hidden-sm">
                     <div class="appointment-img">
-                        <img src="{{asset('member/assets/images/appointment.jpg')}}" class="img-responsive" alt="Appointment">
+                        <img src="{{asset('member/assets/images/appointment.jpg')}}" class="img-responsive"
+                            alt="Appointment">
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
@@ -1608,8 +1346,9 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="news-block">
                         <div class="news-img">
-                            <a href="blog-single-left-sidebar.html"><img src="{{asset('member/assets/images/blog/blog-01.jpg')}}"
-                                    class="img-responsive" alt="news-01">
+                            <a href="blog-single-left-sidebar.html"><img
+                                    src="{{asset('member/assets/images/blog/blog-01.jpg')}}" class="img-responsive"
+                                    alt="news-01">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -1640,8 +1379,9 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="news-block">
                         <div class="news-img">
-                            <a href="blog-single-left-sidebar.html"><img src="{{asset('member/assets/images/blog/blog-02.jpg')}}"
-                                    class="img-responsive" alt="news-02">
+                            <a href="blog-single-left-sidebar.html"><img
+                                    src="{{asset('member/assets/images/blog/blog-02.jpg')}}" class="img-responsive"
+                                    alt="news-02">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -1672,8 +1412,9 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="news-block">
                         <div class="news-img">
-                            <a href="blog-single-left-sidebar.html"><img src="{{asset('member/assets/images/blog/blog-03.jpg')}}"
-                                    class="img-responsive" alt="news-03">
+                            <a href="blog-single-left-sidebar.html"><img
+                                    src="{{asset('member/assets/images/blog/blog-03.jpg')}}" class="img-responsive"
+                                    alt="news-03">
                                 <div class="overlay-bg"></div>
                             </a>
                         </div>
@@ -1708,128 +1449,47 @@
     <!--  clients -->
     <div id="clients" class="clients-main-block">
         <div class="container">
-            <div id="client-slider" class="client-slider owl-carousel owl-theme owl-loaded">
-
-                <div class="owl-stage-outer">
-                    <div class="owl-stage"
-                        style="transform: translate3d(-2090px, 0px, 0px); transition: all 2s ease 0s; width: 3800px;">
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-03.png')}}" class="img-responsive" alt="client-3">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-04.png')}}" class="img-responsive" alt="client-4">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-05.png')}}" class="img-responsive" alt="client-5">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-06.png')}}" class="img-responsive" alt="client-6">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-03.png')}}" class="img-resposive" alt="client-7">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-04.png')}}" class="img-responsive" alt="client-8">
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-01.png')}}" class="img-responsive" alt="client-1">
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-02.png')}}" class="img-responsive" alt="client-2">
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-03.png')}}" class="img-responsive" alt="client-3">
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-04.png')}}" class="img-responsive" alt="client-4">
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-05.png')}}" class="img-responsive" alt="client-5">
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-06.png')}}" class="img-responsive" alt="client-6">
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-03.png')}}" class="img-responsive" alt="client-7">
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-04.png')}}" class="img-responsive" alt="client-8">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned active" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-01.png')}}" class="img-responsive" alt="client-1">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned active" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-02.png')}}" class="img-responsive" alt="client-2">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned active" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-03.png')}}" class="img-responsive" alt="client-3">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-04.png')}}" class="img-responsive" alt="client-4">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-05.png')}}" class="img-responsive" alt="client-5">
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 190px; margin-right: 0px;">
-                            <div class="item client-img">
-                                <img src="{{asset('member/assets/images/icons/client-06.png')}}" class="img-responsive" alt="client-6">
-                            </div>
-                        </div>
-                    </div>
+            <div id="client-slider" class="client-slider">
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-01.png')}}" class="img-responsive"
+                        alt="client-1">
                 </div>
-                <div class="owl-controls">
-                    <div class="owl-nav">
-                        <div class="owl-prev" style="display: none;"><i class="fa fa-angle-left" aria-hidden="true"></i>
-                        </div>
-                        <div class="owl-next" style="display: none;"><i class="fa fa-angle-right"
-                                aria-hidden="true"></i></div>
-                    </div>
-                    <div class="owl-dots" style="display: none;"></div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-02.png')}}" class="img-responsive"
+                        alt="client-2">
+                </div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-03.png')}}" class="img-responsive"
+                        alt="client-3">
+                </div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-04.png')}}" class="img-responsive"
+                        alt="client-4">
+                </div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-05.png')}}" class="img-responsive"
+                        alt="client-5">
+                </div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-06.png')}}" class="img-responsive"
+                        alt="client-6">
+                </div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-01.png')}}" class="img-responsive"
+                        alt="client-7">
+                </div>
+                <div class="item client-img">
+                    <img src="{{asset('member/assets/images/icons/client-02.png')}}" class="img-responsive"
+                        alt="client-8">
                 </div>
             </div>
         </div>
     </div>
     <!--  end clients -->
     <!--  map -->
-    <div id="location" class="map-location"></div>
+    <div id="location" class="map-location">
+
+    </div>
     <!--  end map -->
     <!--  footer -->
     <footer id="footer" class="footer-main-block">
@@ -1839,7 +1499,8 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-about footer-widget">
                             <h5 class="footer-heading">About Us</h5>
-                            <img src="{{asset('member/assets/images/logo-white.png')}}" class="img-responsive" alt="logo">
+                            <img src="{{asset('member/assets/images/logo-white.png')}}" class="img-responsive"
+                                alt="logo">
                             <p>Lorem ipsum dolor sit amet, consectetuer a dipiscing elit aenean commodo ligula eget in
                                 dolor aenean massa cum sociis natoque penatibus et magnis dis parturie.</p>
                         </div>
@@ -1962,7 +1623,7 @@
     <!--  end footer -->
 </body>
 <!--body end -->
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;callback=initialize"></script>
+
 </body>
 <!--body end -->
 
