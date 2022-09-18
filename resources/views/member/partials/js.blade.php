@@ -126,7 +126,7 @@ function initialize() {
     }
     // For Footer Widget Map
     var map = new google.maps.Map(document.getElementById("location"), mapOptions);
-    var image = {{asset('member/assets/images/icons/map.png')}};
+    var image = "{{URL::asset('member/assets/images/icons/map.png')}}";
     var beachMarker = new google.maps.Marker({
         position: myLatLng,
         map: map,
