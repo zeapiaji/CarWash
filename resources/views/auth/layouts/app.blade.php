@@ -7,7 +7,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    @include('admin.partials.head')
+    @include('staff.partials.head')
 </head>
 
 <body>
@@ -27,7 +27,7 @@
     <!-- ===============================================-->
     <!-- JavaScripts -->
     <!-- ===============================================-->
-    @extends('admin.partials.js')
+    @extends('staff.partials.js')
 </body>
 
 

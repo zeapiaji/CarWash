@@ -7,7 +7,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    @include('admin.partials.head')
+    @include('staff.partials.head')
 </head>
 
 <body>
@@ -19,23 +19,23 @@
             <!-- ===============================================-->
             <!-- Navbar -->
             <!-- ===============================================-->
-            @include('admin.partials.navbar')
+            @include('staff.admin.partials.navbar')
 
             <div class="content">
                 <!-- ===============================================-->
                 <!-- Sidebar -->
                 <!-- ===============================================-->
-                @include('admin.partials.sidebar')
+                @include('staff.admin.partials.sidebar')
 
                     <!-- ===============================================-->
                     <!-- Content -->
                     <!-- ===============================================-->
-                    @yield('dashboard')
+                    @yield('content')
 
                 <!-- ===============================================-->
                 <!-- Footer -->
                 <!-- ===============================================-->
-                @include('admin.partials.footer')
+                @include('staff.admin.partials.footer')
             </div>
             <div class="modal fade" id="authentication-modal" tabindex="-1" role="dialog"
                 aria-labelledby="authentication-modal-label" aria-hidden="true">
@@ -96,7 +96,7 @@
     <!-- ===============================================-->
     <!-- JavaScripts -->
     <!-- ===============================================-->
-    @extends('admin.partials.js')
+    @extends('staff.partials.js')
 </body>
 
 
