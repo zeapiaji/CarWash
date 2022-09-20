@@ -21,7 +21,13 @@
                             <li>|</li>
                             <li><a href="#">Faq</a></li>
                             <li>|</li>
-                            <li><a href="/login">Login</a></li>
+                            <li>
+                            @if (Route::has('login'))
+                                <a href="{{ route('login') }}">
+                                    {{ __('Login') }}
+                                </a>
+                            @endif
+                            </li>
                             <li>|</li>
                             <li><a href="/register">Daftar</a></li>
                         </ul>
