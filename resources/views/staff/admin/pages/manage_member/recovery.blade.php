@@ -46,10 +46,13 @@
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap " data-sort="license-plate">Plat Nomor</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap ps-3" data-sort="car">Mobil</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="license-plate">Plat Nomor</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap ps-5" data-sort="address"
+                            style="min-width: 200px;">Alamat</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="joined">Bergabung</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -62,26 +65,26 @@
                                     type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" /></div>
                         </td>
 
-                        <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
+                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                        <div class="avatar-name rounded-circle"><span>RA</span></div>
                                     </div>
                                     <div class="flex-1">
                                         <h5 class="mb-0 fs--1">{{$item->name}}</h5>
                                     </div>
                                 </div>
-                            </a>
-                        </td>
+                            </a></td>
                             {{-- @dd($item) --}}
-                        <td class="email align-middle pt-2">{{$item->car->name}}
+                        <td class="email align-middle ps-3 py-2">{{$item->car->name}}
                         </td>
                         <td class="email align-middle py-2">{{$item->car->number_plate}}
                         </td>
                         <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
                         </td>
-                        <td class="joined align-middle py-2">{{$item->phone}}</td>
+                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:{{$item->phone}}">{{$item->phone}}</a></td>
+                        <td class="address align-middle white-space-nowrap ps-5 py-2">{{$item->address}}</td>
+                        <td class="joined align-middle py-2">{{$item->created_at}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -91,8 +94,8 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="/edit/member/{{$item->id}}">Sunting</a><a
-                                            class="dropdown-item text-danger" href="/delete/member/{{$item->id}}">Hapus</a></div>
+                                    <div class="bg-white py-2"><a class="dropdown-item" href="/recovery/member/{{$item->id}}">Pulihkan</a><a
+                                            class="dropdown-item text-danger" href="/forcedelete/member/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

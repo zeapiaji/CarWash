@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\User;
+use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -24,6 +25,13 @@ class AdminController extends Controller
         $data = User::role('user')->get();
 
         return view('staff.admin.pages.manage_member.index', compact('data'));
+    }
+
+    public function detail_member($id)
+    {
+        $data = User::find($id);
+
+        return view('staff.admin.pages.manage_member.detailmember', compact('data'));
     }
 
         // Edit
@@ -53,12 +61,37 @@ class AdminController extends Controller
             return redirect('/manage-member');
         }
 
+    // Soft Delete
     public function delete_member($id)
     {
-        $data = User::find($id)->delete();
+        User::find($id)->delete();
+        Car::where('user_id', $id)->delete();
 
         return redirect('/manage-member');
     }
+
+        public function recycle_member()
+        {
+            $data = User::onlyTrashed()->get();
+            // $data = Car::withTrashed()->get();
+            return view('staff.admin.pages.manage_member.recovery', compact('data'));
+        }
+
+        public function recovery_member($id)
+        {
+            User::withTrashed()->where('id', $id)->restore();
+            Car::withTrashed()->where('id',$id)->restore();
+
+            return redirect('/recycle/member');
+        }
+
+        public function forcedelete_member($id)
+        {
+            User::withTrashed()->where('id', $id)->forceDelete();
+            Car::withTrashed()->where('id',$id)->forceDelete();
+
+            return redirect('/recycle/member');
+        }
 
     public function pricing()
     {
