@@ -47,6 +47,7 @@ Route::middleware(['role:admin'])->group(function() {
     Route::post('/update/member', [AdminController::class,'update_member'])->name('admin.updatemember');
 
     Route::get('/delete/member/{id}', [AdminController::class,'delete_member'])->name('admin.deletemember');
+    Route::post('/multiple-delete/member', [AdminController::class,'multiple_delete_member'])->name('admin.multiple-delete-member');
 
     Route::get('/recycle/member', [AdminController::class,'recycle_member'])->name('admin.recycle_member');
     Route::get('/forcedelete/member/{id}', [AdminController::class,'forcedelete_member'])->name('admin.forcedeletemember');

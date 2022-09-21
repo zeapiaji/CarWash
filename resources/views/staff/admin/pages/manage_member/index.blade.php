@@ -3,6 +3,11 @@
 
 @include('staff.admin.partials.menu')
 <!--  -->
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <div class="card mb-3" id="customersTable"
     data-list='{"valueNames":["name","email","phone","address","joined"],"page":10,"pagination":true}'>
     <div class="card-header">
@@ -24,6 +29,9 @@
                         <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Tambah Pegawai</span>
                     </a>
+
+                    <button class="btn btn-danger" id="multi-delete" data-route="{{ route('admin.multiple-delete-member') }}">Delete All Selected</button>
+
                     <button class="btn btn-falcon-default btn-sm mx-2" type="button">
                         <span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Filter</span>
@@ -36,13 +44,13 @@
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
+            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="table-customers-body">
                 <thead class="bg-200 text-900">
                     <tr>
                         <th>
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    id="checkbox-bulk-customers-select" type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
+                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                {{-- <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' /> --}}
+                                <input type="checkbox" class="form-check-input check-all">
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
@@ -53,13 +61,15 @@
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
-                <tbody class="list" id="table-customers-body">
+                <tbody class="list">
                     {{-- @dd($data) --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" /></div>
+                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                {{-- <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" /> --}}
+                                <input type="checkbox" class="form-check-input check" value="{{ $item->id }}">
+                            </div>
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
@@ -109,4 +119,52 @@
             data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+      $("#table-customers-body").TableCheckAll();
+
+      $('#multi-delete').on('click', function() {
+        var button = $(this);
+        var selected = [];
+        $('#table-customers-body .check:checked').each(function() {
+          selected.push($(this).val());
+        });
+
+        Swal.fire({
+          icon: 'warning',
+            title: 'Are you sure you want to delete selected record(s)?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            $.ajax({
+              url: button.data('route'),
+              type: 'POST',
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: {
+                'selected': selected
+              },
+              success: function (response, textStatus, xhr) {
+                Swal.fire({
+                  icon: 'success',
+                    title: response,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                  window.location='/manage-member'
+                });
+              }
+            });
+          }
+        });
+      });
+
+    });
+  </script>
+
 @endsection

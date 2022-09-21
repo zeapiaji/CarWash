@@ -14,4 +14,5 @@
 <script src="{{asset('admin/assets/data/world.js')}}"></script>
 <script src="{{asset('admin/vendors/chart/chart.min.js')}}"></script>
 <script src="{{asset('admin/vendors/dayjs/dayjs.min.js')}}"></script>
+<script src="{{asset('admin/vendors/codeanddeploy.tablecheckall/table-check-all.js')}}"></script>
 

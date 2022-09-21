@@ -15,14 +15,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'User',
-            'email' => 'user@gmail.com',
-            'phone' => '123123123',
-            'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
-            'password' => bcrypt('zeapiaji')
-        ]);
-        $user -> assignRole('user');
+        for ($i=1; $i < 10 ; $i++) {
+            $user = User::create([
+                'name' => 'User'.$i,
+                'email' => 'user'.$i.'@gmail.com',
+                'phone' => '123123123'.$i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'password' => bcrypt('zeapiaji')
+            ]);
+            $user -> assignRole('user');
+        }
 
         $pegawai = User::create([
             'name' => 'Pegawai',

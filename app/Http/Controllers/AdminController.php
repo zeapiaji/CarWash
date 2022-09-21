@@ -70,6 +70,14 @@ class AdminController extends Controller
         return redirect('/manage-member');
     }
 
+    public function multiple_delete_member(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))->delete();
+        User::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
         public function recycle_member()
         {
             $data = User::onlyTrashed()->get();
@@ -80,7 +88,7 @@ class AdminController extends Controller
         public function recovery_member($id)
         {
             User::withTrashed()->where('id', $id)->restore();
-            Car::withTrashed()->where('id',$id)->restore();
+            Car::withTrashed()->where('user_id',$id)->restore();
 
             return redirect('/recycle/member');
         }

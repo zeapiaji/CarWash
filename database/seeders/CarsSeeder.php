@@ -15,11 +15,13 @@ class CarsSeeder extends Seeder
      */
     public function run()
     {
-        Car::create([
-            'user_id' => 1,
-            'number_plate' => 'D 1234 JKL',
-            'name' => 'Supa a80',
-            'type' => 'coupe',
-        ]);
+        for ($i=1; $i < 10; $i++) {
+            Car::create([
+                'user_id' => $i,
+                'number_plate' => 'D 123'.$i.' JKL',
+                'name' => 'Supa a80',
+                'type' => 'coupe',
+            ]);
+        }
     }
 }
