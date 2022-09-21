@@ -34,6 +34,20 @@
     <link rel="stylesheet" id="user-style-rtl" href="{{ asset('admin/assets/css/user-rtl.min.css')}}">
     <link rel="stylesheet" id="user-style-default" href="{{ asset('admin/assets/css/user.min.css')}}">
 
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
+
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {

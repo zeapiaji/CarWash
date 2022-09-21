@@ -8,7 +8,7 @@
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Customers</h5>
+                <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Pegawai</h5>
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
@@ -21,7 +21,7 @@
                 </div>
                 <div id="table-customers-replace-element"><button class="btn btn-falcon-default btn-sm"
                         type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span
-                            class="d-none d-sm-inline-block ms-1">New</span></button><button
+                            class="d-none d-sm-inline-block ms-1">Tambah Pegawai</span></button><button
                         class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
                             data-fa-transform="shrink-3 down-2"></span><span
                             class="d-none d-sm-inline-block ms-1">Filter</span></button><button
@@ -42,12 +42,12 @@
                                     data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
                             </div>
                         </th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Name</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Phone</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
                         <th class="sort pe-1 align-middle white-space-nowrap ps-5" data-sort="address"
-                            style="min-width: 200px;">Billing Address</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="joined">Joined</th>
+                            style="min-width: 200px;">Alamat</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="joined">Jenis Kelamin</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -73,7 +73,7 @@
                                 200-1851</a></td>
                         <td class="address align-middle white-space-nowrap ps-5 py-2">2392 Main Avenue, Penasauka, New
                             Jersey 02139</td>
-                        <td class="joined align-middle py-2">30/03/2018</td>
+                        <td class="joined align-middle py-2">L</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -82,8 +82,8 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
+                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Sunting</a><a
+                                            class="dropdown-item text-danger" href="#!">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -551,411 +551,6 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-13">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-14" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>LB</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Lucienne Blick</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:blick@example.com">blick@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:8512654641">(851)
-                                265-4641</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">6757 Giuseppe Meadows
-                            Geraldinemouth, MO 48819-4970</td>
-                        <td class="joined align-middle py-2">23/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-14" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-14">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-15" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <img class="rounded-circle" src="../../assets/img/team/5.jpg" alt="" />
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Laverne Haag</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:haag@example.com">haag@example.com</a></td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:2459881927">(245)
-                                988-1927</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">2327 Kaylee Mill East Citlalli, AZ
-                            89582-3143</td>
-                        <td class="joined align-middle py-2">22/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-15" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-15">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-16" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <img class="rounded-circle" src="../../assets/img/team/6.jpg" alt="" />
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Brandon Bednar</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:bednar@example.com">bednar@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:9535899324">(953) 589-9324
-                            </a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">25156 Isaac Crossing Apt. 810
-                            Lonborough, CO 83774-5999</td>
-                        <td class="joined align-middle py-2">22/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-16" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-16">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-17" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>DB</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Dimitri Boehm</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:dimitri@example.com">dimitri@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:9434099147">(943)
-                                409-9147</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">71603 Wolff Plains Apt. 885
-                            Johnstonton, MI 01581</td>
-                        <td class="joined align-middle py-2">23/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-17" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-17">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-18" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>TF</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Trace Farrell</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:trace@example.com">trace@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:4424850384">(442)
-                                485-0384</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">431 Steuber Mews Apt. 252
-                            Germanland, AK 25882</td>
-                        <td class="joined align-middle py-2">26/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-18" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-18">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-19" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <img class="rounded-circle" src="../../assets/img/team/13.jpg" alt="" />
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Estell Nienow</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:nienow@example.com">nienow@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:5056977549">(505)
-                                697-7549</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">4167 Laverna Manor Marysemouth, NV
-                            74590</td>
-                        <td class="joined align-middle py-2">26/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-19" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-19">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-20" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <img class="rounded-circle" src="../../assets/img/team/14.jpg" alt="" />
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Daisha Howe</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:howe@example.com">howe@example.com</a></td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:3375713547">(337)
-                                571-3547</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">829 Lavonne Valley Apt. 074
-                            Stehrfort, RI 77914-0379</td>
-                        <td class="joined align-middle py-2">25/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-20" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-20">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-21" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>MH</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Miles Haley</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:haley@example.com">haley@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:7646194683">(764)
-                                619-4683</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">53150 Thad Squares Apt. 263
-                            Archibaldfort, MO 00837</td>
-                        <td class="joined align-middle py-2">24/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-21" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-21">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-22" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>BW</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Brenda Watsica</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:watsica@example.com">watsica@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:9616476123">(961)
-                                647-6123</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">9198 O'Kon Harbors Morarborough,
-                            IA 75409-7383</td>
-                        <td class="joined align-middle py-2">24/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-22" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-22">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-23" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>EOR</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Ellie O'Reilly</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:ellie@example.com">ellie@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:6016888144"> (601)
-                                688-8144</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">1478 Kaitlin Haven Apt. 061 Lake
-                            Muhammadmouth, SC 35848</td>
-                        <td class="joined align-middle py-2">24/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-23" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-23">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
-                                            class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center"><input class="form-check-input"
-                                    type="checkbox" id="customer-24" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>GB</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">Garry Brainstrow</h5>
-                                    </div>
-                                </div>
-                            </a></td>
-                        <td class="email align-middle py-2"><a href="mailto:garry@example.com">garry@example.com</a>
-                        </td>
-                        <td class="phone align-middle white-space-nowrap py-2"><a href="tel:4018799970">(401)
-                                879-9970</a></td>
-                        <td class="address align-middle white-space-nowrap ps-5 py-2">Garry Brainstrow, 13572 Kurt Mews
-                            South Merritt, IA 52491</td>
-                        <td class="joined align-middle py-2">23/04/2019</td>
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-24" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-24">
                                     <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a
                                             class="dropdown-item text-danger" href="#!">Delete</a></div>
                                 </div>

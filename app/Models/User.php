@@ -21,6 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'adress',
         'password',
     ];
 
@@ -42,4 +44,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Relation
+
+    public function car()
+    {
+        return $this->hasOne(Car::class);
+    }
 }
