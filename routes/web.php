@@ -49,9 +49,18 @@ Route::middleware(['role:admin'])->group(function() {
     Route::get('/delete/member/{id}', [AdminController::class,'delete_member'])->name('admin.deletemember');
     Route::post('/multiple-delete/member', [AdminController::class,'multiple_delete_member'])->name('admin.multiple-delete-member');
 
-    Route::get('/recycle/member', [AdminController::class,'recycle_member'])->name('admin.recycle_member');
+    Route::get('/recycle-member', [AdminController::class,'recycle_member'])->name('admin.recycle_member');
     Route::get('/forcedelete/member/{id}', [AdminController::class,'forcedelete_member'])->name('admin.forcedeletemember');
     Route::get('/recovery/member/{id}', [AdminController::class,'recovery_member'])->name('admin.recoverymember');
+    Route::post('/multiple-recovery/member', [AdminController::class,'multiple_recovery_member'])->name('admin.multiple-recovery-member');
+
+    // Export
+    Route::get('/export-member-xlsx', [AdminController::class, 'export_member_xlsx'])->name('admin.export-member-xlsx');
+    Route::get('/export-member-csv', [AdminController::class, 'export_member_csv'])->name('admin.export-member-csv');
+    Route::get('/export-member-tsv', [AdminController::class, 'export_member_tsv'])->name('admin.export-member-tsv');
+    Route::get('/export-member-ods', [AdminController::class, 'export_member_ods'])->name('admin.export-member-ods');
+    Route::get('/export-member-pdf', [AdminController::class, 'export_member_pdf'])->name('admin.export-member-pdf');
+
 
     // Washing Data
     Route::get('/admin-washing-data', [AdminController::class,'admin_washing_data'])->name('admin.washingdata');

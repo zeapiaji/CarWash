@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\User;
-use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Http\Request;
+use App\Exports\MemberExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Cache\RedisTaggedCache;
+use PhpOffice\PhpSpreadsheet\Collection\Memory;
 
 class AdminController extends Controller
 {
@@ -70,13 +73,13 @@ class AdminController extends Controller
         return redirect('/manage-member');
     }
 
-    public function multiple_delete_member(Request $request)
-    {
-        Car::whereIn('user_id', $request->get('selected'))->delete();
-        User::whereIn('id', $request->get('selected'))->delete();
+        public function multiple_delete_member(Request $request)
+        {
+            Car::whereIn('user_id', $request->get('selected'))->delete();
+            User::whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
-    }
+            return response("Selected post(s) deleted successfully.", 200);
+        }
 
         public function recycle_member()
         {
@@ -93,12 +96,26 @@ class AdminController extends Controller
             return redirect('/recycle/member');
         }
 
+        public function multiple_recovery_member(Request $request)
+        {
+            Car::whereIn('user_id', $request->get('selected'))
+                ->restore();
+            User::whereIn('id', $request->get('selected'))
+                ->restore();
+
+            return response("Selected post(s) deleted successfully.", 200);
+        }
+
         public function forcedelete_member($id)
         {
             User::withTrashed()->where('id', $id)->forceDelete();
             Car::withTrashed()->where('id',$id)->forceDelete();
 
             return redirect('/recycle/member');
+        }
+
+        public function multiple_forcedelete_member($id)
+        {
         }
 
     public function pricing()
@@ -110,4 +127,33 @@ class AdminController extends Controller
     {
         return view('staff.admin.pages.washing_data.index');
     }
+
+    // Export
+    public function export_member_xlsx()
+    {
+        return Excel::download(new MemberExport, 'member.xlsx');
+    }
+
+    public function export_member_csv()
+    {
+        return Excel::download(new MemberExport, 'member.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
+
+    public function export_member_tsv()
+    {
+        return Excel::download(new MemberExport, 'member.tsv', \Maatwebsite\Excel\Excel::TSV);
+    }
+
+    public function export_member_ods()
+    {
+        return Excel::download(new MemberExport, 'member.ods', \Maatwebsite\Excel\Excel::ODS);
+    }
+
+    public function export_member_pdf()
+    {
+        return Excel::download(new MemberExport, 'member.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
 }

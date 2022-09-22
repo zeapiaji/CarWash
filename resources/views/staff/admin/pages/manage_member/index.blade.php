@@ -3,13 +3,10 @@
 
 @include('staff.admin.partials.menu')
 <!--  -->
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="card mb-3" id="customersTable"
-    data-list='{"valueNames":["name","email","phone","address","joined"],"page":10,"pagination":true}'>
+<div class="card mb-3">
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -17,58 +14,58 @@
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
-                    <div class="d-flex"><select class="form-select form-select-sm" aria-label="Bulk actions">
-                            <option selected="">Bulk actions</option>
-                            <option value="Refund">Refund</option>
-                            <option value="Delete">Delete</option>
-                            <option value="Archive">Archive</option>
-                        </select><button class="btn btn-falcon-default btn-sm ms-2" type="button">Apply</button></div>
+                    <div class="d-flex">
+                        <button class="btn btn-falcon-default btn-sm ms-2" id="multiple-delete" data-route="{{ route('admin.multiple-delete-member')}}">Hapus</button>
+                    </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm" href="/add/member" type="button">
-                        <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Tambah Pegawai</span>
-                    </a>
-
-                    <button class="btn btn-danger" id="multi-delete" data-route="{{ route('admin.multiple-delete-member') }}">Delete All Selected</button>
-
                     <button class="btn btn-falcon-default btn-sm mx-2" type="button">
                         <span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Filter</span>
                     </button>
-                    <button class="btn btn-falcon-default btn-sm" type="button">
+
+                    <a class="btn btn-falcon-default btn-sm" id="dropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Export</span></button></div>
+                        <span class="d-none d-sm-inline-block ms-1">Export</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/export-member-xlsx">XLSX</a>
+                        <a class="dropdown-item" href="/export-member-csv">CSV</a>
+                        <a class="dropdown-item" href="/export-member-tsv">TSV</a>
+                        <a class="dropdown-item" href="/export-member-ods">ODS</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/export-member-pdf">PDF</a>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="table-customers-body">
+            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table"
+            data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
                 <thead class="bg-200 text-900">
                     <tr>
                         <th>
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                {{-- <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' /> --}}
-                                <input type="checkbox" class="form-check-input check-all">
-                            </div>
+                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap " data-sort="license-plate">Plat Nomor</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
-                <tbody class="list">
+                <tbody class="list" id="table-customers-body">
                     {{-- @dd($data) --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                {{-- <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" /> --}}
-                                <input type="checkbox" class="form-check-input check" value="{{ $item->id }}">
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}" value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
 
@@ -84,14 +81,13 @@
                                 </div>
                             </a>
                         </td>
-                            {{-- @dd($item) --}}
-                        <td class="email align-middle pt-2">{{$item->car->name}}
+                        <td class="car align-middle pt-2">{{$item->car->name}}
                         </td>
-                        <td class="email align-middle py-2">{{$item->car->number_plate}}
+                        <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
                         </td>
                         <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
                         </td>
-                        <td class="joined align-middle py-2">{{$item->phone}}</td>
+                        <td class="phone align-middle py-2">{{$item->phone}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -101,7 +97,8 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white py-2"><a class="dropdown-item" href="/edit/member/{{$item->id}}">Sunting</a><a
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom" href="/edit/member/{{$item->id}}">Sunting</a>
+                                        <a
                                             class="dropdown-item text-danger" href="/delete/member/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
@@ -123,12 +120,12 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-      $("#table-customers-body").TableCheckAll();
+      $("#customers-table").TableCheckAll();
 
-      $('#multi-delete').on('click', function() {
+      $('#multiple-delete').on('click', function() {
         var button = $(this);
         var selected = [];
-        $('#table-customers-body .check:checked').each(function() {
+        $('#customers-table .check:checked').each(function() {
           selected.push($(this).val());
         });
 
