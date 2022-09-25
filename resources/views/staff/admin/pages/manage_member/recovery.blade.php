@@ -152,6 +152,70 @@
         });
       });
 
+      $('#recovery-all-member').on('click', function() {
+        var button = $(this);
+
+        Swal.fire({
+          icon: 'warning',
+            title: 'Are you sure you want to delete selected record(s)?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            $.ajax({
+              url: button.data('route'),
+              type: 'POST',
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              success: function (response, textStatus, xhr) {
+                Swal.fire({
+                  icon: 'success',
+                    title: response,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                  window.location='/recycle-member'
+                });
+              }
+            });
+          }
+        });
+      });
+
+      $('#force-delete-all-member').on('click', function() {
+        var button = $(this);
+
+        Swal.fire({
+          icon: 'warning',
+            title: 'Are you sure you want to delete selected record(s)?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            $.ajax({
+              url: button.data('route'),
+              type: 'POST',
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+
+              success: function (response, textStatus, xhr) {
+                Swal.fire({
+                  icon: 'success',
+                    title: response,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                  window.location='/recycle-member'
+                });
+              }
+            });
+          }
+        });
+      });
     });
   </script>
 
