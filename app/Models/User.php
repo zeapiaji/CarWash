@@ -23,10 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
-        'adress',
+        'address',
         'password',
     ];
 
+    protected $guarded =[];
     /**
      * The attributes that should be hidden for serialization.
      *

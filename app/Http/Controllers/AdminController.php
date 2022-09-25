@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\MemberExport;
+use App\Imports\MemberImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Cache\RedisTaggedCache;
 use PhpOffice\PhpSpreadsheet\Collection\Memory;
@@ -106,6 +107,14 @@ class AdminController extends Controller
             return response("Selected post(s) deleted successfully.", 200);
         }
 
+        public function recovery_all_member()
+        {
+            User::withTrashed()->restore();
+            Car::withTrashed()->restore();
+
+            return response("Selected post(s) deleted successfully.", 200);
+        }
+
         public function forcedelete_member($id)
         {
             User::withTrashed()->where('id', $id)->forceDelete();
@@ -114,8 +123,22 @@ class AdminController extends Controller
             return redirect('/recycle/member');
         }
 
-        public function multiple_forcedelete_member($id)
+        public function multiple_force_delete_member(Request $request)
         {
+            Car::whereIn('user_id', $request->get('selected'))
+                ->forceDelete();
+            User::whereIn('id', $request->get('selected'))
+                ->forceDelete();
+
+            return response("Selected post(s) deleted successfully.", 200);
+        }
+
+        public function force_delete_all_member()
+        {
+            Car::onlyTrashed()->forceDelete();
+            User::onlyTrashed()->forceDelete();
+
+            return response("Selected post(s) deleted successfully.", 200);
         }
 
     public function pricing()
@@ -128,7 +151,7 @@ class AdminController extends Controller
         return view('staff.admin.pages.washing_data.index');
     }
 
-    // Export
+    // Export & Import
     public function export_member_xlsx()
     {
         return Excel::download(new MemberExport, 'member.xlsx');
@@ -154,6 +177,13 @@ class AdminController extends Controller
     public function export_member_pdf()
     {
         return Excel::download(new MemberExport, 'member.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
+    public function import_member_xlsx(Request $request)
+    {
+        Excel::import(new MemberImport, $request->file('file_member'));
+
+        return redirect('/manage-member');
     }
 
 }

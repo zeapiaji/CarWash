@@ -9,27 +9,19 @@
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Member</h5>
+                <input type="search" class="form-control search-input search"  placeholder="cari..">
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm ms-2" id="multiple-recovery" data-route="{{ route('admin.multiple-recovery-member')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-member" data-route="{{ route('admin.multiple-recovery-member')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-member" data-route="{{ route('admin.multiple-force-delete-member')}}">Hapus Permanen</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm" href="/add/member" type="button">
-                        <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Tambah Pegawai</span>
-                    </a>
-
-                    <button class="btn btn-falcon-default btn-sm mx-2" type="button">
-                        <span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Filter</span>
-                    </button>
-                    <button class="btn btn-falcon-default btn-sm" type="button">
-                        <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Export</span></button></div>
+                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-member" data-route="{{ route('admin.recovery-all-member')}}">Pulihkan Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-member" data-route="{{ route('admin.force-delete-all-member')}}">Hapus Permanen Semua</button>
+                </div>
             </div>
         </div>
     </div>
@@ -113,7 +105,46 @@
 
       $("#customers-table").TableCheckAll();
 
-      $('#multiple-recovery').on('click', function() {
+      $('#multiple-recovery-member').on('click', function() {
+        var button = $(this);
+        var selected = [];
+        $('#customers-table .check:checked').each(function() {
+          selected.push($(this).val());
+        });
+
+        Swal.fire({
+          icon: 'warning',
+            title: 'Are you sure you want to delete selected record(s)?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            $.ajax({
+              url: button.data('route'),
+              type: 'POST',
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: {
+                'selected': selected
+              },
+              success: function (response, textStatus, xhr) {
+                Swal.fire({
+                  icon: 'success',
+                    title: response,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                  window.location='/recycle-member'
+                });
+              }
+            });
+          }
+        });
+      });
+
+      $('#multiple-force-delete-member').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -198,7 +229,7 @@
           if (result.isConfirmed) {
             $.ajax({
               url: button.data('route'),
-              type: 'POST',
+              type: 'get',
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 
               success: function (response, textStatus, xhr) {

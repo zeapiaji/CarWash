@@ -11,10 +11,13 @@ class Car extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'name',
         'number_plate',
         'type',
     ];
+
+    protected $guarded = [];
 
     public function user()
     {

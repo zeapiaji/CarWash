@@ -24,6 +24,7 @@
     </main>
 
     @include('staff.partials.js')
+
 </body>
 
 </html>
