@@ -28,9 +28,6 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
-                        <a class="dropdown-item" data-bs-toggle="modal2" data-bs-target="#error-modal" >CSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal3" data-bs-target="#error-modal" >TSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal4" data-bs-target="#error-modal" >ODS</a>
                     </div>
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
@@ -41,8 +38,6 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
                         <a class="dropdown-item" href="/export-member-xlsx">XLSX</a>
                         <a class="dropdown-item" href="/export-member-csv">CSV</a>
-                        <a class="dropdown-item" href="/export-member-tsv">TSV</a>
-                        <a class="dropdown-item" href="/export-member-ods">ODS</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/export-member-pdf">PDF</a>
                     </div>

@@ -12,9 +12,9 @@ class Car extends Model
 
     protected $fillable = [
         'user_id',
-        'name',
         'number_plate',
-        'type',
+        'name',
+        'type_id',
     ];
 
     protected $guarded = [];

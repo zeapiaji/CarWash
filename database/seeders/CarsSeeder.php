@@ -19,8 +19,8 @@ class CarsSeeder extends Seeder
             Car::create([
                 'user_id' => $i,
                 'number_plate' => 'D 123'.$i.' JKL',
-                'name' => 'Supa a80',
-                'type' => 'coupe',
+                'name' => 'Supra '.$i,
+                'type_id' => 3,
             ]);
         }
     }

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('staff.admin.pages.dashboard');
 // })->middleware('role:admin')->name('admin.dashboard');
 
-Route::middleware(['role:user'])->group(function() {
+Route::middleware(['role:member'])->group(function() {
     //
 });
 

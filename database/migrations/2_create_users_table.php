@@ -19,11 +19,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address');
+            $table->date('birth');
+            $table->foreignId('gender_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('gender_id')->references('id')->on('genders');
         });
     }
 

@@ -79,6 +79,7 @@
 </div>
 </div>
 </div> --}}
+
 <main class="main" id="top">
     <div class="container-fluid">
         <div class="row justify-content-center pt-4">
@@ -109,7 +110,7 @@
                     </div>
                     <div class="card-body py-4" id="wizard-controller">
                         <div class="tab-content">
-                            <div class="tab-pane active px-sm-3 px-md-5" role="tabpanel"
+                            {{-- <div class="tab-pane active px-sm-3 px-md-5" role="tabpanel"
                                 aria-labelledby="bootstrap-wizard-tab1" id="bootstrap-wizard-tab1">
                                 <form class="needs-validation" novalidate="novalidate">
                                     <div class="mb-3">
@@ -159,16 +160,35 @@
                                             accept the <a href="#!">terms </a>and <a href="#!">privacy
                                                 policy</a></label></div>
                                 </form>
-                            </div>
+                            </div> --}}
                             <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
                                 aria-labelledby="bootstrap-wizard-tab2" id="bootstrap-wizard-tab2">
                                 <form>
+                                    <div class="mb-3">
+                                        <div class="row" data-dropzone="data-dropzone">
+                                          <div class="fallback"><input type="file" name="photo_profile" /></div>
+                                          <div class="col-md-auto">
+                                            <div class="dz-preview dz-preview-single">
+                                              <div class="dz-preview-cover d-flex align-items-center justify-content-center mb-3 mb-md-0">
+                                                <div class="avatar avatar-4xl"><img class="rounded-circle" src="{{asset('admin/assets/img/team/avatar.png')}}" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
+                                                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md">
+                                            <div class="dz-message dropzone-area px-2 py-3" data-dz-message="data-dz-message">
+                                              <div class="text-center"><img class="me-2" src="{{asset('admin/assets/img/icons/cloud-upload.svg')}}" width="25" alt="" />Unggah Foto Profilemu!<p class="mb-0 fs--1 text-400">Upload dengan ukuran 300x300 format jpg dan dengan <br />ukuran file tidak lebih dari 400KB</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     <div class="mb-3"><label class="form-label"
                                             for="bootstrap-wizard-gender">Jenis Kelamin</label><select
                                             class="form-select" name="gender" id="bootstrap-wizard-gender">
-                                            <option value="">Pilih jenis kelaminmu ...</option>
-                                            <option value="Male">Laki-laki</option>
-                                            <option value="Female">Perempuan</option>
+                                            <option>Pilih jenis kelaminmu ...</option>
+                                            <option value="Male" name="gender">Laki-laki</option>
+                                            <option value="Female" name="gender">Perempuan</option>
                                         </select></div>
                                     <div class="mb-3"><label class="form-label"
                                             for="bootstrap-wizard-wizard-phone">Telepon</label><input
@@ -231,4 +251,5 @@
         </div>
     </div>
 </main>
+
 @endsection

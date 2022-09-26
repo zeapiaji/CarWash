@@ -20,13 +20,15 @@ class AdminController extends Controller
 
     public function manage_employee()
     {
-        return view('staff.admin.pages.manage_employee.index');
+        $data = User::role('employee')->get();
+
+        return view('staff.admin.pages.manage_employee.index', compact('data'));
     }
 
     // Member
     public function manage_member()
     {
-        $data = User::role('user')->get();
+        $data = User::role('member')->get();
 
         return view('staff.admin.pages.manage_member.index', compact('data'));
     }
@@ -162,16 +164,6 @@ class AdminController extends Controller
         return Excel::download(new MemberExport, 'member.csv', \Maatwebsite\Excel\Excel::CSV, [
             'Content-Type' => 'text/csv',
         ]);
-    }
-
-    public function export_member_tsv()
-    {
-        return Excel::download(new MemberExport, 'member.tsv', \Maatwebsite\Excel\Excel::TSV);
-    }
-
-    public function export_member_ods()
-    {
-        return Excel::download(new MemberExport, 'member.ods', \Maatwebsite\Excel\Excel::ODS);
     }
 
     public function export_member_pdf()

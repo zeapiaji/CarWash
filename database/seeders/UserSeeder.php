@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -15,31 +17,37 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // for ($i=1; $i < 10 ; $i++) {
-        //     $user = User::create([
-        //         'name' => 'User'.$i,
-        //         'email' => 'user'.$i.'@gmail.com',
-        //         'phone' => '123123123'.$i,
-        //         'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
-        //         'password' => bcrypt('zeapiaji')
-        //     ]);
-        //     $user -> assignRole('user');
-        // }
+        for ($i=1; $i < 10 ; $i++) {
+            $user = User::create([
+                'name' => 'User'.$i,
+                'email' => 'user'.$i.'@gmail.com',
+                'phone' => '123123123'.$i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => random_int(1,2),
+                'password' => bcrypt('zeapiaji')
+            ]);
+            $user -> assignRole('member');
+        }
 
         $pegawai = User::create([
-            'name' => 'Pegawai',
-            'email' => 'pegawai@gmail.com',
+            'name' => 'Employee',
+            'email' => 'employee@gmail.com',
             'phone' => '1242090923',
             'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+            'birth' => Carbon::parse('2000-12-28'),
+            'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
-        $pegawai -> assignRole('pegawai');
+        $pegawai -> assignRole('employee');
 
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'phone' => '1228200423',
             'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+            'birth' => Carbon::parse('2000-12-28'),
+            'gender_id' => 2,
             'password' => bcrypt('zeapiaji')
         ]);
         $admin -> assignRole('admin');
@@ -49,6 +57,8 @@ class UserSeeder extends Seeder
             'email' => 'super_admin@gmail.com',
             'phone' => '3005200623',
             'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+            'birth' => Carbon::parse('2000-12-28'),
+            'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
         $super_admin -> assignRole('super_admin');
@@ -58,6 +68,8 @@ class UserSeeder extends Seeder
             'email' => 'ceo@gmail.com',
             'phone' => '082115051232',
             'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+            'birth' => Carbon::parse('2000-12-28'),
+            'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
         $ceo -> assignRole('ceo');
