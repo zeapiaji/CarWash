@@ -7,7 +7,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="card mb-3" id="customersTable"
-data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
+data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -63,10 +63,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Telepon</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="gender">Jenis Kelamin</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -94,10 +93,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 </div>
                             </a>
                         </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
-                        </td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
-
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
+                        <td class="gender align-middle py-2">{{$item -> gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"

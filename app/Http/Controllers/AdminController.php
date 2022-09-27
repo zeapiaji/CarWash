@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Cache\RedisTaggedCache;
-use PhpOffice\PhpSpreadsheet\Collection\Memory;
 
 class AdminController extends Controller
 {

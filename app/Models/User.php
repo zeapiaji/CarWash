@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Car::class)->withTrashed();
     }
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
 }
