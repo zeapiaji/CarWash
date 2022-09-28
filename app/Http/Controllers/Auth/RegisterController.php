@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -43,6 +44,16 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $this->create($request->all());
+
+        // Change This \/
+        return redirect("/");
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -60,7 +71,7 @@ class RegisterController extends Controller
             'birth' => ['required'],
             'car' => ['required'],
             'number_plate' => ['required'],
-            'type   ' => ['required'],
+            'type' => ['required'],
         ]);
     }
 
