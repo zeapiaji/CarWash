@@ -18,9 +18,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/dashboard-admin', function () {
-//     return view('staff.admin.pages.dashboard');
-// })->middleware('role:admin')->name('admin.dashboard');
+
+Route::post('/register-member', [GeneralController::class, 'register_member'])->name('register-member');
 
 Route::middleware(['role:member'])->group(function() {
     //

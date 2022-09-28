@@ -121,37 +121,44 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="bootstrap-wizard-wizard-name">Nama
                                         </label>
-                                        <input class="form-control" type="text" name="name" placeholder="Nama lengkap"
-                                            id="bootstrap-wizard-wizard-name" required="require" />
-                                        <div class="invalid-feedback">Masukan nama!</div>
+                                        <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder="Nama lengkap"
+                                            id="bootstrap-wizard-wizard-name" value="{{old('name')}}" autocomplete="name" required/>
+                                        @error('name')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3"><label class="form-label"
                                             for="bootstrap-wizard-wizard-email">Email*</label><input
-                                            class="form-control" type="email" name="email" placeholder="Alamat email"
+                                            class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Alamat email"
                                             pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$"
                                             required="required" id="bootstrap-wizard-wizard-email"
-                                            data-wizard-validate-email="true" />
-                                        <div class="invalid-feedback">Masukan email!</div>
+                                            data-wizard-validate-email="true" value="{{old('email')}}" autocomplete="email" required/>
+                                            @error('email')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
                                     </div>
                                     <div class="row g-2">
                                         <div class="col-6">
                                             <div class="mb-3"><label class="form-label"
                                                     for="bootstrap-wizard-wizard-password">Password*</label><input
-                                                    class="form-control" type="password" name="password"
-                                                    placeholder="Password" required="required"
+                                                    class="form-control @error('password')
+                                                        is-invalid
+                                                    @enderror" type="password" name="password"
+                                                    placeholder="Password" required autocomplete="new-password"
                                                     id="bootstrap-wizard-wizard-password"
                                                     data-wizard-validate-password="true" />
-                                                <div class="invalid-feedback">Masukan password!</div>
+                                                    @error('password')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="mb-3"><label class="form-label"
-                                                    for="bootstrap-wizard-wizard-confirm-password">Confirm
+                                                    for="bootstrap-wizard-wizard-confirm-password">Konfirmasi
                                                     Password*</label><input class="form-control" type="password"
-                                                    name="confirmPassword" placeholder="Confirm Password"
-                                                    required="required" id="bootstrap-wizard-wizard-confirm-password"
+                                                    name="password_confirmation" placeholder="Confirm Password"
+                                                    required="required" autocomplete="new-password" id="bootstrap-wizard-wizard-confirm-password"
                                                     data-wizard-validate-confirm-password="true" />
-                                                <div class="invalid-feedback">Password tidak sama</div>
                                             </div>
                                         </div>
                                     </div>
@@ -169,8 +176,7 @@
                                             <div class="fallback"><input type="file" name="photo_profile" /></div>
                                             <div class="col-md-auto">
                                                 <div class="dz-preview dz-preview-single">
-                                                    <div
-                                                        class="dz-preview-cover d-flex align-items-center justify-content-center mb-3 mb-md-0">
+                                                    <div class="dz-preview-cover d-flex align-items-center justify-content-center mb-3 mb-md-0">
                                                         <div class="avatar avatar-4xl"><img class="rounded-circle"
                                                                 src="{{asset('admin/assets/img/team/avatar.png')}}"
                                                                 alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
@@ -198,40 +204,49 @@
                                         <select class="form-select" name="gender" id="bootstrap-wizard-gender">
                                             <option>Pilih jenis kelaminmu ...</option>
                                             @foreach ($gender as $item)
-                                            <option value="{{$item->name}}" name="gender">{{$item->name}}</option>
+                                            <option value="{{$item->id}}" name="gender">{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3"><label class="form-label"
                                             for="bootstrap-wizard-wizard-phone">Telepon</label><input
-                                            class="form-control" type="text" name="phone" placeholder="Telepon"
-                                            id="bootstrap-wizard-wizard-phone" /></div>
+                                            class="form-control @error('phone')
+                                                is-invalid
+                                            @enderror" type="number" name="phone" placeholder="Telepon"
+                                            id="bootstrap-wizard-wizard-phone" value="{{old('phone')}}" autocomplete="phone" required/></div>
                                     <div class="mb-3"><label class="form-label"
                                             for="bootstrap-wizard-wizard-datepicker">Tanggal Lahir</label>
-                                        <input class="form-control datetimepicker" type="text" placeholder="y/m/d"
-                                            data-options='{"dateFormat":"y/m/d","disableMobile":true}'
+                                        <input class="form-control datetimepicker" type="numeric" placeholder="y/m/d"
+                                            data-options='{"disableMobile":true}'
                                             id="bootstrap-wizard-wizard-datepicker" name="birth" /></div>
                                     <div class="mb-3">
                                         <label class="form-label" for="bootstrap-wizard-wizard-address">Alamat</label>
                                         <textarea class="form-control" rows="3" id="bootstrap-wizard-wizard-address"
-                                            name="address"></textarea>
+                                            name="address" required></textarea>
                                     </div>
                                 </div>
                                 <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
                                     aria-labelledby="bootstrap-wizard-tab2" id="bootstrap-wizard-tab3">
                                     <div class="mb-3"><label class="form-label"
-                                        for="bootstrap-wizard-wizard-phone">Nama Mobil</label><input
-                                        class="form-control" type="text" name="car" placeholder="Telepon"
-                                        id="bootstrap-wizard-wizard-phone" /></div>
+                                        for="bootstrap-wizard-wizard-phone">Nama Kendaraan</label><input
+                                        class="form-control @error('car')
+                                            is-invalid
+                                        @enderror" type="text" name="car" placeholder="Nama kendaraan"
+                                        id="bootstrap-wizard-wizard-phone" value="{{old('car')}}" autocomplete="car"/></div>
                                     <div class="mb-3"><label class="form-label"
                                             for="bootstrap-wizard-wizard-phone">Plat Nomor</label><input
-                                            class="form-control" type="text" name="number_plate" placeholder="Plat nomor"
-                                            id="bootstrap-wizard-wizard-phone" /></div>
+                                            class="form-control @error('number_plate')
+                                                is-invalid
+                                            @enderror" type="text" name="number_plate" placeholder="Plat nomor"
+                                            id="bootstrap-wizard-wizard-phone" value="{{old('number_plate')}}" autocomplete="number_plate" required/></div>
+                                            @error('number_plate')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
                                     <div class="mb-3"><label class="form-label" for="bootstrap-wizard-gender">Jenis Kendaraan</label>
-                                        <select class="form-select" name="gender" id="bootstrap-wizard-gender">
+                                        <select class="form-select" name="type" id="bootstrap-wizard-gender" required>
                                             <option>Pilih jenis kendaraan ...</option>
                                             @foreach ($car_type as $item)
-                                            <option value="{{$item->name}}" name="gender">{{$item->name}}</option>
+                                            <option value="{{$item->id}}" name="type">{{$item->name}}</option>
                                             @endforeach
                                         </select></div>
                                 </div>
