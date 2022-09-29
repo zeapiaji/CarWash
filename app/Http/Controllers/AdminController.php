@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Gender;
+use App\Models\CarType;
 use Illuminate\Http\Request;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
@@ -42,8 +44,9 @@ class AdminController extends Controller
         public function edit_member($id)
         {
             $data = User::find($id);
-
-            return view('staff.admin.pages.manage_member.edit', compact('data'));
+            $car_type = CarType::all();
+            $gender = Gender::all();
+            return view('staff.admin.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
         }
 
         public function update_member(Request $request)
@@ -54,11 +57,13 @@ class AdminController extends Controller
             $data->email = $request->email;
             $data->phone = $request->phone;
             $data->address = $request->address;
+            $data->birth = $request->birth;
+            $data->gender_id = $request->gender;
             $data->save();
 
-            $car = Car::find($request->id);
+            $car = Car::where('user_id',$data->id)->first();
             $car->name = $request->car;
-            $car->type = $request->type;
+            $car->type_id = $request->type;
             $car->number_plate = $request->number_plate;
             $car->save();
 

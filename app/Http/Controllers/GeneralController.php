@@ -32,4 +32,17 @@ class GeneralController extends Controller
 
         return redirect('/home');
     }
+
+    public function image(Request $request, $id)
+    {
+        $cover = $request -> cover;
+        $coverName = 'user-'.$id.'.'.$cover->getClientOriginalExtension();
+        request()->cover->move(public_path('/img/cover'), $coverName);
+
+        $profile = $request -> profile;
+        $profileName = 'user-'.$id.'.'.$profile->getClientOriginalExtension();
+        request()->profile->move(public_path('/img/profile'), $profileName);
+
+        return redirect()->back();
+    }
 }

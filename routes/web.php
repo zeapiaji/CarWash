@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register-member', [GeneralController::class, 'register_member'])->name('register-member');
 
+Route::post('/image/user/{id}', [GeneralController::class, 'image']);
+
 Route::middleware(['role:member'])->group(function() {
     //
 });
