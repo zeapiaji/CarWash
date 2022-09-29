@@ -16,7 +16,7 @@
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total Member</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                <h6 class="d-none d-sm-inline-block ">{{$data->count()}}</h6>
+                <h6 class="d-none d-sm-inline-block ">{{$totalUser}}</h6>
             </div>
         </div>
     </div>

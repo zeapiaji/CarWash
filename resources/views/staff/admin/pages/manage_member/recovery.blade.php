@@ -7,6 +7,22 @@
 
 <div class="card mb-3">
     <div class="card-header">
+        <div class="row">
+            <div class="col d-none d-sm-block">
+                <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Tempat Sampah Member</h4>
+            </div>
+            <div class="col-auto d-none d-sm-block">
+                <h6 class="d-none d-sm-inline-block ms-1">Total Member</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                <h6 class="d-none d-sm-inline-block ">{{$totalUser}}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                 <input type="search" class="form-control search-input search"  placeholder="cari..">

@@ -29,8 +29,9 @@ class AdminController extends Controller
     public function manage_member()
     {
         $data = User::role('member')->get();
+        $totalUser = $data->count();
 
-        return view('staff.admin.pages.manage_member.index', compact('data'));
+        return view('staff.admin.pages.manage_member.index', compact('data', 'totalUser'));
     }
 
     public function detail_member($id)
@@ -90,8 +91,8 @@ class AdminController extends Controller
         public function recycle_member()
         {
             $data = User::onlyTrashed()->get();
-            // $data = Car::withTrashed()->get();
-            return view('staff.admin.pages.manage_member.recovery', compact('data'));
+            $totalUser = $data->count();
+            return view('staff.admin.pages.manage_member.recovery', compact('data', 'totalUser'));
         }
 
         public function recovery_member($id)
