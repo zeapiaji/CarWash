@@ -48,38 +48,40 @@
                 </li>
                 <li class="nav-item">
                     <!-- parent pages-->
-                    <a class="nav-link dropdown-indicator collapsed" href="#manage_member" role="button" data-bs-toggle="collapse"
-                        aria-expanded="false" aria-controls="manage_member">
+                    <a class="nav-link dropdown-indicator collapsed" href="#manage_member" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_member">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
-                                <span class="fas fa-user-cog"></span>
+                                <span class="fas fa-users"></span>
                             </span>
-                            <span class="nav-link-text ps-1">Member</span></div>
+                            <span class="nav-link-text ps-1">Member</span>
+                        </div>
                     </a>
                     <ul class="nav false collapse" id="manage_member" style="">
-                        <li class="nav-item"><a class="nav-link" href="/manage-member" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kelola</span></div>
-                          </a><!-- more inner pages-->
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/manage-member" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-user-cog"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Kelola</span>
+                                </div>
+                            </a><!-- more inner pages-->
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/recycle-member" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Sampah</span></div>
-                          </a><!-- more inner pages-->
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/recycle-member" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Tempat Sampah</span>
+                                </div>
+                            </a><!-- more inner pages-->
                         </li>
-                      </ul>
+                    </ul>
                 </li>
 
 
-
-                <li class="nav-item">
-                    <!-- parent pages-->
-                    <a class="nav-link" href="/pricing" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-tags"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Harga Cuci</span></div>
-                    </a><!-- more inner pages-->
-                </li>
                 {{-- Divider --}}
                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                     <div class="col-auto navbar-vertical-label">Data</div>
