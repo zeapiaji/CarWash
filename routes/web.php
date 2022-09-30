@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/dashboard-admin', function () {
-//     return view('staff.admin.pages.dashboard');
-// })->middleware('role:admin')->name('admin.dashboard');
+
+Route::post('/register-member', [GeneralController::class, 'register_member'])->name('register-member');
+
+Route::post('/image/user/{id}', [GeneralController::class, 'image']);
 
 Route::middleware(['role:member'])->group(function () {
     //
@@ -32,7 +33,7 @@ Route::middleware(['role:employee'])->group(function () {
     Route::get('/queue', [EmployeeController::class, 'queue'])->name('employee.queue');
 });
 
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['role:admin|super_admin'])->group(function () {
     // Dashboard
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/update/employe/{id}', [AdminController::class, 'update_employee'])->name('admin.updateemployee');
@@ -75,18 +76,11 @@ Route::middleware(['role:admin'])->group(function () {
     // Export & Import
     Route::get('/export-member-xlsx', [AdminController::class, 'export_member_xlsx'])->name('admin.export-member-xlsx');
     Route::get('/export-member-csv', [AdminController::class, 'export_member_csv'])->name('admin.export-member-csv');
-    Route::get('/export-member-tsv', [AdminController::class, 'export_member_tsv'])->name('admin.export-member-tsv');
-    Route::get('/export-member-ods', [AdminController::class, 'export_member_ods'])->name('admin.export-member-ods');
     Route::get('/export-member-pdf', [AdminController::class, 'export_member_pdf'])->name('admin.export-member-pdf');
     Route::post('/import-member-xlsx', [AdminController::class, 'import_member_xlsx'])->name('admin.import-member-xlsx');
 
-
-
     // Washing Data
     Route::get('/admin-washing-data', [AdminController::class, 'admin_washing_data'])->name('admin.washingdata');
-
-    // Pricing
-    Route::get('/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
 });
 
 Route::middleware(['role:ceo'])->group(function () {
@@ -97,6 +91,24 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::get('/superadmin-dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
     Route::get('/manage-admin', [SuperAdminController::class, 'manage_admin'])->name('superadmin.manageadmin');
     Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
+
+    Route::get('/edit/admin/{id}', [SuperAdminController::class, 'edit_admin'])->name('superadmin.edit.admin');
+    Route::post('/update/admin/{id}', [SuperAdminController::class, 'update_admin'])->name('superadmin.update.admin');
+
+    // Pricing
+    Route::get('/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
+
+    // Subsidiary
+    Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');
+    Route::get('/detail/subsidiary/{id}', [SuperAdminController::class, 'detail_subsidiary'])->name('superadmin.detail.subsidiary');
+    Route::get('/edit/subsidiary/{id}', [SuperAdminController::class, 'edit_subsidiary'])->name('superadmin.edit.subsidiary');
+    Route::get('/delete/subsidiary/{id}', [SuperAdminController::class, 'delete_subsidiary'])->name('superadmin.delete.subsidiary');
+
+    // Export & Import
+    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
+    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
+    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
+    Route::post('/import-admin-xlsx', [SuperAdminController::class, 'import_adminr_xlsx'])->name('admin.import-admin-xlsx');
 });
 
 // Route::middleware(['role:employee|admin|ceo|super_admin'])->group(function() {

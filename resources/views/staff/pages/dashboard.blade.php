@@ -1,7 +1,7 @@
-@extends('staff.super_admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.super_admin.partials.menu')
+@include('staff.partials.menu')
     <div class="row g-3 mb-3">
         <div class="col-xxl-8">
             <div class="card overflow-hidden mb-3">

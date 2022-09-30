@@ -1,9 +1,25 @@
-@extends('staff.admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.admin.partials.menu')
+@include('staff.partials.menu')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col d-none d-sm-block">
+                <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Tempat Sampah Member</h4>
+            </div>
+            <div class="col-auto d-none d-sm-block">
+                <h6 class="d-none d-sm-inline-block ms-1">Total Member</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalUser}}}'></h6>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="card mb-3">
     <div class="card-header">
@@ -54,16 +70,15 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->name, 0, 2)}}</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
-                                    </div>
+                            <div class="d-flex d-flex align-items-center">
+                                <div class="avatar avatar-xl me-2">
+                                    <div class="avatar-name rounded-circle">
+                                        <span>{{mb_substr($item->name, 0, 2)}}</span></div>
                                 </div>
-                            </a>
+                                <div class="flex-1">
+                                    <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                </div>
+                            </div>
                         </td>
                         <td class="car align-middle pt-2">{{$item->car->name}}
                         </td>
@@ -81,7 +96,7 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/member/{{$item->id}}">Sunting</a><a
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/member/{{$item->id}}">Pulihkan</a><a
                                             class="dropdown-item text-danger" href="/forcedelete/member/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>

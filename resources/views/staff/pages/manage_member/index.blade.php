@@ -1,10 +1,26 @@
-@extends('staff.admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.admin.partials.menu')
+@include('staff.partials.menu')
 <!--  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col d-none d-sm-block">
+                <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Member</h4>
+            </div>
+            <div class="col-auto d-none d-sm-block">
+                <h6 class="d-none d-sm-inline-block ms-1">Total Member</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalUser}}}'>0</h6>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
@@ -58,7 +74,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Kendaraan</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>

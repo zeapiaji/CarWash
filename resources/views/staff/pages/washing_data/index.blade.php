@@ -1,8 +1,8 @@
-@extends('staff.super_admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.super_admin.partials.menu')
-<!--  -->
+@include('staff.partials.menu')
+
 <div class="card mb-3" id="customersTable"
     data-list='{"valueNames":["name","email","phone","address","joined"],"page":10,"pagination":true}'>
     <div class="card-header">

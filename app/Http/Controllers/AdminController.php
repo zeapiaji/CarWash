@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Gender;
+use App\Models\CarType;
 use Illuminate\Http\Request;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
@@ -14,37 +16,39 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('staff.admin.pages.dashboard');
+        return view('staff.pages.dashboard');
     }
 
     public function manage_employee()
     {
         $data = User::role('employee')->get();
 
-        return view('staff.admin.pages.manage_employee.index', compact('data'));
+        return view('staff.pages.manage_employee.index', compact('data'));
     }
 
     // Member
     public function manage_member()
     {
         $data = User::role('member')->get();
+        $totalUser = $data->count();
 
-        return view('staff.admin.pages.manage_member.index', compact('data'));
+        return view('staff.pages.manage_member.index', compact('data', 'totalUser'));
     }
 
     public function detail_member($id)
     {
         $data = User::find($id);
 
-        return view('staff.admin.pages.manage_member.detailmember', compact('data'));
+        return view('staff.pages.manage_member.detailmember', compact('data'));
     }
 
     // Edit
     public function edit_member($id)
     {
-        $data = User::find($id);
-
-        return view('staff.admin.pages.manage_member.edit', compact('data'));
+        $data = User::role('member')->where('id', $id)->first();
+        $car_type = CarType::all();
+        $gender = Gender::all();
+        return view('staff.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
     }
 
     public function update_member(Request $request)
@@ -55,11 +59,13 @@ class AdminController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+        $data->birth = $request->birth;
+        $data->gender_id = $request->gender;
         $data->save();
 
-        $car = Car::find($request->id);
+        $car = Car::where('user_id', $data->id)->first();
         $car->name = $request->car;
-        $car->type = $request->type;
+        $car->type_id = $request->type;
         $car->number_plate = $request->number_plate;
         $car->save();
 
@@ -86,8 +92,8 @@ class AdminController extends Controller
     public function recycle_member()
     {
         $data = User::onlyTrashed()->get();
-        // $data = Car::withTrashed()->get();
-        return view('staff.admin.pages.manage_member.recovery', compact('data'));
+        $totalUser = $data->count();
+        return view('staff.pages.manage_member.recovery', compact('data', 'totalUser'));
     }
 
     public function recovery_member($id)
@@ -95,7 +101,7 @@ class AdminController extends Controller
         User::withTrashed()->where('id', $id)->restore();
         Car::withTrashed()->where('user_id', $id)->restore();
 
-        return redirect('/recycle/member');
+        return redirect('/recycle-member');
     }
 
     public function multiple_recovery_member(Request $request)
@@ -121,7 +127,7 @@ class AdminController extends Controller
         User::withTrashed()->where('id', $id)->forceDelete();
         Car::withTrashed()->where('id', $id)->forceDelete();
 
-        return redirect('/recycle/member');
+        return redirect('/recycle-member');
     }
 
     public function multiple_force_delete_member(Request $request)
@@ -260,12 +266,12 @@ class AdminController extends Controller
     //Priceing
     public function pricing()
     {
-        return view('staff.admin.pages.manage_price.index');
+        return view('staff.pages.manage_plans.index');
     }
 
     public function admin_washing_data()
     {
-        return view('staff.admin.pages.washing_data.index');
+        return view('staff.pages.washing_data.index');
     }
 
     // Export & Import
