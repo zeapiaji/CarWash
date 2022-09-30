@@ -36,8 +36,29 @@
                         <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                 </div>
-                <!-- parent pages-->
-                <li class="nav-item">
+
+                 <li class="nav-item">
+                    <!--parent pages-->
+                    <a class="nav-link dropdown-indicator collapsed" href="#manage_employe" role="button" data-bs-toggle="collapse"
+                        aria-expanded="false" aria-controls="manage_employe">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-user"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Pegawai</span></div>
+                    </a>
+                    <ul class="nav false collapse" id="manage_employe" style="">
+                        <li class="nav-item"><a class="nav-link" href="/manage-employee" aria-expanded="false">
+                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kelola</span></div>
+                          </a><!-- more inner pages-->
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/recycle-employe" aria-expanded="false">
+                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Sampah</span></div>
+                          </a><!-- more inner pages-->
+                        </li>
+                      </ul>
+                </li>
+                {{--  <li class="nav-item">
                     <a class="nav-link" href="/manage-employee" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
@@ -45,7 +66,7 @@
                             </span>
                             <span class="nav-link-text ps-1">Pegawai</span></div>
                     </a><!-- more inner pages-->
-                </li>
+                </li>  --}}
                 <li class="nav-item">
                     <!-- parent pages-->
                     <a class="nav-link dropdown-indicator collapsed" href="#manage_member" role="button" data-bs-toggle="collapse"

@@ -17,17 +17,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 10 ; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $user = User::create([
-                'name' => 'User'.$i,
-                'email' => 'user'.$i.'@gmail.com',
-                'phone' => '123123123'.$i,
+                'name' => 'User' . $i,
+                'email' => 'user' . $i . '@gmail.com',
+                'phone' => '123123123' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
-                'gender_id' => random_int(1,2),
+                'gender_id' => random_int(1, 2),
                 'password' => bcrypt('zeapiaji')
             ]);
-            $user -> assignRole('member');
+            $user->assignRole('member');
         }
 
         $pegawai = User::create([
@@ -39,7 +39,10 @@ class UserSeeder extends Seeder
             'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
-        $pegawai -> assignRole('employee');
+        $pegawai->assignRole('employee');
+
+
+
 
         $admin = User::create([
             'name' => 'Admin',
@@ -50,7 +53,7 @@ class UserSeeder extends Seeder
             'gender_id' => 2,
             'password' => bcrypt('zeapiaji')
         ]);
-        $admin -> assignRole('admin');
+        $admin->assignRole('admin');
 
         $super_admin = User::create([
             'name' => 'Super Admin',
@@ -61,7 +64,7 @@ class UserSeeder extends Seeder
             'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
-        $super_admin -> assignRole('super_admin');
+        $super_admin->assignRole('super_admin');
 
         $ceo = User::create([
             'name' => 'Ceo',
@@ -72,6 +75,6 @@ class UserSeeder extends Seeder
             'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
-        $ceo -> assignRole('ceo');
+        $ceo->assignRole('ceo');
     }
 }

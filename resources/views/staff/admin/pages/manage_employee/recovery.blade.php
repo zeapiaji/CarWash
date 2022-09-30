@@ -14,13 +14,13 @@
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-member" data-route="{{ route('admin.multiple-recovery-member')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-member" data-route="{{ route('admin.multiple-force-delete-member')}}">Hapus Permanen</button>
+                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-employee" data-route="{{ route('admin.multiple-recovery-employee')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-employee" data-route="{{ route('admin.multiple-force-delete-employee')}}">Hapus Permanen</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-member" data-route="{{ route('admin.recovery-all-member')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-member" data-route="{{ route('admin.force-delete-all-member')}}">Hapus Permanen Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-employee" data-route="{{ route('admin.recovery-all-employee')}}">Pulihkan Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-employee" data-route="{{ route('admin.force-delete-all-employee')}}">Hapus Permanen Semua</button>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table"
-            data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
+            data-list='{"valueNames":["name","email","phone","gender"],"page":10,"pagination":true}'>
                 <thead class="bg-200 text-900">
                     <tr>
                         <th>
@@ -36,10 +36,9 @@
                                 <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Gender</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -54,7 +53,7 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
+                            <a href="/detail/employe/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle"><span>{{mb_substr($item->name, 0, 2)}}</span></div>
@@ -65,13 +64,14 @@
                                 </div>
                             </a>
                         </td>
-                        <td class="car align-middle pt-2">{{$item->car->name}}
+                        {{--  <td class="car align-middle pt-2">{{$item->car->name}}
                         </td>
                         <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
-                        </td>
+                        </td>  --}}
                         <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
                         </td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
+                        <td class="gender align-middle py-2">{{$item->gender->name}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -81,8 +81,8 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/member/{{$item->id}}">Sunting</a><a
-                                            class="dropdown-item text-danger" href="/forcedelete/member/{{$item->id}}">Hapus</a></div>
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/employe/{{$item->id}}">Sunting</a><a
+                                            class="dropdown-item text-danger" href="/forcedelete/employe/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -105,7 +105,7 @@
 
       $("#customers-table").TableCheckAll();
 
-      $('#multiple-recovery-member').on('click', function() {
+      $('#multiple-recovery-employee').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -136,7 +136,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-employe'
                 });
               }
             });
@@ -144,7 +144,7 @@
         });
       });
 
-      $('#multiple-force-delete-member').on('click', function() {
+      $('#multiple-force-delete-employee').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -175,7 +175,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-employe'
                 });
               }
             });
@@ -183,7 +183,7 @@
         });
       });
 
-      $('#recovery-all-member').on('click', function() {
+      $('#recovery-all-employee').on('click', function() {
         var button = $(this);
 
         Swal.fire({
@@ -207,7 +207,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-employe'
                 });
               }
             });
@@ -215,7 +215,7 @@
         });
       });
 
-      $('#force-delete-all-member').on('click', function() {
+      $('#force-delete-all-employee').on('click', function() {
         var button = $(this);
 
         Swal.fire({
@@ -240,7 +240,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-employe'
                 });
               }
             });

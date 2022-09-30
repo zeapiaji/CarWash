@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
+use App\Models\Gender;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
@@ -38,32 +39,32 @@ class AdminController extends Controller
         return view('staff.admin.pages.manage_member.detailmember', compact('data'));
     }
 
-        // Edit
-        public function edit_member($id)
-        {
-            $data = User::find($id);
+    // Edit
+    public function edit_member($id)
+    {
+        $data = User::find($id);
 
-            return view('staff.admin.pages.manage_member.edit', compact('data'));
-        }
+        return view('staff.admin.pages.manage_member.edit', compact('data'));
+    }
 
-        public function update_member(Request $request)
-        {
-            $data = User::find($request->id);
+    public function update_member(Request $request)
+    {
+        $data = User::find($request->id);
 
-            $data->name = $request->name;
-            $data->email = $request->email;
-            $data->phone = $request->phone;
-            $data->address = $request->address;
-            $data->save();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+        $data->save();
 
-            $car = Car::find($request->id);
-            $car->name = $request->car;
-            $car->type = $request->type;
-            $car->number_plate = $request->number_plate;
-            $car->save();
+        $car = Car::find($request->id);
+        $car->name = $request->car;
+        $car->type = $request->type;
+        $car->number_plate = $request->number_plate;
+        $car->save();
 
-            return redirect('/manage-member');
-        }
+        return redirect('/manage-member');
+    }
 
     // Soft Delete
     public function delete_member($id)
@@ -74,73 +75,189 @@ class AdminController extends Controller
         return redirect('/manage-member');
     }
 
-        public function multiple_delete_member(Request $request)
-        {
-            Car::whereIn('user_id', $request->get('selected'))->delete();
-            User::whereIn('id', $request->get('selected'))->delete();
+    public function multiple_delete_member(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))->delete();
+        User::whereIn('id', $request->get('selected'))->delete();
 
-            return response("Selected post(s) deleted successfully.", 200);
-        }
+        return response("Selected post(s) deleted successfully.", 200);
+    }
 
-        public function recycle_member()
-        {
-            $data = User::onlyTrashed()->get();
-            // $data = Car::withTrashed()->get();
-            return view('staff.admin.pages.manage_member.recovery', compact('data'));
-        }
+    public function recycle_member()
+    {
+        $data = User::onlyTrashed()->get();
+        // $data = Car::withTrashed()->get();
+        return view('staff.admin.pages.manage_member.recovery', compact('data'));
+    }
 
-        public function recovery_member($id)
-        {
-            User::withTrashed()->where('id', $id)->restore();
-            Car::withTrashed()->where('user_id',$id)->restore();
+    public function recovery_member($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
+        Car::withTrashed()->where('user_id', $id)->restore();
 
-            return redirect('/recycle/member');
-        }
+        return redirect('/recycle/member');
+    }
 
-        public function multiple_recovery_member(Request $request)
-        {
-            Car::whereIn('user_id', $request->get('selected'))
-                ->restore();
-            User::whereIn('id', $request->get('selected'))
-                ->restore();
+    public function multiple_recovery_member(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))
+            ->restore();
+        User::whereIn('id', $request->get('selected'))
+            ->restore();
 
-            return response("Selected post(s) deleted successfully.", 200);
-        }
+        return response("Selected post(s) deleted successfully.", 200);
+    }
 
-        public function recovery_all_member()
-        {
-            User::withTrashed()->restore();
-            Car::withTrashed()->restore();
+    public function recovery_all_member()
+    {
+        User::withTrashed()->restore();
+        Car::withTrashed()->restore();
 
-            return response("Selected post(s) deleted successfully.", 200);
-        }
+        return response("Selected post(s) deleted successfully.", 200);
+    }
 
-        public function forcedelete_member($id)
-        {
-            User::withTrashed()->where('id', $id)->forceDelete();
-            Car::withTrashed()->where('id',$id)->forceDelete();
+    public function forcedelete_member($id)
+    {
+        User::withTrashed()->where('id', $id)->forceDelete();
+        Car::withTrashed()->where('id', $id)->forceDelete();
 
-            return redirect('/recycle/member');
-        }
+        return redirect('/recycle/member');
+    }
 
-        public function multiple_force_delete_member(Request $request)
-        {
-            Car::whereIn('user_id', $request->get('selected'))
-                ->forceDelete();
-            User::whereIn('id', $request->get('selected'))
-                ->forceDelete();
+    public function multiple_force_delete_member(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))
+            ->forceDelete();
+        User::whereIn('id', $request->get('selected'))
+            ->forceDelete();
 
-            return response("Selected post(s) deleted successfully.", 200);
-        }
+        return response("Selected post(s) deleted successfully.", 200);
+    }
 
-        public function force_delete_all_member()
-        {
-            Car::onlyTrashed()->forceDelete();
-            User::onlyTrashed()->forceDelete();
+    public function force_delete_all_member()
+    {
+        Car::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->forceDelete();
 
-            return response("Selected post(s) deleted successfully.", 200);
-        }
+        return response("Selected post(s) deleted successfully.", 200);
+    }
 
+
+    //Staff
+    public function input_employee()
+    {
+        $gender = Gender::all();
+        return view('staff.admin.pages.manage_employee.input', compact('gender'));
+    }
+    public function store_employee(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'gender' => 'required'
+        ]);
+        user::role('employee')->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender_id' => $request->gender
+        ]);
+        return redirect('/manage-employee');
+    }
+    public function edit_employee($id)
+    {
+        $data = User::find($id);
+        $gender = Gender::all();
+        return view('staff.admin.pages.manage_employee.edit', compact('data', 'gender'));
+    }
+    public function update_employee(Request $request)
+    {
+        $data = User::find($request->id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+        $data->gender_id = $request->gender;
+        $data->save();
+        return redirect('/manage-employee');
+    }
+
+    // Soft Delete
+    public function delete_employee($id)
+    {
+        User::find($id)->delete();
+
+        return redirect('/manage-employee');
+    }
+
+    public function multiple_delete_employee(Request $request)
+    {
+        User::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function recycle_employee()
+    {
+        $data = User::onlyTrashed()->get();
+        return view('staff.admin.pages.manage_employee.recovery', compact('data'));
+    }
+
+    public function recovery_employee($id)
+    {
+        // User::withTrashed()->where('id', $id)->restore();
+        $data = User::role('employee')->withTrashed()->where('id', $id)->restore();
+
+        return redirect('/recycle/employe');
+    }
+
+    public function multiple_recovery_employee(Request $request)
+    {
+        User::whereIn('id', $request->get('selected'))
+            ->restore();
+
+        $data = User::role('employee')->whereIn('id', $request->get('selected'));
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function recovery_all_employee()
+    {
+        User::role('employee')->withTrashed()->restore();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function forcedelete_employee($id)
+    {
+        User::role('employee')->withTrashed()->where('id', $id)->forceDelete();
+
+        return redirect('/recycle/employe');
+    }
+
+    public function multiple_force_delete_employee(Request $request)
+    {
+        // Car::whereIn('user_id', $request->get('selected'))
+        //     ->forceDelete();
+        User::role('employee')->whereIn('id', $request->get('selected'))
+            ->forceDelete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function force_delete_all_employee()
+    {
+
+        User::role('employee')->onlyTrashed()->forceDelete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+
+    //Priceing
     public function pricing()
     {
         return view('staff.admin.pages.manage_price.index');
@@ -175,5 +292,4 @@ class AdminController extends Controller
 
         return redirect('/manage-member');
     }
-
 }
