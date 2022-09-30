@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subsidiary extends Model
 {
@@ -12,6 +13,15 @@ class Subsidiary extends Model
     protected $fillable = [
         'name',
         'location',
-        'user_id',
     ];
+
+    /**
+     * Get the user that owns the Subsidiary
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function staff()
+    {
+        return $this->hasOne(Staff::class);
+    }
 }

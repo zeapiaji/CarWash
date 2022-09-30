@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\AdminExport;
-use App\Models\Gender;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Gender;
+use App\Models\Subsidiary;
+use App\Exports\AdminExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -33,6 +35,34 @@ class SuperAdminController extends Controller
     public function superadmin_washing_data()
     {
         return view('staff.pages.washing_data.index');
+    }
+
+    public function manage_subsidiary()
+    {
+        $data = Staff::role('admin')->get();
+        $totalSubsidiaries = $data -> count();
+        // dd($data);
+        return view('staff.pages.manage_subsidiaries.index', compact('data', 'totalSubsidiaries'));
+    }
+
+    public function detail_subsidiary($id)
+    {
+        $data = Subsidiary::find($id);
+        $staff = Staff::where('subsidiary_id', $id)->get();
+
+        return view('staff.pages.manage_subsidiaries.detail_subsidiary', compact('data', 'staff'));
+    }
+
+    public function edit_subsidiary($id)
+    {
+        $data = Subsidiary::find($id);
+
+        return view('staff.pages.manage_subsidiaries.edit', compact('data'));
+    }
+
+    public function delete_subsidiary($id)
+    {
+        # code...
     }
 
     public function export_admin_xlsx()

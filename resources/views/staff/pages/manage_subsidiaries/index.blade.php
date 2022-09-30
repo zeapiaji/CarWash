@@ -6,8 +6,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col d-none d-sm-block">
+                <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Cabang</h4>
+            </div>
+            <div class="col-auto d-none d-sm-block">
+                <h6 class="d-none d-sm-inline-block ms-1">Total Cabang</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalSubsidiaries}}}'>0</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="card mb-3" id="customersTable"
-data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
+data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -28,9 +44,6 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
-                        <a class="dropdown-item" data-bs-toggle="modal2" data-bs-target="#error-modal" >CSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal3" data-bs-target="#error-modal" >TSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal4" data-bs-target="#error-modal" >ODS</a>
                     </div>
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
@@ -39,12 +52,10 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
-                        <a class="dropdown-item" href="/export-member-xlsx">XLSX</a>
-                        <a class="dropdown-item" href="/export-member-csv">CSV</a>
-                        <a class="dropdown-item" href="/export-member-tsv">TSV</a>
-                        <a class="dropdown-item" href="/export-member-ods">ODS</a>
+                        <a class="dropdown-item" href="/export-admin-xlsx">XLSX</a>
+                        <a class="dropdown-item" href="/export-admin-csv">CSV</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/export-member-pdf">PDF</a>
+                        <a class="dropdown-item" href="/export-admin-pdf">PDF</a>
                     </div>
                 </div>
             </div>
@@ -63,9 +74,8 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Telepon</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="gender">Jenis Kelamin</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Admin</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Alamat</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -81,21 +91,21 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
+                            <a href="/detail/subsidiary/{{$item->subsidiary->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
                                             <span>{{mb_substr($item->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->subsidiary->name}}</h5>
                                     </div>
                                 </div>
                             </a>
                         </td>
-                        <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
-                        <td class="gender align-middle py-2">{{$item -> gender -> name}}</td>
+                        <td class="email align-middle py-2">{{$item -> user->name}}</td>
+                        <td class="phone align-middle py-2">{{$item->subsidiary->location}}</td>
+
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -105,9 +115,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/member/{{$item->id}}">Sunting</a>
+                                            href="/edit/subsidiary/{{$item->subsidiary->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/member/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/subsidiary/{{$item->subsidiary->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -190,7 +200,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 showCancelButton: false,
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
-                                window.location = '/manage-member'
+                                window.location = '/manage-admin'
                             });
                         }
                     });

@@ -16,7 +16,7 @@
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total Admin</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                <h6 class="d-none d-sm-inline-block ">{{$totalAdmin}}</h6>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalAdmin}}}'>0</h6>
             </div>
         </div>
     </div>

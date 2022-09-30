@@ -30,27 +30,31 @@ class UserSeeder extends Seeder
         //     $user -> assignRole('member');
         // }
 
-        $pegawai = User::create([
-            'name' => 'Employee',
-            'email' => 'employee@gmail.com',
-            'phone' => '1242090923',
-            'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
-            'birth' => Carbon::parse('2000-12-28'),
-            'gender_id' => 1,
-            'password' => bcrypt('zeapiaji')
-        ]);
-        $pegawai -> assignRole('employee');
+        for($i = 1; $i<=50; $i++){
+            $pegawai = User::create([
+                'name' => 'Employee'.$i,
+                'email' => 'employee'.$i.'@gmail.com',
+                'phone' => '12420909'.$i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => random_int(1,2),
+                'password' => bcrypt('zeapiaji')
+            ]);
+            $pegawai -> assignRole('employee');
+        }
 
-        $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'phone' => '1228200423',
-            'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
-            'birth' => Carbon::parse('2000-12-28'),
-            'gender_id' => 2,
-            'password' => bcrypt('zeapiaji')
-        ]);
-        $admin -> assignRole('admin');
+        for($i = 1; $i<=5; $i++){
+            $admin = User::create([
+                'name' => 'Admin'.$i,
+                'email' => 'admin'.$i.'@gmail.com',
+                'phone' => '12282004'.$i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => 2,
+                'password' => bcrypt('zeapiaji')
+            ]);
+            $admin -> assignRole('admin');
+        }
 
         $super_admin = User::create([
             'name' => 'Super Admin',
