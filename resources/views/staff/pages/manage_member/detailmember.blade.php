@@ -1,7 +1,7 @@
-@extends('staff.admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.admin.partials.menu')
+@include('staff.partials.menu')
 <div class="card mb-3">
     <div class="card-header">
         <div class="row">

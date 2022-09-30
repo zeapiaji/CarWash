@@ -1,7 +1,7 @@
-@extends('staff.admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.admin.partials.menu')
+@include('staff.partials.menu')
 <!--  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -11,12 +11,12 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Member</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Admin</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
-                <h6 class="d-none d-sm-inline-block ms-1">Total Member</h6>
+                <h6 class="d-none d-sm-inline-block ms-1">Total Admin</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                <h6 class="d-none d-sm-inline-block ">{{$totalUser}}</h6>
+                <h6 class="d-none d-sm-inline-block ">{{$totalAdmin}}</h6>
             </div>
         </div>
     </div>
@@ -52,10 +52,10 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
-                        <a class="dropdown-item" href="/export-member-xlsx">XLSX</a>
-                        <a class="dropdown-item" href="/export-member-csv">CSV</a>
+                        <a class="dropdown-item" href="/export-admin-xlsx">XLSX</a>
+                        <a class="dropdown-item" href="/export-admin-csv">CSV</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/export-member-pdf">PDF</a>
+                        <a class="dropdown-item" href="/export-admin-pdf">PDF</a>
                     </div>
                 </div>
             </div>
@@ -74,10 +74,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Kendaraan</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="subsidiary">Cabang</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -93,7 +92,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
+                            {{-- <a href="/detail/member/{{$item->id}}"> --}}
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
@@ -103,15 +102,11 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                         <h5 class="mb-0 fs--1">{{$item->name}}</h5>
                                     </div>
                                 </div>
-                            </a>
+                            {{-- </a> --}}
                         </td>
-                        <td class="car align-middle pt-2">{{$item->car->name}}
-                        </td>
-                        <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
-                        </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
-                        </td>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
+                        <td class="phone align-middle py-2">Cabang</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -122,9 +117,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/member/{{$item->id}}">Sunting</a>
+                                            href="/edit/admin/{{$item->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/member/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/admin/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -207,7 +202,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 showCancelButton: false,
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
-                                window.location = '/manage-member'
+                                window.location = '/manage-admin'
                             });
                         }
                     });

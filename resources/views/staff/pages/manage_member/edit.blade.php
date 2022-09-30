@@ -1,7 +1,7 @@
-@extends('staff.admin.app')
+@extends('staff.layouts.app')
 @section('content')
 
-@include('staff.admin.partials.menu')
+@include('staff.partials.menu')
 
 <div class="card mb-3">
     <div class="card-header">
@@ -47,7 +47,7 @@
                                     <option>Pilih gender ...</option>
                                     @foreach ($gender as $item)
                                     <option value="{{$item->id}}" name="gender"
-                                        {{ ($item->id == $data->car->type_id) ? 'selected' : ''}}>{{$item->name}}
+                                        {{ ($item->id == $data->gender_id) ? 'selected' : ''}}>{{$item->name}}
                                     </option>
                                     @endforeach
                                 </select>

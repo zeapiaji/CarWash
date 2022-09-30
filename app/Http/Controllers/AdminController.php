@@ -15,14 +15,14 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('staff.admin.pages.dashboard');
+        return view('staff.pages.dashboard');
     }
 
     public function manage_employee()
     {
         $data = User::role('employee')->get();
 
-        return view('staff.admin.pages.manage_employee.index', compact('data'));
+        return view('staff.pages.manage_employee.index', compact('data'));
     }
 
     // Member
@@ -31,23 +31,23 @@ class AdminController extends Controller
         $data = User::role('member')->get();
         $totalUser = $data->count();
 
-        return view('staff.admin.pages.manage_member.index', compact('data', 'totalUser'));
+        return view('staff.pages.manage_member.index', compact('data', 'totalUser'));
     }
 
     public function detail_member($id)
     {
         $data = User::find($id);
 
-        return view('staff.admin.pages.manage_member.detailmember', compact('data'));
+        return view('staff.pages.manage_member.detailmember', compact('data'));
     }
 
         // Edit
         public function edit_member($id)
         {
-            $data = User::find($id);
+            $data = User::role('member')->where('id', $id)->first();
             $car_type = CarType::all();
             $gender = Gender::all();
-            return view('staff.admin.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
+            return view('staff.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
         }
 
         public function update_member(Request $request)
@@ -92,7 +92,7 @@ class AdminController extends Controller
         {
             $data = User::onlyTrashed()->get();
             $totalUser = $data->count();
-            return view('staff.admin.pages.manage_member.recovery', compact('data', 'totalUser'));
+            return view('staff.pages.manage_member.recovery', compact('data', 'totalUser'));
         }
 
         public function recovery_member($id)
@@ -100,7 +100,7 @@ class AdminController extends Controller
             User::withTrashed()->where('id', $id)->restore();
             Car::withTrashed()->where('user_id',$id)->restore();
 
-            return redirect('/recycle/member');
+            return redirect('/recycle-member');
         }
 
         public function multiple_recovery_member(Request $request)
@@ -126,7 +126,7 @@ class AdminController extends Controller
             User::withTrashed()->where('id', $id)->forceDelete();
             Car::withTrashed()->where('id',$id)->forceDelete();
 
-            return redirect('/recycle/member');
+            return redirect('/recycle-member');
         }
 
         public function multiple_force_delete_member(Request $request)
@@ -149,12 +149,12 @@ class AdminController extends Controller
 
     public function pricing()
     {
-        return view('staff.admin.pages.manage_price.index');
+        return view('staff.pages.manage_plans.index');
     }
 
     public function admin_washing_data()
     {
-        return view('staff.admin.pages.washing_data.index');
+        return view('staff.pages.washing_data.index');
     }
 
     // Export & Import
