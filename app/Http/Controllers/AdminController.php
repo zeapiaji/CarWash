@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\User;
-use App\Models\Gender;
 use App\Models\CarType;
 use Illuminate\Http\Request;
 use App\Exports\MemberExport;
