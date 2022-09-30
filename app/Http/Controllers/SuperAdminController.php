@@ -56,8 +56,19 @@ class SuperAdminController extends Controller
     public function edit_subsidiary($id)
     {
         $data = Subsidiary::find($id);
+        $staff = Staff::where('subsidiary_id', $id)->get();
 
-        return view('staff.pages.manage_subsidiaries.edit', compact('data'));
+        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff'));
+    }
+
+    public function update_subsidiary(Request $request, $id)
+    {
+        $data = Subsidiary::find($id);
+        $data->name = $request->name;
+        $data->location = $request->location;
+        $data->save();
+
+        return redirect('/manage-subsidiaries');
     }
 
     public function delete_subsidiary($id)

@@ -89,6 +89,7 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');
     Route::get('/detail/subsidiary/{id}', [SuperAdminController::class, 'detail_subsidiary'])->name('superadmin.detail.subsidiary');
     Route::get('/edit/subsidiary/{id}', [SuperAdminController::class, 'edit_subsidiary'])->name('superadmin.edit.subsidiary');
+    Route::post('/update/subsidiary/{id}', [SuperAdminController::class, 'update_subsidiary'])->name('superadmin.update.subsidiary');
     Route::get('/delete/subsidiary/{id}', [SuperAdminController::class, 'delete_subsidiary'])->name('superadmin.delete.subsidiary');
 
     // Export & Import
