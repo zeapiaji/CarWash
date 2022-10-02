@@ -16,7 +16,7 @@
     @csrf
     <div class="row g-3">
         <div class="col-lg-8 pe-lg-2">
-            <div class="card mb-3">
+            <div class="card mb-3" style="min-height: 358.48px">
                 <div class="card-header">
                     <h5 class="mb-0">Data Cabang</h5>
                 </div>
@@ -32,10 +32,12 @@
                             <textarea class="form-control" id="address" name="location" cols="30"
                                 rows="3">{{$data->location}}</textarea>
                         </div>
-                        <div class="col-12 d-flex justify-content-end">
-                            <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
-                            <button class="btn btn-primary" type="submit">Ubah</button>
-                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
+                        <button class="btn btn-primary" type="submit">Ubah</button>
                     </div>
                 </div>
             </div>
@@ -52,7 +54,9 @@
                                 Admin
                             </div>
                             <div class="col-auto">
-                                <p>{{$data->staff->user->name}}</p>
+                                <a href="/detail/admin/{{$data->staff->id}}">
+                                    <p class="">{{$data->staff->user->name}}</p>
+                                </a>
                             </div>
                         </div>
                         <div class="row">
@@ -69,7 +73,7 @@
                     <div class="card-header">
                         <h5 class="mb-0">Area Berbahaya</h5>
                     </div>
-                    <div class="card-body bg-light">
+                    <div class="card-body bg-light mb-1">
                         <p class="fs--1">Cabang dengan nama {{$data->name}} akan dihapus.</p>
                         <a class="btn btn-falcon-danger d-block" href="/delete/member/{{$data->id}}">Hapus Cabang</a>
                     </div>
@@ -77,6 +81,7 @@
             </div>
         </div>
     </div>
+
 </form>
 
 @endsection

@@ -23,11 +23,11 @@
 </div>
 
 <div class="card mb-3" id="customersTable"
-data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
+    data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                <input type="search" class="form-control search-input search"  placeholder="cari..">
+                <input type="search" class="form-control search-input search" placeholder="cari..">
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
@@ -43,7 +43,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         <span class="d-none d-sm-inline-block ms-1">Impor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal">XLSX</a>
                     </div>
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
@@ -74,9 +74,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Admin</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Alamat</th>
-                        <th class="align-middle no-sort"></th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="admin">Admin</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="location">Lokasi</th>
+                        <th class="align-middle no-sort white-space-nowrap"></th>
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
@@ -103,23 +103,26 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 </div>
                             </a>
                         </td>
-                        <td class="email align-middle py-2">{{$item -> user->name}}</td>
-                        <td class="phone align-middle py-2">{{$item->subsidiary->location}}</td>
-
-                        <td class="align-middle white-space-nowrap py-2 text-end">
-                            <div class="dropdown font-sans-serif position-static"><button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                    id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window"
-                                    aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--1"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-0"
-                                    aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/subsidiary/{{$item->subsidiary->id}}">Sunting</a>
-                                        <a class="dropdown-item text-danger"
-                                            href="/delete/subsidiary/{{$item->subsidiary->id}}">Hapus</a></div>
+                        <td class="admin align-middle py-2">
+                            <a href="/detail/admin/{{$item->id}}">
+                                <div class="d-flex d-flex align-items-center">
+                                    <div class="flex-1">
+                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+                        </td>
+                        <td class="location align-middle py-2">{{$item->subsidiary->location}}</td>
+
+                        <td class="align-middle py-2">
+                            <a class="btn p-0" href="/edit/subsidiary/{{$item->subsidiary->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Edit">
+                                <span class="text-500 fas fa-edit"></span>
+                            </a>
+                            <a class="btn p-0 ms-2" href="/delete/subsidiary/{{$item->subsidiary->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Hapus">
+                                <span class="text-500 fas fa-trash-alt"></span>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -128,11 +131,11 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
         </div>
     </div>
     <div class="card-footer d-flex align-items-center justify-content-center"><button
-        class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span
-            class="fas fa-chevron-left"></span></button>
-    <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
-        data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-</div>
+            class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span
+                class="fas fa-chevron-left"></span></button>
+        <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
+            data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+    </div>
 </div>
 
 {{-- Upload File Modal --}}

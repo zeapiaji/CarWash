@@ -13,6 +13,17 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function dashboard()
     {
         return view('staff.pages.dashboard');
@@ -29,6 +40,7 @@ class AdminController extends Controller
     public function manage_member()
     {
         $data = User::role('member')->get();
+        // dd($data);
         $totalUser = $data->count();
 
         return view('staff.pages.manage_member.index', compact('data', 'totalUser'));
@@ -38,7 +50,7 @@ class AdminController extends Controller
     {
         $data = User::find($id);
 
-        return view('staff.pages.manage_member.detailmember', compact('data'));
+        return view('staff.pages.manage_member.detail', compact('data'));
     }
 
         // Edit

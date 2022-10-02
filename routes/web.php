@@ -76,14 +76,18 @@ Route::middleware(['role:ceo'])->group(function() {
 
 Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/superadmin-dashboard', [SuperAdminController::class,'dashboard'])->name('superadmin.dashboard');
+
     Route::get('/manage-admin', [SuperAdminController::class,'manage_admin'])->name('superadmin.manageadmin');
-    Route::get('/superadmin-washing-data', [SuperAdminController::class,'superadmin_washing_data'])->name('superadmin.washingdata');
+    Route::get('/detail/admin/{id}', [SuperAdminController::class,'detail_admin'])->name('superadmin.detail.admin');
 
     Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
     Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
+    Route::post('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
 
     // Pricing
     Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
+
+    Route::get('/superadmin-washing-data', [SuperAdminController::class,'superadmin_washing_data'])->name('superadmin.washingdata');
 
     // Subsidiary
     Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');

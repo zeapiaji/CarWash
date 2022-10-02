@@ -92,21 +92,21 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            {{-- <a href="/detail/member/{{$item->id}}"> --}}
+                            <a href="/detail/admin/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                            <span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
                                     </div>
                                 </div>
-                            {{-- </a> --}}
+                            </a>
                         </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
-                        <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="phone align-middle py-2">Cabang</td>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a></td>
+                        <td class="phone align-middle py-2">{{$item->user->phone}}</td>
+                        <td class="phone align-middle py-2">{{$item->subsidiary->name}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -117,9 +117,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/admin/{{$item->id}}">Sunting</a>
+                                            href="/edit/admin/{{$item->user->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/admin/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/admin/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
