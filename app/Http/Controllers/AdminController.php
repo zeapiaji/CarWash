@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\CarType;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class AdminController extends Controller
 
     public function manage_employee()
     {
-        $data = User::role('employee')->get();
+        $data = Staff::role('employee')->get();
 
         return view('staff.pages.manage_employee.index', compact('data'));
     }

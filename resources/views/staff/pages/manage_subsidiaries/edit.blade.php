@@ -14,15 +14,14 @@
 </div>
 <form action="/update/subsidiary/{{$data->id}}" method="POST">
     @csrf
-    <div class="row g-3">
+    <div class="row g-3 mb-3">
         <div class="col-lg-8 pe-lg-2">
-            <div class="card mb-3" style="min-height: 358.48px">
+            <div class="card mb-3" style="min-height: 365px;">
                 <div class="card-header">
                     <h5 class="mb-0">Data Cabang</h5>
                 </div>
                 <div class="card-body bg-light">
                     <div class="row g-3">
-                        <input type="hidden" name="id" value="{{$data->id}}">
                         <div class="col-lg-12">
                             <label class="form-label" for="name">Nama</label>
                             <input class="form-control" id="name" name="name" type="text" value="{{$data->name}}" />
@@ -31,6 +30,17 @@
                             <label class="form-label" for="address">Lokasi</label>
                             <textarea class="form-control" id="address" name="location" cols="30"
                                 rows="3">{{$data->location}}</textarea>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label" for="admin">Admin</label>
+                            <select class="form-select js-choice" id="admin" name="admin" data-options='{"removeItemButton":true,"placeholder":true}'>
+                                <option>Pilih admin ...</option>
+                                @foreach ($staff as $item)
+                                <option value="{{$item->user->id}}" name="admin"
+                                    {{ ($item->id == $data->id) ? 'selected' : ''}} >{{$item->user->name}}
+                                </option>
+                                @endforeach
+                              </select>
                         </div>
                     </div>
                 </div>
@@ -54,7 +64,7 @@
                                 Admin
                             </div>
                             <div class="col-auto">
-                                <a href="/detail/admin/{{$data->staff->id}}">
+                                <a href="/detail/admin/{{$data->id}}">
                                     <p class="">{{$data->staff->user->name}}</p>
                                 </a>
                             </div>
@@ -71,10 +81,10 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0">Area Berbahaya</h5>
+                        <h5 class="">Area Berbahaya</h5>
                     </div>
                     <div class="card-body bg-light mb-1">
-                        <p class="fs--1">Cabang dengan nama {{$data->name}} akan dihapus.</p>
+                        <p class="fs--1">Cabang dengan nama <strong>{{$data->name}}</strong> akan dihapus.</p>
                         <a class="btn btn-falcon-danger d-block" href="/delete/member/{{$data->id}}">Hapus Cabang</a>
                     </div>
                 </div>

@@ -36,6 +36,7 @@
     <link rel="stylesheet" id="user-style-default" href="{{ asset('admin/assets/css/user.min.css')}}">
     <link href="{{asset('admin/vendors/dropzone/dropzone.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('admin/vendors/flatpickr/flatpickr.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/choices/choices.min.css')}}">
 
     <style>
         /* Chrome, Safari, Edge, Opera */

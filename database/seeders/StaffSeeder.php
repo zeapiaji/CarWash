@@ -16,13 +16,14 @@ class StaffSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::role(['admin'])->get();
-        $employee = User::role(['employee'])->get();
+        $admin = User::where('id','<=', 5)->get();
+        $employee = User::where('id','>', 5)->where('id', '<=', 20)->get();
 
+        $no=1;
         foreach ($admin as $item) {
             Staff::create([
                 'user_id' => $item->id,
-                'subsidiary_id' => random_int(1,5),
+                'subsidiary_id' => $no++,
             ])->assignRole('admin');
         }
 

@@ -37,7 +37,7 @@ class SuperAdminController extends Controller
 
     public function detail_admin($id)
     {
-        $data = Staff::find($id);
+        $data = Staff::role('admin')->where('user_id', $id)->first();
 
         return view('staff.pages.manage_admin.detail', compact('data'));
     }
@@ -96,9 +96,12 @@ class SuperAdminController extends Controller
     public function edit_subsidiary($id)
     {
         $data = Subsidiary::find($id);
+        // dd($data);
         $staff = Staff::where('subsidiary_id', $id)->get();
+        // dd($staff);
+        $totalStaff = Staff::where('subsidiary_id', $id)->get();
 
-        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff'));
+        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff', 'totalStaff'));
     }
 
     public function update_subsidiary(Request $request, $id)
@@ -107,6 +110,12 @@ class SuperAdminController extends Controller
         $data->name = $request->name;
         $data->location = $request->location;
         $data->save();
+
+        $staff = Staff::where('user_id', $id)->first();
+        $staff->syncRoles(['employee']);
+
+        $newStaff = Staff::where('user_id', $request->admin)->first();
+        $newStaff->syncRoles(['admin']);
 
         return redirect('/manage-subsidiaries');
     }

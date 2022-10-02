@@ -91,11 +91,11 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/subsidiary/{{$item->subsidiary->id}}">
+                            <a href="/detail/subsidiary/{{$item->user->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                            <span>{{mb_substr($item->subsidiary->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
                                         <h5 class="mb-0 fs--1">{{$item->subsidiary->name}}</h5>
