@@ -37,9 +37,21 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label class="form-label" for="datepicker">Tanggal Lahir</label>
-                            <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="d/m/y"
-                                value="{{$data->user->birth}}" name="birth" data-options='{"disableMobile":true}' />
+                            <label class="form-label" for="bootstrap-wizard-gender">Jabatan</label>
+                                <select class="form-select" name="role" id="bootstrap-wizard-gender">
+                                    <option>Pilih level ...</option>
+                                    {{-- @dd($data->model_has_role) --}}
+                                    @foreach ($role as $item)
+                                    <option value="{{$item->name}}" name="role"
+                                        {{ ($item->id == $selectedRole) ? 'selected' : ''}}>{{$item->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            <div class="mt-3">
+                                <label class="form-label" for="datepicker">Tanggal Lahir</label>
+                                <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="d/m/y"
+                                    value="{{$data->user->birth}}" name="birth" data-options='{"disableMobile":true}' />
+                            </div>
                             <div class="mt-3">
                                 <label class="form-label" for="bootstrap-wizard-gender">Gender</label>
                                 <select class="form-select" name="gender" id="bootstrap-wizard-gender">

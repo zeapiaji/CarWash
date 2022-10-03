@@ -80,6 +80,8 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/manage-admin', [SuperAdminController::class,'manage_admin'])->name('superadmin.manageadmin');
     Route::get('/detail/admin/{id}', [SuperAdminController::class,'detail_admin'])->name('superadmin.detail.admin');
 
+    Route::get('/add/admin' , [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
+    Route::post('/create/admin' , [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
     Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
     Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
     Route::post('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');

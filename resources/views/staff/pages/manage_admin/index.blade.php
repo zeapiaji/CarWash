@@ -23,30 +23,37 @@
 </div>
 
 <div class="card mb-3" id="customersTable"
-data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
+    data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                <input type="search" class="form-control search-input search"  placeholder="cari..">
+                <input type="search" class="form-control search-input search" placeholder="cari..">
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-delete"
-                            data-route="{{ route('admin.multiple-delete-member')}}">Hapus</button>
+                        <button class="btn btn-falcon-danger btn-sm ms-2" id="multiple-delete"
+                            data-route="{{ route('admin.multiple-delete-member')}}">
+                            <span class="fas fa-user-slash" data-fa-transform="shrink-3 down-2"></span>
+                            <div class="d-none d-sm-inline-block ms-1">Hapus</div>
+                        </button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
+                    <a class="btn btn-falcon-success btn-sm mx-2" href="/add/admin">
+                        <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                        <span class="d-none d-sm-inline-block ms-1">Tambah Admin</span>
+                    </a>
+                    <a class="btn btn-falcon-primary btn-sm mx-2" id="import" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Impor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal">XLSX</a>
                     </div>
 
-                    <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
+                    <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-file-export" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
@@ -104,7 +111,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 </div>
                             </a>
                         </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a></td>
+                        <td class="email align-middle py-2">{{$item->user->email}}</td>
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
                         <td class="phone align-middle py-2">{{$item->subsidiary->name}}</td>
 
@@ -130,11 +137,11 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
         </div>
     </div>
     <div class="card-footer d-flex align-items-center justify-content-center"><button
-        class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span
-            class="fas fa-chevron-left"></span></button>
-    <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
-        data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-</div>
+            class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span
+                class="fas fa-chevron-left"></span></button>
+        <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
+            data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+    </div>
 </div>
 
 {{-- Upload File Modal --}}

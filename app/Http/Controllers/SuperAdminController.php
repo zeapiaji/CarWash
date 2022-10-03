@@ -8,7 +8,10 @@ use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Permission\Contracts\Role;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class SuperAdminController extends Controller
 {
@@ -42,13 +45,45 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_admin.detail', compact('data'));
     }
 
+    public function add_admin()
+    {
+        $role = ModelsRole::whereNotIn('name',['member'])->get();
+
+        $subsidiaries = Subsidiary::all();
+        $gender = Gender::all();
+        return view('staff.pages.manage_admin.add', compact('role', 'gender', 'subsidiaries'));
+    }
+
+    public function create_admin(Request $request)
+    {
+        $user = User::create([
+            'name' => $request -> name,
+            'email' => $request -> email,
+            'phone' => $request -> phone,
+            'birth' => $request -> birth,
+            'gender_id' => $request -> gender,
+            'address' => $request -> address,
+            'password' => Hash::make($request['password']),
+        ]);
+
+        Staff::create([
+            'user_id' => $user->id,
+            'subsidiary_id' => $request->subsidiary,
+        ])->assignRole('admin');
+
+        return redirect('/manage-admin');
+    }
+
     public function edit_admin($id)
     {
         $data = Staff::role('admin')->where('user_id', $id)->first();
         $totalEmployee = Staff::role('employee')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
+        $role = ModelsRole::all();
 
-        return view('staff.pages.manage_admin.edit', compact('data', 'gender', 'totalEmployee'));
+        $selectedRole = $data->roles->first()->id;
+
+        return view('staff.pages.manage_admin.edit', compact('data', 'gender', 'totalEmployee', 'role', 'selectedRole'));
     }
 
     public function update_admin(Request $request, $id)
@@ -61,6 +96,9 @@ class SuperAdminController extends Controller
         $data -> address = $request -> address;
         $data -> gender_id = $request -> gender;
         $data->save();
+
+        // Change role
+        Staff::where('user_id', $id)->first()->syncRoles($request->role);
 
         return redirect('/manage-admin');
     }
@@ -79,10 +117,11 @@ class SuperAdminController extends Controller
 
     public function manage_subsidiary()
     {
-        $data = Staff::role('admin')->get();
+        $data = Subsidiary::all();
+        $staff = Staff::role('admin')->get();
         $totalSubsidiaries = $data -> count();
 
-        return view('staff.pages.manage_subsidiaries.index', compact('data', 'totalSubsidiaries'));
+        return view('staff.pages.manage_subsidiaries.index', compact('data' ,'staff', 'totalSubsidiaries'));
     }
 
     public function detail_subsidiary($id)
@@ -96,9 +135,7 @@ class SuperAdminController extends Controller
     public function edit_subsidiary($id)
     {
         $data = Subsidiary::find($id);
-        // dd($data);
         $staff = Staff::where('subsidiary_id', $id)->get();
-        // dd($staff);
         $totalStaff = Staff::where('subsidiary_id', $id)->get();
 
         return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff', 'totalStaff'));
