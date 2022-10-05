@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('harga');
+            $table->string('fitur');
             $table->foreignId('type_id');
             $table->timestamps();
 

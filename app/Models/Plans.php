@@ -12,5 +12,16 @@ class Plans extends Model
     protected $fillable = [
         'name',
         'type_id',
+        'harga',
+        'fitur',
     ];
+
+    protected $table = "plans";
+
+    public function WashingPlans()
+    {
+        return $this->belongsTo('App\WashingPlans');
+    }
+
+    
 }

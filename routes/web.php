@@ -83,10 +83,12 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
 
     // Pricing
-    Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
+    Route::get('/pricing', [SuperAdminController::class,'pricing'])->name('superadmin.pricing');
+    Route::get('/add/pricing', [SuperAdminController::class, 'add_pricing'])->name('superadmin.addpricing');
+    Route::get('/store/pricing', [SuperAdminController::class, 'store'])->name('superadmin.storepricing');
 
     // Subsidiary
-    Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');
+    Route::get('/manage_subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');
     Route::get('/detail/subsidiary/{id}', [SuperAdminController::class, 'detail_subsidiary'])->name('superadmin.detail.subsidiary');
     Route::get('/edit/subsidiary/{id}', [SuperAdminController::class, 'edit_subsidiary'])->name('superadmin.edit.subsidiary');
     Route::post('/update/subsidiary/{id}', [SuperAdminController::class, 'update_subsidiary'])->name('superadmin.update.subsidiary');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Plans;
 use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
@@ -32,10 +33,10 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_admin.edit', compact('data', 'gender'));
     }
 
-    public function superadmin_washing_data()
-    {
-        return view('staff.pages.washing_data.index');
-    }
+    // public function superadmin_washing_data()
+    // {
+    //     return view('staff.pages.washing_data.index');
+    // }
 
     public function manage_subsidiary()
     {
@@ -79,5 +80,35 @@ class SuperAdminController extends Controller
     public function export_admin_xlsx()
     {
         return Excel::download(new AdminExport, 'admin.xlsx');
+    }
+
+    public function pricing()
+    {
+        $plans = Plans::all();
+        // $paket = $plans -> count();
+        // dd($plans);
+        return view('staff.pages.manage_plans.index', compact('plans'));
+    }
+
+    public function add_pricing()
+    {
+        return view('staff.pages.manage_plans.add');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'harga' => 'required',
+            'fitur' => 'required'
+        ]);
+
+        Plans::create([
+            'harga' => $request->harga,
+            'fitur' => $request->fitur
+        ]);
+
+        return redirect('/pricing');
+
+        // return request()->all();
     }
 }
