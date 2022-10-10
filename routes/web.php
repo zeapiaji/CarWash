@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CeoController;
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CashierController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Auth;
@@ -27,35 +27,34 @@ Route::middleware(['role:member'])->group(function () {
     //
 });
 
-Route::middleware(['role:employee'])->group(function () {
-    Route::get('/employee-dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
-    Route::get('/transaction', [EmployeeController::class, 'transaction'])->name('employee.transaction');
-    Route::get('/queue', [EmployeeController::class, 'queue'])->name('employee.queue');
+Route::middleware(['role:cashier'])->group(function () {
+    Route::get('/cashier-dashboard', [CashierController::class, 'dashboard'])->name('cashier.dashboard');
+    Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
+    Route::get('/queue', [CashierController::class, 'queue'])->name('cashier.queue');
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
     // Dashboard
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::post('/update/employe/{id}', [AdminController::class, 'update_employee'])->name('admin.updateemployee');
 
+    // cashier
+    Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
+    Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
+    Route::get('/add/cashier', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
+    Route::post('/create-cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
+    Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
+    Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
 
-    // Employee
-    Route::get('/manage-employee', [AdminController::class, 'manage_employee'])->name('admin.manageemployee');
-    Route::get('/detail/employe/{id}', [AdminController::class, 'detail_employe'])->name('admin.detailemploye');
-    Route::get('/employee/input', [AdminController::class, 'input_employee'])->name('admin.inputemployee');
-    Route::post('/store', [AdminController::class, 'store_employee'])->name('admin.storeemployee');
-    Route::get('/edit/employe/{id}', [AdminController::class, 'edit_employee'])->name('admin.editemployee');
+    Route::get('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('admin.deletecashier');
+    Route::post('/multiple-delete/cashier', [AdminController::class, 'multiple_delete_cashier'])->name('admin.multiple-delete-cashier');
 
-    Route::get('/delete/employe/{id}', [AdminController::class, 'delete_employee'])->name('admin.deleteemployee');
-    Route::post('/multiple-delete/employe', [AdminController::class, 'multiple_delete_employee'])->name('admin.multiple-delete-employe');
-
-    Route::get('/recycle-employe', [AdminController::class, 'recycle_employee'])->name('admin.recycle_employee');
-    Route::get('/forcedelete/employe/{id}', [AdminController::class, 'forcedelete_employee'])->name('admin.forcedeleteemployee');
-    Route::get('/recovery/employe/{id}', [AdminController::class, 'recovery_employee'])->name('admin.recoveryemployee');
-    Route::post('/multiple-recovery-employe', [AdminController::class, 'multiple_recovery_employee'])->name('admin.multiple-recovery-employee');
-    Route::post('/multiple-force-delete-employe', [AdminController::class, 'multiple_force_delete_employee'])->name('admin.multiple-force-delete-employee');
-    Route::post('/recovery-all-employe', [AdminController::class, 'recovery_all_employee'])->name('admin.recovery-all-employee');
-    Route::get('/force-delete-all-employe', [AdminController::class, 'force_delete_all_employee'])->name('admin.force-delete-all-employee');
+    Route::get('/recycle-cashier', [AdminController::class, 'recycle_cashier'])->name('admin.recycle_cashier');
+    Route::get('/forcedelete/cashier/{id}', [AdminController::class, 'forcedelete_cashier'])->name('admin.forcedeletecashier');
+    Route::get('/recovery/cashier/{id}', [AdminController::class, 'recovery_cashier'])->name('admin.recoverycashier');
+    Route::post('/multiple-recovery-cashier', [AdminController::class, 'multiple_recovery_cashier'])->name('admin.multiple-recovery-cashier');
+    Route::post('/multiple-force-delete-cashier', [AdminController::class, 'multiple_force_delete_cashier'])->name('admin.multiple-force-delete-cashier');
+    Route::post('/recovery-all-cashier', [AdminController::class, 'recovery_all_cashier'])->name('admin.recovery-all-cashier');
+    Route::get('/force-delete-all-cashier', [AdminController::class, 'force_delete_all_cashier'])->name('admin.force-delete-all-cashier');
 
     // Member
     Route::get('/manage-member', [AdminController::class, 'manage_member'])->name('admin.managemember');
@@ -120,7 +119,7 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::post('/import-admin-xlsx', [SuperAdminController::class, 'import_adminr_xlsx'])->name('admin.import-admin-xlsx');
 });
 
-// Route::middleware(['role:employee|admin|ceo|super_admin'])->group(function() {
+// Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {
 //     Route::get('/editprofile/staff/id', [GeneralController::class, 'editprofile'])->name('editprofile');
 // });
 

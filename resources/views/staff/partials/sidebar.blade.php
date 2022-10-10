@@ -74,31 +74,20 @@
                 </li>
                 @endrole
 
-                <!-- parent pages-->
-                {{--  <li class="nav-item">
-                    <a class="nav-link" href="/manage-employee" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-user-friends"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Pegawai</span></div>
-
-                    </a><!-- more inner pages-->
-                </li>  --}}
-
+                @role('super_admin||admin')
                 <li class="nav-item">
-                    <a class="nav-link dropdown-indicator collapsed" href="#manage_member" role="button"
-                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_member">
+                    <a class="nav-link dropdown-indicator collapsed" href="#manage_cashier" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_cashier">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-user-tie"></span>
                             </span>
-                            <span class="nav-link-text ps-1">Pegawai</span>
+                            <span class="nav-link-text ps-1">Kasir</span>
                         </div>
                     </a>
-                    <ul class="nav false collapse" id="manage_member" style="">
+                    <ul class="nav false collapse" id="manage_cashier" style="">
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="/manage-employee" aria-expanded="false">
+                            <a class="nav-link" href="/manage-cashier" aria-expanded="false">
                                 <div class="d-flex align-items-center">
                                     <span class="nav-link-icon">
                                         <span class="fas fa-user-cog"></span>
@@ -108,7 +97,7 @@
                             </a><!-- more inner pages-->
                         </li>
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="/recycle-employe" aria-expanded="false">
+                            <a class="nav-link" href="/recycle-cashier" aria-expanded="false">
                                 <div class="d-flex align-items-center">
                                     <span class="nav-link-icon">
                                         <span class="fas fa-trash-alt"></span>
@@ -119,7 +108,7 @@
                         </li>
                     </ul>
                 </li>
-
+                @endrole
 
                 <!-- parent pages-->
                 <li class="nav-item">
@@ -187,7 +176,7 @@
                             <span class="nav-link-text ps-1">Pencucian</span></div>
                     </a><!-- more inner pages-->
                 </li>
-@role('super_admin')
+                @role('super_admin')
                 <li class="nav-item">
                     <!-- parent pages-->
                     <a class="nav-link" href="/manage-subsidiaries" aria-expanded="false">

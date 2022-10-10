@@ -34,11 +34,11 @@ class AdminController extends Controller
         return view('staff.pages.dashboard');
     }
 
-    public function manage_employee()
+    public function manage_cashier()
     {
-        $data = Staff::role('employee')->get();
+        $data = Staff::role('cashier')->get();
 
-        return view('staff.pages.manage_employee.index', compact('data'));
+        return view('staff.pages.manage_cashier.index', compact('data'));
     }
 
     // Member
@@ -166,22 +166,24 @@ class AdminController extends Controller
 
 
     //Staff
-    public function detail_employe($id)
+    public function detail_cashier($id)
     {
-        $data = User::role('employee')->find($id);
+        $data = User::role('cashier')->find($id);
         $gender = Gender::all();
-        return view('staff.pages.manage_employee.detailemployee', compact('data'));
+        return view('staff.pages.manage_cashier.detailcashier', compact('data'));
     }
-    public function input_employee()
+    public function input_cashier()
     {
         $role = ModelsRole::WhereNotIn('name', ['member'])->get();
         $subsidiaries = Subsidiary::all();
+
         $gender = Gender::all();
-        return view('staff.pages.manage_employee.input', compact('gender', 'gender', 'subsidiaries'));
+
+        return view('staff.pages.manage_cashier.input', compact('gender', 'gender', 'subsidiaries'));
     }
 
 
-    public function store_employee(Request $request)
+    public function store_cashier(Request $request)
     {
 
         $user = User::create([
@@ -197,22 +199,22 @@ class AdminController extends Controller
         Staff::create([
             'user_id'       => $user->id,
             'subsidiary_id' => $request->subsidiary,
-        ])->assignRole('employee');
+        ])->assignRole('cashier');
 
-        return redirect('/manage-employee');
+        return redirect('/manage-cashier');
     }
 
 
 
-    public function edit_employee($id)
+    public function edit_cashier($id)
     {
-        $data = Staff::role('employee')->where('user_id', $id)->first();
+        $data = Staff::role('cashier')->where('user_id', $id)->first();
         $role = ModelsRole::all();
-        $totalemployee = Staff::role('employee')->where('subsidiary_id', $data->subsidiary_id)->count();
+        $totalcashier = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
-        return view('staff.pages.manage_employee.edit', compact('data', 'gender', 'totalemployee', 'role', 'SelectedRole'));
+        return view('staff.pages.manage_cashier.edit', compact('data', 'gender', 'totalcashier', 'role', 'SelectedRole'));
     }
-    public function update_employee(Request $request, $id)
+    public function update_cashier(Request $request, $id)
     {
         $data = User::find($request->id);
         $data->name = $request->name;
@@ -225,76 +227,76 @@ class AdminController extends Controller
 
         Staff::where('user_id', $id)->first()->syncRoles($request->role);
 
-        return redirect('/manage-employee');
+        return redirect('/manage-cashier');
     }
 
     // Soft Delete
-    public function delete_employee($id)
+    public function delete_cashier($id)
     {
         User::find($id)->delete();
 
-        return redirect('/manage-employee');
+        return redirect('/manage-cashier');
     }
 
-    public function multiple_delete_employee(Request $request)
+    public function multiple_delete_cashier(Request $request)
     {
         User::whereIn('id', $request->get('selected'))->delete();
 
         return response("Selected post(s) deleted successfully.", 200);
     }
 
-    public function recycle_employee()
+    public function recycle_cashier()
     {
         $data = User::onlyTrashed()->get();
-        return view('staff.pages.manage_employee.recovery', compact('data'));
+        return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 
-    public function recovery_employee($id)
+    public function recovery_cashier($id)
     {
         // User::withTrashed()->where('id', $id)->restore();
-        $data = User::role('employee')->withTrashed()->where('id', $id)->restore();
+        $data = User::role('cashier')->withTrashed()->where('id', $id)->restore();
 
-        return redirect('/recycle/employe');
+        return redirect('/recycle/cashier');
     }
 
-    public function multiple_recovery_employee(Request $request)
+    public function multiple_recovery_cashier(Request $request)
     {
         User::whereIn('id', $request->get('selected'))
             ->restore();
 
-        $data = User::role('employee')->whereIn('id', $request->get('selected'));
+        $data = User::role('cashier')->whereIn('id', $request->get('selected'));
 
         return response("Selected post(s) deleted successfully.", 200);
     }
 
-    public function recovery_all_employee()
+    public function recovery_all_cashier()
     {
-        User::role('employee')->withTrashed()->restore();
+        User::role('cashier')->withTrashed()->restore();
 
         return response("Selected post(s) deleted successfully.", 200);
     }
 
-    public function forcedelete_employee($id)
+    public function forcedelete_cashier($id)
     {
-        User::role('employee')->withTrashed()->where('id', $id)->forceDelete();
+        User::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
 
-        return redirect('/recycle/employe');
+        return redirect('/recycle/cashier');
     }
 
-    public function multiple_force_delete_employee(Request $request)
+    public function multiple_force_delete_cashier(Request $request)
     {
         // Car::whereIn('user_id', $request->get('selected'))
         //     ->forceDelete();
-        User::role('employee')->whereIn('id', $request->get('selected'))
+        User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
 
         return response("Selected post(s) deleted successfully.", 200);
     }
 
-    public function force_delete_all_employee()
+    public function force_delete_all_cashier()
     {
 
-        User::role('employee')->onlyTrashed()->forceDelete();
+        User::role('cashier')->onlyTrashed()->forceDelete();
 
         return response("Selected post(s) deleted successfully.", 200);
     }

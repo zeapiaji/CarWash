@@ -31,7 +31,7 @@ class StaffSeeder extends Seeder
             Staff::create([
                 'user_id' => $item->id,
                 'subsidiary_id' => random_int(1,5),
-            ])->assignRole('employee');
+            ])->assignRole('cashier');
         }
 
     }
