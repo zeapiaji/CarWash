@@ -1,11 +1,9 @@
-@extends('staff.layouts.app')
+@extends('staff.admin.app')
 @section('content')
 
-@include('staff.partials.menu')
-<!--  -->
+@include('staff.admin.partials.menu')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
@@ -88,17 +86,17 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
+                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
                                     </div>
                                 </div>
                             </a>
                         </td>
-                        <td class="phone align-middle py-2">{{$item->user->phone}}</td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item ->user->email}}</a></td>
-                        {{-- <td class="gender align-middle py-2">{{$item -> gender -> name}}</td> --}}
+                        <td class="phone align-middle py-2">{{$item->phone}}</td>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
+                        <td class="gender align-middle py-2">{{$item -> gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"

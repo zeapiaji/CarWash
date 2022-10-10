@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'phone' => '12420909'.$i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
-                'gender_id' => random_int(1,2),
+                'gender_id' => random_int(1, 2),
                 'password' => bcrypt('zeapiaji')
             ]);
         }
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
-        $super_admin -> assignRole('super_admin');
+        $super_admin->assignRole('super_admin');
 
         $ceo = User::create([
             'name' => 'Ceo',
@@ -62,6 +62,6 @@ class UserSeeder extends Seeder
             'gender_id' => 1,
             'password' => bcrypt('zeapiaji')
         ]);
-        $ceo -> assignRole('ceo');
+        $ceo->assignRole('ceo');
     }
 }

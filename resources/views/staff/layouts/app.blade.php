@@ -18,8 +18,8 @@
             @include('staff.partials.navbar')
             <div class="content">
                 @yield('content')
-                @include('staff.partials.footer')
             </div>
+            @include('staff.partials.footer')
         </div>
     </main>
 
