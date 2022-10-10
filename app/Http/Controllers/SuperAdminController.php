@@ -7,6 +7,7 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
+use App\Imports\AdminImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -77,7 +78,7 @@ class SuperAdminController extends Controller
     public function edit_admin($id)
     {
         $data = Staff::role('admin')->where('user_id', $id)->first();
-        $totalEmployee = Staff::role('employee')->where('subsidiary_id', $data->subsidiary_id)->count();
+        $totalEmployee = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
         $role = ModelsRole::all();
 
@@ -162,8 +163,26 @@ class SuperAdminController extends Controller
         # code...
     }
 
+    public function import_admin_xlsx(Request $request)
+    {
+        Excel::import(new AdminImport, $request->file('file_admin'));
+
+        return redirect('/manage-admin');
+    }
+
     public function export_admin_xlsx()
     {
         return Excel::download(new AdminExport, 'admin.xlsx');
     }
+
+    public function export_admin_csv()
+    {
+        return Excel::download(new AdminExport, 'admin.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_admin_pdf()
+    {
+        return Excel::download(new AdminExport, 'admin.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
 }

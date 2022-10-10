@@ -116,7 +116,7 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
     Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
     Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
-    Route::post('/import-admin-xlsx', [SuperAdminController::class, 'import_adminr_xlsx'])->name('admin.import-admin-xlsx');
+    Route::post('/import-admin-xlsx', [SuperAdminController::class, 'import_admin_xlsx'])->name('admin.import-admin-xlsx');
 });
 
 // Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {

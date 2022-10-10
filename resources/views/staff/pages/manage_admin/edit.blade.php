@@ -86,7 +86,7 @@
                     <div class="card-body bg-light">
                         <div class="row">
                             <div class="col-6 border-end">
-                                <p>Jumlah Pegawai</p>
+                                <p>Jumlah Kasir</p>
                             </div>
                             <div class="col-auto">
                                 <p>{{$totalEmployee}}</p>
