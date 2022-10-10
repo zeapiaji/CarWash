@@ -67,10 +67,10 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'gender' => ['required'],
-            'phone' => ['required'],
+            'phone' => ['required', 'min:11', 'max:12','unique:users,phone'],
             'birth' => ['required'],
-            'car' => ['required'],
-            'number_plate' => ['required'],
+            'car' => ['required', 'min:5', 'max:20'],
+            'number_plate' => ['required', 'min:3', 'max:10', 'unique:cars,number_plate'],
             'type' => ['required'],
         ]);
     }

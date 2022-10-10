@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('subsidiaries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('location');
-            $table->foreignId('user_id');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
