@@ -22,7 +22,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                        <a href="employee/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
+                        <a href="cashiere/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
 
                     <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,7 +84,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/employe/{{$item->id}}">
+                            <a href="/detail/cashier/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
@@ -108,9 +108,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/employe/{{$item->id}}">Sunting</a>
+                                            href="/edit/cashier/{{$item->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/employe/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/cashier/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
