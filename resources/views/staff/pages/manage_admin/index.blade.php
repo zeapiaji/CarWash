@@ -113,7 +113,7 @@
                         </td>
                         <td class="email align-middle py-2">{{$item->user->email}}</td>
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
-                        <td class="phone align-middle py-2">{{$item->subsidiary->name}}</td>
+                        <td class="phone align-middle py-2">{{$item->subsidiary->name ?? 'Tidak ada'}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
