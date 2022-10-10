@@ -41,7 +41,9 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
 
     // Employee
     Route::get('/manage-employee', [AdminController::class, 'manage_employee'])->name('admin.manageemployee');
+    Route::get('/detail/employe/{id}', [AdminController::class, 'detail_employe'])->name('admin.detailemploye');
     Route::get('/employee/input', [AdminController::class, 'input_employee'])->name('admin.inputemployee');
+    Route::post('/store', [AdminController::class, 'store_employee'])->name('admin.storeemployee');
     Route::get('/edit/employe/{id}', [AdminController::class, 'edit_employee'])->name('admin.editemployee');
 
     Route::get('/delete/employe/{id}', [AdminController::class, 'delete_employee'])->name('admin.deleteemployee');

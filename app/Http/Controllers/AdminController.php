@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Staff;
 use App\Models\Car;
 use App\Models\User;
 use App\Models\CarType;
-use Illuminate\Http\Request;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
 use App\Models\Gender;
+use App\Models\Subsidiary;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role as ModelsRole;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
@@ -149,44 +153,65 @@ class AdminController extends Controller
 
 
     //Staff
+    public function detail_employe($id)
+    {
+        $data = User::role('employee')->find($id);
+        $gender = Gender::all();
+        return view('staff.pages.manage_employee.detailemployee', compact('data'));
+    }
     public function input_employee()
     {
+        $role = ModelsRole::WhereNotIn('name', ['member'])->get();
+        $subsidiaries = Subsidiary::all();
         $gender = Gender::all();
-        return view('staff.admin.pages.manage_employee.input', compact('gender'));
+        return view('staff.pages.manage_employee.input', compact('gender', 'gender', 'subsidiaries'));
     }
+
+
     public function store_employee(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'gender' => 'required'
+
+        $user = User::create([
+
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'password'    => hash::make($request['password']),
+            'phone'       => $request->phone,
+            'birth'       => $request->birth,
+            'address'     => $request->address,
+            'gender_id'   => $request->gender,
         ]);
-        user::role('employee')->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'gender_id' => $request->gender
-        ]);
+        Staff::create([
+            'user_id'       => $user->id,
+            'subsidiary_id' => $request->subsidiary,
+        ])->assignRole('employee');
+
         return redirect('/manage-employee');
     }
+
+
+
     public function edit_employee($id)
     {
-        $data = User::find($id);
+        $data = Staff::role('employee')->where('user_id', $id)->first();
+        $role = ModelsRole::all();
+        $totalemployee = Staff::role('employee')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
-        return view('staff.admin.pages.manage_employee.edit', compact('data', 'gender'));
+        return view('staff.pages.manage_employee.edit', compact('data', 'gender', 'totalemployee', 'role', 'SelectedRole'));
     }
-    public function update_employee(Request $request)
+    public function update_employee(Request $request, $id)
     {
         $data = User::find($request->id);
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->birth = $request->birth;
         $data->phone = $request->phone;
         $data->address = $request->address;
         $data->gender_id = $request->gender;
         $data->save();
+
+        Staff::where('user_id', $id)->first()->syncRoles($request->role);
+
         return redirect('/manage-employee');
     }
 
@@ -208,7 +233,7 @@ class AdminController extends Controller
     public function recycle_employee()
     {
         $data = User::onlyTrashed()->get();
-        return view('staff.admin.pages.manage_employee.recovery', compact('data'));
+        return view('staff.pages.manage_employee.recovery', compact('data'));
     }
 
     public function recovery_employee($id)

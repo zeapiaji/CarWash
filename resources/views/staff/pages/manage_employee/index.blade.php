@@ -6,6 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
