@@ -37,7 +37,7 @@
                                 <option>Pilih admin ...</option>
                                 @foreach ($staff as $item)
                                 <option value="{{$item->id}}" name="admin"
-                                    {{ ($item->user_id == $selectedAdmin) ? 'selected' : ''}}>
+                                    {{ ($item->user_id == $selectedAdmin->user_id) ? 'selected' : ''}}>
                                         {{$item->user->name}}
                                 </option>
                                 @endforeach
@@ -65,8 +65,8 @@
                                 Admin
                             </div>
                             <div class="col-auto">
-                                <a href="/detail/admin/{{$data->subsidiary->id}}">
-                                    <p class="">{{$data->user->name}}</p>
+                                <a href="/detail/admin/{{$selectedAdmin->user_id}}">
+                                    <p class="">{{$selectedAdmin->user->name}}</p>
                                 </a>
                             </div>
                         </div>

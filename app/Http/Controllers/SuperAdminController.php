@@ -136,7 +136,8 @@ class SuperAdminController extends Controller
     {
         $data = Staff::where('subsidiary_id', $id)->first();
         $staff = Staff::where('subsidiary_id', $id)->get();
-        $selectedAdmin = $data->first()->id;
+        $admin = Staff::role('admin')->get();
+        $selectedAdmin = $admin->where('subsidiary_id', $id)->first();
         // dd($staff);
 
         return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff','selectedAdmin'));
