@@ -145,7 +145,7 @@
 </div>
 
 {{-- Upload File Modal --}}
-<form action="{{route('admin.import-member-xlsx')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('admin.import-admin-xlsx')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
@@ -159,7 +159,7 @@
                         <h5 class="mb-1" id="modalExampleDemoLabel">Import Excel</h5>
                     </div>
                     <div class="p-4 pb-4">
-                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_member">
+                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_admin">
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -1,26 +1,28 @@
 <table>
     <tr>
         <th>nama</th>
+        <th>email</th>
         <th>telepon</th>
         <th>alamat</th>
-        <th>cabang</th>
+        <th>tanggal_lahir</th>
+        <th>gender</th>
+        <th hidden>gender_id</th>
         <th>password</th>
-        <th>plat_nomor</th>
-        <th>mobil</th>
-        <th>tipe</th>
-        <th>id_pemilik</th>
+        <th>cabang</th>
+        <th hidden>cabang_id</th>
     </tr>
     @foreach ($data as $item)
     <tr>
-        <td>{{$item->name}}</td>
-        <td>{{$item->phone}}</td>
-        <td>{{$item->address}}</td>
-        <td>{{$item->email}}</td>
-        <td>{{$item->password}}</td>
-        <td>{{$item->car->number_plate}}</td>
-        <td>{{$item->car->name}}</td>
-        <td>{{$item->car->type}}</td>
-        <td>{{$item->car->user_id}}</td>
+        <td>{{$item->user->name}}</td>
+        <td>{{$item->user->email}}</td>
+        <td>{{$item->user->phone}}</td>
+        <td>{{$item->user->address}}</td>
+        <td>{{$item->user->birth}}</td>
+        <td>{{$item->user->gender->name}}</td>
+        <td hidden>{{$item->user->gender->id}}</td>
+        <td>{{$item->user->password}}</td>
+        <td>{{$item->subsidiary->name}}</td>
+        <td hidden>{{$item->subsidiary->id}}</td>
     </tr>
     @endforeach
 </table>
