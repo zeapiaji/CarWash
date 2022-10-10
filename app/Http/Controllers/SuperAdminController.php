@@ -80,7 +80,7 @@ class SuperAdminController extends Controller
         $data = Staff::role('admin')->where('user_id', $id)->first();
         $totalEmployee = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
-        $role = ModelsRole::all();
+        $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
         $selectedRole = $data->roles->first()->id;
 
@@ -118,11 +118,10 @@ class SuperAdminController extends Controller
 
     public function manage_subsidiary()
     {
-        $data = Subsidiary::all();
-        $staff = Staff::role('admin')->get();
-        $totalSubsidiaries = $data -> count();
+        $data = Staff::role('admin')->get();
+        $totalSubsidiaries = $data->count();
 
-        return view('staff.pages.manage_subsidiaries.index', compact('data' ,'staff', 'totalSubsidiaries'));
+        return view('staff.pages.manage_subsidiaries.index', compact('data', 'totalSubsidiaries'));
     }
 
     public function detail_subsidiary($id)
@@ -135,11 +134,13 @@ class SuperAdminController extends Controller
 
     public function edit_subsidiary($id)
     {
-        $data = Subsidiary::find($id);
+        $data = Staff::where('subsidiary_id', $id)->first();
         $staff = Staff::where('subsidiary_id', $id)->get();
-        $totalStaff = Staff::where('subsidiary_id', $id)->get();
+        $admin = Staff::role('admin')->get();
+        $selectedAdmin = $admin->where('subsidiary_id', $id)->first();
+        // dd($staff);
 
-        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff', 'totalStaff'));
+        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff','selectedAdmin'));
     }
 
     public function update_subsidiary(Request $request, $id)
@@ -150,7 +151,7 @@ class SuperAdminController extends Controller
         $data->save();
 
         $staff = Staff::where('user_id', $id)->first();
-        $staff->syncRoles(['employee']);
+        $staff->syncRoles(['cashier']);
 
         $newStaff = Staff::where('user_id', $request->admin)->first();
         $newStaff->syncRoles(['admin']);
@@ -160,7 +161,10 @@ class SuperAdminController extends Controller
 
     public function delete_subsidiary($id)
     {
-        # code...
+        Staff::where('subsidiary_id', $id)->update(['subsidiary_id' => null]);
+        Subsidiary::find($id)->delete();
+
+        return redirect()->back();
     }
 
     public function import_admin_xlsx(Request $request)

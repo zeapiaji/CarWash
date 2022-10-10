@@ -206,7 +206,7 @@ class AdminController extends Controller
 
 
 
-    public function     _cashier($id)
+    public function edit_cashier($id)
     {
         $data = Staff::role('cashier')->where('user_id', $id)->first();
         $role = ModelsRole::all();
