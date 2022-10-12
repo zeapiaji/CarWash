@@ -88,7 +88,7 @@
                     <ul class="nav false collapse" id="manage_cashier" style="">
                         <li class="nav-item ms-2">
                             <a class="nav-link" href="/manage-cashier" aria-expanded="false">
-                                <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center">
                                     <span class="nav-link-icon">
                                         <span class="fas fa-user-cog"></span>
                                     </span>
