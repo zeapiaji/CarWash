@@ -191,7 +191,7 @@
                 </div>
                 @endrole
 
-                @role('admin')
+                @role('super_admin')
                 <li class="nav-item">
                     <!-- parent pages-->
                     <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
@@ -213,7 +213,7 @@
                                 <span class="fas fa-user-friends"></span>
                             </span>
                             <span class="nav-link-text ps-1">Paket Pencucian</span></div>
-                    </a><!-- more inner pages-->
+                    </a>
                 </li>
                 @endrole
 
