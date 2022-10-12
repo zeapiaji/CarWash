@@ -176,9 +176,8 @@
                             </span>
                             <span class="nav-link-text ps-1">Cabang</span></div>
                     </a><!-- more inner pages-->
-                        </li>
-                    </ul>
                 </li>
+
                 @endrole
 
                 @role('admin||super_admin')
@@ -192,30 +191,32 @@
                 @endrole
 
                 @role('super_admin')
-                <li class="nav-item">
-                    <!-- parent pages-->
-                    <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-car-side"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Pencucian</span></div>
-                    </a><!-- more inner pages-->
-                </li>
+
+
+                <!-- parent pages-->
+                <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
+                    <div class="d-flex align-items-center">
+                        <span class="nav-link-icon">
+                            <span class="fas fa-car-side"></span>
+                        </span>
+                        <span class="nav-link-text ps-2">Pencucian</span></div>
+
+                </a><!-- more inner pages-->
+
                 @endrole
 
                 @role('super_admin')
                 <!-- parent pages-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/pricing" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-user-friends"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Paket Pencucian</span></div>
-                    </a>
-                </li>
-                @endrole
+
+                <a class="nav-link" href="/pricing" aria-expanded="false">
+                    <div class="d-flex align-items-center">
+                        <span class="nav-link-icon">
+                            <span class="fas fa-user-friends"></span>
+                        </span>
+                        <span class="nav-link-text ps-2">Paket Pencucian</span></div>
+                </a>
+            </ul>
+            @endrole
 
             </ul>
         </div>
