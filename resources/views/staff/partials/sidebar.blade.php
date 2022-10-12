@@ -176,6 +176,8 @@
                             </span>
                             <span class="nav-link-text ps-1">Cabang</span></div>
                     </a><!-- more inner pages-->
+                        </li>
+                    </ul>
                 </li>
                 @endrole
 

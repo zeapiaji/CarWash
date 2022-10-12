@@ -5,112 +5,63 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about footer-widget">
-                        <h5 class="footer-heading">About Us</h5>
+                        <h5 class="footer-heading">SEGERA BERLANGGANAN!</h5>
                         <img src="{{asset('member/assets/images/logo-white.png')}}" class="img-responsive"
                             alt="logo">
-                        <p>Lorem ipsum dolor sit amet, consectetuer a dipiscing elit aenean commodo ligula eget in
-                            dolor aenean massa cum sociis natoque penatibus et magnis dis parturie.</p>
+                        <p>Datang dan berkunjunglah pada toko kami, kami hadir untuk memberikan pelayanan dan kenyaman terhadap anda sebagai pelanggan kami. Terimakasih.</p>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-services footer-widget">
-                        <h5 class="footer-heading">Our Services</h5>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Vehicle Hand Wash
-                                    Service</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Headlight Lens
-                                    Restoration Service</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Scratch Removal
-                                    Service</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Tar Removal
-                                    Service</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Odor Elimination
-                                    Service</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Engine Cleaning
-                                    Service</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Valet Car
-                                    Service</a></li>
-                        </ul>
-                    </div>
-                </div>
+               
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-opening footer-widget">
-                        <h5 class="footer-heading">Opening Hours</h5>
+                        <h5 class="footer-heading">BUKA DARI JAM </h5>
                         <div class="row">
                             <div class="col-xs-5">
-                                <div class="opening-day">Monday</div>
+                                <div class="opening-day">Senin</div>
                             </div>
                             <div class="col-xs-7">
                                 <div class="opening-time">9:00 AM - 8:00 PM</div>
                             </div>
                             <div class="col-xs-5">
-                                <div class="opening-day">Tuesday</div>
+                                <div class="opening-day">Selasa</div>
                             </div>
                             <div class="col-xs-7">
                                 <div class="opening-time">9:00 AM - 8:00 PM</div>
                             </div>
                             <div class="col-xs-5">
-                                <div class="opening-day">Wednesday</div>
+                                <div class="opening-day">Rabu</div>
                             </div>
                             <div class="col-xs-7">
                                 <div class="opening-time">9:00 AM - 8:00 PM</div>
                             </div>
                             <div class="col-xs-5">
-                                <div class="opening-day">Thursday</div>
+                                <div class="opening-day">Kamis</div>
                             </div>
                             <div class="col-xs-7">
                                 <div class="opening-time">9:00 AM - 8:00 PM</div>
                             </div>
                             <div class="col-xs-5">
-                                <div class="opening-day">Friday</div>
+                                <div class="opening-day">Jum'at</div>
                             </div>
                             <div class="col-xs-7">
                                 <div class="opening-time">9:00 AM - 8:00 PM</div>
                             </div>
                             <div class="col-xs-5">
-                                <div class="opening-day">Saturday</div>
+                                <div class="opening-day">Sabtu</div>
                             </div>
                             <div class="col-xs-7">
                                 <div class="opening-time">9:00 AM - 1:00 PM</div>
                             </div>
                             <div class="col-xs-5">
-                                <div class="opening-day">Sunday</div>
+                                <div class="opening-day">Minggu</div>
                             </div>
                             <div class="col-xs-7">
-                                <div class="opening-time">Closed</div>
+                                <div class="opening-time">Libur</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-subscribe footer-widget">
-                        <h5 class="footer-heading">Subscribe Newsletter</h5>
-                        <p>Lorem ipsum dolor sit amet consectetuer elit aenean commodo ligula eget dolo.</p>
-                        <form id="subscribe-form" class="subscribe-form" novalidate="true">
-                            <div class="form-group">
-                                <label class="sr-only">Your Email address</label>
-                                <input type="email" class="form-control" id="mc-email"
-                                    placeholder="Enter email address" name="EMAIL">
-                            </div>
-                            <button type="submit" class="btn btn-default"><i class="fa fa-paper-plane"
-                                    aria-hidden="true"></i></button>
-                            <label for="mc-email"></label>
-                        </form>
-                        <div class="social-icon">
-                            <span>Follow us on:</span>
-                            <ul>
-                                <li><a href="#" target="_blank"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a href="#" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </li>
-                                <li><a href="#" target="_blank"><i class="fa fa-instagram"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a href="#" target="_blank"><i class="fa fa-pinterest"
-                                            aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
