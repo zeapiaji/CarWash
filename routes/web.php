@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CeoController;
 use App\Http\Controllers\CashierController;
+use App\Http\Controllers\EntryController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Auth;
@@ -99,6 +100,7 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
     Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
     Route::post('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
+    Route::post('/multiple-delete/admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
 
     // Pricing
     Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
@@ -125,6 +127,10 @@ Route::middleware(['role:super_admin'])->group(function() {
 
 Route::get('/', function () {
     return view('member.pages.index');
+});
+
+Route::middleware(['role:entry'])->group(function() {
+    Route::get('/entry-dashboard', [EntryController::class, 'dashboard'])->name('entry.dashboard');
 });
 
 Auth::routes();

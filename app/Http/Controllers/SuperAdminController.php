@@ -111,6 +111,13 @@ class SuperAdminController extends Controller
         return redirect('/manage-admin');
     }
 
+    public function multiple_delete_admin(Request $request)
+    {
+        Staff::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
     public function superadmin_washing_data()
     {
         return view('staff.pages.washing_data.index');
@@ -150,8 +157,9 @@ class SuperAdminController extends Controller
         $data->location = $request->location;
         $data->save();
 
-        $staff = Staff::where('user_id', $id)->first();
-        $staff->syncRoles(['cashier']);
+        $admin = Staff::role('admin')->get();
+        $selectedAdmin = $admin->where('subsidiary_id', $id)->first();
+        $selectedAdmin->syncRoles(['cashier']);
 
         $newStaff = Staff::where('user_id', $request->admin)->first();
         $newStaff->syncRoles(['admin']);

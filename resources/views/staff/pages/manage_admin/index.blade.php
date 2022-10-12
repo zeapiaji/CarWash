@@ -33,7 +33,7 @@
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
                         <button class="btn btn-falcon-danger btn-sm ms-2" id="multiple-delete"
-                            data-route="{{ route('admin.multiple-delete-member')}}">
+                            data-route="{{ route('superadmin.multiple-delete-admin')}}">
                             <span class="fas fa-user-slash" data-fa-transform="shrink-3 down-2"></span>
                             <div class="d-none d-sm-inline-block ms-1">Hapus</div>
                         </button>
