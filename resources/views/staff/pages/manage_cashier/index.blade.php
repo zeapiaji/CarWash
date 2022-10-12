@@ -98,7 +98,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         </td>
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
                         <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item ->user->email}}</a></td>
-                         <td class="gender align-middle py-2">{{$item->user ->gender->name}}</td>
+                        <td class="gender align-middle py-2">{{$item -> user->gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"

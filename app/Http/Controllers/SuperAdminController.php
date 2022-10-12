@@ -7,6 +7,7 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
+use App\Imports\AdminImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -77,9 +78,9 @@ class SuperAdminController extends Controller
     public function edit_admin($id)
     {
         $data = Staff::role('admin')->where('user_id', $id)->first();
-        $totalEmployee = Staff::role('employee')->where('subsidiary_id', $data->subsidiary_id)->count();
+        $totalEmployee = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
-        $role = ModelsRole::all();
+        $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
         $selectedRole = $data->roles->first()->id;
 
@@ -110,6 +111,13 @@ class SuperAdminController extends Controller
         return redirect('/manage-admin');
     }
 
+    public function multiple_delete_admin(Request $request)
+    {
+        Staff::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
     public function superadmin_washing_data()
     {
         return view('staff.pages.washing_data.index');
@@ -117,11 +125,10 @@ class SuperAdminController extends Controller
 
     public function manage_subsidiary()
     {
-        $data = Subsidiary::all();
-        $staff = Staff::role('admin')->get();
-        $totalSubsidiaries = $data -> count();
+        $data = Staff::role('admin')->get();
+        $totalSubsidiaries = $data->count();
 
-        return view('staff.pages.manage_subsidiaries.index', compact('data' ,'staff', 'totalSubsidiaries'));
+        return view('staff.pages.manage_subsidiaries.index', compact('data', 'totalSubsidiaries'));
     }
 
     public function detail_subsidiary($id)
@@ -134,11 +141,13 @@ class SuperAdminController extends Controller
 
     public function edit_subsidiary($id)
     {
-        $data = Subsidiary::find($id);
+        $data = Staff::where('subsidiary_id', $id)->first();
         $staff = Staff::where('subsidiary_id', $id)->get();
-        $totalStaff = Staff::where('subsidiary_id', $id)->get();
+        $admin = Staff::role('admin')->get();
+        $selectedAdmin = $admin->where('subsidiary_id', $id)->first();
+        // dd($staff);
 
-        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff', 'totalStaff'));
+        return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff','selectedAdmin'));
     }
 
     public function update_subsidiary(Request $request, $id)
@@ -148,8 +157,9 @@ class SuperAdminController extends Controller
         $data->location = $request->location;
         $data->save();
 
-        $staff = Staff::where('user_id', $id)->first();
-        $staff->syncRoles(['employee']);
+        $admin = Staff::role('admin')->get();
+        $selectedAdmin = $admin->where('subsidiary_id', $id)->first();
+        $selectedAdmin->syncRoles(['cashier']);
 
         $newStaff = Staff::where('user_id', $request->admin)->first();
         $newStaff->syncRoles(['admin']);
@@ -159,11 +169,32 @@ class SuperAdminController extends Controller
 
     public function delete_subsidiary($id)
     {
-        # code...
+        Staff::where('subsidiary_id', $id)->update(['subsidiary_id' => null]);
+        Subsidiary::find($id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function import_admin_xlsx(Request $request)
+    {
+        Excel::import(new AdminImport, $request->file('file_admin'));
+
+        return redirect('/manage-admin');
     }
 
     public function export_admin_xlsx()
     {
         return Excel::download(new AdminExport, 'admin.xlsx');
     }
+
+    public function export_admin_csv()
+    {
+        return Excel::download(new AdminExport, 'admin.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_admin_pdf()
+    {
+        return Excel::download(new AdminExport, 'admin.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
 }

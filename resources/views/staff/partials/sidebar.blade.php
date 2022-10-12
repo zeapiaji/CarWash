@@ -29,13 +29,107 @@
                             <span class="nav-link-text ps-1">Dasbor</span></div>
                     </a><!-- more inner pages-->
                 </li>
+
                 {{-- Divider --}}
                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                    <div class="col-auto navbar-vertical-label">Konfigurasi</div>
+                    <div class="col-auto navbar-vertical-label">
+                        @role('admin||super_admin')
+                        Konfigurasi
+                        @endrole
+                        @role('entry')
+                        Antrian
+                        @endrole
+                    </div>
                     <div class="col ps-0">
                         <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                 </div>
+
+                {{-- Entry --}}
+                @role('entry')
+                <!-- parent pages-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/entry-customer">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-users"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Antrian</span>
+                        </div>
+                    </a>
+                </li>
+                @endrole
+
+                @role('super_admin||admin')
+                <!-- parent pages-->
+                <li class="nav-item">
+                    <a class="nav-link dropdown-indicator collapsed" href="#manage_member" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_member">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-users"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Member</span>
+                        </div>
+                    </a>
+                    <ul class="nav false collapse" id="manage_member" style="">
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/manage-member" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-user-cog"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Kelola</span>
+                                </div>
+                            </a><!-- more inner pages-->
+                        </li>
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/recycle-member" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Tempat Sampah</span>
+                                </div>
+                            </a><!-- more inner pages-->
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link dropdown-indicator collapsed" href="#manage_cashier" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_cashier">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-user-tie"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Kasir</span>
+                        </div>
+                    </a>
+                    <ul class="nav false collapse" id="manage_cashier" style="">
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/manage-cashier" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-user-cog"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Kelola</span>
+                                </div>
+                            </a><!-- more inner pages-->
+                        </li>
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/recycle-cashier" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Tempat Sampah</span>
+                                </div>
+                            </a><!-- more inner pages-->
+                        </li>
+                    </ul>
+                </li>
+                @endrole
 
                 @role('super_admin')
                 <!-- parent pages-->
@@ -72,78 +166,43 @@
                         </li>
                     </ul>
                 </li>
-                @endrole
 
-                @role('super_admin||admin')
                 <li class="nav-item">
-                    <a class="nav-link dropdown-indicator collapsed" href="#manage_cashier" role="button"
-                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_cashier">
+                    <!-- parent pages-->
+                    <a class="nav-link" href="/manage-subsidiaries" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
-                                <span class="fas fa-user-tie"></span>
+                                <span class="fas fa-building"></span>
                             </span>
-                            <span class="nav-link-text ps-1">Kasir</span>
-                        </div>
-                    </a>
-                    <ul class="nav false collapse" id="manage_cashier" style="">
-                        <li class="nav-item ms-2">
-                            <a class="nav-link" href="/manage-cashier" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-user-cog"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Kelola</span>
-                                </div>
-                            </a><!-- more inner pages-->
-                        </li>
-                        <li class="nav-item ms-2">
-                            <a class="nav-link" href="/recycle-cashier" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Tempat Sampah</span>
-                                </div>
-                            </a><!-- more inner pages-->
+                            <span class="nav-link-text ps-1">Cabang</span></div>
+                    </a><!-- more inner pages-->
                         </li>
                     </ul>
                 </li>
                 @endrole
 
-                <!-- parent pages-->
+                @role('admin||super_admin')
+                {{-- Divider --}}
+                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                    <div class="col-auto navbar-vertical-label">Data</div>
+                    <div class="col ps-0">
+                        <hr class="mb-0 navbar-vertical-divider" />
+                    </div>
+                </div>
+                @endrole
+
+                @role('admin')
                 <li class="nav-item">
-                    <a class="nav-link dropdown-indicator collapsed" href="#manage_member" role="button"
-                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_member">
+                    <!-- parent pages-->
+                    <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
-                                <span class="fas fa-users"></span>
+                                <span class="fas fa-car-side"></span>
                             </span>
-                            <span class="nav-link-text ps-1">Member</span>
-                        </div>
-                    </a>
-                    <ul class="nav false collapse" id="manage_member" style="">
-                        <li class="nav-item ms-2">
-                            <a class="nav-link" href="/manage-member" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-user-cog"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Kelola</span>
-                                </div>
-                            </a><!-- more inner pages-->
-                        </li>
-                        <li class="nav-item ms-2">
-                            <a class="nav-link" href="/recycle-member" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Tempat Sampah</span>
-                                </div>
-                            </a><!-- more inner pages-->
-                        </li>
-                    </ul>
+                            <span class="nav-link-text ps-1">Pencucian</span></div>
+                    </a><!-- more inner pages-->
                 </li>
+                @endrole
 
                 @role('super_admin')
                 <!-- parent pages-->
@@ -157,38 +216,6 @@
                     </a><!-- more inner pages-->
                 </li>
                 @endrole
-
-                {{-- Divider --}}
-                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                    <div class="col-auto navbar-vertical-label">Data</div>
-                    <div class="col ps-0">
-                        <hr class="mb-0 navbar-vertical-divider" />
-                    </div>
-                </div>
-
-                <li class="nav-item">
-                    <!-- parent pages-->
-                    <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-car-side"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Pencucian</span></div>
-                    </a><!-- more inner pages-->
-                </li>
-                @role('super_admin')
-                <li class="nav-item">
-                    <!-- parent pages-->
-                    <a class="nav-link" href="/manage-subsidiaries" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-building"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Cabang</span></div>
-                    </a><!-- more inner pages-->
-                </li>
-                @endrole
-
 
             </ul>
         </div>

@@ -63,7 +63,7 @@
                     <p class="fs--1">Masukan calon admin ke cabang yang akan dipilih.</p>
                     <select class="form-select js-choice" id="subsidiary" name="subsidiary"
                         data-options='{"removeItemButton":true,"placeholder":true}'>
-                        <option>Pilih cabang ...</option>
+                        <option value="">Pilih cabang ...</option>
                         @foreach ($subsidiaries as $item)
                         <option value="{{$item->id}}" name="subsidiary">{{$item->name}}
                         </option>

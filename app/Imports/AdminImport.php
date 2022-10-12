@@ -2,16 +2,15 @@
 
 namespace App\Imports;
 
-use App\Models\Car;
 use App\Models\User;
+use App\Models\Staff;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MemberImport implements ToCollection, WithHeadingRow
+class AdminImport implements ToCollection, WithHeadingRow
 {
     use Importable;
 
@@ -21,23 +20,21 @@ class MemberImport implements ToCollection, WithHeadingRow
         {
            $user = User::create([
                 'name' => $row['nama'],
+                'email' => $row['email'],
                 'phone' => $row['telepon'],
                 'address' => $row['alamat'],
-                'email' => $row['email'],
+                'birth' => $row['tanggal_lahir'],
+                'gender_id' => $row['gender_id'],
                 'password' => Hash::make($row['password']),
             ]);
 
-            $car = new Car();
-            $car -> fill([
-                'number_plate' => $row['plat_nomor'],
-                'name' => $row['mobil'],
-                'type' => $row['tipe'],
-                'user_id' =>$this->user =  $user->id,
+            $staff = new Staff();
+            $staff -> fill([
+                'subsidiary_id' => $row['cabang_id'],
             ]);
-            $user->assignRole('member');
-            $car->user_id = $user->id;
-            $car->save();
+            $staff->user_id = $user->id;
+            $staff->assignRole('admin');
+            $staff->save();
         }
     }
-
 }
