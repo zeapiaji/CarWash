@@ -38,6 +38,7 @@ class AdminController extends Controller
     public function manage_cashier()
     {
         $data = Staff::role('cashier')->get();
+
         // dd($data);
         $gender = Gender::all();
 
@@ -257,14 +258,14 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-        $data = Staff::role('cashier')->withTrashed()->get();
+        $data = user::role('cashier')->withTrashed()->get();
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 
     public function recovery_cashier($id)
     {
-        // User::withTrashed()->where('id', $id)->restore();
-        $data = Staff::role('cashier')->withTrashed()->where('id', $id)->restore();
+        User::withTrashed()->where('id', $id)->restore();
+        // $data = Staff::role('cashier')->withTrashed()->where('id', $id)->restore();
         $data = User::role('cashier')->withTrashed()->where('id', $id)->restore();
 
         return redirect('/recycle/cashier');
@@ -272,12 +273,12 @@ class AdminController extends Controller
 
     public function multiple_recovery_cashier(Request $request)
     {
-        Staff::role('cashier')->whereIn('id', $request->get('selected'))
-            ->restore();
+        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
+        //     ->restore();
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->restore();
 
-        $data = Staff::role('cashier')->whereIn('id', $request->get('selected'));
+        // $data = Staff::role('cashier')->whereIn('id', $request->get('selected'));
         $data = User::role('cashier')->whereIn('id', $request->get('selected'));
 
         return response("Selected post(s) deleted successfully.", 200);

@@ -17,7 +17,7 @@ class StaffSeeder extends Seeder
     public function run()
     {
         $employee = User::where('id', '<=', 25)->get();
-        $admin = User::where('id', '=', 26)->first()->id;
+        $admin = User::find(26);
 
         $no = 1;
         foreach ($employee as $item) {

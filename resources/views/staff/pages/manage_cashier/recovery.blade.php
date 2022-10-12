@@ -53,7 +53,7 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/cashier/{{$item->user->id}}">
+                            {{--  <a href="/detail/cashier/{{$item->id}}">  --}}
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle"><span>{{mb_substr($item->user->name, 0, 2)}}</span></div>

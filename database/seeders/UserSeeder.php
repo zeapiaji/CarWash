@@ -42,6 +42,16 @@ class UserSeeder extends Seeder
             ]);
         }
 
+        $admin = User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'phone' => '2131212095',
+            'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+            'birth' => Carbon::parse('2000-12-28'),
+            'gender_id' => 1,
+            'password' => bcrypt('zeapiaji')
+        ])->assignRole('admin');
+
         $entry = User::create([
             'name' => 'Entry',
             'email' => 'entry1@gmail.com',
