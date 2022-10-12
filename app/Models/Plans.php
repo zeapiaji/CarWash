@@ -13,4 +13,5 @@ class Plans extends Model
         'name',
         'type_id',
     ];
+
 }

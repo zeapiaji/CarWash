@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class WashingPlans extends Model
 {
     use HasFactory;
+    
+    protected $primaryKey = 'type_id';
 }

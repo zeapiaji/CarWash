@@ -123,7 +123,7 @@
                 @role('super_admin')
                 <!-- parent pages-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/pricing" aria-expanded="false">
+                    <a class="nav-link" href="/manage-plans" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-user-friends"></span>

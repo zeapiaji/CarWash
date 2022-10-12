@@ -12,7 +12,7 @@
         </div>
     </div>
 </div>
-<form action="/update/member" method="POST">
+<form action="/update/member{id}" method="POST">
     @csrf
     <div class="row g-3">
         <div class="col-lg-8 pe-lg-2">

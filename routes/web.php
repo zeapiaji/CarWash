@@ -77,13 +77,20 @@ Route::middleware(['role:ceo'])->group(function() {
 Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/superadmin-dashboard', [SuperAdminController::class,'dashboard'])->name('superadmin.dashboard');
     Route::get('/manage-admin', [SuperAdminController::class,'manage_admin'])->name('superadmin.manageadmin');
-    Route::get('/superadmin-washing-data', [SuperAdminController::class,'superadmin_washing_data'])->name('superadmin.washingdata');
+    Route::get('/superadmin-washing-data', [SuperAdminController::class,'washing_data'])->name('superadmin.washingdata');
 
     Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
     Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
 
     // Pricing
-    Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
+    // Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
+    
+    // Manage Plans
+    Route::get('/manage-plans', [SuperAdminController::class, 'manage_plans'])->name('superadmin.manageplans');
+    Route::get('/plans/add', [SuperAdminController::class, 'create_plans'])->name('superadmin.create');
+    Route::get('/plans/edit/{id}', [SuperAdminController::class,'edit_plans'])->name('superadmin.editplans');
+    Route::post('/plans/update/{id}', [SuperAdminController::class,'update_plans'])->name('superadmin.updateplans');
+    // Route::post('/plan')
 
     // Subsidiary
     Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');

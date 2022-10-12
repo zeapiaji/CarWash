@@ -7,8 +7,10 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
+use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Plans;
 
 class SuperAdminController extends Controller
 {
@@ -17,6 +19,7 @@ class SuperAdminController extends Controller
         return view('staff.pages.dashboard');
     }
 
+    // Admin
     public function manage_admin()
     {
         $data = User::role('admin')->get();
@@ -32,11 +35,41 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_admin.edit', compact('data', 'gender'));
     }
 
-    public function superadmin_washing_data()
+    // Plans
+    public function manage_plans()
     {
-        return view('staff.pages.washing_data.index');
+        $data = WashingPlans::all();
+        // dd($washing_plans);
+        return view('staff.pages.manage_plans.index', compact('data'));
     }
 
+    public function create_plans()
+    {
+        return view('staff.pages.manage_plans.add');
+    }
+
+        // Edit
+        public function edit_plans($id)
+        {
+            $data = WashingPlans::find($id);
+            $plans = Plans::all();
+            return view('staff.pages.manage_plans.edit', compact('data', 'plans'));
+        }   
+
+        public function update_plans(Request $request, $id)
+        {
+            // dd($request);
+            $data = WashingPlans::find($request->id);
+
+            $data->plan_id = $request->name;
+            $data->feature = $request->feature;
+            $data->type_id = $request->plan;
+            $data->save();
+
+            return redirect('manage-plans.index')->with('succes', 'Data telah disimpan');
+        }
+
+    // Subsidiary
     public function manage_subsidiary()
     {
         $data = Staff::role('admin')->get();
