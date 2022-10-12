@@ -30,17 +30,27 @@ class UserSeeder extends Seeder
         //     $user -> assignRole('member');
         // }
 
-        for($i = 1; $i<=25; $i++){
-            User::create([
-                'name' => 'Employee'.$i,
-                'email' => 'employee'.$i.'@gmail.com',
-                'phone' => '12420909'.$i,
+        for ($i = 1; $i <= 25; $i++) {
+            $cashier = User::create([
+                'name' => 'cashier' . $i,
+                'email' => 'cashierboys' . $i . '@gmail.com',
+                'phone' => '12420909' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),
                 'password' => bcrypt('zeapiaji')
             ]);
         }
+
+        $admin = User::create([
+            'name' => 'Admin',
+            'email' => 'admincabang@gmail.com',
+            'phone' => '3005200622',
+            'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+            'birth' => Carbon::parse('2000-12-28'),
+            'gender_id' => 1,
+            'password' => bcrypt('zeapiaji')
+        ]);
 
         $super_admin = User::create([
             'name' => 'Super Admin',

@@ -40,7 +40,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     // cashier
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
-    Route::get('/add/cashier', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
+    Route::get('/cashier/input', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
     Route::post('/create-cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
     Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
     Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
@@ -88,22 +88,22 @@ Route::middleware(['role:ceo'])->group(function () {
     Route::get('/ceo-dashboard', [CeoController::class, 'dashboard'])->name('ceo.dashboard');
 });
 
-Route::middleware(['role:super_admin'])->group(function() {
-    Route::get('/superadmin-dashboard', [SuperAdminController::class,'dashboard'])->name('superadmin.dashboard');
+Route::middleware(['role:super_admin'])->group(function () {
+    Route::get('/superadmin-dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 
-    Route::get('/manage-admin', [SuperAdminController::class,'manage_admin'])->name('superadmin.manageadmin');
-    Route::get('/detail/admin/{id}', [SuperAdminController::class,'detail_admin'])->name('superadmin.detail.admin');
+    Route::get('/manage-admin', [SuperAdminController::class, 'manage_admin'])->name('superadmin.manageadmin');
+    Route::get('/detail/admin/{id}', [SuperAdminController::class, 'detail_admin'])->name('superadmin.detail.admin');
 
-    Route::get('/add/admin' , [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
-    Route::post('/create/admin' , [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
-    Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
-    Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
-    Route::post('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
+    Route::get('/add/admin', [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
+    Route::post('/create/admin', [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
+    Route::get('/edit/admin/{id}', [SuperAdminController::class, 'edit_admin'])->name('superadmin.edit.admin');
+    Route::post('/update/admin/{id}', [SuperAdminController::class, 'update_admin'])->name('superadmin.update.admin');
+    Route::post('/delete/admin/{id}', [SuperAdminController::class, 'delete_admin'])->name('superadmin.delete.admin');
 
     // Pricing
-    Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
+    Route::get('/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
 
-    Route::get('/superadmin-washing-data', [SuperAdminController::class,'superadmin_washing_data'])->name('superadmin.washingdata');
+    Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
 
     // Subsidiary
     Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');
