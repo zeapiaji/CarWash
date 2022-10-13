@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
-                    {{-- @dd($data) --}}
+                    {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">

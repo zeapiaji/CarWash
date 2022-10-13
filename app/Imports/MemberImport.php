@@ -34,7 +34,7 @@ class MemberImport implements ToCollection, WithHeadingRow
                 'type' => $row['tipe'],
                 'user_id' =>$this->user =  $user->id,
             ]);
-            $user->assignRole('user');
+            $user->assignRole('member');
             $car->user_id = $user->id;
             $car->save();
         }

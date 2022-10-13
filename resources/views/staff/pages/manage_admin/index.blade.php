@@ -23,30 +23,37 @@
 </div>
 
 <div class="card mb-3" id="customersTable"
-data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
+    data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
     <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                <input type="search" class="form-control search-input search"  placeholder="cari..">
+                <input type="search" class="form-control search-input search" placeholder="cari..">
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-delete"
-                            data-route="{{ route('admin.multiple-delete-member')}}">Hapus</button>
+                        <button class="btn btn-falcon-danger btn-sm ms-2" id="multiple-delete"
+                            data-route="{{ route('superadmin.multiple-delete-admin')}}">
+                            <span class="fas fa-user-slash" data-fa-transform="shrink-3 down-2"></span>
+                            <div class="d-none d-sm-inline-block ms-1">Hapus</div>
+                        </button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
+                    <a class="btn btn-falcon-success btn-sm mx-2" href="/add/admin">
+                        <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                        <span class="d-none d-sm-inline-block ms-1">Tambah Admin</span>
+                    </a>
+                    <a class="btn btn-falcon-primary btn-sm mx-2" id="import" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Impor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal">XLSX</a>
                     </div>
 
-                    <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
+                    <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-file-export" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
@@ -92,21 +99,21 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            {{-- <a href="/detail/member/{{$item->id}}"> --}}
+                            <a href="/detail/admin/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                            <span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
                                     </div>
                                 </div>
-                            {{-- </a> --}}
+                            </a>
                         </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
-                        <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="phone align-middle py-2">Cabang</td>
+                        <td class="email align-middle py-2">{{$item->user->email}}</td>
+                        <td class="phone align-middle py-2">{{$item->user->phone}}</td>
+                        <td class="phone align-middle py-2">{{$item->subsidiary->name ?? 'Tidak ada'}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -117,9 +124,9 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/admin/{{$item->id}}">Sunting</a>
+                                            href="/edit/admin/{{$item->user->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/admin/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/admin/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -130,15 +137,15 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
         </div>
     </div>
     <div class="card-footer d-flex align-items-center justify-content-center"><button
-        class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span
-            class="fas fa-chevron-left"></span></button>
-    <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
-        data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-</div>
+            class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span
+                class="fas fa-chevron-left"></span></button>
+        <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
+            data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+    </div>
 </div>
 
 {{-- Upload File Modal --}}
-<form action="{{route('admin.import-member-xlsx')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('admin.import-admin-xlsx')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
@@ -152,7 +159,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         <h5 class="mb-1" id="modalExampleDemoLabel">Import Excel</h5>
                     </div>
                     <div class="p-4 pb-4">
-                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_member">
+                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_admin">
                     </div>
                 </div>
                 <div class="modal-footer">

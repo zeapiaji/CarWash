@@ -38,13 +38,19 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <div class="mt">
+                                <label class="form-label" for="phone">Telepon</label>
+                                <input class="form-control" id="phone" name="phone" type="number"
+                                    value="{{$data->phone}}" />
+                            </div>
+                            <div class="mt-3">
                             <label class="form-label" for="datepicker">Tanggal Lahir</label>
                             <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="d/m/y"
                                 value="{{$data->birth}}" name="birth" data-options='{"disableMobile":true}' />
-                            <div class="mt-3">
-                                <label class="form-label" for="bootstrap-wizard-gender">Gender</label>
+                                </div>
+                                <div class="mt-3">
+                                <label class="form-label" for="bootstrap-wizard-gender">Jenis kelamin</label>
                                 <select class="form-select" name="gender" id="bootstrap-wizard-gender">
-                                    <option>Pilih gender ...</option>
                                     @foreach ($gender as $item)
                                     <option value="{{$item->id}}" name="gender"
                                         {{ ($item->id == $data->gender_id) ? 'selected' : ''}}>{{$item->name}}
@@ -53,14 +59,16 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <label class="form-label" for="address">Alamat</label>
                             <textarea class="form-control" id="address" name="address" cols="30"
-                                rows="3">{{$data->address}}</textarea>
+                                rows="2">{{$data->address}}</textarea>
                         </div>
+                        <div class="mt-3">
                         <div class="col-12 d-flex justify-content-end">
                             <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
                             <button class="btn btn-primary" type="submit">Ubah</button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -74,7 +82,7 @@
                     </div>
                     <div class="card-body bg-light">
                         <label class="form-label" for="car">Mobil</label>
-                        <input class="form-control" id="car" name="car" type="text" value="{{$data->car->name}}" />
+                        <input class="form-control" id="car" name="car" type="text" value="{{$data->car->name}}"/>
                         <div class="mt-3">
                             <label class="form-label" for="bootstrap-wizard-gender">Tipe</label>
                             <select class="form-select" name="type" id="bootstrap-wizard-gender">

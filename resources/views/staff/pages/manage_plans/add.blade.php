@@ -2,51 +2,74 @@
 @section('content')
 
 @include('staff.partials.menu')
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="col-12 text-center mb-4">
-            <div class="fs-1">Manage Pricing</div>
-            <h3 class="fs-2 fs-md-3">
-                Form Pricing
-            </h3>
-        </div>
-
-        <form action="/pricing" method="POST">
-
-          {{ csrf_field() }}
-          <div class="form-group form-floating mb-3">
-            <input class="form-control" id="paket" type="name" name="name" placeholder="Paket" />
-            <label for="name">Paket</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input class="form-control" id="harga" type="harga" name="harga" placeholder="Rp xxx" />
-            <label for="harga">Harga Paket</label>
-              @if($errors->has('harga'))
-              <div class="text-danger">
-                  {{ $errors->first('harga')}}
+<form action="/create/pricing" method="POST">
+  @csrf
+  <div class="row g-3">
+      <div class="col-lg-8 pe-lg-2">
+          <div class="card mb-3">
+              <div class="card-header">
+                  <h5 class="mb-0">Tambah Paket Pencucian</h5>
               </div>
-              @endif
-          </div>
-          <div class="form-floating mb-3">
-            <input class="form-control" id="fitur" type="fitur" name="fitur" placeholder="Fitur Paket" />
-            <label for="fitur">Fitur Paket</label>
-              @if($errors->has('fitur'))
-              <div class="text-danger">
-                  {{ $errors->first('fitur')}}
+              <div class="card-body bg-light">
+                  <div class="row g-3">
+                      <div class="col-lg-6">
+                          <label class="form-label" for="name">Paket</label>
+                          <input class="form-control" id="name" name="name" type="text" />
+                          <div class="mt-3">
+                              <label class="form-label" for="price">Harga</label>
+                              <input class="form-control" id="price" name="price" type="price" />
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="mt-3">
+                            <label class="form-label" for="bootstrap-wizard-gender">Type</label>
+                            <select class="form-select" name="gender" id="bootstrap-wizard-gender">
+                                <option>Pilih Type ...</option>
+                                @foreach ($car_types as $item)
+                                <option value="{{$item->id}}" name="type_id">{{$item->name}}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                      <div class="col-12 d-flex justify-content-end">
+                          <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
+                          <button class="btn btn-primary" type="submit">Buat Akun</button>
+                      </div>
+                  </div>
               </div>
-              @endif
           </div>
-          <div class="form-floating mb-3">
-            <input class="form-control" id="type_id" type="type_id" name="type_id" placeholder="Type_id/Mobil" />
-            <label for="type_id">Type_id/Mobil</label>
-              @if($errors->has('type_id'))
-              <div class="text-danger">
-                  {{ $errors->first('type_id')}}
+      </div>
+      {{-- <div class="col-lg-4 ps-lg-2">
+          <div class="card mb-3">
+              <div class="card-header">
+                  <h5 class="mb-0">Cabang</h5>
               </div>
-              @endif
-          </div><br>
-          <button class="btn btn-primary" type="submit">Simpan</button>
-        </form>    
-    </div>
-</div>
+              <div class="card-body bg-light">
+                  <p class="fs--1">Masukan calon admin ke cabang yang akan dipilih.</p>
+                  <select class="form-select js-choice" id="subsidiary" name="subsidiary"
+                      data-options='{"removeItemButton":true,"placeholder":true}'>
+                      <option value="">Pilih cabang ...</option>
+                      @foreach ($subsidiaries as $item)
+                      <option value="{{$item->id}}" name="subsidiary">{{$item->name}}
+                      </option>
+                      @endforeach
+                  </select>
+              </div>
+          </div>
+          <div class="card mb-3">
+              <div class="card-header">
+                  <h5 class="mb-0">Password Akun</h5>
+              </div>
+              <div class="card-body bg-light">
+                  <div class="mb-3"><label class="form-label" for="new-password">Password*</label><input
+                          class="form-control" id="new-password" type="password" name="password"></div>
+                  <div class="mb-3"><label class="form-label" for="confirm-password">Konfirmasi
+                          Password*</label><input class="form-control" id="confirm-password" type="password"
+                          name="password_confirmation"></div>
+              </div>
+          </div>
+      </div> --}}
+  </div>
+</form>
 @endsection
