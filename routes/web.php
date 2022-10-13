@@ -29,7 +29,7 @@ Route::middleware(['role:member'])->group(function () {
 });
 
 Route::middleware(['role:cashier'])->group(function () {
-    Route::get('/cashier-dashboard', [CashierController::class, 'dashboard'])->name('cashier.dashboard');
+    Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
     Route::get('/queue', [CashierController::class, 'queue'])->name('cashier.queue');
 });

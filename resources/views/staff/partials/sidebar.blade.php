@@ -189,18 +189,18 @@
                         <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                 </div>
+
                 @endrole
 
                 @role('super_admin')
                 <li class="nav-item">
-                    <!-- parent pages-->
                     <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-car-side"></span>
                             </span>
                             <span class="nav-link-text ps-1">Pencucian</span></div>
-                    </a><!-- more inner pages-->
+                    </a>
                 </li>
                 @endrole
 

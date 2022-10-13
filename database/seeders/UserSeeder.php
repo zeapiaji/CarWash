@@ -19,14 +19,38 @@ class UserSeeder extends Seeder
     {
         for($i = 1; $i<=25; $i++){
             User::create([
-                'name' => 'user'.$i,
-                'email' => 'user'.$i.'@gmail.com',
+                'name' => 'member'.$i,
+                'email' => 'member'.$i.'@gmail.com',
                 'phone' => '12420909'.$i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),
                 'password' => bcrypt('zeapiaji')
-            ]);
+            ])->assignRole('member');
+        }
+
+        for($i = 1; $i<=25; $i++){
+            User::create([
+                'name' => 'user'.$i,
+                'email' => 'user'.$i.'@gmail.com',
+                'phone' => '023901'.$i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => random_int(1, 2),
+                'password' => bcrypt('zeapiaji')
+            ])->assignRole('cashier');
+        }
+
+        for($i = 1; $i<=5; $i++){
+            User::create([
+                'name' => 'admin'.$i,
+                'email' => 'admin'.$i.'@gmail.com',
+                'phone' => '58715'.$i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => random_int(1, 2),
+                'password' => bcrypt('zeapiaji')
+            ])->assignRole('admin');
         }
 
         $super_admin = User::create([

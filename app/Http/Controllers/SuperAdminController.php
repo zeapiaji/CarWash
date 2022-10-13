@@ -65,20 +65,21 @@ class SuperAdminController extends Controller
             'gender_id' => $request -> gender,
             'address' => $request -> address,
             'password' => Hash::make($request['password']),
-        ]);
+        ])->assignRole('admin');;
 
         Staff::create([
             'user_id' => $user->id,
             'subsidiary_id' => $request->subsidiary,
-        ])->assignRole('admin');
+        ]);
 
         return redirect('/manage-admin');
     }
 
     public function edit_admin($id)
     {
-        $data = Staff::role('admin')->where('user_id', $id)->first();
-        $totalEmployee = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
+        $data = User::role('admin')->where('id', $id)->first();
+        $totalEmployee = User::role('cashier')->get();
+        $totalEmployee = Staff::where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
         $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
