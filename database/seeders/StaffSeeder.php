@@ -17,7 +17,7 @@ class StaffSeeder extends Seeder
     public function run()
     {
         $admin = User::where('id','<=', 5)->get();
-        $employee = User::where('id','>', 5)->where('id', '<=', 20)->get();
+        $cashier = User::where('id','>', 5)->where('id', '<=', 20)->get();
 
         $no=1;
         foreach ($admin as $item) {
@@ -27,7 +27,7 @@ class StaffSeeder extends Seeder
             ])->assignRole('admin');
         }
 
-        foreach ($employee as $item) {
+        foreach ($cashier as $item) {
             Staff::create([
                 'user_id' => $item->id,
                 'subsidiary_id' => random_int(1,5),
