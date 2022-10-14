@@ -110,6 +110,8 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::post('/recovery-all-admin', [SuperAdminController::class, 'recovery_all_admin'])->name('superadmin.recovery-all-admin');
     Route::post('/force-delete-all-admin', [SuperAdminController::class, 'force_delete_all_admin'])->name('superadmin.force-delete-all-admin');
 
+
+
     // Pricing
     Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
 

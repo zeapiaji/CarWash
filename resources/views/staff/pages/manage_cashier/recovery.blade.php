@@ -7,6 +7,22 @@
 
 <div class="card mb-3">
     <div class="card-header">
+        <div class="row">
+            <div class="col d-none d-sm-block">
+                <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Tempat Sampah kasir</h4>
+            </div>
+            <div class="col-auto d-none d-sm-block">
+                <h6 class="d-none d-sm-inline-block ms-1">Total kasir</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                 <input type="search" class="form-control search-input search"  placeholder="cari..">
@@ -14,13 +30,13 @@
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-employee" data-route="{{ route('admin.multiple-recovery-employee')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-employee" data-route="{{ route('admin.multiple-force-delete-employee')}}">Hapus Permanen</button>
+                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-cashier" data-route="{{ route('admin.multiple-recovery-cashier')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-cashier" data-route="{{ route('admin.multiple-force-delete-cashier')}}">Hapus Permanen</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-employee" data-route="{{ route('admin.recovery-all-employee')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-employee" data-route="{{ route('admin.force-delete-all-employee')}}">Hapus Permanen Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-cashier" data-route="{{ route('admin.recovery-all-cashier')}}">Pulihkan Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-cashier" data-route="{{ route('admin.force-delete-all-cashier')}}">Hapus Permanen Semua</button>
                 </div>
             </div>
         </div>

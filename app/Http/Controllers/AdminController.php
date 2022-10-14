@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('staff.pages.dashboard');
+        return view('staff.pages.dashboard_admin.dashboard');
     }
 
     public function manage_cashier()
@@ -88,6 +88,83 @@ class AdminController extends Controller
         return redirect('/manage-member');
     }
 
+
+    public function delete_admin($id)
+    {
+        User::find($id)->delete();
+        Car::where('user_id', $id)->delete();
+
+        return redirect('/manage-admin');
+    }
+
+    public function multiple_delete_admin(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))->delete();
+        User::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function recycle_admin()
+    {
+        $data = User::onlyTrashed()->get();
+        $totalUser = $data->count();
+        return view('staff.pages.manage_admin.recoveryadmin', compact('data', 'totalUser'));
+    }
+
+    public function recovery_admin($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
+        Car::withTrashed()->where('user_id', $id)->restore();
+
+        return redirect('/recycle-admin');
+    }
+
+    public function multiple_recovery_admin(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))
+            ->restore();
+        User::whereIn('id', $request->get('selected'))
+            ->restore();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function recovery_all_admin()
+    {
+        User::withTrashed()->restore();
+        Car::withTrashed()->restore();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function forcedelete_admin($id)
+    {
+        User::withTrashed()->where('id', $id)->forceDelete();
+        Car::withTrashed()->where('id', $id)->forceDelete();
+
+        return redirect('/recycle-admin');
+    }
+
+    public function multiple_force_delete_admin(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))
+            ->forceDelete();
+        User::whereIn('id', $request->get('selected'))
+            ->forceDelete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+    public function force_delete_all_admin()
+    {
+        Car::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->forceDelete();
+
+        return response("Selected post(s) deleted successfully.", 200);
+    }
+
+
     // Soft Delete
     public function delete_member($id)
     {
@@ -109,7 +186,7 @@ class AdminController extends Controller
     {
         $data = User::onlyTrashed()->get();
         $totalUser = $data->count();
-        return view('staff.pages.manage_member.recovery', compact('data', 'totalUser'));
+        return view('staff.pages.manage_member.recoverymember', compact('data', 'totalUser'));
     }
 
     public function recovery_member($id)
@@ -163,6 +240,7 @@ class AdminController extends Controller
 
         return response("Selected post(s) deleted successfully.", 200);
     }
+    
 
 
     //Staff
@@ -248,7 +326,7 @@ class AdminController extends Controller
     public function recycle_cashier()
     {
         $data = User::onlyTrashed()->get();
-        return view('staff.pages.manage_cashier.recovery', compact('data'));
+        return view('staff.pages.manage_cashier.recoverycashier', compact('data'));
     }
 
     public function recovery_cashier($id)
