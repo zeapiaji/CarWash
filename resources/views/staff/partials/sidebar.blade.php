@@ -155,7 +155,7 @@
                             </a><!-- more inner pages-->
                         </li>
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="/recycle-member" aria-expanded="false">
+                        <a class="nav-link" href="/recycle-admin" aria-expanded="false">    
                                 <div class="d-flex align-items-center">
                                     <span class="nav-link-icon">
                                         <span class="fas fa-trash-alt"></span>

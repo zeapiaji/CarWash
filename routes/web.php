@@ -102,6 +102,8 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::post('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
     Route::post('/multiple-delete/admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
 
+
+
     // Pricing
     Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
 

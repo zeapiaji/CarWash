@@ -30,13 +30,13 @@
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-cashier" data-route="{{ route('admin.multiple-recovery-cashier')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-cashier" data-route="{{ route('admin.multiple-force-delete-cashier')}}">Hapus Permanen</button>
+                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-admin" data-route="{{ route('admin.multiple-recovery-admin')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-admin" data-route="{{ route('admin.multiple-force-delete-admin')}}">Hapus Permanen</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-cashier" data-route="{{ route('admin.recovery-all-cashier')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-cashier" data-route="{{ route('admin.force-delete-all-cashier')}}">Hapus Permanen Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-admin" data-route="{{ route('admin.recovery-all-admin')}}">Pulihkan Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-admin" data-route="{{ route('admin.force-delete-all-admin')}}">Hapus Permanen Semua</button>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table"
-            data-list='{"valueNames":["name","email","phone","gender"],"page":10,"pagination":true}'>
+            data-list='{"valueNames":["name","email","phone","cabang"],"page":10,"pagination":true}'>
                 <thead class="bg-200 text-900">
                     <tr>
                         <th>
@@ -54,7 +54,7 @@
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Gender</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">cabang</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
