@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('staff.pages.dashboard');
+        return view('staff.pages.dashboard_admin.dashboard');
     }
 
     public function manage_cashier()
