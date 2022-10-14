@@ -68,7 +68,7 @@ class User extends Authenticatable
      */
     public function staff()
     {
-        return $this->hasOne(Subsidiary::class);
+        return $this->hasOne(Staff::class);
     }
 
     /**

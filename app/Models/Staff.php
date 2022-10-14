@@ -27,7 +27,7 @@ class Staff extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -37,6 +37,6 @@ class Staff extends Model
      */
     public function subsidiary()
     {
-        return $this->belongsTo(Subsidiary::class, 'subsidiary_id');
+        return $this->belongsTo(Subsidiary::class);
     }
 }

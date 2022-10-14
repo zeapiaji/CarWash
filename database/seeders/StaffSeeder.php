@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Staff;
+use App\Models\Subsidiary;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,22 +33,24 @@ class StaffSeeder extends Seeder
         //         'subsidiary_id' => $no++,
         //     ])->assignRole('admin');
         // }
-        $admin = User::where('id', '<=', 5)->get();
-        $employee = User::where('id', '>', 5)->where('id', '<=', 20)->get();
+        //
+
+        $cashier = user::role('cashier')->get();
+        $admin = user::role('admin')->get();
 
         $no = 1;
-        foreach ($admin as $item) {
-            Staff::create([
-                'user_id' => $item->id,
-                'subsidiary_id' => $no++,
-            ])->assignRole('admin');
-        }
 
-        foreach ($employee as $item) {
+        foreach ($cashier as $item) {
             Staff::create([
                 'user_id' => $item->id,
                 'subsidiary_id' => random_int(1, 5),
-            ])->assignRole('cashier');
+            ]);
+        }
+        foreach ($admin as $item) {
+            staff::create([
+                'user_id' => $item->id,
+                'subsidiary_id' => $no++,
+            ]);
         }
     }
 }

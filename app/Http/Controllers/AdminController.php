@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Car;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Staff;
 use App\Models\Gender;
@@ -37,10 +38,15 @@ class AdminController extends Controller
 
     public function manage_cashier()
     {
-        $data = Staff::role('cashier')->get();
+        // $data = User::role('cashier')->get();
+        $subs = Auth::user()->staff->subsidiary_id;
+        $data = Staff::where('subsidiary_id', $subs)->get();
+        $role = ModelsRole::whereNotIn('name', ['admin']);
+        // dd($subs);
 
         // dd($data);
         $gender = Gender::all();
+        // $totalCashier = $data->count();
 
         return view('staff.pages.manage_cashier.index', compact('data'));
     }
@@ -172,7 +178,7 @@ class AdminController extends Controller
     //Staff
     public function detail_cashier($id)
     {
-        $data = Staff::role('cashier')->find($id);
+        $data = User::role('cashier')->where('id', $id)->first();
         $gender = Gender::all();
         return view('staff.pages.manage_cashier.detailcashier', compact('data'));
     }
@@ -190,7 +196,7 @@ class AdminController extends Controller
     public function store_cashier(Request $request)
     {
 
-        $user = Staff::create([
+        $user = User::create([
 
             'name'        => $request->name,
             'email'       => $request->email,
@@ -199,11 +205,11 @@ class AdminController extends Controller
             'birth'       => $request->birth,
             'address'     => $request->address,
             'gender_id'   => $request->gender,
-        ]);
+        ])->assignRole('cashier');
         Staff::create([
             'user_id'       => $user->id,
             'subsidiary_id' => $request->subsidiary,
-        ])->assignRole('cashier');
+        ]);
 
         return redirect('/manage-cashier');
     }
@@ -212,7 +218,8 @@ class AdminController extends Controller
 
     public function edit_cashier($id)
     {
-        $data = Staff::role('cashier')->where('user_id', $id)->first();
+        // $data = User::role('cashier')->where('user_id', $id)->first();
+        $data = User::find($id);
         $role = ModelsRole::whereNotIn('name', ['member'])->get();
         $totalcashier = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
@@ -222,7 +229,7 @@ class AdminController extends Controller
     }
     public function update_cashier(Request $request, $id)
     {
-        $data = Staff::find($request->id);
+        $data = User::find($request->id);
         $data->name = $request->name;
         $data->email = $request->email;
         // $data->password = Hash::make($request['password']);

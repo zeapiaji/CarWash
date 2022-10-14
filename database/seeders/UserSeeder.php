@@ -17,30 +17,42 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // for ($i=1; $i < 10 ; $i++) {
-        //     $user = User::create([
-        //         'name' => 'User'.$i,
-        //         'email' => 'user'.$i.'@gmail.com',
-        //         'phone' => '123123123'.$i,
-        //         'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
-        //         'birth' => Carbon::parse('2000-12-28'),
-        //         'gender_id' => random_int(1,2),
-        //         'password' => bcrypt('zeapiaji')
-        //     ]);
-        //     $user -> assignRole('member');
-        // }
-
         for ($i = 1; $i <= 25; $i++) {
-            $cashier = User::create([
-                'name' => 'cashier' . $i,
-                'email' => 'cashierboys' . $i . '@gmail.com',
-                'phone' => '12420909' . $i,
+            User::create([
+                'name' => 'member' . $i,
+                'email' => 'member' . $i . '@gmail.com',
+                'phone' => '12420908' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),
                 'password' => bcrypt('zeapiaji')
-            ]);
+            ])->assignRole('member');
         }
+
+        for ($i = 1; $i <= 25; $i++) {
+            User::create([
+                'name' => 'kasir' . $i,
+                'email' => 'kasir1' . $i . '@gmail.com',
+                'phone' => '1312261' . $i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => random_int(1, 2),
+                'password' => bcrypt('zeapiaji')
+            ])->assignRole('cashier');
+        }
+
+        for ($i = 1; $i <= 5; $i++) {
+            User::create([
+                'name' => 'admin' . $i,
+                'email' => 'admin1' . $i . '@gmail.com',
+                'phone' => '12420902' . $i,
+                'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
+                'birth' => Carbon::parse('2000-12-28'),
+                'gender_id' => random_int(1, 2),
+                'password' => bcrypt('zeapiaji')
+            ])->assignRole('admin');
+        }
+
 
         $super_admin = User::create([
             'name' => 'Super Admin',

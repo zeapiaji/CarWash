@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Entry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\returnSelf;
 
 class EntryController extends Controller
 {
@@ -26,8 +30,23 @@ class EntryController extends Controller
 
         if (Auth::attempt($credentials)) {
 
+            $user = User::where('email', $request->email)->first()->id;
 
-            return redirect('/home');
+            try {
+                Entry::create([
+                    'user_id' => $user,
+                    'status_id' => 1,
+                ]);
+            } catch (\Throwable $th) {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'Anda sudah dalam antrian.',
+                ]);
+            }
+
+            Auth::logout();
+            return back();
         }
 
         return back()->withErrors([
