@@ -286,7 +286,7 @@ class AdminController extends Controller
 
     public function recovery_all_cashier()
     {
-        Staff::role('cashier')->Trashed()->restore();
+        // Staff::role('cashier')->Trashed()->restore();
         User::role('cashier')->Trashed()->restore();
 
         return response("Selected post(s) deleted successfully.", 200);
@@ -294,7 +294,7 @@ class AdminController extends Controller
 
     public function forcedelete_cashier($id)
     {
-        Staff::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
+        // Staff::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
         User::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
 
         return redirect('/recycle/cashier');
@@ -304,8 +304,8 @@ class AdminController extends Controller
     {
         // Car::whereIn('user_id', $request->get('selected'))
         //     ->forceDelete();
-        Staff::role('cashier')->whereIn('id', $request->get('selected'))
-            ->forceDelete();
+        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
+        //     ->forceDelete();
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
 
@@ -315,7 +315,7 @@ class AdminController extends Controller
     public function force_delete_all_cashier()
     {
 
-        Staff::role('cashier')->onlyTrashed()->forceDelete();
+        // Staff::role('cashier')->onlyTrashed()->forceDelete();
         User::role('cashier')->onlyTrashed()->forceDelete();
 
         return response("Selected post(s) deleted successfully.", 200);
