@@ -99,8 +99,16 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::post('/create/admin' , [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
     Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
     Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
-    Route::post('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
-    Route::post('/multiple-delete/admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
+    Route::get('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
+    Route::post('/multiple-delete-admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
+
+    Route::get('/recycle-admin', [SuperAdminController::class, 'recycle_admin'])->name('superadmin.recycle-admin');
+    Route::post('/recovery/admin/{id}', [SuperAdminController::class, 'recovery_admin'])->name('superadmin.recoveradmin');
+    Route::post('/forcedelete/admin/{id}', [SuperAdminController::class, 'force_delete_admin'])->name('superadmin.forcedeleteadmin');
+    Route::post('/multiple-recovery-admin', [SuperAdminController::class, 'multiple_recovery_admin'])->name('superadmin.multiple-recovery-admin');
+    Route::post('/multiple-force-delete-admin', [SuperAdminController::class, 'multiple_force_delete_admin'])->name('superadmin.multiple-force-delete-admin');
+    Route::post('/recovery-all-admin', [SuperAdminController::class, 'recovery_all_admin'])->name('superadmin.recovery-all-admin');
+    Route::post('/force-delete-all-admin', [SuperAdminController::class, 'force_delete_all_admin'])->name('superadmin.force-delete-all-admin');
 
     // Pricing
     Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
@@ -108,8 +116,13 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::get('/superadmin-washing-data', [SuperAdminController::class,'superadmin_washing_data'])->name('superadmin.washingdata');
 
     // Subsidiary
+    Route::get('/show-subsidiaries', [SuperAdminController::class, 'show_subsidiary'])->name('superadmin.show.subsidiary');
     Route::get('/manage-subsidiaries', [SuperAdminController::class, 'manage_subsidiary'])->name('superadmin.manage.subsidiary');
     Route::get('/detail/subsidiary/{id}', [SuperAdminController::class, 'detail_subsidiary'])->name('superadmin.detail.subsidiary');
+
+    Route::get('/add/subsidiary', [SuperAdminController::class, 'add_subsidiary'])->name('superadmi.add.subsidiary');
+    Route::post('/create/subsidiary', [SuperAdminController::class, 'create_subsidiary'])->name('superadmi.create.subsidiary');
+
     Route::get('/edit/subsidiary/{id}', [SuperAdminController::class, 'edit_subsidiary'])->name('superadmin.edit.subsidiary');
     Route::post('/update/subsidiary/{id}', [SuperAdminController::class, 'update_subsidiary'])->name('superadmin.update.subsidiary');
     Route::get('/delete/subsidiary/{id}', [SuperAdminController::class, 'delete_subsidiary'])->name('superadmin.delete.subsidiary');

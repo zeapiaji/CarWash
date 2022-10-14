@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('subsidiary_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('subsidiary_id')->references('id')->on('subsidiaries');

@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function manage_cashier()
     {
-        $data = Staff::role('cashier')->get();
+        $data = User::role('cashier')->get();
 
         return view('staff.pages.manage_cashier.index', compact('data'));
     }

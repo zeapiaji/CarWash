@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 
 class Staff extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -26,7 +27,7 @@ class Staff extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -36,6 +37,6 @@ class Staff extends Model
      */
     public function subsidiary()
     {
-        return $this->belongsTo(Subsidiary::class, 'subsidiary_id');
+        return $this->belongsTo(Subsidiary::class);
     }
 }

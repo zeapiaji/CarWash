@@ -32,12 +32,19 @@
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-delete"
-                            data-route="{{ route('admin.multiple-delete-member')}}">Hapus</button>
+                        <button class="btn btn-falcon-danger btn-sm ms-2" id="multiple-delete"
+                            data-route="{{ route('superadmin.multiple-delete-admin')}}">
+                            <span class="fas fa-user-slash" data-fa-transform="shrink-3 down-2"></span>
+                            <div class="d-none d-sm-inline-block ms-1">Hapus</div>
+                        </button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
+                    <a class="btn btn-falcon-success btn-sm mx-2" href="/add/subsidiary">
+                        <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                        <span class="d-none d-sm-inline-block ms-1">Tambah Cabang</span>
+                    </a>
+                    <a class="btn btn-falcon-primary btn-sm mx-2" id="import" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Impor</span>
@@ -46,7 +53,7 @@
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal">XLSX</a>
                     </div>
 
-                    <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
+                    <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-file-export" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
@@ -74,7 +81,7 @@
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="admin">Admin</th>
+                        {{-- <th class="sort pe-1 align-middle white-space-nowrap" data-sort="admin">Admin</th> --}}
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="location">Lokasi</th>
                         <th class="align-middle no-sort white-space-nowrap"></th>
                     </tr>
@@ -84,8 +91,8 @@
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->subsidiary->id}}"
-                                    value="{{$item->subsidiary->id}}" data-bulk-select-row="data-bulk-select-row" />
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
+                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
 
@@ -94,33 +101,22 @@
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->subsidiary->name, 0, 2)}}</span></div>
+                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->subsidiary->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
                                     </div>
                                 </div>
                             </a>
                         </td>
-                        <td class="admin align-middle py-2">
-                            <a href="/detail/admin/{{$item->id}}">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">
-                                            {{$item->user->name}}
-                                        </h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </td>
-                        <td class="location align-middle py-2">{{$item->subsidiary->location}}</td>
+                        <td class="location align-middle py-2">{{$item->location}}</td>
 
                         <td class="align-middle py-2">
-                            <a class="btn p-0" href="/edit/subsidiary/{{$item->subsidiary->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
+                            <a class="btn p-0" href="/edit/subsidiary/{{$item->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Edit">
                                 <span class="text-500 fas fa-edit"></span>
                             </a>
-                            <a class="btn p-0 ms-2" href="/delete/subsidiary/{{$item->subsidiary->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
+                            <a class="btn p-0 ms-2" href="/delete/subsidiary/{{$item->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Hapus">
                                 <span class="text-500 fas fa-trash-alt"></span>
                             </a>
