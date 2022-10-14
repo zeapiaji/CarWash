@@ -130,7 +130,10 @@ Route::get('/', function () {
 
 Route::middleware(['role:entry'])->group(function () {
     Route::get('/entry-dashboard', [EntryController::class, 'dashboard'])->name('entry.dashboard');
-});
+    Route::get('/entry-customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
+    Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
+
+    Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
 
 Auth::routes();
 
