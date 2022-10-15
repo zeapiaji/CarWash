@@ -38,15 +38,14 @@ class AdminController extends Controller
 
     public function manage_cashier()
     {
-        // $data = User::role('cashier')->get();
-        $subs = Auth::user()->staff->subsidiary_id;
-        $data = Staff::where('subsidiary_id', $subs)->get();
-        $role = ModelsRole::whereNotIn('name', ['admin']);
-        // dd($subs);
 
-        // dd($data);
+        $subs = Auth::user()->staff;
+        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
+            ->whereNotIn('user_id', [$subs->user_id])
+            ->get();
+
         $gender = Gender::all();
-        // $totalCashier = $data->count();
+
 
         return view('staff.pages.manage_cashier.index', compact('data'));
     }
@@ -221,11 +220,11 @@ class AdminController extends Controller
         // $data = User::role('cashier')->where('user_id', $id)->first();
         $data = User::find($id);
         $role = ModelsRole::whereNotIn('name', ['member'])->get();
-        $totalcashier = Staff::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
+        // $totalcashier = User::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
         $selectedRole = $data->roles->first()->id;
         // dd($selectedRole);
-        return view('staff.pages.manage_cashier.edit', compact('data', 'gender', 'totalcashier', 'role', 'selectedRole'));
+        return view('staff.pages.manage_cashier.edit', compact('data', 'gender', 'role', 'selectedRole'));
     }
     public function update_cashier(Request $request, $id)
     {

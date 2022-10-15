@@ -108,9 +108,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/cashier/{{$item->id}}">Sunting</a>
+                                            href="/edit/cashier/{{$item->user->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/cashier/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/cashier/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

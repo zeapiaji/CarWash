@@ -39,15 +39,15 @@
                     @csrf
                     <div class="col-lg-6">
                         <label class="form-label" for="name">Nama</label>
-                        <input class="form-control" id="name" name="name" type="text" value="{{$data->user->name}}" />
+                        <input class="form-control" id="name" name="name" type="text" value="{{$data->name}}" />
                         <div class="mt-3">
                             <label class="form-label" for="email">Email</label>
-                            <input class="form-control" id="email" name="email" type="email" value="{{$data->user->email}}" />
+                            <input class="form-control" id="email" name="email" type="email" value="{{$data->email}}" />
                         </div>
                         {{--  <div class="mt-3">
                             <label class="form-label" for="password">Password</label>
                             <div class="input-group">
-                            <input class="form-control" id="pass" name="password" type="password" value="{{$data->user->password}}" />
+                            <input class="form-control" id="pass" name="password" type="password" value="{{$data->password}}" />
                                 <span id="mybutton" onclick="change()" class="input-group-text">
 
                                 <!-- icon mata bawaan bootstrap  -->
@@ -63,14 +63,14 @@
                         <div class="mt-3">
                             <label class="form-label" for="address">Alamat</label>
                         <textarea class="form-control" id="address" name="address" cols="30"
-                            rows="3">{{$data->user->address}}</textarea>
+                            rows="3">{{$data->address}}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mt">
                             <label class="form-label" for="phone">Telepon</label>
                             <input class="form-control" id="phone" name="phone" type="number"
-                                value="{{$data->user->phone}}" />
+                                value="{{$data->phone}}" />
                         </div>
                         <div class="mt-3">
                             <label class="form-label" for="gender">Jenis kelamin</label>
@@ -95,7 +95,7 @@
                         <div class="mt-3">
                             <label class="form-label" for="datepicker">Tanggal lahir</label>
                             <input class="form-control datetimepicker" id="datepicker" name="birth" type="text"
-                                placeholder="d/m/y" data-options='{"disableMobile":true}'/>
+                                placeholder="d/m/y" data-options='{"disableMobile":true}' value="{{ $data ->birth }}"/>
                         </div>
                     </div>
                     <div class="col-lg-6">
