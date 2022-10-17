@@ -17,24 +17,28 @@
                           <input class="form-control" id="name" name="name" type="text" />
                           <div class="mt-3">
                               <label class="form-label" for="price">Harga</label>
-                              <input class="form-control" id="price" name="price" type="price" />
+                               <input class="form-control" id="price" name="price" type="price" />
                           </div>
                       </div>
                       <div class="col-lg-6">
+                        @foreach ($washing_plans as $item)
                         <div class="mt-3">
-                            <label class="form-label" for="bootstrap-wizard-gender">Type</label>
-                            <select class="form-select" name="gender" id="bootstrap-wizard-gender">
-                                <option>Pilih Type ...</option>
-                                @foreach ($car_types as $item)
-                                <option value="{{$item->id}}" name="type_id">{{$item->name}}
+                            <label class="form-label" for="bootstrap-wizard-plan">Mobil</label>
+                            <select class="form-select" name="gender" id="bootstrap-wizard-plan">
+                                <option>Pilih Mobil ...</option>
+                                <option value="{{$item->id}}" name="plan_id">{{$item->plan_id}}
                                 </option>
-                                @endforeach
                             </select>
                         </div>
+                        <div class="mt-3">
+                            <label class="form-label" for="feature">Fitur</label>
+                             <input class="form-control" id="feature" name="festure" type="feature" />
+                        </div>
+                        @endforeach
                     </div>
                       <div class="col-12 d-flex justify-content-end">
                           <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
-                          <button class="btn btn-primary" type="submit">Buat Akun</button>
+                          <button class="btn btn-primary" type="submit">Buat Paket</button>
                       </div>
                   </div>
               </div>

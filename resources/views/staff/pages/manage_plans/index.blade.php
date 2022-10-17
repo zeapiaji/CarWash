@@ -95,8 +95,9 @@
                                     value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
-                        <td class="email align-middle py-2">{{$item->name}}</td>
-                        <td class="email align-middle py-2">{{$item->price}}</td>
+                        <td class="name align-middle py-2">{{$item->name}}</td>
+                        <td class="price align-middle py-2">{{$item->price}}</td>
+                        <td class="type align-middle py-2">{{ $item->plan_id }}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button

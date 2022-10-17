@@ -13,7 +13,7 @@ class CarType extends Model
     protected $fillable = [
         'name'
     ];
-    protected $table = 'car_types';
+
 
     /**
      * Get the user that owns the CarType

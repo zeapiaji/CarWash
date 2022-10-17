@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Models\Role as ModelsRole;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SuperAdminController extends Controller
 {
@@ -200,43 +201,20 @@ class SuperAdminController extends Controller
 
     public function add_pricing()
     {
-    
-        $car_types = CarType::all();
-        // dd($car_types);
-        return view('staff.pages.manage_plans.add', compact('car_types'));
+        $plans = Plans::all();
+        $washing_plans = WashingPlans::all();
+        // dd($washing_plan);
+        return view('staff.pages.manage_plans.add', compact('washing_plans', 'plans'));
     }
 
     public function create_pricing(Request $request)
     {
-        $plans = Plans::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'type_id' => $request->type_id,
+        $request->validate([
+            'plan_id' => 'required'
         ]);
 
-        CarType::create([
-            'name' => $request->name,
-        ]);
-
-        return redirect('/manage_plans');
+        return $request;
 
     }
 
-
-    // public function store(Request $request)
-    // {
-    //     $this->validate($request,[
-    //         'harga' => 'required',
-    //         'fitur' => 'required'
-    //     ]);
-
-    //     Plans::create([
-    //         'harga' => $request->harga,
-    //         'fitur' => $request->fitur
-    //     ]);
-
-    //     return redirect('/pricing');
-
-    //     // return request()->all();
-    // }
 }
