@@ -199,14 +199,14 @@ class AdminController extends Controller
 
             'name'        => $request->name,
             'email'       => $request->email,
-            'password'    => hash::make($request['password']),
+            'password' => Hash::make($request['password']),
             'phone'       => $request->phone,
             'birth'       => $request->birth,
             'address'     => $request->address,
             'gender_id'   => $request->gender,
         ])->assignRole('cashier');
         Staff::create([
-            'user_id'       => $user->id,
+            'user_id' => $user->id,
             'subsidiary_id' => $request->subsidiary,
         ]);
 
@@ -247,8 +247,7 @@ class AdminController extends Controller
     // Soft Delete
     public function delete_cashier($id)
     {
-
-        Staff::role('cashier')->find($id)->delete();
+        Staff::where('user_id', $id)->delete();
         User::find($id)->delete();
 
         return redirect('/manage-cashier');
@@ -264,7 +263,10 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-        $data = user::role('cashier')->withTrashed()->get();
+        $subs = Auth::user()->staff;
+        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)->onlyTrashed()->get();
+        // $data = User::onlyTrashed()->get();
+
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 

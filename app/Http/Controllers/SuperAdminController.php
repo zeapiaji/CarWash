@@ -10,7 +10,9 @@ use App\Exports\AdminExport;
 use App\Imports\AdminImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Models\Role as ModelsRole;
 
@@ -48,7 +50,7 @@ class SuperAdminController extends Controller
 
     public function add_admin()
     {
-        $role = ModelsRole::whereNotIn('name',['member'])->get();
+        $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
         $subsidiaries = Subsidiary::all();
         $gender = Gender::all();
@@ -58,12 +60,12 @@ class SuperAdminController extends Controller
     public function create_admin(Request $request)
     {
         $user = User::create([
-            'name' => $request -> name,
-            'email' => $request -> email,
-            'phone' => $request -> phone,
-            'birth' => $request -> birth,
-            'gender_id' => $request -> gender,
-            'address' => $request -> address,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'birth' => $request->birth,
+            'gender_id' => $request->gender,
+            'address' => $request->address,
             'password' => Hash::make($request['password']),
         ])->assignRole('admin');
 
@@ -95,12 +97,12 @@ class SuperAdminController extends Controller
     public function update_admin(Request $request, $id)
     {
         $data = User::find($id);
-        $data -> name = $request -> name;
-        $data -> email = $request -> email;
-        $data -> phone = $request -> phone;
-        $data -> birth = $request -> birth;
-        $data -> address = $request -> address;
-        $data -> gender_id = $request -> gender;
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->birth = $request->birth;
+        $data->address = $request->address;
+        $data->gender_id = $request->gender;
         $data->save();
 
         // Change role
@@ -127,7 +129,7 @@ class SuperAdminController extends Controller
         Staff::where('user_id', $id)->forceDelete();
         User::where('id', $id)->forceDelete();
 
-        return back();
+        return redirect()->back();
     }
 
     public function multiple_delete_admin(Request $request)
@@ -225,8 +227,8 @@ class SuperAdminController extends Controller
         $path = $request->file('path')->store('public/img/subsidiaries');
 
         Subsidiary::create([
-            'name' => $request -> name,
-            'location' => $request -> location,
+            'name' => $request->name,
+            'location' => $request->location,
             'img_path' => $path,
         ]);
 
@@ -280,5 +282,4 @@ class SuperAdminController extends Controller
     {
         return Excel::download(new AdminExport, 'admin.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
-
 }

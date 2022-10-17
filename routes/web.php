@@ -42,7 +42,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
     Route::get('/cashier/input', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
-    Route::post('/create-cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
+    Route::post('/create/cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
     Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
     Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
 
@@ -95,11 +95,11 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::get('/manage-admin', [SuperAdminController::class, 'manage_admin'])->name('superadmin.manageadmin');
     Route::get('/detail/admin/{id}', [SuperAdminController::class, 'detail_admin'])->name('superadmin.detail.admin');
 
-    Route::get('/add/admin' , [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
-    Route::post('/create/admin' , [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
-    Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
-    Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
-    Route::get('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
+    Route::get('/add/admin', [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
+    Route::post('/create/admin', [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
+    Route::get('/edit/admin/{id}', [SuperAdminController::class, 'edit_admin'])->name('superadmin.edit.admin');
+    Route::post('/update/admin/{id}', [SuperAdminController::class, 'update_admin'])->name('superadmin.update.admin');
+    Route::get('/delete/admin/{id}', [SuperAdminController::class, 'delete_admin'])->name('superadmin.delete.admin');
     Route::post('/multiple-delete-admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
 
     Route::get('/recycle-admin', [SuperAdminController::class, 'recycle_admin'])->name('superadmin.recycle-admin');
@@ -148,7 +148,7 @@ Route::middleware(['role:entry'])->group(function () {
     Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
 
     Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
-
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
