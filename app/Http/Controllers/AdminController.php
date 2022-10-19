@@ -249,7 +249,7 @@ class AdminController extends Controller
 
         return response("Selected post(s) deleted successfully.", 200);
     }
-    
+
 
 
     //Staff
@@ -342,13 +342,9 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-<<<<<<< HEAD
-        $data = User::onlyTrashed()->get();
-        return view('staff.pages.manage_cashier.recoverycashier', compact('data'));
-=======
         $data = user::role('cashier')->withTrashed()->get();
+
         return view('staff.pages.manage_cashier.recovery', compact('data'));
->>>>>>> 471d2644b39f566a0d6c2bee83284f8eb050d958
     }
 
     public function recovery_cashier($id)

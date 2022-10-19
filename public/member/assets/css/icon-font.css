@@ -18,10 +18,10 @@
    -moz-osx-font-smoothing: grayscale
 }
 .icon-1:before{content:'\0041';}
-.icon-2:before{content:'\0042';}
-.icon-3:before{content:'\0043';}
-.icon-4:before{content:'\0044';}
-.icon-5:before{content:'\0045';}
+.icon-2:before{content:'\0043';}
+.icon-3:before{content:'\0042';}
+.icon-4:before{content:'\0046';}
+.icon-5:before{content:'\0044';}
 .icon-6:before{content:'\0046';}
 .icon-7:before{content:'\0047';}
 .icon-8:before{content:'\0048';}

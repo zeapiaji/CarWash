@@ -25,14 +25,12 @@ class CarTypesSeeder extends Seeder
 
         CarType::create([
             'name' => 'SUV',
+
         ]);
 
         CarType::create([
-            'name' => 'Mini Van',
+            'name' => 'Van',
         ]);
 
-        CarType::create([
-            'name' => 'MPV',
-        ]);
     }
 }

@@ -25,9 +25,8 @@ class CashierController extends Controller
         return view('staff.cashier.pages.transaction.index');
     }
 
-    public function queue()
+    public function entry_list()
     {
-        return view('staff.cashier.pages.queue.index');
+        return view('staff.pages.cashier.entry_list');
     }
-
 }

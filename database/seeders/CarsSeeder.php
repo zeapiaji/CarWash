@@ -20,7 +20,7 @@ class CarsSeeder extends Seeder
                 'user_id' => $i,
                 'number_plate' => 'D 123'.$i.' JKL',
                 'name' => 'Supra '.$i,
-                'type_id' => random_int(1, 5),
+                'type_id' => random_int(1, 4),
             ]);
         }
     }

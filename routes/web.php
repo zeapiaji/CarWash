@@ -31,7 +31,7 @@ Route::middleware(['role:member'])->group(function () {
 Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
-    Route::get('/queue', [CashierController::class, 'queue'])->name('cashier.queue');
+    Route::get('/entry_list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
@@ -113,7 +113,13 @@ Route::middleware(['role:super_admin'])->group(function () {
 
 
     // Pricing
-    Route::get('/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/pricing', [SuperAdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
+    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
+
+    Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
+    Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
+    Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
 
     Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
 
@@ -150,7 +156,7 @@ Route::middleware(['role:entry'])->group(function () {
     Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
 
     Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
-
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
