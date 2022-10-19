@@ -1,4 +1,4 @@
-@extends('staff.layouts.app')
+@extends('staff.layout.app')
 @section('content')
 
 @include('staff.partials.menu')
