@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Staff extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasRoles, SoftDeletes;
 
     protected $fillable = [
         'user_id',

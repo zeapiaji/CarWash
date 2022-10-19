@@ -22,7 +22,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                        <a href="cashiere/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
+                        <a href="cashier/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
 
                     <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,7 +73,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
-                    {{-- @dd($data) --}}
+                        {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
@@ -88,17 +88,17 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                            <span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
                                     </div>
                                 </div>
                             </a>
                         </td>
-                        <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item ->email}}</a></td>
-                        <td class="gender align-middle py-2">{{$item->gender -> name}}</td>
+                        <td class="phone align-middle py-2">{{$item->user->phone}}</td>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item->user->email}}</a></td>
+                        <td class="gender align-middle py-2">{{$item -> user->gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -108,9 +108,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/cashier/{{$item->id}}">Sunting</a>
+                                            href="/edit/cashier/{{$item->user->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/cashier/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/cashier/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

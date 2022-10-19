@@ -69,13 +69,13 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/employe/{{$item->id}}">
+                            {{--  <a href="/detail/cashier/{{$item->id}}">  --}}
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
                                     </div>
                                 </div>
                             </a>
@@ -84,10 +84,10 @@
                         </td>
                         <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
                         </td>  --}}
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
+                        {{--  <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> user->email}}</a>
                         </td>
-                        <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="gender align-middle py-2">{{$item->gender->name}}</td>
+                        <td class="phone align-middle py-2">{{$item->user->phone}}</td>
+                        <td class="gender align-middle py-2">{{$item->user->gender->name}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -97,11 +97,11 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/employe/{{$item->id}}">Sunting</a><a
-                                            class="dropdown-item text-danger" href="/forcedelete/employe/{{$item->id}}">Hapus</a></div>
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->id}}">Sunting</a><a
+                                            class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
-                        </td>
+                        </td>  --}}
                     </tr>
                     @endforeach
                 </tbody>
@@ -121,7 +121,7 @@
 
       $("#customers-table").TableCheckAll();
 
-      $('#multiple-recovery-employee').on('click', function() {
+      $('#multiple-recovery-cashier').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -152,7 +152,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-employe'
+                  window.location='/recycle-cashier'
                 });
               }
             });
@@ -160,7 +160,7 @@
         });
       });
 
-      $('#multiple-force-delete-employee').on('click', function() {
+      $('#multiple-force-delete-cashier').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -191,7 +191,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-employe'
+                  window.location='/recycle-cashier'
                 });
               }
             });
@@ -199,7 +199,7 @@
         });
       });
 
-      $('#recovery-all-employee').on('click', function() {
+      $('#recovery-all-cashier').on('click', function() {
         var button = $(this);
 
         Swal.fire({
@@ -223,7 +223,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-employe'
+                  window.location='/recycle-cashier'
                 });
               }
             });
@@ -231,7 +231,7 @@
         });
       });
 
-      $('#force-delete-all-employee').on('click', function() {
+      $('#force-delete-all-cashier').on('click', function() {
         var button = $(this);
 
         Swal.fire({
@@ -256,7 +256,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-employe'
+                  window.location='/recycle-cashier'
                 });
               }
             });
