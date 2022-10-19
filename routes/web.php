@@ -39,6 +39,8 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     // cashier
+    Route::get('/admin-dashboard', [AdminController::class, 'dashboard_table'])->name('admin.dashboardtable');
+
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
     Route::get('/cashier/input', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
@@ -79,7 +81,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/export-member-xlsx', [AdminController::class, 'export_member_xlsx'])->name('admin.export-member-xlsx');
     Route::get('/export-member-csv', [AdminController::class, 'export_member_csv'])->name('admin.export-member-csv');
     Route::get('/export-member-pdf', [AdminController::class, 'export_member_pdf'])->name('admin.export-member-pdf');
-    Route::post('/import-member-xlsx', [AdminController::class, 'import_member_xlsx'])->name('admin.import-member-xlsx');
+    
 
     // Washing Data
     Route::get('/admin-washing-data', [AdminController::class, 'admin_washing_data'])->name('admin.washingdata');
@@ -133,7 +135,7 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
     Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
     Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
-    Route::post('/import-admin-xlsx', [SuperAdminController::class, 'import_admin_xlsx'])->name('admin.import-admin-xlsx');
+   
 });
 
 // Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {
@@ -150,8 +152,8 @@ Route::middleware(['role:entry'])->group(function () {
     Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
 
     Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
+});   
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});

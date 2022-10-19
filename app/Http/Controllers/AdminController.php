@@ -36,6 +36,19 @@ class AdminController extends Controller
         return view('staff.pages.dashboard_admin.dashboard');
     }
 
+    public function dashboard_table()
+    {
+        
+       
+        
+
+        $data = User::role('cashier')->get();
+        // $gender = Gender::all();
+        $totalKasir = $data->count();
+
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'totalKasir'));
+    }
+
     public function manage_cashier()
     {
 
@@ -342,13 +355,8 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-<<<<<<< HEAD
         $data = User::onlyTrashed()->get();
         return view('staff.pages.manage_cashier.recoverycashier', compact('data'));
-=======
-        $data = user::role('cashier')->withTrashed()->get();
-        return view('staff.pages.manage_cashier.recovery', compact('data'));
->>>>>>> 471d2644b39f566a0d6c2bee83284f8eb050d958
     }
 
     public function recovery_cashier($id)
