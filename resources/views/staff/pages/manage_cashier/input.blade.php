@@ -3,7 +3,7 @@
 
 @include('staff.partials.menu')
 
-<form action="/create/cashier" method="POST">
+<form action="/create/cashier/" method="POST">
     @csrf
     <div class="row g-3">
         <div class="col-lg-8 pe-lg-2">

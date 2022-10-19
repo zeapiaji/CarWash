@@ -147,7 +147,7 @@
                     <div class="card-header pb-0">
                       <div class="row flex-between-center g-card">
                         <div class="col-auto">
-                          <h6>Laporan hari ke hari</h6>
+                          <h6>Laporan pencucian hari ke hari</h6>
                         </div>
                         <div class="col-auto d-flex">
                           <div class="btn btn-sm btn-text d-flex align-items-center p-0 me-3 shadow-none" id="echart-bar-report-for-this-week-option-1"><span class="fas fa-circle text-primary fs--2 me-1"></span><span class="text">Minggu ini </span></div>
@@ -166,7 +166,7 @@
               </div>
             </div>
            
-    <div class="card mb-3">
+    <div class="card mb-1">
     <div class="card-header">
         <div class="row">
             <div class="col d-none d-sm-block">

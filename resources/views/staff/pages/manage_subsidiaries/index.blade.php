@@ -44,14 +44,7 @@
                         <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Tambah Cabang</span>
                     </a>
-                    <a class="btn btn-falcon-primary btn-sm mx-2" id="import" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Impor</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal">XLSX</a>
-                    </div>
+                   
 
                     <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -135,32 +128,7 @@
     </div>
 </div>
 
-{{-- Upload File Modal --}}
-<form action="{{route('admin.import-member-xlsx')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-            <div class="modal-content position-relative">
-                <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="rounded-top-sm py-3 ps-4 pe-6 bg-light">
-                        <h5 class="mb-1" id="modalExampleDemoLabel">Import Excel</h5>
-                    </div>
-                    <div class="p-4 pb-4">
-                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_member">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                    <button class="btn btn-sm btn-primary" type="submit">Kirim </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
