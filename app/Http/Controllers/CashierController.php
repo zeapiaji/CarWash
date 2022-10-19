@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entry;
+use App\Models\Staff;
+use Illuminate\Support\Facades\Auth;
+
 class CashierController extends Controller
 {
 
@@ -17,6 +21,7 @@ class CashierController extends Controller
 
     public function cashier_dashboard()
     {
+
         return view('staff.pages.cashier.index');
     }
 
@@ -27,6 +32,10 @@ class CashierController extends Controller
 
     public function entry_list()
     {
-        return view('staff.pages.cashier.entry_list');
+        $cashier = Auth::user();
+        $cashier = Staff::where('user_id', $cashier->id)->first();
+        $entry = Entry::where('subsidiary_id', $cashier->subsidiary_id)->get();
+
+        return view('staff.pages.cashier.entry_list', compact('entry'));
     }
 }

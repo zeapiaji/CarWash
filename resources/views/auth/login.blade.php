@@ -94,10 +94,8 @@
                                     <!--/.bg-holder-->
                                     <div class="z-index-1 position-relative"><a
                                             class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                                            href="/">Car Wash</a>
-                                        <p class="opacity-75 text-white">With the power of Falcon, you can now focus
-                                            only on functionaries for your digital products, while leaving the UI design
-                                            on us!</p>
+                                            href="/">UltraWash</a>
+                                        <p class="opacity-75 text-white"></p>
                                     </div>
                                 </div>
                                 <div class="mt-3 mb-4 mt-md-4 mb-md-5 light">
@@ -119,7 +117,6 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label class="form-label" for="email">Email
-                                                address
                                             </label>
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"

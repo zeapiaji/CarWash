@@ -17,10 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->unique();
             $table->foreignId('status_id');
+            $table->foreignId('subsidiary_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('subsidiary_id')->references('id')->on('subsidiaries');
         });
     }
 

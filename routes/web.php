@@ -31,7 +31,7 @@ Route::middleware(['role:member'])->group(function () {
 Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
-    Route::get('/entry_list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+    Route::get('/entry-list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
@@ -150,14 +150,12 @@ Route::get('/', function () {
     return view('member.pages.index');
 });
 
-Route::middleware(['role:entry'])->group(function () {
-    Route::get('/entry-dashboard', [EntryController::class, 'dashboard'])->name('entry.dashboard');
-    Route::get('/entry-customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
-    Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
+Route::prefix('entry')->group(function () {
+    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
+    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
 
-    Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
+    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
 });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});

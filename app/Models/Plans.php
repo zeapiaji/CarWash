@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Plans extends Model
 {
@@ -13,10 +13,10 @@ class Plans extends Model
     /**
      * Get the washing_plans associated with the Plans
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function washing_plans(): HasOne
+    public function washing_plans(): HasMany
     {
-        return $this->hasOne(WashingPlans::class, 'plan_id');
+        return $this->hasMany(WashingPlans::class, 'plan_id');
     }
 }

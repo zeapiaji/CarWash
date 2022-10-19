@@ -12,8 +12,10 @@ class Entry extends Model
 
     protected $fillable = [
         'user_id',
-        'status_id'
+        'status_id',
+        'subsidiary_id'
     ];
+
 
     /**
      * Get the user that owns the Entry
@@ -33,5 +35,15 @@ class Entry extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * Get the subsidiary that owns the Entry
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subsidiary(): BelongsTo
+    {
+        return $this->belongsTo(Subsidiary::class, 'subsidiary_id');
     }
 }
