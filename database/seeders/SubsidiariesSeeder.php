@@ -18,6 +18,7 @@ class SubsidiariesSeeder extends Seeder
             Subsidiary::create([
                 'name' => 'cabang'. $i,
                 'location' => 'lokasi'. $i,
+                'img_path' => 'path'. $i,
             ]);
         }
     }

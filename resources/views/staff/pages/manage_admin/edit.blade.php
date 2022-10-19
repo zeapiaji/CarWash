@@ -12,17 +12,16 @@
         </div>
     </div>
 </div>
-<form action="/update/member{id}" method="POST">
+<form action="/update/admin/{{$data->id}}" method="POST">
     @csrf
     <div class="row g-3">
         <div class="col-lg-8 pe-lg-2">
             <div class="card mb-3">
                 <div class="card-header">
-                    <h5 class="mb-0">Data Akun Member</h5>
+                    <h5 class="mb-0">Data Akun Admin</h5>
                 </div>
                 <div class="card-body bg-light">
                     <div class="row g-3">
-                        <input type="hidden" name="id" value="{{$data->id}}">
                         <div class="col-lg-6">
                             <label class="form-label" for="name">Nama</label>
                             <input class="form-control" id="name" name="name" type="text" value="{{$data->name}}" />
@@ -38,9 +37,21 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label class="form-label" for="datepicker">Tanggal Lahir</label>
-                            <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="d/m/y"
-                                value="{{$data->birth}}" name="birth" data-options='{"disableMobile":true}' />
+                            <label class="form-label" for="bootstrap-wizard-gender">Jabatan</label>
+                                <select class="form-select" name="role" id="bootstrap-wizard-gender">
+                                    <option>Pilih level ...</option>
+                                    {{-- @dd($data->model_has_role) --}}
+                                    @foreach ($role as $item)
+                                    <option value="{{$item->name}}" name="role"
+                                        {{ ($item->id == $selectedRole) ? 'selected' : ''}}>{{$item->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            <div class="mt-3">
+                                <label class="form-label" for="datepicker">Tanggal Lahir</label>
+                                <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="d/m/y"
+                                    value="{{$data->birth}}" name="birth" data-options='{"disableMobile":true}' />
+                            </div>
                             <div class="mt-3">
                                 <label class="form-label" for="bootstrap-wizard-gender">Gender</label>
                                 <select class="form-select" name="gender" id="bootstrap-wizard-gender">
@@ -67,22 +78,34 @@
             </div>
         </div>
         <div class="col-lg-4 ps-lg-2">
-            <div class="sticky-sidebar">
-                <div class="card mb-3 overflow-hidden">
-                    <div class="card-header">
-                        <h5 class="mb-0">Data Cabang</h5>
-                    </div>
-                    <div class="card-body bg-light">
+            <div class="card mb-3 overflow-hidden">
+                <div class="card-header">
+                    <h5 class="mb-0">Admin Cabang <strong>{{$data->staff->subsidiary->name}}</strong></h5>
+                </div>
+                <div class="card-body bg-light">
+                    <div class="row">
+                        <div class="col-6 border-end">
+                            <p>Jumlah Staff</p>
+                        </div>
+                        <div class="col-auto">
+                            <p>{{$totalEmployee}}</p>
+                        </div>
+                        <div class="col-6 border-end">
+                            <p>Lokasi</p>
+                        </div>
+                        <div class="col-auto">
+                            <p>{{$data->staff->subsidiary->location}}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">Area Berbahaya</h5>
-                    </div>
-                    <div class="card-body bg-light">
-                        <p class="fs--1">Akun dengan email {{$data->email}} akun dihapus.</p>
-                        <a class="btn btn-falcon-danger d-block" href="/delete/member/{{$data->id}}">Hapus Akun</a>
-                    </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Area Berbahaya</h5>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="fs--1">Akun admin dengan email {{$data->email}} akan dihapus.</p>
+                    <a class="btn btn-falcon-danger d-block" href="/delete/admin/{{$data->id}}">Hapus Admin</a>
                 </div>
             </div>
         </div>

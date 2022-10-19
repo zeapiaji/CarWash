@@ -68,6 +68,16 @@ class User extends Authenticatable
      */
     public function staff()
     {
-        return $this->hasOne(Subsidiary::class);
+        return $this->hasOne(Staff::class);
+    }
+
+    /**
+     * Get the entry associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function entry(): HasOne
+    {
+        return $this->hasOne(Entry::class);
     }
 }

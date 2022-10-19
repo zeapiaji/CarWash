@@ -5,6 +5,7 @@
 <script src="{{asset('admin/vendors/list.js/list.min.js')}}"></script>
 <script src="{{asset('admin/vendors/countup/countUp.umd.js')}}"></script>
 <script src="{{asset('admin/vendors/dropzone/dropzone.min.js')}}"></script>
+<script src="{{asset('admin/vendors/choices/choices.min.js')}}"></script>
 <script src="{{asset('admin/vendors/popper/popper.min.js')}}"></script>
 <script src="{{asset('admin/vendors/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{asset('admin/vendors/anchorjs/anchor.min.js')}}"></script>

@@ -7,13 +7,25 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
-use App\Models\WashingPlans;
+use App\Imports\AdminImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\Plans;
+use Spatie\Permission\Contracts\Role;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class SuperAdminController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function dashboard()
     {
         return view('staff.pages.dashboard');
@@ -24,57 +36,173 @@ class SuperAdminController extends Controller
     {
         $data = User::role('admin')->get();
         $totalAdmin = $data->count();
+
         return view('staff.pages.manage_admin.index', compact('data', 'totalAdmin'));
+    }
+
+    public function detail_admin($id)
+    {
+        $data = User::role('admin')->where('id', $id)->first();
+
+        return view('staff.pages.manage_admin.detail', compact('data'));
+    }
+
+    public function add_admin()
+    {
+        $role = ModelsRole::whereNotIn('name',['member'])->get();
+
+        $subsidiaries = Subsidiary::all();
+        $gender = Gender::all();
+        return view('staff.pages.manage_admin.add', compact('role', 'gender', 'subsidiaries'));
+    }
+
+    public function create_admin(Request $request)
+    {
+        $user = User::create([
+            'name' => $request -> name,
+            'email' => $request -> email,
+            'phone' => $request -> phone,
+            'birth' => $request -> birth,
+            'gender_id' => $request -> gender,
+            'address' => $request -> address,
+            'password' => Hash::make($request['password']),
+        ])->assignRole('admin');
+
+        Staff::create([
+            'user_id' => $user->id,
+            'subsidiary_id' => $request->subsidiary,
+        ]);
+
+        return redirect('/manage-admin');
     }
 
     public function edit_admin($id)
     {
-        $data = User::role('admin')->where('id', $id)->first();
+        // $data = User::role('admin')->where('id', $id)->first();
+        $data = User::find($id);
+
+        // $totalEmployee = User::role('cashier')->get();
+        $totalEmployee = Staff::where('subsidiary_id', $data->staff->subsidiary_id)->count();
+        // dd($data);
+
         $gender = Gender::all();
+        $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
-        return view('staff.pages.manage_admin.edit', compact('data', 'gender'));
+        $selectedRole = $data->roles->first()->id;
+
+        return view('staff.pages.manage_admin.edit', compact('data', 'gender', 'totalEmployee', 'role', 'selectedRole'));
     }
 
-    // Plans
-    public function manage_plans()
+    public function update_admin(Request $request, $id)
     {
-        $data = WashingPlans::all();
-        // dd($washing_plans);
-        return view('staff.pages.manage_plans.index', compact('data'));
+        $data = User::find($id);
+        $data -> name = $request -> name;
+        $data -> email = $request -> email;
+        $data -> phone = $request -> phone;
+        $data -> birth = $request -> birth;
+        $data -> address = $request -> address;
+        $data -> gender_id = $request -> gender;
+        $data->save();
+
+        // Change role
+        Staff::where('user_id', $id)->first()->syncRoles($request->role);
+
+        return redirect('/manage-admin');
     }
 
-    public function create_plans()
+    public function delete_admin($id)
     {
-        return view('staff.pages.manage_plans.add');
+        Staff::where('user_id', $id)->update([
+            'subsidiary_id' => null,
+        ]);
+
+        Staff::where('user_id', $id)->delete();
+
+        User::find($id)->delete();
+
+        return redirect('/manage-admin');
     }
 
-        // Edit
-        public function edit_plans($id)
-        {
-            $data = WashingPlans::find($id);
-            $plans = Plans::all();
-            return view('staff.pages.manage_plans.edit', compact('data', 'plans'));
-        }   
+    public function force_delete_admin($id)
+    {
+        Staff::where('user_id', $id)->forceDelete();
+        User::where('id', $id)->forceDelete();
 
-        public function update_plans(Request $request, $id)
-        {
-            // dd($request);
-            $data = WashingPlans::find($request->id);
+        return back();
+    }
 
-            $data->plan_id = $request->name;
-            $data->feature = $request->feature;
-            $data->type_id = $request->plan;
-            $data->save();
+    public function multiple_delete_admin(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->delete();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->delete();
 
-            return redirect('manage-plans.index')->with('succes', 'Data telah disimpan');
-        }
+        return response("Selected post(s) deleted successfully.", 200);
+    }
 
-    // Subsidiary
+    public function recycle_admin()
+    {
+        $data = User::onlyTrashed()->get();
+
+        return view('staff.pages.manage_admin.recovery', compact('data'));
+    }
+
+    public function recovery_admin($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
+        Staff::withTrashed()->where('user_id', $id)->restore();
+
+        return back();
+    }
+
+    public function multiple_recovery_admin(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->restore();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->restore();
+
+        return response("Akun yang dipilih berhasil dipulihkan.", 200);
+    }
+
+    public function multiple_force_delete_admin(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->forceDelete();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->forceDelete();
+
+        return response("Akun yang dipilih berhasil dihapus.", 200);
+    }
+
+    public function recovery_all_admin()
+    {
+        Staff::onlyTrashed()->restore();
+        User::onlyTrashed()->restore();
+
+        return response("Semua admin berhasil dipulihkan.", 200);
+    }
+
+    public function force_delete_all_admin()
+    {
+        Staff::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->forceDelete();
+
+        return response("Semua admin berhasil hapus.", 200);
+    }
+
+    public function superadmin_washing_data()
+    {
+        return view('staff.pages.washing_data.index');
+    }
+
+    public function show_subsidiary()
+    {
+        $data = Subsidiary::all();
+
+        return view('staff.pages.manage_subsidiaries.show', compact('data'));
+    }
+
     public function manage_subsidiary()
     {
-        $data = Staff::role('admin')->get();
-        $totalSubsidiaries = $data -> count();
-        // dd($data);
+        $data = Subsidiary::all();
+        $totalSubsidiaries = $data->count();
+
         return view('staff.pages.manage_subsidiaries.index', compact('data', 'totalSubsidiaries'));
     }
 
@@ -83,7 +211,27 @@ class SuperAdminController extends Controller
         $data = Subsidiary::find($id);
         $staff = Staff::where('subsidiary_id', $id)->get();
 
-        return view('staff.pages.manage_subsidiaries.detail_subsidiary', compact('data', 'staff'));
+        return view('staff.pages.manage_subsidiaries.detail', compact('data', 'staff'));
+    }
+
+    public function add_subsidiary()
+    {
+        return view('staff.pages.manage_subsidiaries.add');
+    }
+
+    public function create_subsidiary(Request $request)
+    {
+        $request->file('path')->getClientOriginalName();
+
+        $path = $request->file('path')->store('public/img/subsidiaries');
+
+        Subsidiary::create([
+            'name' => $request -> name,
+            'location' => $request -> location,
+            'img_path' => $path,
+        ]);
+
+        return redirect()->back();
     }
 
     public function edit_subsidiary($id)
@@ -106,11 +254,32 @@ class SuperAdminController extends Controller
 
     public function delete_subsidiary($id)
     {
-        # code...
+        Staff::where('subsidiary_id', $id)->update(['subsidiary_id' => null]);
+        Subsidiary::find($id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function import_admin_xlsx(Request $request)
+    {
+        Excel::import(new AdminImport, $request->file('file_admin'));
+
+        return redirect('/manage-admin');
     }
 
     public function export_admin_xlsx()
     {
         return Excel::download(new AdminExport, 'admin.xlsx');
     }
+
+    public function export_admin_csv()
+    {
+        return Excel::download(new AdminExport, 'admin.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_admin_pdf()
+    {
+        return Excel::download(new AdminExport, 'admin.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
 }

@@ -6,6 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
@@ -21,17 +22,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Impor</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
-                        <a class="dropdown-item" data-bs-toggle="modal2" data-bs-target="#error-modal" >CSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal3" data-bs-target="#error-modal" >TSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal4" data-bs-target="#error-modal" >ODS</a>
-                    </div>
+                        <a href="cashiere/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
+
+                 
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +56,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="gender">Jenis Kelamin</th>
                         <th class="align-middle no-sort"></th>
@@ -81,7 +74,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
+                            <a href="/detail/cashier/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
@@ -94,8 +87,8 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                             </a>
                         </td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a></td>
-                        <td class="gender align-middle py-2">{{$item -> gender -> name}}</td>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item ->email}}</a></td>
+                        <td class="gender align-middle py-2">{{$item->gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -105,9 +98,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/edit/member/{{$item->id}}">Sunting</a>
+                                            href="/edit/cashier/{{$item->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/member/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/cashier/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -125,32 +118,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
 </div>
 </div>
 
-{{-- Upload File Modal --}}
-<form action="{{route('admin.import-member-xlsx')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-            <div class="modal-content position-relative">
-                <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="rounded-top-sm py-3 ps-4 pe-6 bg-light">
-                        <h5 class="mb-1" id="modalExampleDemoLabel">Import Excel</h5>
-                    </div>
-                    <div class="p-4 pb-4">
-                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_member">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                    <button class="btn btn-sm btn-primary" type="submit">Kirim </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+
 
 <script type="text/javascript">
     $(document).ready(function () {

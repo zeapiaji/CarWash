@@ -13,9 +13,9 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
                         class="fas fa-ellipsis-h"></span></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/edit/member/{{$data->id}}}">Sunting</a>
+                    <a class="dropdown-item" href="/edit/employe/{{$data->id}}}">Sunting</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="/delete/member/{{$data->id}}">Hapus Member</a>
+                    <a class="dropdown-item text-danger" href="/delete/employe/{{$data->id}}">Hapus Member</a>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
     <div class="card-body bg-light border-top">
         <div class="row">
             <div class="col-lg col-xxl-5">
-                <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informasi Akun Member</h6>
+                <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informasi Akun Pegawai</h6>
                 <div class="row">
                     <div class="col-6 col-sm-5">
                         <p class="fw-semi-bold mb-1">Email</p>
@@ -52,7 +52,7 @@
                         <p class="fw-semi-bold mb-1">Jenis Kelamin</p>
                     </div>
                     <div class="col">
-                        <p class="mb-1" style="width: 200px">{{$data->gender->name}}</p>
+                        <p class="mb-1" style="width: 200px">{{$gender->name}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -78,7 +78,7 @@
                     <div class="col">{{$data->created_at}}</div>
                 </div>
             </div>
-            <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
+            {{--  <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
                 <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informasi Kendaraan</h6>
                 <div class="row">
                     <div class="col-5 col-sm-5">
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col">{{$data->car->number_plate}}</div>
                 </div>
-            </div>
+            </div>  --}}
         </div>
     </div>
     <div class="card-footer border-top text-end">

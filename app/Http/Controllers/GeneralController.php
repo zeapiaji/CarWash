@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class GeneralController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function register_member(Request $request)
     {
         $user = User::create([
