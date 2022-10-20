@@ -102,7 +102,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         </td>
                         <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
                         </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item->email}}</a>
                         </td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
 
