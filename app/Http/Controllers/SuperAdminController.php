@@ -230,8 +230,8 @@ class SuperAdminController extends Controller
 
         Subsidiary::create([
             'name' => $request -> name,
-            'location' => $request -> location,
             'img_path' => $path,
+            'location' => $request -> location,
         ]);
 
         return redirect()->back();
@@ -261,6 +261,52 @@ class SuperAdminController extends Controller
         Subsidiary::find($id)->delete();
 
         return redirect()->back();
+    }
+    public function recycle_subsidiary()
+    {
+         $data = User::onlyTrashed()->get();
+         $totalSubsidiaries = $data->count();
+        return view('staff.pages.manage_subsidiaries.recovery', compact('data', 'totalSubsidiaries'));
+    }
+
+    public function recovery_subsidiary($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
+        Staff::withTrashed()->where('user_id', $id)->restore();
+
+        return back();
+    }
+
+    public function multiple_recovery_subsidiary(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->restore();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->restore();
+
+        return response("Akun yang dipilih berhasil dipulihkan.", 200);
+    }
+
+    public function multiple_force_delete_subsidiary(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->forceDelete();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->forceDelete();
+
+        return response("Akun yang dipilih berhasil dihapus.", 200);
+    }
+
+    public function recovery_all_subsidiary()
+    {
+        Staff::onlyTrashed()->restore();
+        User::onlyTrashed()->restore();
+
+        return response("Semua admin berhasil dipulihkan.", 200);
+    }
+
+    public function force_delete_all_subsidiary()
+    {
+        Staff::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->forceDelete();
+
+        return response("Semua admin berhasil hapus.", 200);
     }
 
     public function import_admin_xlsx(Request $request)

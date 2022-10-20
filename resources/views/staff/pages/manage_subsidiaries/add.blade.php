@@ -38,7 +38,7 @@
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
                     <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
-                    <button class="btn btn-primary" type="submit">Ubah</button>
+                    <button class="btn btn-primary" type="submit">Tambah</button>
                 </div>
             </div>
         </div>

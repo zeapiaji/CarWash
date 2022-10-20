@@ -39,6 +39,8 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     // cashier
+    Route::get('/admin-dashboard', [AdminController::class, 'dashboard_table'])->name('admin.dashboardtable');
+
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
     Route::get('/cashier/input', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
@@ -75,11 +77,11 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::post('/recovery-all-member', [AdminController::class, 'recovery_all_member'])->name('admin.recovery-all-member');
     Route::get('/force-delete-all-member', [AdminController::class, 'force_delete_all_member'])->name('admin.force-delete-all-member');
 
-    // Export & Import
+    // Export
     Route::get('/export-member-xlsx', [AdminController::class, 'export_member_xlsx'])->name('admin.export-member-xlsx');
     Route::get('/export-member-csv', [AdminController::class, 'export_member_csv'])->name('admin.export-member-csv');
     Route::get('/export-member-pdf', [AdminController::class, 'export_member_pdf'])->name('admin.export-member-pdf');
-    Route::post('/import-member-xlsx', [AdminController::class, 'import_member_xlsx'])->name('admin.import-member-xlsx');
+
 
     // Washing Data
     Route::get('/admin-washing-data', [AdminController::class, 'admin_washing_data'])->name('admin.washingdata');
@@ -135,11 +137,21 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::post('/update/subsidiary/{id}', [SuperAdminController::class, 'update_subsidiary'])->name('superadmin.update.subsidiary');
     Route::get('/delete/subsidiary/{id}', [SuperAdminController::class, 'delete_subsidiary'])->name('superadmin.delete.subsidiary');
 
-    // Export & Import
+    // Route::get('/recycle-subsidiary', [SuperAdminController::class, 'recycle_subsidiary'])->name('superadmin.recycle-subsidiary');
+    // Route::post('/multiple-recovery-subsidiary', [SuperAdminController::class, 'multiple_recovery_subsidiary'])->name('superadmin.multiple-recovery-subsidiary');
+    Route::get('/recycle-subsidiary', [SuperAdminController::class, 'recycle_subsidiary'])->name('superadmin.recyclesubsidiary');
+    Route::post('/recovery/subsidiary/{id}', [SuperAdminController::class, 'recovery_subsidiary'])->name('superadmin.recoversubsidiary');
+    Route::post('/forcedelete/subsidiary/{id}', [SuperAdminController::class, 'force_delete_subsidiary'])->name('superadmin.forcedeletesubsidiary');
+    Route::post('/multiple-recovery-subsidiary', [SuperAdminController::class, 'multiple_recovery_subsidiary'])->name('superadmin.multiple-recovery-subsidiary');
+    Route::post('/multiple-force-delete-subsidiary', [SuperAdminController::class, 'multiple_force_delete_subsidiary'])->name('superadmin.multiple-force-delete-subsidiary');
+    Route::post('/recovery-all-subsidiary', [SuperAdminController::class, 'recovery_all_subsidiary'])->name('superadmin.recovery-all-subsidiary');
+    Route::post('/force-delete-all-subsidiary', [SuperAdminController::class, 'force_delete_all_subsidiary'])->name('superadmin.force-delete-all-subsidiary');
+
+    // Export t
     Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
     Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
     Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
-    Route::post('/import-admin-xlsx', [SuperAdminController::class, 'import_admin_xlsx'])->name('admin.import-admin-xlsx');
+
 });
 
 // Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {
@@ -158,4 +170,5 @@ Route::prefix('entry')->group(function () {
 });
 Auth::routes();
 
+<<<<<<< HEAD
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

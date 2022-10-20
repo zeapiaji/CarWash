@@ -36,9 +36,22 @@ class AdminController extends Controller
         return view('staff.pages.dashboard_admin.dashboard');
     }
 
-    public function manage_cashier()
+    public function dashboard_table()
     {
 
+
+
+
+        $data = User::role('cashier')->get();
+        // $gender = Gender::all();
+        $totalKasir = $data->count();
+
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'totalKasir'));
+    }
+
+    public function manage_cashier()
+    {
+        $data = User::role('cashier')->get();
         $subs = Auth::user()->staff;
         $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
             ->whereNotIn('user_id', [$subs->user_id])
@@ -195,7 +208,7 @@ class AdminController extends Controller
     {
         $data = User::onlyTrashed()->get();
         $totalUser = $data->count();
-        return view('staff.pages.manage_member.recoverymember', compact('data', 'totalUser'));
+        return view('staff.pages.manage_member.recovery', compact('data', 'totalUser'));
     }
 
     public function recovery_member($id)
@@ -342,7 +355,7 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-        $data = user::role('cashier')->withTrashed()->get();
+        $data = User::role('cashier')->withTrashed()->get();
 
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }

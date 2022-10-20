@@ -10,12 +10,12 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Tempat Sampah Member</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Tempat Sampah subsidiaries</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total Member</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalUser}}}'></h6>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalSubsidiaries}}}'></h6>
             </div>
         </div>
     </div>
@@ -30,13 +30,13 @@
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-member" data-route="{{ route('admin.multiple-recovery-member')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-member" data-route="{{ route('admin.multiple-force-delete-member')}}">Hapus Permanen</button>
+                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-subsidiary" data-route="{{ route('admin.multiple-recovery-subsidiary')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-subsidiary" data-route="{{ route('admin.multiple-force-delete-subsidiary')}}">Hapus Permanen</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-member" data-route="{{ route('admin.recovery-all-member')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-member" data-route="{{ route('admin.force-delete-all-member')}}">Hapus Permanen Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-subsidiary" data-route="{{ route('admin.recovery-all-subsidiary')}}">Pulihkan Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-subsidiary" data-route="{{ route('admin.force-delete-all-subsidiary')}}">Hapus Permanen Semua</button>
                 </div>
             </div>
         </div>
@@ -96,8 +96,8 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/member/{{$item->id}}">Pulihkan</a><a
-                                            class="dropdown-item text-danger" href="/forcedelete/member/{{$item->id}}">Hapus</a></div>
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/subsidiary/{{$item->id}}">Pulihkan</a><a
+                                            class="dropdown-item text-danger" href="/forcedelete/subsidiary/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -120,7 +120,7 @@
 
       $("#customers-table").TableCheckAll();
 
-      $('#multiple-recovery-member').on('click', function() {
+      $('#multiple-recovery-subsidiaries').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -151,7 +151,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-subsidiaries'
                 });
               }
             });
@@ -159,7 +159,7 @@
         });
       });
 
-      $('#multiple-force-delete-member').on('click', function() {
+      $('#multiple-force-delete-subsidiaries').on('click', function() {
         var button = $(this);
         var selected = [];
         $('#customers-table .check:checked').each(function() {
@@ -190,7 +190,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-subsidiaries'
                 });
               }
             });
@@ -198,7 +198,7 @@
         });
       });
 
-      $('#recovery-all-member').on('click', function() {
+      $('#recovery-all-subsidiaries').on('click', function() {
         var button = $(this);
 
         Swal.fire({
@@ -222,7 +222,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-subsidiaries'
                 });
               }
             });
@@ -230,7 +230,7 @@
         });
       });
 
-      $('#force-delete-all-member').on('click', function() {
+      $('#force-delete-all-subsidiaries').on('click', function() {
         var button = $(this);
 
         Swal.fire({
@@ -255,7 +255,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                  window.location='/recycle-member'
+                  window.location='/recycle-subsidiaries'
                 });
               }
             });
