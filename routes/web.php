@@ -43,8 +43,8 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
 
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
-    Route::get('/cashier/input', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
-    Route::post('/create-cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
+    Route::get('/input/cashier', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
+    Route::post('/store/cashier', [AdminController::class, 'store_cashier'])->name('admin.store.cashier');
     Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
     Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
 
@@ -58,6 +58,10 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::post('/multiple-force-delete-cashier', [AdminController::class, 'multiple_force_delete_cashier'])->name('admin.multiple-force-delete-cashier');
     Route::post('/recovery-all-cashier', [AdminController::class, 'recovery_all_cashier'])->name('admin.recovery-all-cashier');
     Route::get('/force-delete-all-cashier', [AdminController::class, 'force_delete_all_cashier'])->name('admin.force-delete-all-cashier');
+
+    Route::get('/export-cashier-xlsx', [AdminController::class, 'export_cashier_xlsx'])->name('cashier.export-cashier-xlsx');
+    Route::get('/export-cashier-csv', [AdminController::class, 'export_cashier_csv'])->name('cashier.export-cashier-csv');
+    Route::get('/export-cashier-pdf', [AdminController::class, 'export_cashier_pdf'])->name('cashier.export-cashier-pdf');
 
     // Member
     Route::get('/manage-member', [AdminController::class, 'manage_member'])->name('admin.managemember');
@@ -142,9 +146,9 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::post('/force-delete-all-subsidiary', [SuperAdminController::class, 'force_delete_all_subsidiary'])->name('superadmin.force-delete-all-subsidiary');
 
     // Export t
-    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
-    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
-    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
+    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('superadmin.export-admin-xlsx');
+    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('superadmin.export-admin-csv');
+    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('superadmin.export-admin-pdf');
    
 });
 

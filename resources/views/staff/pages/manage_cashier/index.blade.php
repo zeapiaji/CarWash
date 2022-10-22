@@ -18,11 +18,11 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
                         <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-delete"
-                            data-route="{{ route('admin.multiple-delete-member')}}">Hapus</button>
+                            data-route="{{ route('admin.multiple-delete-cashier')}}">Hapus</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                        <a href="cashier/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
+                        <a href="input/cashier" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
 
                    
 
@@ -32,12 +32,12 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
-                        <a class="dropdown-item" href="/export-member-xlsx">XLSX</a>
-                        <a class="dropdown-item" href="/export-member-csv">CSV</a>
-                        <a class="dropdown-item" href="/export-member-tsv">TSV</a>
-                        <a class="dropdown-item" href="/export-member-ods">ODS</a>
+                        <a class="dropdown-item" href="/export-cashier-xlsx">XLSX</a>
+                        <a class="dropdown-item" href="/export-cashier-csv">CSV</a>
+                        <a class="dropdown-item" href="/export-cashier-tsv">TSV</a>
+                        <a class="dropdown-item" href="/export-cashier-ods">ODS</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/export-member-pdf">PDF</a>
+                        <a class="dropdown-item" href="/export-cashier-pdf">PDF</a>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
                                             href="/edit/cashier/{{$item->user->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/cashier/{{$item->user->id}}">Hapus</a></div>
+                                            href="/delete/cashier/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>
@@ -158,7 +158,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 showCancelButton: false,
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
-                                window.location = '/manage-member'
+                                window.location = '/manage-cashier'
                             });
                         }
                     });

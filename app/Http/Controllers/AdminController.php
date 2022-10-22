@@ -10,6 +10,7 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\CarType;
 use App\Exports\MemberExport;
+use App\Exports\CashierExport;
 use App\Imports\MemberImport;
 use App\Models\Subsidiary;
 use Illuminate\Support\Facades\Hash;
@@ -38,10 +39,6 @@ class AdminController extends Controller
 
     public function dashboard_table()
     {
-        
-       
-        
-
         $data = User::role('cashier')->get();
         // $gender = Gender::all();
         $totalKasir = $data->count();
@@ -66,8 +63,9 @@ class AdminController extends Controller
     // Member
     public function manage_member()
     {
+        $data = User::onlyTrashed()->get();
+      
         $data = User::role('member')->get();
-    
         // dd($data);
         $totalUser = $data->count();
 
@@ -286,8 +284,7 @@ class AdminController extends Controller
 
     public function store_cashier(Request $request)
     {
-
-        $user = User::create([
+           $user = User::create([
 
             'name'        => $request->name,
             'email'       => $request->email,
@@ -312,6 +309,7 @@ class AdminController extends Controller
         // $data = User::role('cashier')->where('user_id', $id)->first();
         $data = User::find($id);
         $role = ModelsRole::whereNotIn('name', ['member'])->get();
+        
         // $totalcashier = User::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
         $selectedRole = $data->roles->first()->id;
@@ -339,11 +337,25 @@ class AdminController extends Controller
     // Soft Delete
     public function delete_cashier($id)
     {
+        // Staff::where('user_id', $id)->update([
+        //     'subsidiary_id' => null,
+        // ]);
 
-        Staff::role('cashier')->find($id)->delete();
+      
+        // Staff::role('cashier')->find($id)->delete();
+        // User::find($id)->delete();
+
+        // return redirect('/manage-cashier');
+        Staff::where('user_id', $id)->update([
+            'subsidiary_id' => null,
+        ]);
+
+        Staff::where('user_id', $id)->delete();
+
         User::find($id)->delete();
 
         return redirect('/manage-cashier');
+
     }
 
     public function multiple_delete_cashier(Request $request)
@@ -400,10 +412,10 @@ class AdminController extends Controller
 
     public function multiple_force_delete_cashier(Request $request)
     {
-        // Car::whereIn('user_id', $request->get('selected'))
-        //     ->forceDelete();
-        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
-        //     ->forceDelete();
+        Car::whereIn('user_id', $request->get('selected'))
+            ->forceDelete();
+        Staff::role('cashier')->whereIn('id', $request->get('selected'))
+            ->forceDelete();
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
 
@@ -454,5 +466,27 @@ class AdminController extends Controller
         Excel::import(new MemberImport, $request->file('file_member'));
 
         return redirect('/manage-member');
+    }
+
+    public function import_cashier_xlsx(Request $request)
+    {
+        Excel::import(new CashierImport, $request->file('file_cashier'));
+
+        return redirect('/manage-cashier');
+    }
+
+    public function export_cashier_xlsx()
+    {
+        return Excel::download(new CashierExport, 'cashier.xlsx');
+    }
+
+    public function export_cashier_csv()
+    {
+        return Excel::download(new CashierExport, 'cashier.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_cashier_pdf()
+    {
+        return Excel::download(new CashierExport, 'cashier.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 }
