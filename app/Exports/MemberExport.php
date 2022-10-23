@@ -10,7 +10,7 @@ class MemberExport implements FromView
 {
     public function view(): View
     {
-        $data = User::role('user')->get();
+        $data = User::role('member')->get();
         return view('staff.exports.member', compact('data'));
     }
 }

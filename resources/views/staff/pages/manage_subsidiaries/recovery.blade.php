@@ -30,13 +30,13 @@
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-subsidiary" data-route="{{ route('admin.multiple-recovery-subsidiary')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-subsidiary" data-route="{{ route('admin.multiple-force-delete-subsidiary')}}">Hapus Permanen</button>
+                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-subsidiary" data-route="{{ route('superadmin.multiple-recovery-subsidiary')}}">Pulihkan</button>
+                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-subsidiary" data-route="{{ route('superadmin.multiple-force-delete-subsidiary')}}">Hapus Permanen</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-subsidiary" data-route="{{ route('admin.recovery-all-subsidiary')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-subsidiary" data-route="{{ route('admin.force-delete-all-subsidiary')}}">Hapus Permanen Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-subsidiary" data-route="{{ route('superadmin.recovery-all-subsidiary')}}">Pulihkan Semua</button>
+                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-subsidiary" data-route="{{ route('superadmin.force-delete-all-subsidiary')}}">Hapus Permanen Semua</button>
                 </div>
             </div>
         </div>
@@ -52,10 +52,8 @@
                                 <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        {{-- <th class="sort pe-1 align-middle white-space-nowrap" data-sort="admin">Admin</th> --}}
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="location">Lokasi</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -70,23 +68,19 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <div class="d-flex d-flex align-items-center">
-                                <div class="avatar avatar-xl me-2">
-                                    <div class="avatar-name rounded-circle">
-                                        <span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                            <a href="/detail/subsidiary/{{$item->id}}">
+                                <div class="d-flex d-flex align-items-center">
+                                    <div class="avatar avatar-xl me-2">
+                                        <div class="avatar-name rounded-circle">
+                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                    </div>
                                 </div>
-                                <div class="flex-1">
-                                    <h5 class="mb-0 fs--1">{{$item->name}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </td>
-                        <td class="car align-middle pt-2">{{$item->car->name}}
-                        </td>
-                        <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
-                        </td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
-                        </td>
-                        <td class="phone align-middle py-2">{{$item->phone}}</td>
+                        <td class="location align-middle py-2">{{$item->location}}</td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button

@@ -10,6 +10,7 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\CarType;
 use App\Exports\MemberExport;
+use App\Exports\CashierExport;
 use App\Imports\MemberImport;
 use App\Models\Doormeer;
 use App\Models\Subsidiary;
@@ -65,6 +66,8 @@ class AdminController extends Controller
     // Member
     public function manage_member()
     {
+        $data = User::onlyTrashed()->get();
+
         $data = User::role('member')->get();
         // dd($data);
         $totalUser = $data->count();
@@ -284,8 +287,7 @@ class AdminController extends Controller
 
     public function store_cashier(Request $request)
     {
-
-        $user = User::create([
+           $user = User::create([
 
             'name'        => $request->name,
             'email'       => $request->email,
@@ -310,6 +312,7 @@ class AdminController extends Controller
         // $data = User::role('cashier')->where('user_id', $id)->first();
         $data = User::find($id);
         $role = ModelsRole::whereNotIn('name', ['member'])->get();
+
         // $totalcashier = User::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
         $selectedRole = $data->roles->first()->id;
@@ -342,6 +345,7 @@ class AdminController extends Controller
         User::find($id)->delete();
 
         return redirect('/manage-cashier');
+
     }
 
     public function multiple_delete_cashier(Request $request)
@@ -399,10 +403,10 @@ class AdminController extends Controller
 
     public function multiple_force_delete_cashier(Request $request)
     {
-        // Car::whereIn('user_id', $request->get('selected'))
-        //     ->forceDelete();
-        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
-        //     ->forceDelete();
+        Car::whereIn('user_id', $request->get('selected'))
+            ->forceDelete();
+        Staff::role('cashier')->whereIn('id', $request->get('selected'))
+            ->forceDelete();
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
 

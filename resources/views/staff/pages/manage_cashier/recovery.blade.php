@@ -52,9 +52,9 @@
                                 <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Gender</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Email</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Jenis Kelamin</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
