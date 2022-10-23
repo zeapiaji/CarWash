@@ -15,7 +15,7 @@
                                 <h3>Mulai Antri</h3>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('entry.entry_customer_post') }}">
+                        <form method="POST" action="{{route('entry.customer_post')}}">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label" for="email">Email
@@ -56,7 +56,7 @@
                                 <div class="col-auto">
                                 </div>
                                 <div class="col-auto">
-                                    <a class="fs--1" href="{{ route('entry.entry_customer_non_member') }}">
+                                    <a class="fs--1" href="{{ route('entry.customer_non_member') }}">
                                         {{ __('Tidak Punya Akun?') }}
                                     </a>
                                 </div>

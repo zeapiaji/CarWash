@@ -11,7 +11,9 @@ use App\Models\Gender;
 use App\Models\CarType;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
+use App\Models\Doormeer;
 use App\Models\Subsidiary;
+use Database\Seeders\DoormeerSeeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role as ModelsRole;
@@ -38,9 +40,6 @@ class AdminController extends Controller
 
     public function dashboard_table()
     {
-
-
-
 
         $data = User::role('cashier')->get();
         // $gender = Gender::all();
@@ -454,5 +453,67 @@ class AdminController extends Controller
         Excel::import(new MemberImport, $request->file('file_member'));
 
         return redirect('/manage-member');
+    }
+
+
+    /**
+     * Doorsmeer
+     */
+    public function manage_doorsmeer()
+    {
+        $admin = Staff::where('user_id', Auth::user()->id)->first()->subsidiary_id;
+        $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
+
+        return view('staff.pages.manage_doorsmeer.index', compact('doorsmeer'));
+    }
+
+    public function edit_doorsmeer($id)
+    {
+        $data = Doormeer::find($id);
+
+        return view('staff.pages.manage_doorsmeer.edit', compact('data'));
+    }
+
+    public function update_doorsmeer(Request $request, $id)
+    {
+        $data = Doormeer::find($id);
+        $data->name = $request->name;
+        $data->save();
+
+        return redirect('/doorsmeer/');
+    }
+
+    public function delete_doorsmeer($id)
+    {
+        try {
+            Doormeer::find($id)->delete();
+        } catch (\Throwable $th) {
+            return 'Keluarkan terlebih dahulu member dari doorsmeer!';
+        }
+
+        return redirect('/doorsmeer/');
+    }
+
+    public function add_doorsmeer()
+    {
+        return view('staff.pages.manage_doorsmeer.add');
+    }
+
+    public function store_doorsmeer(Request $request)
+    {
+        $admin = Staff::where('user_id', Auth::user()->id)->first();
+        Doormeer::create([
+            'name' => $request->name,
+            'subsidiary_id' => $admin->subsidiary_id,
+        ]);
+
+        return redirect('/doorsmeer/');
+    }
+
+    public function multiple_delete_doorsmeer(Request $request)
+    {
+        Doormeer::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Selected post(s) deleted successfully.", 200);
     }
 }

@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
       $this->call(SubsidiariesSeeder::class);
       $this->call(StaffSeeder::class);
       $this->call(StatusSeeder::class);
+      $this->call(DoormeerSeeder::class);
     }
 }

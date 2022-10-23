@@ -60,7 +60,7 @@
                 @role('cashier')
                 <!-- parent pages-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/entry-list">
+                    <a class="nav-link" href="/entry/list">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-users"></span>
@@ -234,7 +234,18 @@
                         <hr class="mb-0 navbar-vertical-divider" />
                     </div>
                 </div>
+                @endrole
 
+                @role('admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="/doorsmeer/{{Auth::user()->id}}" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-car-side"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Doorsmeer</span></div>
+                    </a>
+                </li>
                 @endrole
 
                 @role('super_admin')

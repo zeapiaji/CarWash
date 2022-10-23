@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Entry;
+use App\Models\Staff;
+use App\Models\Doormeer;
 use App\Models\Subsidiary;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use function PHPUnit\Framework\returnSelf;
 
 class EntryController extends Controller
@@ -58,5 +60,45 @@ class EntryController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function entry_wash($id,$entryId)
+    {
+        Entry::where('user_id', $entryId)->update([
+            'status_id' => 2
+        ]);
+
+        $doorsmeer = Doormeer::find($id);
+        $doorsmeer->user_id = $entryId;
+        $doorsmeer->save();
+
+        return redirect()->back();
+    }
+
+    public function entry_wash_done($id)
+    {
+        $doorsmeer = Doormeer::find($id);
+
+        Entry::where('user_id', $doorsmeer->user_id)->delete();
+
+        $doorsmeer->user_id = null;
+        $doorsmeer->save();
+
+        return redirect()->back();
+    }
+
+    public function entry_wash_cancel($id)
+    {
+
+        $doorsmeer = Doormeer::find($id);
+
+        Entry::where('user_id', $doorsmeer->user_id)->update([
+            'status_id' => 1
+        ]);
+
+        $doorsmeer->user_id = null;
+        $doorsmeer->save();
+
+        return redirect()->back();
     }
 }

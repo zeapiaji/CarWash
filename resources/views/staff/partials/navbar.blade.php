@@ -36,21 +36,16 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                     <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                        <a class="dropdown-item fw-bold text-warning" href="#!"><span
-                                class="fas fa-crown me-1"></span><span>Go Pro</span></a>
+                        <a class="dropdown-item" href="/edit/staff/{{ Auth::user()->id}}">Profile &amp; account</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
-
                     </div>
                 </div>
             </li>

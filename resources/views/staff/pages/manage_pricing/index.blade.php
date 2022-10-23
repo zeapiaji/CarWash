@@ -12,16 +12,9 @@
                 <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Paket Pencucian</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
-
-                <a href="/add/pricing-1" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 1</a>
-                <a href="/add/pricing-2" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 2</a>
-                <a href="/add/pricing-3" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 3</a>
-                <a href="/add/pricing-4" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 4</a>
-
+                <a href="/add/pricing" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket</a>
                 <h6 class="d-none d-sm-inline-block ms-1">Total Admin</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                {{-- <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalAdmin}}}'>0</h6> --}}
-
             </div>
         </div>
     </div>

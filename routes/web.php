@@ -6,6 +6,7 @@ use App\Http\Controllers\CashierController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\SuperAdminController;
+use App\Models\Entry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,20 @@ Route::middleware(['role:member'])->group(function () {
 Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
-    Route::get('/entry-list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+    Route::get('/entry/list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+});
+
+Route::prefix('doorsmeer')->group(function() {
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/', [AdminController::class, 'manage_doorsmeer']);
+        Route::get('/add', [AdminController::class, 'add_doorsmeer']);
+        Route::get('/edit/{id}', [AdminController::class, 'edit_doorsmeer']);
+        Route::post('/store', [AdminController::class, 'store_doorsmeer']);
+        Route::post('/update/{id}', [AdminController::class, 'update_doorsmeer']);
+        Route::get('/delete/{id}', [AdminController::class, 'delete_doorsmeer']);
+
+        Route::post('/multiple/delete', [AdminController::class, 'multiple_delete_doorsmeer'])->name('multiple_delete_doorsmeer');
+    });
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
@@ -163,12 +177,14 @@ Route::get('/', function () {
 });
 
 Route::prefix('entry')->group(function () {
-    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
-    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
-
-    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
+    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.customer');
+    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.customer_post');
+    Route::get('/wash/{id}/entry/{entryId}', [EntryController::class, 'entry_wash'])->name('entry.wash');
+    Route::get('/wash/done/{id}', [EntryController::class, 'entry_wash_done'])->name('entry.wash.done');
+    Route::get('/wash/cancel/{id}', [EntryController::class, 'entry_wash_cancel'])->name('entry.wash.cancel');
+    Route::post('/delete/{id}', [EntryController::class, 'entry_delete'])->name('entry.delete');
+    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.customer_non_member');
 });
 Auth::routes();
 
-<<<<<<< HEAD
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

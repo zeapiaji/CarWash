@@ -35,4 +35,14 @@ class Subsidiary extends Model
     {
         return $this->hasMany(Entry::class, 'subsidiary_id');
     }
+
+    /**
+     * Get all of the doorsmeer for the Subsidiary
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function doorsmeer(): HasMany
+    {
+        return $this->hasMany(Doormeer::class, 'doorsmeer_id');
+    }
 }
