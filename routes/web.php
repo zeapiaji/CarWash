@@ -135,12 +135,13 @@ Route::middleware(['role:super_admin'])->group(function () {
     // Pricing
     Route::get('/pricing', [SuperAdminController::class, 'pricing'])->name('admin.pricing');
     Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
-    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
-
     Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
-    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
     Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
     Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
+    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
+    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
+    Route::post('/create/pricing-3', [SuperAdminController::class, 'create_pricing_3'])->name('admin.create.pricing.3');
+    Route::post('/create/pricing-4', [SuperAdminController::class, 'create_pricing_4'])->name('admin.create.pricing.4');
 
     Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
 
