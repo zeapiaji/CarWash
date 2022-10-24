@@ -85,7 +85,7 @@
         <div class="row justify-content-center pt-4">
             <div class="col-sm-10 col-lg-7 col-xxl-5"><a class="d-flex flex-center mb-4" href="/"><img class="me-2"
                         src="{{asset('admin/assets/img/icons/spot-illustrations/falcon.png')}}" alt=""
-                        width="45" /><span class="font-sans-serif fw-bolder fs-4 d-inline-block">falcon</span></a>
+                        width="45" /><span class="font-sans-serif fw-bolder fs-4 d-inline-block">UltraWash</span></a>
                 <div class="card theme-wizard" id="wizard">
                     <div class="card-header bg-light pt-1 pb-1">
                         <ul class="nav justify-content-between nav-wizard">
@@ -166,34 +166,6 @@
                                 <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
                                     aria-labelledby="bootstrap-wizard-tab2" id="bootstrap-wizard-tab2">
                                     <div class="mb-3">
-                                        <div class="row" data-dropzone="data-dropzone">
-                                            <div class="fallback"><input type="file" name="photo_profile" /></div>
-                                            <div class="col-md-auto">
-                                                <div class="dz-preview dz-preview-single">
-                                                    <div class="dz-preview-cover d-flex align-items-center justify-content-center mb-3 mb-md-0">
-                                                        <div class="avatar avatar-4xl"><img class="rounded-circle"
-                                                                src="{{asset('admin/assets/img/team/avatar.png')}}"
-                                                                alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
-                                                        <div class="dz-progress"><span class="dz-upload"
-                                                                data-dz-uploadprogress=""></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md">
-                                                <div class="dz-message dropzone-area px-2 py-3"
-                                                    data-dz-message="data-dz-message">
-                                                    <div class="text-center"><img class="me-2"
-                                                            src="{{asset('admin/assets/img/icons/cloud-upload.svg')}}"
-                                                            width="25" alt="" />Unggah Foto Profilemu!<p
-                                                            class="mb-0 fs--1 text-400">Upload dengan ukuran 300x300
-                                                            format jpg dan dengan <br />ukuran file tidak lebih dari
-                                                            400KB</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
                                         <label class="form-label" for="bootstrap-wizard-gender">Jenis Kelamin</label>
                                         <select class="form-select" name="gender" id="bootstrap-wizard-gender">
                                             <option>Pilih jenis kelaminmu ...</option>
@@ -251,9 +223,9 @@
                                             data-options='{"path":"../../assets/img/animated-icons/celebration.json"}'>
                                         </div>
                                     </div>
-                                    <h4 class="mb-1">Your account is all set!</h4>
-                                    <p>Now you can access to your account</p>
-                                    <button class="btn btn-primary px-5 my-3" type="submit">Start Over</button>
+                                    <h4 class="mb-1">Akun anda telah selesai dibuat!</h4>
+                                    <p>Sekarang anda bisa mulai mengakses akun anda!</p>
+                                    <button class="btn btn-primary px-5 my-3" type="submit">Mulai</button>
                                 </div>
                             </div>
                         </form>

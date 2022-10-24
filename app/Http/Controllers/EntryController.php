@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Entry;
+use App\Models\Subsidiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,24 +19,29 @@ class EntryController extends Controller
 
     public function entry_customer()
     {
-        return view('staff.pages.entry.entry_customer');
+        $subsidiaries = Subsidiary::all();
+
+        return view('staff.pages.entry.entry_customer', compact('subsidiaries'));
     }
 
     public function entry_customer_post(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $request->validate([
+            'subsidiary' => 'required',
         ]);
 
         if (Auth::attempt($credentials)) {
 
-            $user = User::where('email', $request->email)->first()->id;
-
             try {
                 Entry::create([
-                    'user_id' => $user,
+                    'user_id' => Auth::user()->id,
                     'status_id' => 1,
+                    'subsidiary_id' => $request->subsidiary,
                 ]);
             } catch (\Throwable $th) {
                 Auth::logout();

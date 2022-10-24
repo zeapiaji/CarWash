@@ -27,7 +27,7 @@
                         data-fa-transform="shrink-7" style="font-size: 33px;"></span><span
                         class="notification-indicator-number"></span></a>
             </li>
-           
+
             <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-xl">
@@ -39,9 +39,7 @@
                         <a class="dropdown-item fw-bold text-warning" href="#!"><span
                                 class="fas fa-crown me-1"></span><span>Go Pro</span></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">Set status</a>
                         <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                        <a class="dropdown-item" href="#!">Feedback</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

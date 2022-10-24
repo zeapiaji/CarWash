@@ -15,30 +15,11 @@ class PlansSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 4; $i++) {
+        for ($i=1; $i < 5; $i++) {
+            # code...
             Plans::create([
-                'name' => 'Cuci Biasa',
-                'type_id' => $i,
+                'name' => 'Paket'. $i
             ]);
         }
-        for ($i=1; $i < 4; $i++) {
-            Plans::create([
-                'name' => 'Cuci Reguler',
-                'type_id' => $i,
-            ]);
-        }
-        for ($i=1; $i < 4; $i++) {
-            Plans::create([
-                'name' => 'Cuci Premium',
-                'type_id' => $i,
-            ]);
-        }
-        for ($i=1; $i < 4; $i++) {
-            Plans::create([
-                'name' => 'Cuci Elit',
-                'type_id' => $i,
-            ]);
-        }
-
     }
 }

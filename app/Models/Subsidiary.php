@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subsidiary extends Model
 {
@@ -23,5 +24,15 @@ class Subsidiary extends Model
     public function staff()
     {
         return $this->hasOne(Staff::class);
+    }
+
+    /**
+     * Get all of the entries for the Subsidiary
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function entries(): HasMany
+    {
+        return $this->hasMany(Entry::class, 'subsidiary_id');
     }
 }

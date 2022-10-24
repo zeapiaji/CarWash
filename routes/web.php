@@ -31,7 +31,7 @@ Route::middleware(['role:member'])->group(function () {
 Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
-    Route::get('/queue', [CashierController::class, 'queue'])->name('cashier.queue');
+    Route::get('/entry-list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
@@ -85,7 +85,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/export-member-xlsx', [AdminController::class, 'export_member_xlsx'])->name('admin.export-member-xlsx');
     Route::get('/export-member-csv', [AdminController::class, 'export_member_csv'])->name('admin.export-member-csv');
     Route::get('/export-member-pdf', [AdminController::class, 'export_member_pdf'])->name('admin.export-member-pdf');
-    
+
 
     // Washing Data
     Route::get('/admin-washing-data', [AdminController::class, 'admin_washing_data'])->name('admin.washingdata');
@@ -119,7 +119,13 @@ Route::middleware(['role:super_admin'])->group(function () {
 
 
     // Pricing
-    Route::get('/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/pricing', [SuperAdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
+    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
+
+    Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
+    Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
+    Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
 
     Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
 
@@ -146,10 +152,10 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::post('/force-delete-all-subsidiary', [SuperAdminController::class, 'force_delete_all_subsidiary'])->name('superadmin.force-delete-all-subsidiary');
 
     // Export t
-    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('superadmin.export-admin-xlsx');
-    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('superadmin.export-admin-csv');
-    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('superadmin.export-admin-pdf');
-   
+    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
+    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
+    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
+
 });
 
 // Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {
@@ -160,14 +166,13 @@ Route::get('/', function () {
     return view('member.pages.index');
 });
 
-Route::middleware(['role:entry'])->group(function () {
-    Route::get('/entry-dashboard', [EntryController::class, 'dashboard'])->name('entry.dashboard');
-    Route::get('/entry-customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
-    Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
+Route::prefix('entry')->group(function () {
+    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
+    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
 
-    Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
-});   
-
+    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
+});
 Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,6 +8,10 @@ use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
 use App\Imports\AdminImport;
+use App\Models\CarType;
+use App\Models\PlanFeature;
+use App\Models\Plans;
+use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -327,4 +331,37 @@ class SuperAdminController extends Controller
         return Excel::download(new AdminExport, 'admin.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 
+    /**
+     * Pricing
+     *
+    */
+    public function pricing()
+    {
+        $carType = CarType::all();
+        $plans = Plans::all();
+        $washingPlans = WashingPlans::all();
+
+        return view('staff.pages.manage_pricing.index', compact('carType', 'washingPlans', 'plans'));
+    }
+
+    public function add_pricing_1()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_1', compact('carType'));
+    }
+
+    public function create_pricing_1(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 1,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
 }

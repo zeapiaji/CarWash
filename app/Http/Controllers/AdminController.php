@@ -39,6 +39,10 @@ class AdminController extends Controller
 
     public function dashboard_table()
     {
+
+
+
+
         $data = User::role('cashier')->get();
         // $gender = Gender::all();
         $totalKasir = $data->count();
@@ -261,7 +265,7 @@ class AdminController extends Controller
 
         return response("Selected post(s) deleted successfully.", 200);
     }
-    
+
 
 
     //Staff
@@ -368,7 +372,8 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-        $data = User::onlyTrashed()->get();
+        $data = User::role('cashier')->withTrashed()->get();
+
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 
