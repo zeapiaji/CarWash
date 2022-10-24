@@ -4,11 +4,9 @@
         <th>telepon</th>
         <th>alamat</th>
         <th>email</th>
-        <th>password</th>
         <th>plat_nomor</th>
         <th>mobil</th>
         <th>tipe</th>
-        <th>id_pemilik</th>
     </tr>
     @foreach ($data as $item)
     <tr>
@@ -16,11 +14,9 @@
         <td>{{$item->phone}}</td>
         <td>{{$item->address}}</td>
         <td>{{$item->email}}</td>
-        <td>{{$item->password}}</td>
         <td>{{$item->car->number_plate}}</td>
         <td>{{$item->car->name}}</td>
-        <td>{{$item->car->type}}</td>
-        <td>{{$item->car->user_id}}</td>
+        <td>{{$item->car->car_type->name}}</td>
     </tr>
     @endforeach
 </table>

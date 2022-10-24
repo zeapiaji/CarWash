@@ -36,20 +36,20 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="plan-1">
                 <div class="row">
-                    @foreach ($washingPlans as $item)
+                    @foreach ($washingPlans as $item => $features)
                     <div class="col-md-3 col-sm-6">
                         <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">{{$item->price}}</h6>
+                            <h6 class="pricing-heding">Paket {{$item}}</h6>
                             <div class="pricing-price-block">
-                                <h2 class="pricing-price">{{$item->price}}</h2>
+                                {{-- <h2 class="pricing-price">{{$item->price}}</h2> --}}
                                 <div class="pricing-duration">25 Mins</div>
                             </div>
                             <div class="pricing-dtl">
                                 <ul>
-                                    {{-- @dd($item->washing_plans) --}}
-                                    {{-- @foreach ($item->washing_plans as $feature) --}}
-                                    <li>{{$item->name}}</li>
-                                    {{-- @endforeach --}}
+                                    {{-- @dd($item->name) --}}
+                                    @foreach ($features as $feature)
+                                    <li>{{$feature}}</li>
+                                    @endforeach
                                 </ul>
                             <a href="#" class="btn btn-default">Mulai Berlangganan</a>
                             </div>

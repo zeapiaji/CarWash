@@ -101,4 +101,11 @@ class EntryController extends Controller
 
         return redirect()->back();
     }
+
+    public function entry_delete($id)
+    {
+        Entry::find($id)->delete();
+
+        return redirect()->back();
+    }
 }

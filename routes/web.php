@@ -138,6 +138,7 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
 
     Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
+    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
     Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
     Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
 
@@ -186,7 +187,7 @@ Route::prefix('entry')->group(function () {
     Route::get('/wash/{id}/entry/{entryId}', [EntryController::class, 'entry_wash'])->name('entry.wash');
     Route::get('/wash/done/{id}', [EntryController::class, 'entry_wash_done'])->name('entry.wash.done');
     Route::get('/wash/cancel/{id}', [EntryController::class, 'entry_wash_cancel'])->name('entry.wash.cancel');
-    Route::post('/delete/{id}', [EntryController::class, 'entry_delete'])->name('entry.delete');
+    Route::get('/delete/{id}', [EntryController::class, 'entry_delete'])->name('entry.delete');
     Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.customer_non_member');
 });
 Auth::routes();

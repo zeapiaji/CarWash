@@ -66,8 +66,6 @@ class AdminController extends Controller
     // Member
     public function manage_member()
     {
-        $data = User::onlyTrashed()->get();
-
         $data = User::role('member')->get();
         // dd($data);
         $totalUser = $data->count();

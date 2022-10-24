@@ -339,7 +339,7 @@ class SuperAdminController extends Controller
     {
         $carType = CarType::all();
         $plans = Plans::all();
-        $washingPlans = WashingPlans::all();
+        $washingPlans = WashingPlans::all()->groupBy('plan_id');
 
         return view('staff.pages.manage_pricing.index', compact('carType', 'washingPlans', 'plans'));
     }
@@ -357,6 +357,27 @@ class SuperAdminController extends Controller
             WashingPlans::create([
                 'name' => $item,
                 'plan_id' => 1,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
+
+    public function add_pricing_2()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_2', compact('carType'));
+    }
+
+    public function create_pricing_2(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 2,
                 'price' => $request->price,
                 'type_id' => $request->car_type
             ]);
