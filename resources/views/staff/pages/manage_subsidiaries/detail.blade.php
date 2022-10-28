@@ -13,9 +13,9 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
                         class="fas fa-ellipsis-h"></span></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/edit/member/{{$data->id}}}">Sunting</a>
+                    <a class="dropdown-item" href="/edit/subsidiary/{{$data->user->id}}}">Sunting</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="/delete/member/{{$data->id}}">Hapus Member</a>
+                    <a class="dropdown-item text-danger" href="/delete/subsidiary/{{$data->user->id}}">Hapus subsidiary</a>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
     <div class="card-body bg-light border-top">
         <div class="row">
             <div class="col-lg col-xxl-5">
-                <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informasi Akun Member</h6>
+                <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informasi Akun subsidiary</h6>
                 <div class="row">
                     <div class="col-6 col-sm-5">
                         <p class="fw-semi-bold mb-1">Email</p>

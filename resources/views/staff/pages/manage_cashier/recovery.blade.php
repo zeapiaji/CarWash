@@ -52,27 +52,29 @@
                                 <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Telepon</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Jenis Kelamin</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="gender">Jenis Kelamin</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
-                    {{--  @dd($data)  --}}
+                        {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}" value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
+                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            {{--  <a href="/detail/cashier/{{$item->id}}">  --}}
+                            <a href="/detail/cashier/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->name, 0, 2)}}</span></div>
+                                        <div class="avatar-name rounded-circle">
+                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
                                         <h5 class="mb-0 fs--1">{{$item->name}}</h5>
@@ -80,15 +82,9 @@
                                 </div>
                             </a>
                         </td>
-                        {{--  <td class="car align-middle pt-2">{{$item->car->name}}
-                        </td>
-                        <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
-                        </td>  --}}
-                        {{--  <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
-                        </td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
-                        <td class="gender align-middle py-2">{{$item->gender->name}}</td>
-
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item->email}}</a></td>
+                        <td class="gender align-middle py-2">{{$item -> gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -97,11 +93,11 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->id}}">Sunting</a><a
-                                            class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->id}}">Hapus</a></div>
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->id}}">Pulihkan</a><a
+                                        class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->id}}">Hapus Permanen</div>
                                 </div>
                             </div>
-                        </td>  --}}
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -136,8 +136,11 @@ class SuperAdminController extends Controller
 
     public function multiple_delete_admin(Request $request)
     {
-        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->delete();
-        User::withTrashed()->whereIn('id', $request->get('selected'))->delete();
+        Staff::whereIn('user_id', $request->get('selected'))->delete();
+        User::whereIn('id', $request->get('selected'))->delete();
+
+        // Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->delete();
+        // User::withTrashed()->whereIn('id', $request->get('selected'))->delete();
 
         return response("Selected post(s) deleted successfully.", 200);
     }
@@ -263,9 +266,12 @@ class SuperAdminController extends Controller
         return redirect()->back();
     }
     public function recycle_subsidiary()
+    
     {
-         $data = User::onlyTrashed()->get();
-         $totalSubsidiaries = $data->count();
+        $data = Subsidiary::all();
+        $totalSubsidiaries = $data->count();
+        $data = Subsidiary::onlyTrashed()->get();
+
         return view('staff.pages.manage_subsidiaries.recovery', compact('data', 'totalSubsidiaries'));
     }
 
@@ -276,10 +282,18 @@ class SuperAdminController extends Controller
 
         return back();
     }
+    public function multiple_delete_subsidiary(Request $request)
+    { 
+        
+        Subsidiary::withTrashed()->whereIn('subsidiary_id', $request->get('selected'))->delete();
+            User::withTrashed()->whereIn('id', $request->get('selected'))->delete();
+      
 
+        return response("Selected post(s) deleted successfully.", 200);
+    }
     public function multiple_recovery_subsidiary(Request $request)
     {
-        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->restore();
+        Staff::withTrashed()->whereIn('subsidiary_id', $request->get('selected'))->restore();
         User::withTrashed()->whereIn('id', $request->get('selected'))->restore();
 
         return response("Akun yang dipilih berhasil dipulihkan.", 200);
@@ -287,7 +301,7 @@ class SuperAdminController extends Controller
 
     public function multiple_force_delete_subsidiary(Request $request)
     {
-        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->forceDelete();
+        Staff::withTrashed()->whereIn('subsidiary_id', $request->get('selected'))->forceDelete();
         User::withTrashed()->whereIn('id', $request->get('selected'))->forceDelete();
 
         return response("Akun yang dipilih berhasil dihapus.", 200);
@@ -303,7 +317,7 @@ class SuperAdminController extends Controller
 
     public function force_delete_all_subsidiary()
     {
-        Staff::onlyTrashed()->forceDelete();
+        Subsidiary::onlyTrashed()->forceDelete();
         User::onlyTrashed()->forceDelete();
 
         return response("Semua admin berhasil hapus.", 200);
@@ -339,7 +353,7 @@ class SuperAdminController extends Controller
     {
         $carType = CarType::all();
         $plans = Plans::all();
-        $washingPlans = WashingPlans::all();
+        $washingPlans = WashingPlans::all()->groupBy('plan_id');
 
         return view('staff.pages.manage_pricing.index', compact('carType', 'washingPlans', 'plans'));
     }
@@ -357,6 +371,27 @@ class SuperAdminController extends Controller
             WashingPlans::create([
                 'name' => $item,
                 'plan_id' => 1,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
+
+    public function add_pricing_2()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_2', compact('carType'));
+    }
+
+    public function create_pricing_2(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 2,
                 'price' => $request->price,
                 'type_id' => $request->car_type
             ]);

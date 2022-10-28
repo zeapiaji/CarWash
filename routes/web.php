@@ -6,6 +6,7 @@ use App\Http\Controllers\CashierController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\SuperAdminController;
+use App\Models\Entry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,20 @@ Route::middleware(['role:member'])->group(function () {
 Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
-    Route::get('/entry-list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+    Route::get('/entry/list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+});
+
+Route::prefix('doorsmeer')->group(function() {
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/', [AdminController::class, 'manage_doorsmeer']);
+        Route::get('/add', [AdminController::class, 'add_doorsmeer']);
+        Route::get('/edit/{id}', [AdminController::class, 'edit_doorsmeer']);
+        Route::post('/store', [AdminController::class, 'store_doorsmeer']);
+        Route::post('/update/{id}', [AdminController::class, 'update_doorsmeer']);
+        Route::get('/delete/{id}', [AdminController::class, 'delete_doorsmeer']);
+
+        Route::post('/multiple/delete', [AdminController::class, 'multiple_delete_doorsmeer'])->name('multiple_delete_doorsmeer');
+    });
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
@@ -124,6 +138,7 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
 
     Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
+    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
     Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
     Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
 
@@ -143,18 +158,19 @@ Route::middleware(['role:super_admin'])->group(function () {
 
     // Route::get('/recycle-subsidiary', [SuperAdminController::class, 'recycle_subsidiary'])->name('superadmin.recycle-subsidiary');
     // Route::post('/multiple-recovery-subsidiary', [SuperAdminController::class, 'multiple_recovery_subsidiary'])->name('superadmin.multiple-recovery-subsidiary');
+    Route::post('/multiple-delete-subsidiary', [SuperAdminController::class, 'multiple_delete_subsidiary'])->name('superadmin.multiple-delete-subsidiary');
     Route::get('/recycle-subsidiary', [SuperAdminController::class, 'recycle_subsidiary'])->name('superadmin.recyclesubsidiary');
     Route::post('/recovery/subsidiary/{id}', [SuperAdminController::class, 'recovery_subsidiary'])->name('superadmin.recoversubsidiary');
     Route::post('/forcedelete/subsidiary/{id}', [SuperAdminController::class, 'force_delete_subsidiary'])->name('superadmin.forcedeletesubsidiary');
     Route::post('/multiple-recovery-subsidiary', [SuperAdminController::class, 'multiple_recovery_subsidiary'])->name('superadmin.multiple-recovery-subsidiary');
     Route::post('/multiple-force-delete-subsidiary', [SuperAdminController::class, 'multiple_force_delete_subsidiary'])->name('superadmin.multiple-force-delete-subsidiary');
     Route::post('/recovery-all-subsidiary', [SuperAdminController::class, 'recovery_all_subsidiary'])->name('superadmin.recovery-all-subsidiary');
-    Route::post('/force-delete-all-subsidiary', [SuperAdminController::class, 'force_delete_all_subsidiary'])->name('superadmin.force-delete-all-subsidiary');
+    Route::posst('/force-delete-all-subsidiary', [SuperAdminController::class, 'force_delete_all_subsidiary'])->name('superadmin.force-delete-all-subsidiary');
 
     // Export t
-    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
-    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
-    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
+    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('superadmin.export-admin-xlsx');
+    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('superadmin.export-admin-csv');
+    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('superadmin.export-admin-pdf');
 
 });
 
@@ -167,12 +183,14 @@ Route::get('/', function () {
 });
 
 Route::prefix('entry')->group(function () {
-    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
-    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
-
-    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
+    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.customer');
+    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.customer_post');
+    Route::get('/wash/{id}/entry/{entryId}', [EntryController::class, 'entry_wash'])->name('entry.wash');
+    Route::get('/wash/done/{id}', [EntryController::class, 'entry_wash_done'])->name('entry.wash.done');
+    Route::get('/wash/cancel/{id}', [EntryController::class, 'entry_wash_cancel'])->name('entry.wash.cancel');
+    Route::get('/delete/{id}', [EntryController::class, 'entry_delete'])->name('entry.delete');
+    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.customer_non_member');
 });
 Auth::routes();
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

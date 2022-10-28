@@ -68,13 +68,13 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
-                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->user->id}}"
+                                    value="{{$item->user->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/cashier/{{$item->id}}">
+                            <a href="/detail/cashier/{{$item->user->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
@@ -100,7 +100,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
                                             href="/edit/cashier/{{$item->user->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/delete/cashier/{{$item->id}}">Hapus</a></div>
+                                            href="/delete/cashier/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

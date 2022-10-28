@@ -11,12 +11,12 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Cabang</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Doorsmeer</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
-                <h6 class="d-none d-sm-inline-block ms-1">Total Cabang</h6>
+                <h6 class="d-none d-sm-inline-block ms-1">Total Doorsmeer</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalSubsidiaries}}}'>0</h6>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$doorsmeer->count()}}}'>0</h6>
             </div>
         </div>
     </div>
@@ -33,37 +33,24 @@
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
                         <button class="btn btn-falcon-danger btn-sm ms-2" id="multiple-delete"
-                            data-route="{{ route('superadmin.multiple-delete-subsidiary')}}">
+                            data-route="{{ route('multiple_delete_doorsmeer')}}">
                             <span class="fas fa-user-slash" data-fa-transform="shrink-3 down-2"></span>
                             <div class="d-none d-sm-inline-block ms-1">Hapus</div>
                         </button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-success btn-sm mx-2" href="/add/subsidiary">
+                    <a class="btn btn-falcon-success btn-sm mx-2" href="/doorsmeer/add">
                         <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Tambah Cabang</span>
+                        <span class="d-none d-sm-inline-block ms-1">Tambah Doorsmeer</span>
                     </a>
-                   
-
-                    <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-file-export" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
-                        <a class="dropdown-item" href="/export-admin-xlsx">XLSX</a>
-                        <a class="dropdown-item" href="/export-admin-csv">CSV</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/export-admin-pdf">PDF</a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
+            <table class="table table-lg table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
                 <thead class="bg-200 text-900">
                     <tr>
                         <th>
@@ -73,14 +60,13 @@
                                     data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
                             </div>
                         </th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        {{-- <th class="sort pe-1 align-middle white-space-nowrap" data-sort="admin">Admin</th> --}}
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="location">Lokasi</th>
-                        <th class="align-middle no-sort white-space-nowrap"></th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nomor</th>
+                        <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
-                    @foreach ($data as $item)
+                    {{-- @dd($data) --}}
+                    @foreach ($doorsmeer as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
@@ -90,7 +76,7 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/subsidiary/{{$item->id}}">
+                            <a href="/detail/admin/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
@@ -102,17 +88,21 @@
                                 </div>
                             </a>
                         </td>
-                        <td class="location align-middle py-2">{{$item->location}}</td>
 
-                        <td class="align-middle py-2">
-                            <a class="btn p-0" href="/edit/subsidiary/{{$item->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Edit">
-                                <span class="text-500 fas fa-edit"></span>
-                            </a>
-                            <a class="btn p-0 ms-2" href="/delete/subsidiary/{{$item->id}}" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="Hapus">
-                                <span class="text-500 fas fa-trash-alt"></span>
-                            </a>
+                        <td class="align-middle white-space-nowrap py-2 text-end">
+                            <div class="dropdown font-sans-serif position-static"><button
+                                    class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                    id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window"
+                                    aria-haspopup="true" aria-expanded="false"><span
+                                        class="fas fa-ellipsis-h fs--1"></span></button>
+                                <div class="dropdown-menu dropdown-menu-end border py-0"
+                                    aria-labelledby="customer-dropdown-0">
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
+                                            href="/doorsmeer/edit/{{$item->id}}">Sunting</a>
+                                        <a class="dropdown-item text-danger"
+                                            href="/doorsmeer/delete/{{$item->id}}">Hapus</a></div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
@@ -168,7 +158,7 @@
                                 showCancelButton: false,
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
-                                window.location = '/manage-subsidiaries'
+                                window.location = '/doorsmeer/'
                             });
                         }
                     });

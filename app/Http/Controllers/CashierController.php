@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doormeer;
 use App\Models\Entry;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
@@ -32,10 +33,14 @@ class CashierController extends Controller
 
     public function entry_list()
     {
-        $cashier = Auth::user();
-        $cashier = Staff::where('user_id', $cashier->id)->first();
-        $entry = Entry::where('subsidiary_id', $cashier->subsidiary_id)->get();
+        $cashier = Auth::user()->staff;
+        $entry = Entry::where('subsidiary_id', $cashier->subsidiary_id)->where('status_id', 1)->get();
+        $emptyDoorsmeer = Doormeer::where('subsidiary_id', $cashier->subsidiary_id)->where('user_id', null)->get();
+        $doorsmeer = Doormeer::where('subsidiary_id', $cashier->subsidiary_id)->get();
+        $onDoorsmeer = Entry::where('subsidiary_id', $cashier->subsidiary_id)->where('status_id', 2)->count();
 
-        return view('staff.pages.cashier.entry_list', compact('entry'));
+        return view('staff.pages.cashier.entry_list', compact('entry','cashier', 'emptyDoorsmeer','doorsmeer', 'onDoorsmeer'));
     }
+
+
 }

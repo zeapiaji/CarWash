@@ -12,16 +12,9 @@
                 <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Paket Pencucian</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
-
-                <a href="/add/pricing-1" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 1</a>
-                <a href="/add/pricing-2" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 2</a>
-                <a href="/add/pricing-3" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 3</a>
-                <a href="/add/pricing-4" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 4</a>
-
+                <a href="/add/pricing" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket</a>
                 <h6 class="d-none d-sm-inline-block ms-1">Total Admin</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                {{-- <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$totalAdmin}}}'>0</h6> --}}
-
             </div>
         </div>
     </div>
@@ -43,20 +36,20 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="plan-1">
                 <div class="row">
-                    @foreach ($washingPlans as $item)
+                    @foreach ($washingPlans as $item => $features)
                     <div class="col-md-3 col-sm-6">
                         <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">{{$item->price}}</h6>
+                            <h6 class="pricing-heding">Paket {{$item}}</h6>
                             <div class="pricing-price-block">
-                                <h2 class="pricing-price">{{$item->price}}</h2>
+                                {{-- <h2 class="pricing-price">{{$item->price}}</h2> --}}
                                 <div class="pricing-duration">25 Mins</div>
                             </div>
                             <div class="pricing-dtl">
                                 <ul>
-                                    {{-- @dd($item->washing_plans) --}}
-                                    {{-- @foreach ($item->washing_plans as $feature) --}}
-                                    <li>{{$item->name}}</li>
-                                    {{-- @endforeach --}}
+                                    {{-- @dd($item->name) --}}
+                                    @foreach ($features as $feature)
+                                    <li>{{$feature}}</li>
+                                    @endforeach
                                 </ul>
                             <a href="#" class="btn btn-default">Mulai Berlangganan</a>
                             </div>
