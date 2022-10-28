@@ -240,8 +240,8 @@ class AdminController extends Controller
 
     public function forcedelete_member($id)
     {
-        User::withTrashed()->where('id', $id)->forceDelete();
         Car::withTrashed()->where('id', $id)->forceDelete();
+        User::withTrashed()->where('id', $id)->forceDelete();
 
         return redirect('/recycle-member');
     }
@@ -339,9 +339,7 @@ class AdminController extends Controller
     // Soft Delete
     public function delete_cashier($id)
     {
-
-        Staff::role('cashier')->find($id)->delete();
-        User::find($id)->delete();
+        Staff::where('user_id', $id)->delete();
 
         return redirect('/manage-cashier');
 
@@ -357,18 +355,17 @@ class AdminController extends Controller
 
     public function recycle_cashier()
     {
-        $data = User::role('cashier')->withTrashed()->get();
+        $admin = Auth::user();
+        $data = Staff::where('subsidiary_id', $admin->staff->subsidiary_id)->onlyTrashed()->get();
 
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 
     public function recovery_cashier($id)
     {
-        User::withTrashed()->where('id', $id)->restore();
-        // $data = Staff::role('cashier')->withTrashed()->where('id', $id)->restore();
-        $data = User::role('cashier')->withTrashed()->where('id', $id)->restore();
+        Staff::withTrashed()->where('user_id', $id)->restore();
 
-        return redirect('/recycle/cashier');
+        return redirect('/recycle-cashier');
     }
 
     public function multiple_recovery_cashier(Request $request)
@@ -394,17 +391,14 @@ class AdminController extends Controller
 
     public function forcedelete_cashier($id)
     {
-        // Staff::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
-        User::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
+        Staff::withTrashed()->where('user_id', $id)->forceDelete();
 
         return redirect('/recycle/cashier');
     }
 
     public function multiple_force_delete_cashier(Request $request)
     {
-        Car::whereIn('user_id', $request->get('selected'))
-            ->forceDelete();
-        Staff::role('cashier')->whereIn('id', $request->get('selected'))
+        Staff::whereIn('user_id', $request->get('selected'))
             ->forceDelete();
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
@@ -415,8 +409,7 @@ class AdminController extends Controller
     public function force_delete_all_cashier()
     {
 
-        // Staff::role('cashier')->onlyTrashed()->forceDelete();
-        User::role('cashier')->onlyTrashed()->forceDelete();
+        Staff::onlyTrashed()->where('subsidiary_id', Auth::user()->staff->subsidiary_id)->forceDelete();
 
         return response("Selected post(s) deleted successfully.", 200);
     }

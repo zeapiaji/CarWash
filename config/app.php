@@ -183,8 +183,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
+        * Package Service Providers...
+        */
+        Venturecraft\Revisionable\RevisionableServiceProvider::class,
 
         /*
          * Application Service Providers...
