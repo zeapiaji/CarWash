@@ -352,7 +352,7 @@ class SuperAdminController extends Controller
     public function pricing()
     {
         $carType = CarType::all();
-        $plans = Plans::all();
+        $plans = WashingPlans::all()->groupBy('type_id');
         $washingPlans = WashingPlans::all()->groupBy('plan_id');
 
         return view('staff.pages.manage_pricing.index', compact('carType', 'washingPlans', 'plans'));
@@ -386,12 +386,54 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_pricing.add_2', compact('carType'));
     }
 
+    public function add_pricing_3()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_3', compact('carType'));
+    }
+
+    public function add_pricing_4()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_4', compact('carType'));
+    }
+
     public function create_pricing_2(Request $request)
     {
         foreach ($request->feature as $item) {
             WashingPlans::create([
                 'name' => $item,
                 'plan_id' => 2,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
+
+    public function create_pricing_3(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 3,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
+
+    public function create_pricing_4(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 4,
                 'price' => $request->price,
                 'type_id' => $request->car_type
             ]);

@@ -42,11 +42,12 @@ class AdminController extends Controller
     public function dashboard_table()
     {
 
-        $data = User::role('cashier')->get();
-        // $gender = Gender::all();
-        $totalKasir = $data->count();
+        $admin = Auth::user()->staff->subsidiary_id;
+        $data = Staff::where('subsidiary_id', $admin)->get();
 
-        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'totalKasir'));
+        $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
+
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer'));
     }
 
     public function manage_cashier()
@@ -413,7 +414,23 @@ class AdminController extends Controller
         return response("Semua cashier berhasil hapus.", 200);
     }
 
+  // Export & Import
+  public function export_cashier_xlsx()
+  {
+      return Excel::download(new CashierExport, 'cashier.xlsx');
+  }
 
+  public function export_cashier_csv()
+  {
+      return Excel::download(new CashierExport, 'cashier.csv', \Maatwebsite\Excel\Excel::CSV, [
+          'Content-Type' => 'text/csv',
+      ]);
+  }
+
+  public function export_cashier_pdf()
+  {
+      return Excel::download(new CashierExport, 'cashier.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+  }
 
     //Priceing
     public function pricing()

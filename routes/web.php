@@ -37,7 +37,7 @@ Route::middleware(['role:cashier'])->group(function () {
 
 Route::prefix('doorsmeer')->group(function() {
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/', [AdminController::class, 'manage_doorsmeer']);
+        Route::get('/{id}', [AdminController::class, 'manage_doorsmeer']);
         Route::get('/add', [AdminController::class, 'add_doorsmeer']);
         Route::get('/edit/{id}', [AdminController::class, 'edit_doorsmeer']);
         Route::post('/store', [AdminController::class, 'store_doorsmeer']);
@@ -49,11 +49,8 @@ Route::prefix('doorsmeer')->group(function() {
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
-    // Dashboard
-    Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
     // cashier
-    Route::get('/admin-dashboard', [AdminController::class, 'dashboard_table'])->name('admin.dashboardtable');
+    Route::get('/admin-dashboard', [AdminController::class, 'dashboard_table'])->name('admin.dashboard');
 
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
@@ -135,12 +132,13 @@ Route::middleware(['role:super_admin'])->group(function () {
     // Pricing
     Route::get('/pricing', [SuperAdminController::class, 'pricing'])->name('admin.pricing');
     Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
-    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
-
     Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
-    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
     Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
     Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
+    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
+    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
+    Route::post('/create/pricing-3', [SuperAdminController::class, 'create_pricing_3'])->name('admin.create.pricing.3');
+    Route::post('/create/pricing-4', [SuperAdminController::class, 'create_pricing_4'])->name('admin.create.pricing.4');
 
     Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
 
@@ -173,10 +171,6 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('superadmin.export-admin-pdf');
 
 });
-
-// Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {
-//     Route::get('/editprofile/staff/id', [GeneralController::class, 'editprofile'])->name('editprofile');
-// });
 
 Route::get('/', function () {
     return view('member.pages.index');

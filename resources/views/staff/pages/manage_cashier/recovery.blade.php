@@ -15,7 +15,7 @@
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total kasir</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                
+
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </td>
+                       
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
                         <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item->email}}</a></td>
                         <td class="gender align-middle py-2">{{$item -> gender -> name}}</td>
