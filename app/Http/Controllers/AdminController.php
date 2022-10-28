@@ -125,7 +125,7 @@ class AdminController extends Controller
         Car::whereIn('user_id', $request->get('selected'))->delete();
         User::whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recycle_admin()
@@ -150,7 +150,7 @@ class AdminController extends Controller
         User::whereIn('id', $request->get('selected'))
             ->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recovery_all_admin()
@@ -158,7 +158,7 @@ class AdminController extends Controller
         User::withTrashed()->restore();
         Car::withTrashed()->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function forcedelete_admin($id)
@@ -176,7 +176,7 @@ class AdminController extends Controller
         User::whereIn('id', $request->get('selected'))
             ->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function force_delete_all_admin()
@@ -184,7 +184,7 @@ class AdminController extends Controller
         Car::onlyTrashed()->forceDelete();
         User::onlyTrashed()->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
 
@@ -202,7 +202,7 @@ class AdminController extends Controller
         Car::whereIn('user_id', $request->get('selected'))->delete();
         User::whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recycle_member()
@@ -227,7 +227,7 @@ class AdminController extends Controller
         User::whereIn('id', $request->get('selected'))
             ->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recovery_all_member()
@@ -235,7 +235,7 @@ class AdminController extends Controller
         User::withTrashed()->restore();
         Car::withTrashed()->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function forcedelete_member($id)
@@ -253,7 +253,7 @@ class AdminController extends Controller
         User::whereIn('id', $request->get('selected'))
             ->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function force_delete_all_member()
@@ -261,7 +261,7 @@ class AdminController extends Controller
         Car::onlyTrashed()->forceDelete();
         User::onlyTrashed()->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
 
@@ -350,7 +350,7 @@ class AdminController extends Controller
         Staff::role('cashier')->whereIn('id', $request->get('selected'))->delete();
         User::role('cashier')->whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!.", 200);
     }
 
     public function recycle_cashier()
@@ -365,35 +365,30 @@ class AdminController extends Controller
     {
         Staff::withTrashed()->where('user_id', $id)->restore();
 
-        return redirect('/recycle-cashier');
+        return redirect()->back();
     }
 
     public function multiple_recovery_cashier(Request $request)
     {
-        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
-        //     ->restore();
-        User::role('cashier')->whereIn('id', $request->get('selected'))
+        Staff::whereIn('id', $request->get('selected'))
             ->restore();
 
-        // $data = Staff::role('cashier')->whereIn('id', $request->get('selected'));
-        $data = User::role('cashier')->whereIn('id', $request->get('selected'));
-
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recovery_all_cashier()
     {
-        // Staff::role('cashier')->Trashed()->restore();
-        User::role('cashier')->Trashed()->restore();
+        Staff::where('subsidiary_id', Auth::user()->staff->subsidiary_id)->withTrashed()->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function forcedelete_cashier($id)
     {
         Staff::withTrashed()->where('user_id', $id)->forceDelete();
+        User::find($id)->forceDelete();
 
-        return redirect('/recycle/cashier');
+        return redirect('/recycle-cashier');
     }
 
     public function multiple_force_delete_cashier(Request $request)
@@ -403,15 +398,15 @@ class AdminController extends Controller
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function force_delete_all_cashier()
     {
-
+        $cashier = Staff::where('subsidiary_id', Auth::user()->staff->subsidiary_id)->get();
         Staff::onlyTrashed()->where('subsidiary_id', Auth::user()->staff->subsidiary_id)->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
 
@@ -510,6 +505,6 @@ class AdminController extends Controller
     {
         Doormeer::whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 }

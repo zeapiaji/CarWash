@@ -44,19 +44,7 @@
                         <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Tambah Cabang</span>
                     </a>
-                   
 
-                    <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-file-export" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
-                        <a class="dropdown-item" href="/export-admin-xlsx">XLSX</a>
-                        <a class="dropdown-item" href="/export-admin-csv">CSV</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/export-admin-pdf">PDF</a>
-                    </div>
                 </div>
             </div>
         </div>

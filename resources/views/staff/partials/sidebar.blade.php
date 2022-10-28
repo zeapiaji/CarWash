@@ -21,15 +21,6 @@
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
-                    @role('cashier')
-                    <a class="nav-link" href="/cashier-dashboard" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-chart-pie"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Dasbor Kasir</span></div>
-                    </a>
-                    @endrole
                     @role('admin')
                     <a class="nav-link" href="/admin-dashboard" aria-expanded="false">
                         <div class="d-flex align-items-center">
@@ -192,16 +183,6 @@
                     </a>
                     <ul class="nav false collapse" id="subsidiary" style="">
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="/show-subsidiaries" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-list-alt"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Lihat Cabang</span>
-                                </div>
-                            </a><!-- more inner pages-->
-                        </li>
-                        <li class="nav-item ms-2">
                             <a class="nav-link" href="/manage-subsidiaries" aria-expanded="false">
                                 <div class="d-flex align-items-center">
                                     <span class="nav-link-icon">
@@ -260,7 +241,7 @@
                 </li>
                 @endrole
 
-                @role('super_admin')
+                {{-- @role('super_admin')
                 <!-- parent pages-->
 
                 <a class="nav-link" href="/pricing" aria-expanded="false">
@@ -270,8 +251,8 @@
                         </span>
                         <span class="nav-link-text ps-2">Paket Pencucian</span></div>
                 </a>
+                @endrole --}}
             </ul>
-            @endrole
 
             </ul>
         </div>

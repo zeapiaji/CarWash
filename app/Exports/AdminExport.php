@@ -11,7 +11,7 @@ class AdminExport implements FromView
 {
     public function view(): View
     {
-        $data = Staff::role('admin')->get();
+        $data = User::role('admin')->get();
 
         return view('staff.exports.admin', compact('data'));
     }

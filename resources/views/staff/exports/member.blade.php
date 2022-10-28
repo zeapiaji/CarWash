@@ -14,9 +14,9 @@
         <td>{{$item->phone}}</td>
         <td>{{$item->address}}</td>
         <td>{{$item->email}}</td>
-        <td>{{$item->car->number_plate}}</td>
-        <td>{{$item->car->name}}</td>
-        <td>{{$item->car->car_type->name}}</td>
+        <td>{{$item->car->number_plate ?? ''}}</td>
+        <td>{{$item->car->name ?? ''}}</td>
+        <td>{{$item->car->car_type->name ?? ''}}</td>
     </tr>
     @endforeach
 </table>
