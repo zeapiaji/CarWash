@@ -94,7 +94,7 @@
                                     <!--/.bg-holder-->
                                     <div class="z-index-1 position-relative"><a
                                             class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                                            href="/">UltraWash</a>
+                                            href="/">CarWash</a>
                                         <p class="opacity-75 text-white"></p>
                                     </div>
                                 </div>

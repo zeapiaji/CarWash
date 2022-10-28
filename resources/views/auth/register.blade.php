@@ -85,7 +85,7 @@
         <div class="row justify-content-center pt-4">
             <div class="col-sm-10 col-lg-7 col-xxl-5"><a class="d-flex flex-center mb-4" href="/"><img class="me-2"
                         src="{{asset('admin/assets/img/icons/spot-illustrations/falcon.png')}}" alt=""
-                        width="45" /><span class="font-sans-serif fw-bolder fs-4 d-inline-block">UltraWash</span></a>
+                        width="45" /><span class="font-sans-serif fw-bolder fs-4 d-inline-block">CarWash</span></a>
                 <div class="card theme-wizard" id="wizard">
                     <div class="card-header bg-light pt-1 pb-1">
                         <ul class="nav justify-content-between nav-wizard">

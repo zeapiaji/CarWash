@@ -44,7 +44,7 @@
                         <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">Tambah Admin</span>
                     </a>
-                   
+
 
                     <a class="btn btn-falcon-primary btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -100,8 +100,6 @@
                                     </div>
                                     <div class="flex-1">
                                         <h5 class="mb-0 fs--1">{{$item->name}}</h5>
-                                        {{-- Delete This --}}
-                                        <h5 class="mb-0 fs--1">{{$item->id}}</h5>
                                     </div>
                                 </div>
                             </a>

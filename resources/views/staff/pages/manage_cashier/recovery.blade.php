@@ -15,7 +15,7 @@
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total kasir</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                
+
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
                                 </div>
                             </a>
                         </td>
-                        {{--  <td class="car align-middle pt-2">{{$item->car->name}}
+                         {{-- <td class="car align-middle pt-2">{{$item->car->name}}
                         </td>
                         <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
                         </td>  --}}

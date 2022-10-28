@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 @include('staff.partials.head')
 
 <body>
@@ -15,10 +16,15 @@
                 }
               </script>
             @include('staff.partials.sidebar')
+
             @include('staff.partials.navbar')
+
             <div class="content">
+
                 @yield('content')
+
                 @include('staff.partials.footer')
+
             </div>
         </div>
     </main>

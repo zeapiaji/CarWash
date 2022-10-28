@@ -238,7 +238,7 @@
 
                 @role('admin')
                 <li class="nav-item">
-                    <a class="nav-link" href="/doorsmeer/{{Auth::user()->id}}" aria-expanded="false">
+                    <a class="nav-link" href="/doorsmeer" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-car-side"></span>

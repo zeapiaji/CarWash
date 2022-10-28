@@ -42,11 +42,12 @@ class AdminController extends Controller
     public function dashboard_table()
     {
 
-        $data = User::role('cashier')->get();
-        // $gender = Gender::all();
-        $totalKasir = $data->count();
+        $admin = Auth::user()->staff->subsidiary_id;
+        $data = Staff::where('subsidiary_id', $admin)->get();
 
-        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'totalKasir'));
+        $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
+
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer'));
     }
 
     public function manage_cashier()
