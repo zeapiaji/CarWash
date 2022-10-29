@@ -179,18 +179,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md">
-                                                <div class="dz-message dropzone-area px-2 py-3"
-                                                    data-dz-message="data-dz-message">
-                                                    <div class="text-center"><img class="me-2"
-                                                            src="{{asset('admin/assets/img/icons/cloud-upload.svg')}}"
-                                                            width="25" alt="" />Unggah Foto Profilemu!<p
-                                                            class="mb-0 fs--1 text-400">Upload dengan ukuran 300x300
-                                                            format jpg dan dengan <br />ukuran file tidak lebih dari
-                                                            400KB</p>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="mb-3">

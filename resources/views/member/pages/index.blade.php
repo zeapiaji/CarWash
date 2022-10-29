@@ -5,10 +5,9 @@
             style="background-image: url('{{asset('member/assets/images/slider-1.jpg')}}')">
             <div class="container">
                 <div class="slider-dtl">
-                    <h4 class="slider-sub-heading">We Care</h4>
-                    <h1 class="slider-heading">For Your Car</h1>
-                    <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
-                        aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                    <h4 class="slider-sub-heading">Kami Hadir</h4>
+                    <h1 class="slider-heading">Untuk Melindungi Mobil Anda</h1>
+                    <p>Carwash adalah tempat pencucian yang terbaik.</p>
                     <div class="slider-btn">
                         <a href="#" class="btn btn-orange">Read More</a>
                         <a href="#" class="btn btn-default">Contact Us</a>
@@ -20,10 +19,9 @@
             style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
             <div class="container">
                 <div class="slider-dtl">
-                    <h4 class="slider-sub-heading">We Care</h4>
-                    <h1 class="slider-heading">For Your Car</h1>
-                    <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
-                        aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                    <<h4 class="slider-sub-heading">Kami Hadir</h4>
+                    <h1 class="slider-heading">Untuk Melindungi Mobil Anda</h1>
+                    <p>Dengan kualitas produk yang terjamin.</p>
                     <div class="slider-btn">
                         <a href="#" class="btn btn-orange">Read More</a>
                         <a href="#" class="btn btn-default">Contact Us</a>
@@ -35,10 +33,9 @@
             style="background-image: url('{{asset('member/assets/images/slider-3.jpg')}}')">
             <div class="container">
                 <div class="slider-dtl">
-                    <h4 class="slider-sub-heading">We Care</h4>
-                    <h1 class="slider-heading">For Your Car</h1>
-                    <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
-                        aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                    <h4 class="slider-sub-heading">Kami Hadir</h4>
+                    <h1 class="slider-heading">Untuk Melindungi Mobil Anda</h1>
+                    <p>Dan pengamanan yang terjaga.</p>
                     <div class="slider-btn">
                         <a href="#" class="btn btn-orange">Read More</a>
                         <a href="#" class="btn btn-default">Contact Us</a>
@@ -133,8 +130,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Pembersihan Manual</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Pemberihkan bertahap akan dilakukan dengan cara manual.</p>
                         </div>
                     </div>
                 </div>
@@ -149,8 +145,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Pemulihan Lampu Depan</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Penggantian lampu yang lebih terang dan memiliki kapasitas yang tinggi.</p>
                         </div>
                     </div>
                 </div>
@@ -165,8 +160,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Penghapusan Goresan</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Goresan yang halus akan kami hilangkan dengan bantuan alat khusus sehingga mobil kembali seperti baru lagi.</p>
                         </div>
                     </div>
                 </div>
@@ -181,8 +175,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Penghapusan Tar</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Penghilangan dengan minyak yang berkualitas.</p>
                         </div>
                     </div>
                 </div>
@@ -197,8 +190,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Penghilang Bau</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Pemanfaatan parfum dan sabun akan menghilangkan bau yang tak sedap pada mobil anda.</p>
                         </div>
                     </div>
                 </div>
@@ -213,8 +205,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Pembersihan Mesin</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Langkah awal kami akan membersihkan debu-debu kecil terlebih dahulu, lalu pembersihan menyeluruh.</p>
                         </div>
                     </div>
                 </div>
@@ -229,8 +220,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Penyikatan Kerak Mobil</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Menggunakan cairan yang khusus untuk dapat membersihkan kerak mobil.</p>
                         </div>
                     </div>
                 </div>
@@ -245,8 +235,7 @@
                             <a href="services-details.html">
                                 <h5 class="service-heading">Layanan Valet</h5>
                             </a>
-                            <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                                enatib.</p>
+                            <p>Jangan khawatir dengan pelayanan yang kami berikan.</p>
                         </div>
                     </div>
                 </div>
