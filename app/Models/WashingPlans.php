@@ -13,8 +13,6 @@ class WashingPlans extends Model
     protected $fillable = [
         'name',
         'plan_id',
-        'price',
-        'type_id',
     ];
 
     /**

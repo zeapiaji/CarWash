@@ -42,6 +42,16 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
+                                <label for="plan">Paket</label>
+                                <select class="form-select" id="plan" name="plan">
+                                    <option value="">Pilih Paket ...</option>
+                                    @foreach ($plans as $item)
+                                    <option value="{{$item->id}}" name="plan">{{$item->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="subsidiary">Cabang</label>
                                 <select class="form-select" id="subsidiary" name="subsidiary">
                                     <option value="">Pilih cabang ...</option>
@@ -56,7 +66,7 @@
                                 <div class="col-auto">
                                 </div>
                                 <div class="col-auto">
-                                    <a class="fs--1" href="{{ route('entry.customer_non_member') }}">
+                                    <a class="fs--1" href="{{ route('register') }}">
                                         {{ __('Tidak Punya Akun?') }}
                                     </a>
                                 </div>

@@ -15,13 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, RevisionableTrait;
-
-    protected $revisionEnabled = true;
-    protected $revisionCleanup = true;
-    protected $historyLimit = 500;
-    protected $revisionForceDeleteEnabled = true;
-    protected $revisionCreationsEnabled = true;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

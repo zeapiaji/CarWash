@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Doorsmeer</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Harga {{$carType->name}}</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total Doorsmeer</h6>
@@ -71,7 +71,7 @@
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->plans->id}}"
                                     value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
@@ -92,7 +92,7 @@
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/doorsmeer/edit/{{$item->id}}">Sunting</a>
+                                            href="/pricing/edit/{{$item->plans->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
                                             href="/doorsmeer/delete/{{$item->id}}">Hapus</a></div>
                                 </div>

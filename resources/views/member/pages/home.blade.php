@@ -10,7 +10,6 @@
             <!--/.bg-holder-->
             <div class="card-header z-index-1">
                 <h5 class="text-primary">Selamat datang {{Auth::user()->name}}! </h5>
-                <h6 class="text-500">Kelola antrian cabang {{Auth::user()->staff->subsidiary->name}}</h6>
               </div>
         </div>
     </div>
@@ -18,37 +17,31 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="row g-3 mb-3">
-              <div class="col-sm-4 col-md-4">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                  <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-5.png')}});"></div>
-                  <!--/.bg-holder-->
-                  <div class="card-body position-relative">
-                    <h6>Doorsmeer</h6>
-                    <div class="d-flex display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning" data-countup='{"endValue":{{$doorsmeer->count()}}}'>0</div>
-                    <a class="fw-semi-bold fs--1 text-nowrap" href="#entry">Kelola<span
-                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                <div class="col-sm-4 col-md-4">
+                    <div class="card overflow-hidden" style="min-width: 12rem">
+                      <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-1.png')}});"></div>
+                      <!--/.bg-holder-->
+                      <div class="card-body position-relative">
+                        <h6>Info Kendaraan</h6>
+                        <div class="display-4 fs-2 mb-1 fw-normal font-sans-serif text-warning">{{Auth::user()->car->name}}</div>
+                        <div class="fs-0 mb-0 fw-bolder">{{Auth::user()->car->number_plate}}</div>
+                        <div class="mt-3">
+                            <div class="d-flex flex-row-reverse">
+                                <div class="d-flex">
+                                    <a class="btn btn-sm btn-primary me-2 mb-1" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" href="/member/edit/car/{{Auth::user()->id}}"><span class="fas fa-cog"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-md-4">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                  <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-1.png')}});"></div>
-                  <!--/.bg-holder-->
-                  <div class="card-body position-relative">
-                    <h6>Dalam Antrian</h6>
-                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
-                      data-countup='{"endValue":{{$entry->count()}},"suffix":" Kendaraan"}'>0</div><a
-                      class="fw-semi-bold fs--1 text-nowrap" href="#entry">Kelola<span
-                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
-                  </div>
-                </div>
-              </div>
+
               <div class="col-sm-4 col-md-4">
                 <div class="card overflow-hidden" style="min-width: 12rem">
                     <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-1.png')}});"></div>
                     <!--/.bg-holder-->
                     <div class="card-body position-relative">
-                      <h6>Dicuci</h6>
+                      <h6>Invoice</h6>
                       <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
                         data-countup='{"endValue":{{$onDoorsmeer}},"suffix":" Kendaraan"}'>0</div><a
                         class="fw-semi-bold fs--1 text-nowrap" href="#onDoorsmeer">Kelola<span
@@ -60,7 +53,7 @@
           </div>
         </div>
       </div>
-    <div class="col-xxl-3 col-md-6">
+    {{-- <div class="col-xxl-3 col-md-6">
         <div class="card h-lg-100 overflow-hidden">
             <div class="card-header bg-light">
                 <div class="row align-items-center">
@@ -139,7 +132,7 @@
                         <div class="mt-3">
                             <div class="d-flex flex-row-reverse">
                                 <div class="d-flex">
-                                    <a class="btn btn-sm btn-primary me-2 mb-1" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Selesai Cuci" href="/entry/wash/payment/{{$item->id}}"><span class="fas fa-check"></span></a>
+                                    <a class="btn btn-sm btn-primary me-2 mb-1" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Selesai Cuci" href="/entry/wash/done/{{$item->id}}"><span class="fas fa-check"></span></a>
                                 </div>
                                 <div class="d-flex">
                                     <a class="btn btn-sm btn-warning me-2 mb-1" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembalikan ke Antrian" href="/entry/wash/cancel/{{$item->id}}"><span class="fas fa-backspace"></span></a>
@@ -151,6 +144,6 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

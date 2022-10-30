@@ -18,7 +18,8 @@ class PlansSeeder extends Seeder
         for ($i=1; $i < 5; $i++) {
             # code...
             Plans::create([
-                'name' => 'Paket'. $i
+                'name' => 'Paket'. $i,
+                'price' => random_int(20000, 5000000)
             ]);
         }
     }

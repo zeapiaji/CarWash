@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CeoController;
-use App\Http\Controllers\CashierController;
-use App\Http\Controllers\EntryController;
-use App\Http\Controllers\GeneralController;
-use App\Http\Controllers\SuperAdminController;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CeoController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EntryController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CashierController;
+use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\SuperAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ Route::post('/register-member', [GeneralController::class, 'register_member'])->
 Route::post('/image/user/{id}', [GeneralController::class, 'image']);
 
 Route::middleware(['role:member'])->group(function () {
-    //
+    Route::get('/member-home', [MemberController::class, 'member_home'])->name('member.home');
 });
 
 Route::middleware(['role:cashier'])->group(function () {
@@ -133,6 +135,8 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::get('/pricing', [SuperAdminController::class, 'pricing']);
     Route::prefix('/pricing')->group(function() {
         Route::get('/{id}', [SuperAdminController::class, 'manage_pricing']);
+        Route::get('/edit/{id}', [SuperAdminController::class, 'edit_pricing']);
+        Route::post('/update/pricing/{id}', [SuperAdminController::class, 'update_pricing']);
     });
 
     Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
@@ -175,18 +179,16 @@ Route::middleware(['role:super_admin'])->group(function () {
 
 });
 
-Route::get('/', function () {
-    return view('member.pages.index');
-})->name('member');
+Route::get('/', [UserController::class, 'landing_page']);
 
 Route::prefix('entry')->group(function () {
     Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.customer');
     Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.customer_post');
     Route::get('/wash/{id}/entry/{entryId}', [EntryController::class, 'entry_wash'])->name('entry.wash');
+    Route::get('/wash/payment/{id}', [EntryController::class, 'entry_wash_payment'])->name('entry.wash.payment');
     Route::get('/wash/done/{id}', [EntryController::class, 'entry_wash_done'])->name('entry.wash.done');
     Route::get('/wash/cancel/{id}', [EntryController::class, 'entry_wash_cancel'])->name('entry.wash.cancel');
     Route::get('/delete/{id}', [EntryController::class, 'entry_delete'])->name('entry.delete');
-    Route::get('/customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.customer_non_member');
 });
 Auth::routes();
 

@@ -11,6 +11,11 @@ class Plans extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'price',
+    ];
+
     /**
      * Get the washing_plans associated with the Plans
      *
@@ -22,12 +27,12 @@ class Plans extends Model
     }
 
     /**
-     * Get the washing_plan associated with the Plans
+     * Get the entry associated with the Plans
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function washing_plan(): HasOne
+    public function entry(): HasOne
     {
-        return $this->hasOne(WashingPlans::class);
+        return $this->hasOne(Entry::class);
     }
 }

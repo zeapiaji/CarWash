@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Entry;
 use App\Models\Staff;
 use App\Models\Doormeer;
+use App\Models\Plans;
 use App\Models\Subsidiary;
 
 use Illuminate\Http\Request;
@@ -22,8 +23,9 @@ class EntryController extends Controller
     public function entry_customer()
     {
         $subsidiaries = Subsidiary::all();
+        $plans = Plans::all();
 
-        return view('staff.pages.entry.entry_customer', compact('subsidiaries'));
+        return view('staff.pages.entry.entry_customer', compact('subsidiaries', 'plans'));
     }
 
     public function entry_customer_post(Request $request)
@@ -32,17 +34,17 @@ class EntryController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
         $request->validate([
             'subsidiary' => 'required',
+            'plan' => 'required',
         ]);
 
         if (Auth::attempt($credentials)) {
-
             try {
                 Entry::create([
                     'user_id' => Auth::user()->id,
                     'status_id' => 1,
+                    'plan_id' => $request->plan,
                     'subsidiary_id' => $request->subsidiary,
                 ]);
             } catch (\Throwable $th) {
@@ -75,16 +77,24 @@ class EntryController extends Controller
         return redirect()->back();
     }
 
-    public function entry_wash_done($id)
+    public function entry_wash_payment($id)
     {
         $doorsmeer = Doormeer::find($id);
 
-        Entry::where('user_id', $doorsmeer->user_id)->delete();
+        $entry = Entry::where('user_id', $doorsmeer->user_id)->first();
 
+        return view('member.pages.invoice', compact('entry', 'doorsmeer'));
+    }
+
+    public function entry_wash_done($id)
+    {
+        $doorsmeer = Doormeer::find($id);
         $doorsmeer->user_id = null;
         $doorsmeer->save();
 
-        return redirect()->back();
+        $entry = Entry::where('user_id', $doorsmeer->user_id)->first();
+
+        return redirect('/entry/list');
     }
 
     public function entry_wash_cancel($id)
