@@ -47,9 +47,11 @@ class AdminController extends Controller
         ->whereNotIn('user_id', [$admin->user_id])
         ->get();
 
-        $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
+        $doorsmeer = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
+        $history = Doormeer::find(Auth::user()->staff->subsidiary_id);
+        // dd($history);
 
-        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer'));
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer', 'history'));
     }
 
     public function manage_cashier()

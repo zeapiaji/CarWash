@@ -89,6 +89,7 @@ class EntryController extends Controller
     public function entry_wash_done($id)
     {
         $doorsmeer = Doormeer::find($id);
+        Entry::where('user_id', $doorsmeer->user_id)->delete();
         $doorsmeer->user_id = null;
         $doorsmeer->save();
 

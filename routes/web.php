@@ -39,7 +39,7 @@ Route::middleware(['role:cashier'])->group(function () {
 
 Route::prefix('doorsmeer')->group(function() {
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/{id}', [AdminController::class, 'manage_doorsmeer']);
+        Route::get('/', [AdminController::class, 'manage_doorsmeer']);
         Route::get('/add', [AdminController::class, 'add_doorsmeer']);
         Route::get('/edit/{id}', [AdminController::class, 'edit_doorsmeer']);
         Route::post('/store', [AdminController::class, 'store_doorsmeer']);

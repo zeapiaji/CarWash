@@ -156,64 +156,32 @@
                                 <h6>Doorsmeer</h6>
                                 <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
                                     data-countup='{"endValue":{{$doorsmeer->count()}}}'>0</div><a
-                                    class="fw-semi-bold fs--1 text-nowrap"
-                                    href="/doorsmeer">Kelola<span
+                                    class="fw-semi-bold fs--1 text-nowrap" href="/doorsmeer">Kelola<span
                                         class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <div class="row flex-between-center g-card">
-                            <div class="col-auto">
-                                <h6>Laporan pencucian hari ke hari</h6>
-                            </div>
-                            <div class="col-auto d-flex">
-                                <div class="btn btn-sm btn-text d-flex align-items-center p-0 me-3 shadow-none"
-                                    id="echart-bar-report-for-this-week-option-1"><span
-                                        class="fas fa-circle text-primary fs--2 me-1"></span><span class="text">Minggu
-                                        ini </span></div>
-                                <div class="btn btn-sm btn-text d-flex align-items-center p-0 shadow-none"
-                                    id="echart-bar-report-for-this-week-option-2"><span
-                                        class="fas fa-circle text-300 fs--2 me-1"></span><span class="text">Minggu
-                                        lalu</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body py-0">
-                        <!-- Find the JS file for the following chart at: src/js/charts/echarts/report-for-this-week.js-->
-                        <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
-                        <div class="echart-bar-report-for-this-week" data-echart-responsive="true"
-                            data-chart="{&quot;option1&quot;:&quot;echart-bar-report-for-this-week-option-1&quot;,&quot;option2&quot;:&quot;echart-bar-report-for-this-week-option-2&quot;}">
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light p-0"><a class="btn btn-sm btn-link d-block w-100 py-2"
-                            href="#!">See all projects<span class="fas fa-chevron-right ms-1 fs--2"></span></a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-1">
-        <div class="card-header">
-            <div class="row">
-                <div class="col d-none d-sm-block">
-                    <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                    <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Pegawai</h4>
-                </div>
-                <div class="col-auto d-none d-sm-block">
-                    <h6 class="d-none d-sm-inline-block ms-1">Total pegawai</h6>
-                    <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                    <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$data->count()}}}'>0</h6>
-                </div>
-            </div>
         </div>
     </div>
 
     <div class="col-xxl-8 order-xxl-2">
+        <div class="card mb-1">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col d-none d-sm-block">
+                        <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                        <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Pegawai</h4>
+                    </div>
+                    <div class="col-auto d-none d-sm-block">
+                        <h6 class="d-none d-sm-inline-block ms-1">Total pegawai</h6>
+                        <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                        <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$data->count()}}}'>0</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card h-100">
             <div class="card-body p-0">
                 <div class="scrollbar">
@@ -275,217 +243,6 @@
                     <div class="col-auto"></div>
                     <div class="col-auto"><a class="btn btn-sm btn-link px-0 fw-medium"
                             href="/manage-cashier">Kelola<span class="fas fa-chevron-right ms-1 fs--2"></span></a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xxl-6 col-lg-6 order-xxl-1">
-        <div class="card h-100">
-            <div class="card-header">
-                <h6 class="mb-0">Riwayat Pencucian</h6>
-            </div>
-            <div class="card-body scrollbar recent-activity-body-height ps-2">
-                <div class="row g-3 timeline timeline-primary timeline-past pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-envelope"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Antony Hopkins sent an Email</h6>
-                                <p class="fs--1 text-600 mb-0">Got an email for previous year sale report</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">2m ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary timeline-past pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-archive"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Emma archived a board</h6>
-                                <p class="fs--1 text-600 mb-0">A finished project's board is archived recently</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">26m ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary timeline-current pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-code"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Falcon v3.0.0 released with new features</h6>
-                                <p class="fs--1 text-600 mb-0">Falcon new version is released successfully with new
-                                    Dashboards</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">1h ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary  pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-code-branch"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Rowan shared a link to the board</h6>
-                                <p class="fs--1 text-600 mb-0">A link is shared with attachments</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">3h ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary far fa-file-code"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Anna updated a file</h6>
-                                <p class="fs--1 text-600 mb-0">Fixed some bugs and spelling errors on this update</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">4h ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-6 col-lg-6 order-xxl-1">
-        <div class="card h-100">
-            <div class="card-header">
-                <h6 class="mb-0">Riwayat Transaksi</h6>
-            </div>
-            <div class="card-body scrollbar recent-activity-body-height ps-2">
-                <div class="row g-3 timeline timeline-primary timeline-past pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-envelope"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Antony Hopkins sent an Email</h6>
-                                <p class="fs--1 text-600 mb-0">Got an email for previous year sale report</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">2m ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary timeline-past pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-archive"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Emma archived a board</h6>
-                                <p class="fs--1 text-600 mb-0">A finished project's board is archived recently</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">26m ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary timeline-current pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-code"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Falcon v3.0.0 released with new features</h6>
-                                <p class="fs--1 text-600 mb-0">Falcon new version is released successfully with new
-                                    Dashboards</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">1h ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary  pb-card">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary fas fa-code-branch"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0 border-bottom pb-card">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Rowan shared a link to the board</h6>
-                                <p class="fs--1 text-600 mb-0">A link is shared with attachments</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">3h ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3 timeline timeline-primary">
-                    <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                                    class="text-primary far fa-file-code"></span></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row gx-0">
-                            <div class="col">
-                                <h6 class="text-800 mb-1">Anna updated a file</h6>
-                                <p class="fs--1 text-600 mb-0">Fixed some bugs and spelling errors on this update</p>
-                            </div>
-                            <div class="col-auto">
-                                <p class="fs--2 text-500 mb-0">4h ago</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
