@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => 'admin' . $i,
                 'email' => 'admin1' . $i . '@gmail.com',
-                'phone' => '12420902' . $i,
+                'phone' => '1242090288' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),

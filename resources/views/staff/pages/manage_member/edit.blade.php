@@ -82,10 +82,14 @@
                     </div>
                     <div class="card-body bg-light">
                         <label class="form-label" for="car">Mobil</label>
-                        <input class="form-control" id="car" name="car" type="text" value="{{$data->car->name}}"/>
+                        <input class="form-control @error('car')is-invalid
+
+                        @enderror" id="car" name="car" type="text" value="{{$data->car->name?? ''}}"/>
                         <div class="mt-3">
                             <label class="form-label" for="bootstrap-wizard-gender">Tipe</label>
-                            <select class="form-select" name="type" id="bootstrap-wizard-gender">
+                            <select class="form-select @error('type')is-invalid
+
+                            @enderror" name="type" id="bootstrap-wizard-gender">
                                 <option>Pilih jenis mobil ...</option>
                                 @foreach ($car_type as $item)
                                 <option value="{{$item->id}}" name="type"
@@ -95,7 +99,9 @@
                         </div>
                         <div class="mt-3">
                             <label class="form-label" for="number_plate">Plat Nomor</label>
-                            <input class="form-control" id="number_plate" name="number_plate" type="text"
+                            <input class="form-control @error('number_plate')is-invalid
+
+                            @enderror" id="number_plate" name="number_plate" type="text"
                                 value="{{$data->car->number_plate}}" />
                         </div>
                     </div>

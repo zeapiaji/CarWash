@@ -10,6 +10,9 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\CarType;
 use App\Exports\MemberExport;
+use App\Http\Requests\memberRequest;
+use App\Http\Requests\cashierRequest;
+// use App\Http\Requests\updateCashierRequest;
 use App\Imports\MemberImport;
 use App\Models\Subsidiary;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +20,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role as ModelsRole;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Contracts\Role;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -40,9 +44,7 @@ class AdminController extends Controller
     {
 
         $subs = Auth::user()->staff;
-        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
-            ->whereNotIn('user_id', [$subs->user_id])
-            ->get();
+        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)->whereNotIn('user_id', [$subs->user_id])->get();
 
         $gender = Gender::all();
 
@@ -70,13 +72,14 @@ class AdminController extends Controller
     // Edit
     public function edit_member($id)
     {
-        $data = User::role('member')->where('id', $id)->first();
+        $data = User::find($id)->first();
+        // dd($data);
         $car_type = CarType::all();
         $gender = Gender::all();
         return view('staff.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
     }
 
-    public function update_member(Request $request)
+    public function update_member(memberRequest $request)
     {
         $data = User::find($request->id);
 
@@ -192,8 +195,9 @@ class AdminController extends Controller
     }
 
 
-    public function store_cashier(Request $request)
+    public function store_cashier(cashierRequest $request)
     {
+        // $validated = $request->validated();
 
         $user = User::create([
 
@@ -214,7 +218,6 @@ class AdminController extends Controller
     }
 
 
-
     public function edit_cashier($id)
     {
         // $data = User::role('cashier')->where('user_id', $id)->first();
@@ -231,13 +234,23 @@ class AdminController extends Controller
         $data = User::find($request->id);
         $data->name = $request->name;
         $data->email = $request->email;
-        // $data->password = Hash::make($request['password']);
         $data->birth = $request->birth;
         $data->phone = $request->phone;
-        // $data->selectedRole = $request->role;
         $data->address = $request->address;
         $data->gender_id = $request->gender;
         $data->save();
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:25',
+            'email' => 'required|unique:users,email',
+            'phone' => 'required|unique:users,phone|min:10|max:13',
+            'birth' => 'required',
+            'address' => 'required|min:5|max:100',
+            'gender' => 'required',
+            'subsidiary' => 'required',
+
+        ]);
+
 
         Staff::where('user_id', $id)->first()->syncRoles($request->role);
 
@@ -265,16 +278,21 @@ class AdminController extends Controller
     {
         $subs = Auth::user()->staff;
         $data = Staff::where('subsidiary_id', $subs->subsidiary_id)->onlyTrashed()->get();
-        // $data = User::onlyTrashed()->get();
 
+        $gender = Gender::all();
+        // $data = User::role('cashier')->where('subsidiary_id', $subs->subsidiary_id)->onlyTrashed()->get();
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 
     public function recovery_cashier($id)
     {
-        User::withTrashed()->where('id', $id)->restore();
+        // User::withTrashed()->where('id', $id)->restore();
         // $data = Staff::role('cashier')->withTrashed()->where('id', $id)->restore();
-        $data = User::role('cashier')->withTrashed()->where('id', $id)->restore();
+        // $data = User::role('cashier')->withTrashed()->where('id', $id)->restore();
+        User::withTrashed()->where('id', $id)->restore();
+        Staff::withTrashed()->where('user_id', $id)->restore();
+
+        return back();
 
         return redirect('/recycle/cashier');
     }
@@ -303,9 +321,13 @@ class AdminController extends Controller
     public function forcedelete_cashier($id)
     {
         // Staff::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
-        User::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
+        // User::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
 
-        return redirect('/recycle/cashier');
+        // return redirect('/recycle/cashier');
+        Staff::where('user_id', $id)->forceDelete();
+        User::where('id', $id)->forceDelete();
+
+        return redirect()->back();
     }
 
     public function multiple_force_delete_cashier(Request $request)

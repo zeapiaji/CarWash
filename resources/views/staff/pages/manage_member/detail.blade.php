@@ -75,21 +75,21 @@
                     <div class="col-5 col-sm-5">
                         <p class="fw-semi-bold mb-1">Mobil</p>
                     </div>
-                    <div class="col">{{$data->car->name}}</div>
+                    <div class="col">{{$data->car->name?? ''}}</div>
                 </div>
                 <div class="row">
                     <div class="col-5 col-sm-5">
                         <p class="fw-semi-bold mb-1">Tipe</p>
                     </div>
                     <div class="col">
-                        <div class="col">{{$data->car->car_type->name}}</div>
+                        <div class="col">{{$data->car->car_type->name?? ''}}</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-5 col-sm-5">
                         <p class="fw-semi-bold mb-1">Plat Nomor</p>
                     </div>
-                    <div class="col">{{$data->car->number_plate}}</div>
+                    <div class="col">{{$data->car->number_plate?? ''}}</div>
                 </div>
             </div>
         </div>

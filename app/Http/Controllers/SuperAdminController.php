@@ -7,6 +7,8 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
+use App\Http\Requests\adminRequest;
+use App\Http\Requests\updateAdminRequest;
 use App\Imports\AdminImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +17,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Models\Role as ModelsRole;
+use Illuminate\Support\Facades\Validator;
 
 class SuperAdminController extends Controller
 {
@@ -57,7 +60,7 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_admin.add', compact('role', 'gender', 'subsidiaries'));
     }
 
-    public function create_admin(Request $request)
+    public function create_admin(adminRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -105,7 +108,16 @@ class SuperAdminController extends Controller
         $data->gender_id = $request->gender;
         $data->save();
 
-        // Change role
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:25',
+            'email' => 'required|unique:users,email',
+            'phone' => 'required|unique:users,phone|min:10|max:13',
+            'birth' => 'required',
+            'address' => 'required|min:5|max:100',
+            'gender' => 'required',
+        ]);
+
+        // dd($data);
         Staff::where('user_id', $id)->first()->syncRoles($request->role);
 
         return redirect('/manage-admin');
@@ -129,7 +141,7 @@ class SuperAdminController extends Controller
         Staff::where('user_id', $id)->forceDelete();
         User::where('id', $id)->forceDelete();
 
-        return redirect()->back();
+        return back();
     }
 
     public function multiple_delete_admin(Request $request)
@@ -142,7 +154,7 @@ class SuperAdminController extends Controller
 
     public function recycle_admin()
     {
-        $data = User::onlyTrashed()->get();
+        $data = User::role('admin')->onlyTrashed()->get();
 
         return view('staff.pages.manage_admin.recovery', compact('data'));
     }
