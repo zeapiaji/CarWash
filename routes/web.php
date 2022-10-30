@@ -130,7 +130,11 @@ Route::middleware(['role:super_admin'])->group(function () {
 
 
     // Pricing
-    Route::get('/pricing', [SuperAdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/pricing', [SuperAdminController::class, 'pricing']);
+    Route::prefix('/pricing')->group(function() {
+        Route::get('/{id}', [SuperAdminController::class, 'manage_pricing']);
+    });
+
     Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
     Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
     Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
@@ -173,7 +177,7 @@ Route::middleware(['role:super_admin'])->group(function () {
 
 Route::get('/', function () {
     return view('member.pages.index');
-});
+})->name('member');
 
 Route::prefix('entry')->group(function () {
     Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.customer');

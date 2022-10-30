@@ -338,10 +338,14 @@ class SuperAdminController extends Controller
     public function pricing()
     {
         $carType = CarType::all();
-        $plans = WashingPlans::all()->groupBy('type_id');
-        $washingPlans = WashingPlans::all()->groupBy('plan_id');
 
-        return view('staff.pages.manage_pricing.index', compact('carType', 'washingPlans', 'plans'));
+        return view('staff.pages.manage_pricing.index', compact('carType'));
+    }
+
+    public function manage_pricing($id)
+    {
+        $washingPlans = WashingPlans::where('type_id', $id)->orderBy('plan_id', 'asc')->get();
+        return view('staff.pages.manage_pricing.type', compact('washingPlans'));
     }
 
     public function add_pricing_1()

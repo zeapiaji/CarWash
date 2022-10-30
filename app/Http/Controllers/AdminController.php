@@ -42,8 +42,10 @@ class AdminController extends Controller
     public function dashboard_table()
     {
 
-        $admin = Auth::user()->staff->subsidiary_id;
-        $data = Staff::where('subsidiary_id', $admin)->get();
+        $admin = Auth::user()->staff;
+        $data = Staff::where('subsidiary_id', $admin->subsidiary_id)
+        ->whereNotIn('user_id', [$admin->user_id])
+        ->get();
 
         $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
 
@@ -52,16 +54,24 @@ class AdminController extends Controller
 
     public function manage_cashier()
     {
-        $data = User::role('cashier')->get();
-        $subs = Auth::user()->staff;
-        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
-            ->whereNotIn('user_id', [$subs->user_id])
-            ->get();
+        $staff = User::find(Auth::user()->id);
+        if ($staff->hasRole('super_admin')) {
+            $data = Staff::all();
 
-        $gender = Gender::all();
+            return view('staff.pages.manage_cashier.index', compact('data'));
 
+        } elseif($staff->hasRole('admin')) {
+            $subs = Auth::user()->staff;
+            $data = User::role('cashier')->get();
+            $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
+                ->whereNotIn('user_id', [$subs->user_id])
+                ->get();
 
-        return view('staff.pages.manage_cashier.index', compact('data'));
+            $gender = Gender::all();
+
+            return view('staff.pages.manage_cashier.index', compact('data'));
+        }
+
     }
 
     // Member

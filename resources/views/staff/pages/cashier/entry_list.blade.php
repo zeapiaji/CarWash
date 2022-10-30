@@ -6,13 +6,60 @@
     <div class="col-xxl-6 col-lg-12">
         <div class="card h-100">
             <div class="bg-holder bg-card"
-                style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);"></div>
+                style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-3.png')}});"></div>
             <!--/.bg-holder-->
             <div class="card-header z-index-1">
-                <h5 class="text-primary">Antrian Cabang {{$cashier->subsidiary->name}}! </h5>
-            </div>
+                <h5 class="text-primary">Selamat datang {{Auth::user()->name}}! </h5>
+                <h6 class="text-500">Kelola antrian cabang {{Auth::user()->staff->subsidiary->name}}</h6>
+              </div>
         </div>
     </div>
+    <div class="col-xxl-6 col-lg-12">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row g-3 mb-3">
+              <div class="col-sm-4 col-md-4">
+                <div class="card overflow-hidden" style="min-width: 12rem">
+                  <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-5.png')}});"></div>
+                  <!--/.bg-holder-->
+                  <div class="card-body position-relative">
+                    <h6>Doorsmeer</h6>
+                    <div class="d-flex display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning" data-countup='{"endValue":{{$doorsmeer->count()}}}'>0</div>
+                    <a class="fw-semi-bold fs--1 text-nowrap" href="#entry">Kelola<span
+                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card overflow-hidden" style="min-width: 12rem">
+                  <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-1.png')}});"></div>
+                  <!--/.bg-holder-->
+                  <div class="card-body position-relative">
+                    <h6>Dalam Antrian</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                      data-countup='{"endValue":{{$entry->count()}},"suffix":" Kendaraan"}'>0</div><a
+                      class="fw-semi-bold fs--1 text-nowrap" href="#entry">Kelola<span
+                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card overflow-hidden" style="min-width: 12rem">
+                    <div class="bg-holder bg-card" style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-1.png')}});"></div>
+                    <!--/.bg-holder-->
+                    <div class="card-body position-relative">
+                      <h6>Dicuci</h6>
+                      <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":{{$onDoorsmeer}},"suffix":" Kendaraan"}'>0</div><a
+                        class="fw-semi-bold fs--1 text-nowrap" href="#onDoorsmeer">Kelola<span
+                          class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="col-xxl-3 col-md-6">
         <div class="card h-lg-100 overflow-hidden">
             <div class="card-header bg-light">
@@ -20,12 +67,9 @@
                     <div class="col">
                         <h6 class="mb-0">Dalam Antrian</h6>
                     </div>
-                    <div class="col-auto border-start">
-                        <h6 class="mb-0 fw-bolder" data-countup='{"endValue":{{$entry->count()}}}'>0</h6>
-                    </div>
                 </div>
             </div>
-            <div class="card-body p-3">
+            <div class="card-body p-3" id="entry">
                 <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
                     <div class="table-responsive scrollbar">
                       <table class="table table-sm table-bordered table-striped fs--1 mb-0">
@@ -39,8 +83,8 @@
                             </tr>
                         </thead>
                         <tbody class="list">
+                            @foreach ($entry as $item)
                             <tr>
-                                @foreach ($entry as $item)
                                 <td>{{$item->user->name}}</td>
                                 <td>{{$item->user->car->car_type->name}}</td>
                                 <td>{{$item->user->car->number_plate}}</td>
@@ -57,8 +101,8 @@
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"><span
                                             class="text-danger fas fa-trash-alt"></span></a>
                                 </td>
-                                @endforeach
                             </tr>
+                            @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -76,18 +120,15 @@
                     <div class="col">
                         <h6 class="mb-0">Dicuci</h6>
                     </div>
-                    <div class="col-auto border-start">
-                        <h6 class="mb-0 fw-bolder" data-countup='{"endValue":{{$onDoorsmeer}}}'>0</h6>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="row g-3">
             @foreach ($doorsmeer as $item)
             <div class="col-6">
-                <div class="card overflow-hidden">
+                <div class="card overflow-hidden" id="onDoorsmeer">
                     <div class="bg-holder bg-card"
-                        style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-1.png')}});">
+                        style="background-image:url({{asset('admin/assets/img/icons/spot-illustrations/corner-5.png')}});">
                     </div>
                     <!--/.bg-holder-->
                     <div class="card-body position-relative">

@@ -93,17 +93,14 @@
                                     </div>
                                     <!--/.bg-holder-->
                                     <div class="z-index-1 position-relative"><a
-                                            class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                                            href="/">CarWash</a>
+                                            class="link-light mb-4 font-sans-serif fs-4 d-inline-block"
+                                            href="/"><img src="{{asset('member/assets/images/logo-white.png')}}" alt="logo"></a>
                                         <p class="opacity-75 text-white"></p>
                                     </div>
                                 </div>
                                 <div class="mt-3 mb-4 mt-md-4 mb-md-5 light">
                                     <p class="text-white">Tidak punya akun?<br><a
                                             class="text-decoration-underline link-light" href="/register">Mulai sekarang!</a></p>
-                                    <p class="mb-0 mt-4 mt-md-5 fs--1 fw-semi-bold text-white opacity-75">Read our <a
-                                            class="text-decoration-underline text-white" href="#!">terms</a> and <a
-                                            class="text-decoration-underline text-white" href="#!">conditions </a></p>
                                 </div>
                             </div>
                             <div class="col-md-7 d-flex flex-center">
@@ -151,11 +148,6 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-auto">@if (Route::has('password.request'))
-                                                <a class="fs--1" href="{{ route('password.request') }}">
-                                                    {{ __('Lupa Password?') }}
-                                                </a>
-                                                @endif</div>
                                         </div>
                                         <div class="mb-3"><button class="btn btn-primary d-block w-100 mt-3"
                                                 type="submit" name="submit">Masuk</button></div>

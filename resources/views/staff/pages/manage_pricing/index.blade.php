@@ -1,334 +1,88 @@
-@include('member.partials.head')
-@include('member.partials.js')
 @extends('staff.layouts.app')
 @section('content')
+
 @include('staff.partials.menu')
+<!--  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="card mb-3">
     <div class="card-header">
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Paket Pencucian</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Harga</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
-                <a href="/add/pricing-1" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 1</a>
-                <a href="/add/pricing-2" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 2</a>
-                <a href="/add/pricing-3" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 3</a>
-                <a href="/add/pricing-4" class="btn btn-falcon-default btn-sm mx-2">Tambah Paket 4</a>
+                <h6 class="d-none d-sm-inline-block ms-1">Total Jenis Kendaraan</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$carType->count()}}}'>0</h6>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card p-4">
-    <div id="pricing-plan" class="pricing-plan-main-block">
-        <div class="pricing-plan-tab text-center align-item-center">
-            <ul class="nav nav-tabs" role="tablist">
-                @foreach ($carType as $item)
-                <li role="presentation"><a href="#plan-{{$item->id}}" aria-controls="plan-{{$item->id}}" role="tab"
-                        data-toggle="tab"><span>
-                            <i class="icon-{{$item->id}}"></i>
-                        </span>{{$item->name}}</a></li>
-                @endforeach
-            </ul>
-        </div>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="plan-1">
-                <div class="row">
-                    @foreach ($washingPlans as $item => $features)
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket {{$features->
-                            price}}</h6>
-                            <div class="pricing-price-block">
-                                {{-- <h2 class="pricing-price">{{$item->price}}</h2> --}}
-                                <div class="pricing-duration">25 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    {{-- @dd($features) --}}
-                                    @foreach ($features as $feature)
-                                    <li>{{$feature->name}}</li>
-                                    @endforeach
-                                </ul>
-                            <a href="#" class="btn btn-default">Mulai Berlangganan</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="plan-2">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 1</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$69.00</h2>
-                                <div class="pricing-duration">25 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlangganan</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 2</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$89.00</h2>
-                                <div class="pricing-duration">45 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 3</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$109.00</h2>
-                                <div class="pricing-duration">60 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                    <li>Vakum Interior</li>
-                                    <li>Penutup Pintu & Plastik</li>
-                                    <li>Pengharum Ruangan</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 4</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$309.00</h2>
-                                <div class="pricing-duration">100 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                    <li>Vakum Interior</li>
-                                    <li>Penutup Pintu & Plastik</li>
-                                    <li>Pengharum Ruangan</li>
-                                    <li>Pembersihan Dasbor</li>
-                                    <li>Pengharum ruangan</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="plan-3">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 1</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$89.00</h2>
-                                <div class="pricing-duration">25 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 2</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$109.00</h2>
-                                <div class="pricing-duration">45 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 3</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$149.00</h2>
-                                <div class="pricing-duration">60 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                    <li>Vakum Interior</li>
-                                    <li>Penutup Pintu & Plastik</li>
-                                    <li>Pengharum Ruangan</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 4</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$199.00</h2>
-                                <div class="pricing-duration">100 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                    <li>Vakum Interior</li>
-                                    <li>Penutup Pintu & Plastik</li>
-                                    <li>Pengharum Ruangan</li>
-                                    <li>Pembersihan Dasbor</li>
-                                    <li>Pengharum ruangan</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="plan-4">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 1</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$99.00</h2>
-                                <div class="pricing-duration">25 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 2</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$149.00</h2>
-                                <div class="pricing-duration">45 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 3</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$199.00</h2>
-                                <div class="pricing-duration">60 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                    <li>Vakum Interior</li>
-                                    <li>Penutup Pintu & Plastik</li>
-                                    <li>Pengharum Ruangan</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="pricing-block text-center">
-                            <h6 class="pricing-heding">Paket 4</h6>
-                            <div class="pricing-price-block">
-                                <h2 class="pricing-price">$249.00</h2>
-                                <div class="pricing-duration">100 Mins</div>
-                            </div>
-                            <div class="pricing-dtl">
-                                <ul>
-                                    <li>Cuci Eksterior</li>
-                                    <li>Pengeringan Mobil</li>
-                                    <li>Cuci Roda</li>
-                                    <li>Ganti Ban</li>
-                                    <li>Cuci Jendela</li>
-                                    <li>Sabun clear wax</li>
-                                    <li>Vakum Interior</li>
-                                    <li>Penutup Pintu & Plastik</li>
-                                    <li>Pengharum Ruangan</li>
-                                    <li>Pembersihan Dasbor</li>
-                                    <li>Pengharum ruangan</li>
-                                </ul>
-                                <a href="#" class="btn btn-default">Mulai Berlanggana</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="card mb-3" id="customersTable"
+    data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
+    <div class="card-header">
+    </div>
+    <div class="card-body p-4">
+        @foreach ($carType as $item)
+        <a href="/pricing/{{$item->id}}" class="btn btn-lg btn-falcon-primary ms-3">{{$item->name}}</a>
+        @endforeach
     </div>
 </div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#customers-table").TableCheckAll();
+
+        $('#multiple-delete').on('click', function () {
+            var button = $(this);
+            var selected = [];
+            $('#customers-table .check:checked').each(function () {
+                selected.push($(this).val());
+            });
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure you want to delete selected record(s)?',
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: button.data('route'),
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            'selected': selected
+                        },
+                        success: function (response, textStatus, xhr) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response,
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Yes'
+                            }).then((result) => {
+                                window.location = '/doorsmeer/'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+    });
+
+</script>
 
 @endsection
