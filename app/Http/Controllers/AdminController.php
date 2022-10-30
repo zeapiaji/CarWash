@@ -10,17 +10,24 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\CarType;
 use App\Exports\MemberExport;
-use App\Http\Requests\memberRequest;
+use App\Exports\CashierExport;
 use App\Http\Requests\cashierRequest;
-// use App\Http\Requests\updateCashierRequest;
+use App\Http\Requests\memberRequest;
 use App\Imports\MemberImport;
+use App\Models\Doormeer;
 use App\Models\Subsidiary;
+use Database\Seeders\DoormeerSeeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role as ModelsRole;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Contracts\Role;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
+
+
 
 class AdminController extends Controller
 {
@@ -37,20 +44,45 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('staff.pages.dashboard');
+        return view('staff.pages.dashboard_admin.dashboard');
+    }
+
+    public function dashboard_table()
+    {
+
+        $admin = Auth::user()->staff;
+        $data = Staff::where('subsidiary_id', $admin->subsidiary_id)
+            ->whereNotIn('user_id', [$admin->user_id])
+            ->get();
+
+        $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
+
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer'));
     }
 
     public function manage_cashier()
     {
+        $staff = User::find(Auth::user()->id);
+        if ($staff->hasRole('super_admin')) {
+            $data = Staff::all();
 
-        $subs = Auth::user()->staff;
-        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)->whereNotIn('user_id', [$subs->user_id])->get();
+            return view('staff.pages.
+            manage_cashier.index', compact('data'));
+        } elseif ($staff->hasRole('admin')) {
+            $subs = Auth::user()->staff;
+            $data = User::role('cashier')->get();
+            $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
+                ->whereNotIn('user_id', [$subs->user_id])
+                ->get();
 
-        $gender = Gender::all();
+            $gender = Gender::all();
+            // example:
 
 
-        return view('staff.pages.manage_cashier.index', compact('data'));
+            return view('staff.pages.manage_cashier.index', compact('data'));
+        }
     }
+
 
     // Member
     public function manage_member()
@@ -96,9 +128,87 @@ class AdminController extends Controller
         $car->type_id = $request->type;
         $car->number_plate = $request->number_plate;
         $car->save();
+        Alert::success('Berhasil', 'data member telah diubah    ');
 
         return redirect('/manage-member');
     }
+
+
+    public function delete_admin($id)
+    {
+        User::find($id)->delete();
+        Car::where('user_id', $id)->delete();
+
+        return redirect('/manage-admin');
+    }
+
+    public function multiple_delete_admin(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))->delete();
+        User::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+    public function recycle_admin()
+    {
+        $data = User::onlyTrashed()->get();
+        $totalUser = $data->count();
+        return view('staff.pages.manage_admin.recoveryadmin', compact('data', 'totalUser'));
+    }
+
+    public function recovery_admin($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
+        Car::withTrashed()->where('user_id', $id)->restore();
+
+        return redirect('/recycle-admin');
+    }
+
+    public function multiple_recovery_admin(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))
+            ->restore();
+        User::whereIn('id', $request->get('selected'))
+            ->restore();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+    public function recovery_all_admin()
+    {
+        User::withTrashed()->restore();
+        Car::withTrashed()->restore();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+    public function forcedelete_admin($id)
+    {
+        User::withTrashed()->where('id', $id)->forceDelete();
+        Car::withTrashed()->where('id', $id)->forceDelete();
+
+        return redirect('/recycle-admin');
+    }
+
+    public function multiple_force_delete_admin(Request $request)
+    {
+        Car::whereIn('user_id', $request->get('selected'))
+            ->forceDelete();
+        User::whereIn('id', $request->get('selected'))
+            ->forceDelete();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+    public function force_delete_all_admin()
+    {
+        Car::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->forceDelete();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
 
     // Soft Delete
     public function delete_member($id)
@@ -114,7 +224,7 @@ class AdminController extends Controller
         Car::whereIn('user_id', $request->get('selected'))->delete();
         User::whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recycle_member()
@@ -139,7 +249,7 @@ class AdminController extends Controller
         User::whereIn('id', $request->get('selected'))
             ->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function recovery_all_member()
@@ -147,13 +257,13 @@ class AdminController extends Controller
         User::withTrashed()->restore();
         Car::withTrashed()->restore();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function forcedelete_member($id)
     {
-        User::withTrashed()->where('id', $id)->forceDelete();
         Car::withTrashed()->where('id', $id)->forceDelete();
+        User::withTrashed()->where('id', $id)->forceDelete();
 
         return redirect('/recycle-member');
     }
@@ -165,7 +275,7 @@ class AdminController extends Controller
         User::whereIn('id', $request->get('selected'))
             ->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function force_delete_all_member()
@@ -173,8 +283,9 @@ class AdminController extends Controller
         Car::onlyTrashed()->forceDelete();
         User::onlyTrashed()->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
+
 
 
     //Staff
@@ -197,8 +308,6 @@ class AdminController extends Controller
 
     public function store_cashier(cashierRequest $request)
     {
-        // $validated = $request->validated();
-
         $user = User::create([
 
             'name'        => $request->name,
@@ -214,6 +323,7 @@ class AdminController extends Controller
             'subsidiary_id' => $request->subsidiary,
         ]);
 
+        Alert::success('Berhasil', 'Kasir telah ditambahkan');
         return redirect('/manage-cashier');
     }
 
@@ -223,6 +333,7 @@ class AdminController extends Controller
         // $data = User::role('cashier')->where('user_id', $id)->first();
         $data = User::find($id);
         $role = ModelsRole::whereNotIn('name', ['member'])->get();
+
         // $totalcashier = User::role('cashier')->where('subsidiary_id', $data->subsidiary_id)->count();
         $gender = Gender::all();
         $selectedRole = $data->roles->first()->id;
@@ -254,6 +365,10 @@ class AdminController extends Controller
 
         Staff::where('user_id', $id)->first()->syncRoles($request->role);
 
+        // alert::toast('success');
+        Alert::success('Berhasil', 'Data kasir telah diubah');
+
+
         return redirect('/manage-cashier');
     }
 
@@ -261,7 +376,6 @@ class AdminController extends Controller
     public function delete_cashier($id)
     {
         Staff::where('user_id', $id)->delete();
-        User::find($id)->delete();
 
         return redirect('/manage-cashier');
     }
@@ -271,84 +385,63 @@ class AdminController extends Controller
         Staff::role('cashier')->whereIn('id', $request->get('selected'))->delete();
         User::role('cashier')->whereIn('id', $request->get('selected'))->delete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!.", 200);
     }
 
     public function recycle_cashier()
     {
-        $subs = Auth::user()->staff;
-        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)->onlyTrashed()->get();
+        $admin = Auth::user();
+        $data = Staff::where('subsidiary_id', $admin->staff->subsidiary_id)->onlyTrashed()->get();
 
-        $gender = Gender::all();
-        // $data = User::role('cashier')->where('subsidiary_id', $subs->subsidiary_id)->onlyTrashed()->get();
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
 
     public function recovery_cashier($id)
     {
-        // User::withTrashed()->where('id', $id)->restore();
-        // $data = Staff::role('cashier')->withTrashed()->where('id', $id)->restore();
-        // $data = User::role('cashier')->withTrashed()->where('id', $id)->restore();
-        User::withTrashed()->where('id', $id)->restore();
         Staff::withTrashed()->where('user_id', $id)->restore();
-
-        return back();
-
-        return redirect('/recycle/cashier');
-    }
-
-    public function multiple_recovery_cashier(Request $request)
-    {
-        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
-        //     ->restore();
-        User::role('cashier')->whereIn('id', $request->get('selected'))
-            ->restore();
-
-        // $data = Staff::role('cashier')->whereIn('id', $request->get('selected'));
-        $data = User::role('cashier')->whereIn('id', $request->get('selected'));
-
-        return response("Selected post(s) deleted successfully.", 200);
-    }
-
-    public function recovery_all_cashier()
-    {
-        // Staff::role('cashier')->Trashed()->restore();
-        User::role('cashier')->Trashed()->restore();
-
-        return response("Selected post(s) deleted successfully.", 200);
-    }
-
-    public function forcedelete_cashier($id)
-    {
-        // Staff::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
-        // User::role('cashier')->withTrashed()->where('id', $id)->forceDelete();
-
-        // return redirect('/recycle/cashier');
-        Staff::where('user_id', $id)->forceDelete();
-        User::where('id', $id)->forceDelete();
 
         return redirect()->back();
     }
 
+    public function multiple_recovery_cashier(Request $request)
+    {
+        Staff::whereIn('id', $request->get('selected'))
+            ->restore();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+    public function recovery_all_cashier()
+    {
+        Staff::where('subsidiary_id', Auth::user()->staff->subsidiary_id)->withTrashed()->restore();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+    public function forcedelete_cashier($id)
+    {
+        Staff::withTrashed()->where('user_id', $id)->forceDelete();
+        User::find($id)->forceDelete();
+
+        return redirect('/recycle-cashier');
+    }
+
     public function multiple_force_delete_cashier(Request $request)
     {
-        // Car::whereIn('user_id', $request->get('selected'))
-        //     ->forceDelete();
-        // Staff::role('cashier')->whereIn('id', $request->get('selected'))
-        //     ->forceDelete();
+        Staff::whereIn('user_id', $request->get('selected'))
+            ->forceDelete();
         User::role('cashier')->whereIn('id', $request->get('selected'))
             ->forceDelete();
 
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
     public function force_delete_all_cashier()
     {
+        $cashier = Staff::where('subsidiary_id', Auth::user()->staff->subsidiary_id)->get();
+        Staff::onlyTrashed()->where('subsidiary_id', Auth::user()->staff->subsidiary_id)->forceDelete();
 
-        // Staff::role('cashier')->onlyTrashed()->forceDelete();
-        User::role('cashier')->onlyTrashed()->forceDelete();
-
-        return response("Selected post(s) deleted successfully.", 200);
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
 
@@ -386,5 +479,68 @@ class AdminController extends Controller
         Excel::import(new MemberImport, $request->file('file_member'));
 
         return redirect('/manage-member');
+    }
+
+
+    /**
+     * Doorsmeer
+     */
+    public function manage_doorsmeer()
+    {
+        $admin = Staff::where('user_id', Auth::user()->id)->first()->subsidiary_id;
+        $doorsmeer = Doormeer::where('subsidiary_id', $admin)->get();
+
+        return view('staff.pages.manage_doorsmeer.index', compact('doorsmeer'));
+    }
+
+    public function edit_doorsmeer($id)
+    {
+        $data = Doormeer::find($id);
+
+        return view('staff.pages.manage_doorsmeer.edit', compact('data'));
+    }
+
+    public function update_doorsmeer(Request $request, $id)
+    {
+        $data = Doormeer::find($id);
+        $data->name = $request->name;
+        $data->save();
+        Alert::success('Berhasil', 'Doorsmeer telah diubah');
+        return redirect('/doorsmeer/');
+    }
+
+    public function delete_doorsmeer($id)
+    {
+        try {
+            Doormeer::find($id)->delete();
+        } catch (\Throwable $th) {
+            return 'Keluarkan terlebih dahulu member dari doorsmeer!';
+        }
+
+        return redirect('/doorsmeer/');
+    }
+
+    public function add_doorsmeer()
+    {
+        return view('staff.pages.manage_doorsmeer.add');
+    }
+
+    public function store_doorsmeer(Request $request)
+    {
+        $admin = Staff::where('user_id', Auth::user()->id)->first();
+        Doormeer::create([
+            'name' => $request->name,
+            'subsidiary_id' => $admin->subsidiary_id,
+        ]);
+        Alert::success('Berhasil', 'Doorsmeer telah ditambahkan');
+
+        return redirect('/doorsmeer/');
+    }
+
+    public function multiple_delete_doorsmeer(Request $request)
+    {
+        Doormeer::whereIn('id', $request->get('selected'))->delete();
+
+        return response("Data yang dipilih berhasil dihapus!", 200);
     }
 }

@@ -37,14 +37,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Impor</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
-                    </div>
+
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,20 +54,18 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
             </div>
         </div>
     </div>
-    <div class="card-body p-0">
+     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
+            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table"
+            data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
                 <thead class="bg-200 text-900">
                     <tr>
                         <th>
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select"
-                                    type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
-                            </div>
+                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Kendaraan</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
@@ -82,28 +73,26 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
-                    {{-- @dd($data) --}}
+                    {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
-                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}" value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
 
+
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/member/{{$item->id}}">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
-                                    </div>
+                            <div class="d-flex d-flex align-items-center">
+                                <div class="avatar avatar-xl me-2">
+                                    <div class="avatar-name rounded-circle">
+                                        <span>{{mb_substr($item->name, 0, 2)}}</span></div>
                                 </div>
-                            </a>
+                                <div class="flex-1">
+                                    <h5 class="mb-0 fs--1">{{$item->name}}</h5>
+                                </div>
+                            </div>
                         </td>
                          <td class="car align-middle pt-2">{{$item->car->name?? ''}}
                         </td>
@@ -112,6 +101,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
                         <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
                         </td>
                         <td class="phone align-middle py-2">{{$item->phone}}</td>
+
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -142,32 +132,7 @@ data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10
 </div>
 </div>
 
-{{-- Upload File Modal --}}
-<form action="{{route('admin.import-member-xlsx')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-            <div class="modal-content position-relative">
-                <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="rounded-top-sm py-3 ps-4 pe-6 bg-light">
-                        <h5 class="mb-1" id="modalExampleDemoLabel">Import Excel</h5>
-                    </div>
-                    <div class="p-4 pb-4">
-                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_member">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                    <button class="btn btn-sm btn-primary" type="submit">Kirim </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -10,6 +10,10 @@ use App\Exports\AdminExport;
 use App\Http\Requests\adminRequest;
 use App\Http\Requests\updateAdminRequest;
 use App\Imports\AdminImport;
+use App\Models\CarType;
+use App\Models\PlanFeature;
+use App\Models\Plans;
+use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -18,6 +22,8 @@ use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Models\Role as ModelsRole;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class SuperAdminController extends Controller
 {
@@ -76,6 +82,7 @@ class SuperAdminController extends Controller
             'user_id' => $user->id,
             'subsidiary_id' => $request->subsidiary,
         ]);
+        Alert::success('Berhasil', 'Admin telah ditambahkan');
 
         return redirect('/manage-admin');
     }
@@ -119,7 +126,7 @@ class SuperAdminController extends Controller
 
         // dd($data);
         Staff::where('user_id', $id)->first()->syncRoles($request->role);
-
+        Alert::success('Berhasil', 'Data admin telah diubah');
         return redirect('/manage-admin');
     }
 
@@ -240,9 +247,10 @@ class SuperAdminController extends Controller
 
         Subsidiary::create([
             'name' => $request->name,
-            'location' => $request->location,
             'img_path' => $path,
+            'location' => $request->location,
         ]);
+        Alert::success('Berhasil', 'Cabang telah ditambahkan');
 
         return redirect()->back();
     }
@@ -261,6 +269,7 @@ class SuperAdminController extends Controller
         $data->name = $request->name;
         $data->location = $request->location;
         $data->save();
+        Alert::success('Berhasil', 'Data cabang telah diubah');
 
         return redirect('/manage-subsidiaries');
     }
@@ -271,6 +280,52 @@ class SuperAdminController extends Controller
         Subsidiary::find($id)->delete();
 
         return redirect()->back();
+    }
+    public function recycle_subsidiary()
+    {
+        $data = User::onlyTrashed()->get();
+        $totalSubsidiaries = $data->count();
+        return view('staff.pages.manage_subsidiaries.recovery', compact('data', 'totalSubsidiaries'));
+    }
+
+    public function recovery_subsidiary($id)
+    {
+        User::withTrashed()->where('id', $id)->restore();
+        Staff::withTrashed()->where('user_id', $id)->restore();
+
+        return back();
+    }
+
+    public function multiple_recovery_subsidiary(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->restore();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->restore();
+
+        return response("Akun yang dipilih berhasil dipulihkan.", 200);
+    }
+
+    public function multiple_force_delete_subsidiary(Request $request)
+    {
+        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->forceDelete();
+        User::withTrashed()->whereIn('id', $request->get('selected'))->forceDelete();
+
+        return response("Akun yang dipilih berhasil dihapus.", 200);
+    }
+
+    public function recovery_all_subsidiary()
+    {
+        Staff::onlyTrashed()->restore();
+        User::onlyTrashed()->restore();
+
+        return response("Semua admin berhasil dipulihkan.", 200);
+    }
+
+    public function force_delete_all_subsidiary()
+    {
+        Staff::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->forceDelete();
+
+        return response("Semua admin berhasil hapus.", 200);
     }
 
     public function import_admin_xlsx(Request $request)
@@ -293,5 +348,126 @@ class SuperAdminController extends Controller
     public function export_admin_pdf()
     {
         return Excel::download(new AdminExport, 'admin.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
+    /**
+     * Pricing
+     *
+     */
+    public function pricing()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.index', compact('carType'));
+    }
+
+    public function manage_pricing($id)
+    {
+        $washingPlans = WashingPlans::where('type_id', $id)->orderBy('plan_id', 'asc')->get();
+        $carType = CarType::find($id);
+
+        return view('staff.pages.manage_pricing.type', compact('washingPlans', 'carType'));
+    }
+
+    public function edit_pricing($id)
+    {
+        $washingPlans = WashingPlans::find($id);
+
+        return view('staff.pages.manage_pricing.edit', compact('washingPlans'));
+    }
+
+    public function update_pricing($id, Request $request)
+    {
+        $washingPlans = WashingPlans::find($id);
+        $washingPlans->name = $request->feature;
+        $washingPlans->price = $request->price;
+        $washingPlans->save();
+        Alert::success('Berhasil', 'Harga pencucian telah diubah');
+        return redirect('/pricing');
+    }
+
+    public function add_pricing_1()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_1', compact('carType'));
+    }
+
+    public function create_pricing_1(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 1,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+        Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
+
+        return redirect('/pricing');
+    }
+
+    public function add_pricing_2()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_2', compact('carType'));
+    }
+
+    public function add_pricing_3()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_3', compact('carType'));
+    }
+
+    public function add_pricing_4()
+    {
+        $carType = CarType::all();
+
+        return view('staff.pages.manage_pricing.add_4', compact('carType'));
+    }
+
+    public function create_pricing_2(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 2,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
+
+    public function create_pricing_3(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 3,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
+    }
+
+    public function create_pricing_4(Request $request)
+    {
+        foreach ($request->feature as $item) {
+            WashingPlans::create([
+                'name' => $item,
+                'plan_id' => 4,
+                'price' => $request->price,
+                'type_id' => $request->car_type
+            ]);
+        };
+
+        return redirect('/pricing');
     }
 }

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 @include('staff.partials.head')
 
 <body>
-
+@include('sweetalert::alert')
     <main class="main" id="top">
         <div class="container-fluid" data-layout="container">
             <script>
@@ -15,10 +16,15 @@
                 }
               </script>
             @include('staff.partials.sidebar')
+
             @include('staff.partials.navbar')
+
             <div class="content">
+
                 @yield('content')
+
                 @include('staff.partials.footer')
+
             </div>
         </div>
     </main>

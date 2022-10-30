@@ -2,11 +2,10 @@
 @section('content')
 
 @include('staff.partials.menu')
-<!--  -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+@include('sweetalert::alert')
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
@@ -18,23 +17,11 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
                         <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-delete"
-                            data-route="{{ route('admin.multiple-delete-member')}}">Hapus</button>
+                            data-route="{{ route('admin.multiple-delete-cashier')}}">Hapus</button>
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                        <a href="cashier/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
-
-                    <a class="btn btn-falcon-default btn-sm mx-2" id="import" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-file-import" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Impor</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="impor">
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#error-modal" >XLSX</a>
-                        <a class="dropdown-item" data-bs-toggle="modal2" data-bs-target="#error-modal" >CSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal3" data-bs-target="#error-modal" >TSV</a>
-                        <a class="dropdown-item" data-bs-toggle="modal4" data-bs-target="#error-modal" >ODS</a>
-                    </div>
+                        <a href="/cashier/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,12 +29,12 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         <span class="d-none d-sm-inline-block ms-1">Ekspor</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
-                        <a class="dropdown-item" href="/export-member-xlsx">XLSX</a>
-                        <a class="dropdown-item" href="/export-member-csv">CSV</a>
-                        <a class="dropdown-item" href="/export-member-tsv">TSV</a>
-                        <a class="dropdown-item" href="/export-member-ods">ODS</a>
+                        <a class="dropdown-item" href="/export-cashier-xlsx">XLSX</a>
+                        <a class="dropdown-item" href="/export-cashier-csv">CSV</a>
+                        <a class="dropdown-item" href="/export-cashier-tsv">TSV</a>
+                        <a class="dropdown-item" href="/export-cashier-ods">ODS</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/export-member-pdf">PDF</a>
+                        <a class="dropdown-item" href="/export-cashier-pdf">PDF</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +71,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/cashier/{{$item->id}}">
+                            <a href="/detail/cashier/{{$item->user->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
                                         <div class="avatar-name rounded-circle">
@@ -97,7 +84,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                             </a>
                         </td>
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
-                        <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item->user->email}}</a></td>
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a></td>
                         <td class="gender align-middle py-2">{{$item -> user->gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
@@ -128,32 +115,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
 </div>
 </div>
 
-{{-- Upload File Modal --}}
-<form action="{{route('admin.import-member-xlsx')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-            <div class="modal-content position-relative">
-                <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="rounded-top-sm py-3 ps-4 pe-6 bg-light">
-                        <h5 class="mb-1" id="modalExampleDemoLabel">Import Excel</h5>
-                    </div>
-                    <div class="p-4 pb-4">
-                        <input class="form-control form-control-sm" type="file" id="formFile" name="file_member">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                    <button class="btn btn-sm btn-primary" type="submit">Kirim </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -193,7 +155,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                                 showCancelButton: false,
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
-                                window.location = '/manage-member'
+                                window.location = '/manage-cashier'
                             });
                         }
                     });
@@ -204,5 +166,26 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
     });
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
 
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+
+</script>
 @endsection

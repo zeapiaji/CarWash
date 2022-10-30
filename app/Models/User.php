@@ -7,7 +7,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -79,5 +81,15 @@ class User extends Authenticatable
     public function entry(): HasOne
     {
         return $this->hasOne(Entry::class);
+    }
+
+    /**
+     * Get the doorsmeer associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function doorsmeer(): HasOne
+    {
+        return $this->hasOne(Doormeer::class);
     }
 }

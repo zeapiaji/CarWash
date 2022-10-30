@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         for ($i = 1; $i <= 25; $i++) {
             User::create([
                 'name' => 'kasir' . $i,
-                'email' => 'kasir1' . $i . '@gmail.com',
+                'email' => 'kasir' . $i . '@gmail.com',
                 'phone' => '1312261' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),

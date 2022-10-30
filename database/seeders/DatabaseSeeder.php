@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\PlanFeature;
 use App\Models\Staff;
 use Illuminate\Database\Seeder;
 
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SubsidiariesSeeder::class);
         $this->call(StaffSeeder::class);
         $this->call(StatusSeeder::class);
+        $this->call(DoormeerSeeder::class);
     }
 }

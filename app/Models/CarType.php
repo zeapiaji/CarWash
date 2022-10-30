@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CarType extends Model
 {
@@ -23,5 +24,15 @@ class CarType extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
+    }
+
+    /**
+     * Get the washing_plans associated with the CarType
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function washing_plans(): HasOne
+    {
+        return $this->hasOne(WashingPlans::class);
     }
 }

@@ -15,33 +15,11 @@ class WashingPlansSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 5; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             WashingPlans::create([
-                'plan_id' => $i,
-                'feature' => 'fitur '.$i,
+                'name' => 'Paket ' . $i,
+                'plan_id' => random_int(1, 4),
             ]);
         }
-
-        for ($i=1; $i < 8; $i++) {
-            WashingPlans::create([
-                'plan_id' => $i,
-                'feature' => 'fitur '.$i,
-            ]);
-        }
-
-        for ($i=1; $i < 10; $i++) {
-            WashingPlans::create([
-                'plan_id' => $i,
-                'feature' => 'fitur '.$i,
-            ]);
-        }
-
-        for ($i=1; $i < 13; $i++) {
-            WashingPlans::create([
-                'plan_id' => $i,
-                'feature' => 'fitur '.$i,
-            ]);
-        }
-
     }
 }
