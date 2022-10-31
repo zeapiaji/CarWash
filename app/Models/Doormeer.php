@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\RevisionableTrait;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Venturecraft\Revisionable\RevisionableTrait;
 
 class Doormeer extends Model
 {
@@ -36,5 +37,15 @@ class Doormeer extends Model
     public function subsidiary(): BelongsTo
     {
         return $this->belongsTo(Subsidiary::class);
+    }
+
+    /**
+     * Get the transaction associated with the Doormeer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function transaction(): HasOne
+    {
+        return $this->hasOne(Transaction::class, 'doorsmeer_id');
     }
 }

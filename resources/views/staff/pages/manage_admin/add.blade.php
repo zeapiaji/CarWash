@@ -89,7 +89,7 @@
 
                                 @enderror" name="gender" id="bootstrap-wizard-gender">
 
-                                    <option>Pilih gender ...</option>
+                                    <option value="">Pilih gender ...</option>
                                     @foreach ($gender as $item)
                                     <option value="{{$item->id}}" name="gender"
                                         {{ (old('gender') == $item->id) ? 'selected' : ''}}>{{$item->name}}
@@ -151,7 +151,7 @@
                         </option> --}}
 
 
-                        <option>Pilih cabang ...</option>
+                        <option value="">Pilih cabang ...</option>
                         @foreach ($subsidiaries as $item)
 
                         <option value="{{$item->id}}" name="subsidiary"

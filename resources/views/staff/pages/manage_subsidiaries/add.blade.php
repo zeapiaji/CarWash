@@ -24,10 +24,7 @@
                         <label class="form-label" for="name">Nama</label>
                         <input class="form-control" id="name" name="name" type="text"/>
                     </div>
-                    <div class="col-lg-12">
-                        <label class="form-label" for="path">Foto Cabang</label>
-                        <input class="form-control" type="file" id="path" name="path" />
-                    </div>
+
                     <div class="col-lg-12">
                         <label class="form-label" for="address">Lokasi</label>
                         <textarea class="form-control" id="address" name="location" cols="30"

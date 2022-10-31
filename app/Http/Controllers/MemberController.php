@@ -24,9 +24,9 @@ class MemberController extends Controller
 
     public function member_home()
     {
-        $member = User::find(Auth::user()->id);
-        $onDoorsmeer = Entry::where('status_id', 2)->where('user_id', Auth::user()->id)->first();
-        return view('member.pages.home', compact('onDoorsmeer', 'member'));
+        $tipe = CarType::find(Auth::user()->car->type_id)->first();
+
+        return view('member.pages.home', compact('tipe'));
     }
 
     public function edit_car_member()

@@ -31,8 +31,6 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="export">
                         <a class="dropdown-item" href="/export-cashier-xlsx">XLSX</a>
                         <a class="dropdown-item" href="/export-cashier-csv">CSV</a>
-                        <a class="dropdown-item" href="/export-cashier-tsv">TSV</a>
-                        <a class="dropdown-item" href="/export-cashier-ods">ODS</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/export-cashier-pdf">PDF</a>
                     </div>

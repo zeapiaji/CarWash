@@ -9,8 +9,9 @@
                 <h5 class="mb-2 mb-md-0"></h5>
             </div>
             <div class="col-auto">
-                <a class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="/entry/wash/done/{{$doorsmeer->id}}"
-                    type="button"><span class="fas fa-dollar-sign me-1"></span>Terima Pembayaran</a></div>
+                <a class="btn btn-falcon-default btn-sm me-1 mb-2 mb-sm-0" href="/transaction/download/{{$transaction->id}}" type="button"><span class="fas fa-arrow-down me-1"> </span>Download (.pdf)</a>
+                <a class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="{{URL::previous()}}"
+                    type="button">Kembali</a></div>
         </div>
     </div>
 </div>
@@ -18,11 +19,11 @@
     <div class="card-body">
         <div class="row align-items-center text-center mb-3">
             <div class="col-sm-6 text-sm-start"><img src="{{asset('member/assets/images/logo.png')}}"
-                    alt="invoice" width="300" /></div>
+                alt="invoice" width="300" /></div>
             <div class="col text-sm-end mt-3 mt-sm-0">
-                <h2 class="mb-3">{{$entry->subsidiary->name}}</h2>
-                <h5>{{$doorsmeer->name}}</h5>
-                <p class="fs--1 mb-0">{{$entry->subsidiary->location}}</p>
+                <h2 class="mb-3">{{$transaction->subsidiary->name}}</h2>
+                <h5>{{$transaction->doorsmeer->name}}</h5>
+                <p class="fs--1 mb-0">{{$transaction->subsidiary->location}}</p>
             </div>
             <div class="col-12">
                 <hr />
@@ -31,17 +32,21 @@
         <div class="row align-items-center">
             <div class="col">
                 <h6 class="text-500">Tagihan kepada</h6>
-                <h5>{{$entry->user->name}}</h5>
-                <p class="fs--1" style="width: 200px">{{$entry->user->address}}</p>
-                <p class="fs--1">{{$entry->user->email}}<br />{{$entry->user->phone}}</p>
+                <h5>{{$transaction->user->name}}</h5>
+                <p class="fs--1" style="width: 200px">{{$transaction->user->address}}</p>
+                <p class="fs--1">{{$transaction->user->email}}<br />{{$transaction->user->phone}}</p>
             </div>
-            <div class="col-sm-auto ms-auto text">
+            <div class="col-sm-auto ms-auto">
                 <div class="table-responsive">
                     <table class="table table-sm table-borderless fs--1">
                         <tbody>
                             <tr>
+                                <th class="text-sm-end">Nomor faktur:</th>
+                                <td>{{$transaction->id}}</td>
+                            </tr>
+                            <tr>
                                 <th class="text-sm-end">Tanggal faktur:</th>
-                                <td>{{$entry->updated_at->format('Y-m-d')}}</td>
+                                <td>{{$transaction->created_at}}</td>
                             </tr>
                             <tr>
                                 <th class="text-sm-end">Tanggal jatuh tempo:</th>
@@ -49,7 +54,7 @@
                             </tr>
                             <tr class="alert-success fw-bold">
                                 <th class="text-sm-end">Jumlah yang harus dibayar:</th>
-                                <td>Rp @convert($entry->plans->price)</td>
+                                <td>Rp @convert($transaction->plan->price)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,14 +73,14 @@
                 <tbody>
                     <tr>
                         <td class="align-middle">
-                            <h6 class="mb-0 text-nowrap">{{$entry->plans->name}}</h6>
+                            <h6 class="mb-0 text-nowrap">{{$transaction->plan->name}}</h6>
                         </td>
                         <td>
-                            @foreach ($entry->plans->washing_plans as $item)
+                            @foreach ($transaction->plan->washing_plans as $item)
                             <div class="fs--2 text-500">{{$item->name}} <br></div>
                             @endforeach
                         </td>
-                        <td class="align-middle text-end">{{$entry->count()}}</td>
+                        <td class="align-middle text-end">{{$transaction->count()}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -85,7 +90,7 @@
                 <table class="table table-sm table-borderless fs--1 text-end">
                     <tr class="">
                         <th class="text-900">Total:</th>
-                        <td class="fw-semi-bold">Rp @convert($entry->plans->price)</td>
+                        <td class="fw-semi-bold">Rp @convert($transaction->plan->price)</td>
                     </tr>
                 </table>
             </div>

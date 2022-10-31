@@ -11,20 +11,34 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Harga</h4>
-            </div>
-            <div class="col-auto d-none d-sm-block">
-                <h6 class="d-none d-sm-inline-block ms-1">Total Jenis Kendaraan</h6>
-                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$carType->count()}}}'>0</h6>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Paket</h4>
             </div>
         </div>
     </div>
 </div>
 
+
 <div class="card mb-3" id="customersTable"
     data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
-    <div class="card-header">
+    <div class="card-header text-end">
+        <div id="table-customers-replace-element">
+            <a class="btn btn-falcon-success btn-sm mx-2" href="/pricing/add/pricing-1">
+                <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                <span class="d-none d-sm-inline-block ms-1">Tambah Fitur 1</span>
+            </a>
+            <a class="btn btn-falcon-success btn-sm mx-2" href="/pricing/add/pricing-2">
+                <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                <span class="d-none d-sm-inline-block ms-1">Tambah Fitur 2</span>
+            </a>
+            <a class="btn btn-falcon-success btn-sm mx-2" href="/pricing/add/pricing-3">
+                <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                <span class="d-none d-sm-inline-block ms-1">Tambah Fitur 3</span>
+            </a>
+            <a class="btn btn-falcon-success btn-sm mx-2" href="/pricing/add/pricing-4">
+                <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
+                <span class="d-none d-sm-inline-block ms-1">Tambah Fitur 4</span>
+            </a>
+        </div>
     </div>
     <div class="card-body p-4">
         @foreach ($carType as $item)

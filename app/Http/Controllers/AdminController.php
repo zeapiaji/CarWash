@@ -4,26 +4,29 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Car;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\CarType;
-use App\Exports\MemberExport;
-use App\Exports\CashierExport;
-use App\Http\Requests\cashierRequest;
-use App\Http\Requests\memberRequest;
-use App\Imports\MemberImport;
 use App\Models\Doormeer;
 use App\Models\Subsidiary;
-use Database\Seeders\DoormeerSeeder;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role as ModelsRole;
+use App\Exports\MemberExport;
+use App\Imports\MemberImport;
+use App\Exports\CashierExport;
+use App\Exports\TransactionExport;
+use App\Http\Requests\memberRequest;
+use Database\Seeders\DoormeerSeeder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\cashierRequest;
 use Spatie\Permission\Contracts\Role;
-use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role as ModelsRole;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 
@@ -42,7 +45,6 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-
     public function dashboard_table()
     {
 
@@ -54,8 +56,9 @@ class AdminController extends Controller
         $doorsmeer = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
         $history = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
         // dd($history);
+        $transaction = Transaction::where('subsidiary_id', $admin->subsidiary_id)->get();
 
-        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer', 'history'));
+        return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer', 'history', 'transaction'));
     }
 
     public function manage_cashier()
@@ -64,8 +67,7 @@ class AdminController extends Controller
         if ($staff->hasRole('super_admin')) {
             $data = Staff::all();
 
-            return view('staff.pages.
-            manage_cashier.index', compact('data'));
+            return view('staff.pages.manage_cashier.index', compact('data'));
         } elseif ($staff->hasRole('admin')) {
             $subs = Auth::user()->staff;
             $data = User::role('cashier')->get();
@@ -74,8 +76,6 @@ class AdminController extends Controller
                 ->get();
 
             $gender = Gender::all();
-            // example:
-
 
             return view('staff.pages.manage_cashier.index', compact('data'));
         }
@@ -288,8 +288,6 @@ class AdminController extends Controller
         return response("Data yang dipilih berhasil dihapus!", 200);
     }
 
-
-
     //Staff
     public function detail_cashier($id)
     {
@@ -479,11 +477,21 @@ class AdminController extends Controller
         return Excel::download(new MemberExport, 'member.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 
-    public function import_member_xlsx(Request $request)
+    public function export_cashier_xlsx()
     {
-        Excel::import(new MemberImport, $request->file('file_member'));
+        return Excel::download(new CashierExport, 'cashier-cabang-'.Auth::user()->staff->subsidiary->name.'.xlsx');
+    }
 
-        return redirect('/manage-member');
+    public function export_cashier_csv()
+    {
+        return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
+
+    public function export_cashier_pdf()
+    {
+        return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 
 
@@ -548,4 +556,32 @@ class AdminController extends Controller
 
         return response("Data yang dipilih berhasil dihapus!", 200);
     }
+
+    /**
+     * Transaction
+     *
+     */
+    public function history_transaction($id)
+    {
+        $transaction = Transaction::find($id);
+
+        return view('member.pages.history_invoices', compact('transaction'));
+    }
+
+    public function history_member()
+    {
+        $transaction = Transaction::where('member_id', Auth::id())->get();
+
+        return view('member.pages.history', compact('transaction'));
+    }
+
+    public function transaction_download($id)
+    {
+        $data = Transaction::find($id);
+        $transaction = ['transaction' => $data];
+        $pdf = Pdf::loadView('staff.pages.transaction.export', $transaction);
+        return $pdf->stream();
+
+    }
+
 }

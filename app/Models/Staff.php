@@ -40,4 +40,14 @@ class Staff extends Model
     {
         return $this->belongsTo(Subsidiary::class);
     }
+
+    /**
+     * Get the transaction associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function transaction(): HasOne
+    {
+        return $this->hasOne(Transaction::class, 'staff_id');
+    }
 }

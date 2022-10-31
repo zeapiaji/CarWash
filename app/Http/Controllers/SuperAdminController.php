@@ -13,6 +13,7 @@ use App\Imports\AdminImport;
 use App\Models\CarType;
 use App\Models\PlanFeature;
 use App\Models\Plans;
+use App\Models\Transaction;
 use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -241,13 +242,8 @@ class SuperAdminController extends Controller
 
     public function create_subsidiary(Request $request)
     {
-        $request->file('path')->getClientOriginalName();
-
-        $path = $request->file('path')->store('public/img/subsidiaries');
-
         Subsidiary::create([
             'name' => $request->name,
-            'img_path' => $path,
             'location' => $request->location,
         ]);
         Alert::success('Berhasil', 'Cabang telah ditambahkan');
@@ -356,17 +352,17 @@ class SuperAdminController extends Controller
      */
     public function pricing()
     {
-        $carType = CarType::all();
+        $carType = Plans::all();
 
         return view('staff.pages.manage_pricing.index', compact('carType'));
     }
 
     public function manage_pricing($id)
     {
-        $washingPlans = WashingPlans::where('type_id', $id)->orderBy('plan_id', 'asc')->get();
-        $carType = CarType::find($id);
+        $washingPlans = WashingPlans::where('plan_id', $id)->get();
+        $price = Plans::find($id);
 
-        return view('staff.pages.manage_pricing.type', compact('washingPlans', 'carType'));
+        return view('staff.pages.manage_pricing.type', compact('washingPlans', 'price'));
     }
 
     public function edit_pricing($id)
@@ -376,13 +372,43 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_pricing.edit', compact('washingPlans'));
     }
 
+    public function edit_price($id)
+    {
+        $price = Plans::find($id);
+
+        return view('staff.pages.manage_pricing.edit_price', compact('price'));
+    }
+
     public function update_pricing($id, Request $request)
     {
         $washingPlans = WashingPlans::find($id);
         $washingPlans->name = $request->feature;
-        $washingPlans->price = $request->price;
         $washingPlans->save();
+
+        $plans = Plans::find($id);
+        $plans->name = $request->price;
+
+
         Alert::success('Berhasil', 'Harga pencucian telah diubah');
+        return redirect('/pricing');
+    }
+
+    public function update_price($id, Request $request)
+    {
+
+        $plans = Plans::find($id);
+        $plans->name = $request->price;
+
+
+        Alert::success('Berhasil', 'Harga pencucian telah diubah');
+        return redirect('/pricing');
+    }
+
+    public function delete_pricing($id)
+    {
+        $washingPlans = WashingPlans::find($id)->forceDelete();
+
+        Alert::success('Berhasil', 'Fitur paket telah dihapus');
         return redirect('/pricing');
     }
 
@@ -400,7 +426,6 @@ class SuperAdminController extends Controller
                 'name' => $item,
                 'plan_id' => 1,
                 'price' => $request->price,
-                'type_id' => $request->car_type
             ]);
         };
         Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
@@ -436,9 +461,9 @@ class SuperAdminController extends Controller
                 'name' => $item,
                 'plan_id' => 2,
                 'price' => $request->price,
-                'type_id' => $request->car_type
             ]);
         };
+        Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
 
         return redirect('/pricing');
     }
@@ -450,9 +475,9 @@ class SuperAdminController extends Controller
                 'name' => $item,
                 'plan_id' => 3,
                 'price' => $request->price,
-                'type_id' => $request->car_type
             ]);
         };
+        Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
 
         return redirect('/pricing');
     }
@@ -464,10 +489,51 @@ class SuperAdminController extends Controller
                 'name' => $item,
                 'plan_id' => 4,
                 'price' => $request->price,
-                'type_id' => $request->car_type
             ]);
         };
+        Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
 
         return redirect('/pricing');
     }
+
+
+    public function multiple_delete_pricing(Request $request)
+    {
+        WashingPlans::whereIn('id', $request->get('selected'))->forceDelete();
+
+        Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
+
+        return redirect('/pricing');
+    }
+
+    /**
+     * Transaction
+     *
+     */
+
+     public function all_transaction()
+     {
+        $subsidiary = Subsidiary::all();
+
+        return view('staff.pages.transaction.all_transaction',compact('subsidiary'));
+     }
+
+     public function transaction_subsidiary($id)
+     {
+        $transaction = Transaction::where('subsidiary_id', $id)->get();
+        // dd($transaction);
+        return view('staff.pages.transaction.subsidiary_transaction', compact('transaction'));
+     }
+
+    /**
+     * Washing History
+     *
+     */
+
+     public function washing_subsidiary($id)
+     {
+        $transaction = Transaction::where('subsidiary_id', $id)->get();
+        // dd($transaction);
+        return view('staff.pages.washing.subsidiary_washing', compact('transaction'));
+     }
 }

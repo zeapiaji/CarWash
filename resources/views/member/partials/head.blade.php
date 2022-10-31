@@ -25,6 +25,13 @@
     <!-- magnify popup css -->
     <link rel="stylesheet" type="text/css" href="{{asset('member/assets/css/datepicker.css')}}" />
     <!-- datepicker css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('member/assets/css/style.css')}}" /> <!-- custom css -->
+    <link rel="stylesheet" type="text/css" href="{{asset('member/assets/css/style.css')}}" />
+
+    <style>
+        html {
+  scroll-behavior: smooth;
+}
+    </style>
+    <!-- custom css -->
     <!-- end theme style -->
 </head>

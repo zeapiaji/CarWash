@@ -11,12 +11,14 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Harga {{$carType->name}}</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Paket {{$price->name}}</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
-                <h6 class="d-none d-sm-inline-block ms-1">Total Doorsmeer</h6>
+                <h6 class="d-none d-sm-inline-block ms-1">Harga Paket</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-                {{-- <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$doorsmeer->count()}}}'>0</h6> --}}
+                <h6 class="d-none d-sm-inline-block ms-1">Rp</h6>
+                {{-- <span class="fw-bolder mx-1" style="font-size:20px">|</span> --}}
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$price->price}}}'>0</h6>
             </div>
         </div>
     </div>
@@ -28,22 +30,17 @@
         <div class="row flex-between-center">
             <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                 <input type="search" class="form-control search-input search" placeholder="cari..">
+                <a href="/pricing/edit/price/{{$price->id}}" class="ms-3 btn btn-falcon-primary">Edit</a>
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
                 <div class="d-none" id="table-customers-actions">
                     <div class="d-flex">
                         <button class="btn btn-falcon-danger btn-sm ms-2" id="multiple-delete"
-                            data-route="{{ route('multiple_delete_doorsmeer')}}">
+                            data-route="{{ route('multiple_delete_pricing')}}">
                             <span class="fas fa-user-slash" data-fa-transform="shrink-3 down-2"></span>
                             <div class="d-none d-sm-inline-block ms-1">Hapus</div>
                         </button>
                     </div>
-                </div>
-                <div id="table-customers-replace-element">
-                    <a class="btn btn-falcon-success btn-sm mx-2" href="/doorsmeer/add">
-                        <span class="fas fa-user-plus" data-fa-transform="shrink-3 down-2"></span>
-                        <span class="d-none d-sm-inline-block ms-1">Tambah Paket</span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -61,7 +58,6 @@
                             </div>
                         </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama Fitur</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Paket</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -71,16 +67,13 @@
                     <tr class="btn-reveal-trigger">
                         <td class="align-middle py-2" style="width: 28px;">
                             <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->plans->id}}"
+                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
                                     value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
                             </div>
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
                             {{$item->name}}
-                        </td>
-                        <td class="name align-middle white-space-nowrap py-2">
-                            {{$item->plan_id}}
                         </td>
 
                         <td class="align-middle white-space-nowrap py-2 text-end">
@@ -92,9 +85,9 @@
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item border-bottom"
-                                            href="/pricing/edit/{{$item->plans->id}}">Sunting</a>
+                                            href="/pricing/edit/{{$item->id}}">Sunting</a>
                                         <a class="dropdown-item text-danger"
-                                            href="/doorsmeer/delete/{{$item->id}}">Hapus</a></div>
+                                            href="/pricing/delete/{{$item->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

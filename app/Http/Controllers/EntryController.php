@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Entry;
+use App\Models\Plans;
 use App\Models\Staff;
 use App\Models\Doormeer;
-use App\Models\Plans;
 use App\Models\Subsidiary;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\returnSelf;
@@ -48,8 +49,6 @@ class EntryController extends Controller
                     'subsidiary_id' => $request->subsidiary,
                 ]);
             } catch (\Throwable $th) {
-                Auth::logout();
-
                 return back()->withErrors([
                     'email' => 'Anda sudah dalam antrian.',
                 ]);
@@ -80,7 +79,6 @@ class EntryController extends Controller
     public function entry_wash_payment($id)
     {
         $doorsmeer = Doormeer::find($id);
-
         $entry = Entry::where('user_id', $doorsmeer->user_id)->first();
 
         return view('member.pages.invoice', compact('entry', 'doorsmeer'));
@@ -89,12 +87,23 @@ class EntryController extends Controller
     public function entry_wash_done($id)
     {
         $doorsmeer = Doormeer::find($id);
-        Entry::where('user_id', $doorsmeer->user_id)->delete();
-        $doorsmeer->user_id = null;
-        $doorsmeer->save();
 
         $entry = Entry::where('user_id', $doorsmeer->user_id)->first();
 
+        Transaction::create([
+            'member_id' => $entry->user->id,
+            'staff_id' => Auth::user()->staff->id,
+            'plan_id' => $entry->plans->id,
+            'doorsmeer_id' => $doorsmeer->id,
+            'subsidiary_id' => $doorsmeer->subsidiary->id,
+        ]);
+
+        $entry->delete();
+
+        $doorsmeer->user_id = null;
+        $doorsmeer->save();
+
+        Alert::success('Berhasil', 'Rekaman transaksi telah disimpan');
         return redirect('/entry/list');
     }
 

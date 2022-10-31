@@ -35,4 +35,14 @@ class Plans extends Model
     {
         return $this->hasOne(Entry::class);
     }
+
+    /**
+     * Get the transaction associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function transaction(): HasOne
+    {
+        return $this->hasOne(Transaction::class, 'plan_id');
+    }
 }

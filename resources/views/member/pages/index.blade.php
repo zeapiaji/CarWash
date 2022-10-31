@@ -8,7 +8,7 @@
                 <h1 class="slider-heading">Untuk kendaraan anda</h1>
                 <p>Sekarang berlangganan cuci mobil lebih mudah dilakukan, car wash  siap membuat mobil anda berih dan tetap elegant.</p>
                 <div class="slider-btn">
-                    <a href="#" class="btn btn-default">Tentang kami</a>
+                    <a href="#about_us" class="btn btn-default">Tentang kami</a>
                 </div>
             </div>
         </div>
@@ -16,11 +16,11 @@
     <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
         <div class="container">
             <div class="slider-dtl">
-                <h4 class="slider-sub-heading">Kami peduli</h4>
+                <h4 class="slider-sub-heading">Memberikan Layanan Terbaik</h4>
                 <h1 class="slider-heading">Untuk kendaraan anda</h1>
-                <p>Sekarang berlangganan cuci mobil lebih mudah dilakukan, car wash  siap membuat mobil anda berih dan tetap elegant.</p>
+                <p>Kami memberikan pelayanan terbaik untuk berbagai jenis kendaraan milik anda.</p>
                 <div class="slider-btn">
-                    <a href="#" class="btn btn-default">Tentang kami</a>
+                    <a href="#service" class="btn btn-default">Layanan Kami</a>
                 </div>
             </div>
         </div>
@@ -28,11 +28,11 @@
     <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-3.jpg')}}')">
         <div class="container">
             <div class="slider-dtl">
-                <h4 class="slider-sub-heading">Kami peduli</h4>
+                <h4 class="slider-sub-heading">Harga terbaik</h4>
                 <h1 class="slider-heading">Untuk kendaraan anda</h1>
-                <p>Sekarang berlangganan cuci mobil lebih mudah dilakukan, car wash  siap membuat mobil anda berih dan tetap elegant.</p>
+                <p>Kami memberikan harga yang sesuai dengan kualitas jasa yang diberikan oleh kami.</p>
                 <div class="slider-btn">
-                    <a href="#" class="btn btn-default">Tentang kami</a>
+                    <a href="#paket" class="btn btn-default">Tentang kami</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="section">
-                    <h3 class="section-heading">TENTANG KAMI</h3>
+                    <h3 class="section-heading">Tentang Kami</h3>
                     <p>Layanan kami bukan hanya sekedar mencuci karena merupakan perawatan nyata untuk mobil Anda. Mobil
                         terlahir kembali karena pengerjaan pada karyawan kami yang terlatih. Penelitian telah
                         menunjukkan, pembersihan tekanan uap mencegah korosi untuk jangka waktu 2 tahun jika
@@ -131,8 +131,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Pembersihan Manual</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+                        <p>Dengan Pembersihan .</p>
                     </div>
                 </div>
             </div>
@@ -293,7 +292,7 @@
                             <i class="fa fa-coffee" aria-hidden="true"></i>
                         </div>
                         <h2 class="facts-number counter">500</h2>
-                        <div class="facts-text">Gelas kopi</div>
+                        <div class="facts-text">Menikmati Pelayanan</div>
                     </div>
                 </div>
             </div>
@@ -310,8 +309,7 @@
         </div>
         <!-- Tab panes -->
         <div class="tab-content">
-
-            {{--  <div role="tabpanel" class="tab-pane active" id="plan-1">
+             <div role="tabpanel" class="tab-pane active" id="plan-1">
                 <div class="row">
                     @foreach ($plans as $item )
                     <div class="col-md-3 col-sm-6">
@@ -331,24 +329,10 @@
                     </div>
                     @endforeach
                 </div>
-            </div>  --}}
-
+            </div>
         </div>
     </div>
 </div>
-<!--  end plans -->
-<!--  testimonials -->
-
-<!--  end testimonials -->
-<!--  appointment -->
-
-<!--  end appointment -->
-
-<!--  end latest news -->
-
-<!--  end clients -->
-<!--  map -->
-<div id="location" class="map-location">
 
 </div>
 <!--  end map -->

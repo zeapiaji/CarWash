@@ -7,24 +7,11 @@
     @csrf
     <div class="card mb-3">
         <div class="card-header">
-            <h5 class="mb-0">Tambah Fitur di Paket 1</h5>
+            <h5 class="mb-0">Tambah Fitur di Paket 4</h5>
         </div>
         <div class="card-body bg-light">
             <div class="row g-3">
-                <div class="col-lg-6">
-                    <label class="form-label" for="bootstrap-wizard-gender">Pilih Tipe</label>
-                    <select class="form-select" name="car_type" id="bootstrap-wizard-gender">
-                        <option>Pilih Tipe ...</option>
-                        @foreach ($carType as $item)
-                        <option value="{{$item->id}}" name="car_type">{{$item->name}}
-                        </option>
-                        @endforeach
-                    </select>
-                    <div class="mt-1">
-                        <p class="fs--2 text-secondary">*Fitur akan ditambahkan sesuai dengan tipe yang dipilih.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <label class="form-label" for="price">Harga Paket</label>
                     <div class="input-group"><span class="input-group-text">Rp</span><input class="form-control" type="number" name="price"/></div>
                 </div>

@@ -54,6 +54,23 @@
                 </li>
                 @endrole
 
+                {{-- Entry --}}
+                @role('member')
+                <!-- parent pages-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/member-home">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-users"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Dasbor</span>
+                        </div>
+                    </a>
+                </li>
+
+                @endrole
+
+
                 @role('super_admin')
                 <!-- parent pages-->
                 <li class="nav-item">
@@ -199,7 +216,7 @@
 
                 @endrole
 
-                @role('admin')
+                @role('admin||super_admin||member||cashier')
                 {{-- Divider --}}
                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                     <div class="col-auto navbar-vertical-label">Data</div>
@@ -209,14 +226,82 @@
                 </div>
                 @endrole
 
+                @role('member')
+                 <!-- parent pages-->
+                 <li class="nav-item">
+                    <a class="nav-link" href="/history/transaction">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-users"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Riwayat</span>
+                        </div>
+                    </a>
+                </li>
+                @endrole
+
+                @role('admin||cashier')
+                <!-- parent pages-->
+                <li class="nav-item">
+                   <a class="nav-link" href="/transaction/subsidiary/{{Auth::user()->staff->subsidiary_id}}">
+                       <div class="d-flex align-items-center">
+                           <span class="nav-link-icon">
+                               <span class="fas fa-file-invoice-dollar"></span>
+                           </span>
+                           <span class="nav-link-text ps-1">Riwayat Transaksi</span>
+                       </div>
+                   </a>
+               </li>
+               @endrole
+
+               @role('admin||cashier')
+                <!-- parent pages-->
+                <li class="nav-item">
+                   <a class="nav-link" href="/washing/subsidiary/{{Auth::user()->staff->subsidiary_id}}">
+                       <div class="d-flex align-items-center">
+                           <span class="nav-link-icon">
+                               <span class="fas fa-car-side"></span>
+                           </span>
+                           <span class="nav-link-text ps-1">Riwayat Pencucian</span>
+                       </div>
+                   </a>
+               </li>
+               @endrole
+
+                @role('super_admin')
+                 <!-- parent pages-->
+                 <li class="nav-item">
+                    <a class="nav-link" href="/all-transaction">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-users"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Pencucian</span>
+                        </div>
+                    </a>
+                </li>
+                @endrole
+
                 @role('admin')
                 <li class="nav-item">
                     <a class="nav-link" href="/doorsmeer/" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
-                                <span class="fas fa-car-side"></span>
+                                <span class="fas fa-smog"></span>
                             </span>
                             <span class="nav-link-text ps-1">Doorsmeer</span></div>
+                    </a>
+                </li>
+                @endrole
+
+                @role('super_admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="/pricing" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-car-side"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">Harga Pencucian</span></div>
                     </a>
                 </li>
                 @endrole
