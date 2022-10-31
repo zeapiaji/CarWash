@@ -4,13 +4,11 @@
     <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-1.jpg')}}')">
         <div class="container">
             <div class="slider-dtl">
-                <h4 class="slider-sub-heading">We Care</h4>
-                <h1 class="slider-heading">For Your Car</h1>
-                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
-                    aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                <h4 class="slider-sub-heading">Kami peduli</h4>
+                <h1 class="slider-heading">Untuk kendaraan anda</h1>
+                <p>Sekarang berlangganan cuci mobil lebih mudah dilakukan, car wash  siap membuat mobil anda berih dan tetap elegant.</p>
                 <div class="slider-btn">
-                    <a href="#" class="btn btn-orange">Read More</a>
-                    <a href="#" class="btn btn-default">Contact Us</a>
+                    <a href="#" class="btn btn-default">Tentang kami</a>
                 </div>
             </div>
         </div>
@@ -18,13 +16,11 @@
     <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-2.jpg')}}')">
         <div class="container">
             <div class="slider-dtl">
-                <h4 class="slider-sub-heading">We Care</h4>
-                <h1 class="slider-heading">For Your Car</h1>
-                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
-                    aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                <h4 class="slider-sub-heading">Kami peduli</h4>
+                <h1 class="slider-heading">Untuk kendaraan anda</h1>
+                <p>Sekarang berlangganan cuci mobil lebih mudah dilakukan, car wash  siap membuat mobil anda berih dan tetap elegant.</p>
                 <div class="slider-btn">
-                    <a href="#" class="btn btn-orange">Read More</a>
-                    <a href="#" class="btn btn-default">Contact Us</a>
+                    <a href="#" class="btn btn-default">Tentang kami</a>
                 </div>
             </div>
         </div>
@@ -32,13 +28,11 @@
     <div class="item home-slider-bg" style="background-image: url('{{asset('member/assets/images/slider-3.jpg')}}')">
         <div class="container">
             <div class="slider-dtl">
-                <h4 class="slider-sub-heading">We Care</h4>
-                <h1 class="slider-heading">For Your Car</h1>
-                <p>Nam pretium turpis et arcu duis arcu tortor suscipit eget impe nec imperdiet iaculis ipsum sed
-                    aliquam ultrices mauris ante arcu accumsan a consectetuer eget posuere.</p>
+                <h4 class="slider-sub-heading">Kami peduli</h4>
+                <h1 class="slider-heading">Untuk kendaraan anda</h1>
+                <p>Sekarang berlangganan cuci mobil lebih mudah dilakukan, car wash  siap membuat mobil anda berih dan tetap elegant.</p>
                 <div class="slider-btn">
-                    <a href="#" class="btn btn-orange">Read More</a>
-                    <a href="#" class="btn btn-default">Contact Us</a>
+                    <a href="#" class="btn btn-default">Tentang kami</a>
                 </div>
             </div>
         </div>
@@ -46,7 +40,7 @@
 </div>
 <!--  end slider -->
 <!--  who we are -->
-<div id="who-we-are" class="who-we-are-main-block">
+<div id="about_us" class="who-we-are-main-block">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -118,7 +112,7 @@
 </div>
 <!--  end who we are -->
 <!--  services -->
-<div id="services" class="services-main-block">
+<div id="service" class="services-main-block">
     <div class="container">
         <div class="section text-center">
             <h3 class="section-heading">LAYANAN KAMI</h3>
@@ -308,7 +302,7 @@
 </div>
 <!--  end facts -->
 <!--  plans -->
-<div id="pricing-plan" class="pricing-plan-main-block">
+<div id="paket" class="pricing-plan-main-block">
     <div class="container">
         <div class="section text-center">
             <h3 class="section-heading">Paket Cuci</h3>

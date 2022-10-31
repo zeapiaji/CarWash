@@ -9,7 +9,7 @@
                 <h5 class="mb-2 mb-md-0"></h5>
             </div>
             <div class="col-auto">
-                    class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="" type="button"><span
+                    <a class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="/entry/wash/done/{{$entry->id}}" type="button"><span
                         class="fas fa-dollar-sign me-1"></span>Terima Pembayaran</a></div>
         </div>
     </div>

@@ -28,6 +28,13 @@ Route::post('/register-member', [GeneralController::class, 'register_member'])->
 Route::post('/image/user/{id}', [GeneralController::class, 'image']);
 
 Route::middleware(['role:member'])->group(function () {
+    Route::prefix('member')->group(function () {
+        Route::get('/edit/car/{id}', [MemberController::class, 'edit_car_member']);
+        Route::post('/update/car', [MemberController::class, 'update_car_member']);
+        Route::get('/edit/{id}', [MemberController::class, 'edit_member']);
+        Route::post('/update', [MemberController::class, 'update_member']);
+        Route::get('/delete', [MemberController::class, 'delete_member']);
+    });
     Route::get('/member-home', [MemberController::class, 'member_home'])->name('member.home');
 });
 

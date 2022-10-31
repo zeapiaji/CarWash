@@ -199,7 +199,7 @@
 
                 @endrole
 
-                @role('admin||super_admin')
+                @role('admin')
                 {{-- Divider --}}
                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                     <div class="col-auto navbar-vertical-label">Data</div>
@@ -217,18 +217,6 @@
                                 <span class="fas fa-car-side"></span>
                             </span>
                             <span class="nav-link-text ps-1">Doorsmeer</span></div>
-                    </a>
-                </li>
-                @endrole
-
-                @role('super_admin')
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin-washing-data" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-car-side"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Pencucian</span></div>
                     </a>
                 </li>
                 @endrole
