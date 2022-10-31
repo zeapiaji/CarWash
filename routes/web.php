@@ -61,7 +61,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
     Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
 
-    Route::get('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('admin.deletecashier');
+    Route::delete('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('delete.cashier');
     Route::post('/multiple-delete/cashier', [AdminController::class, 'multiple_delete_cashier'])->name('admin.multiple-delete-cashier');
 
     Route::get('/recycle-cashier', [AdminController::class, 'recycle_cashier'])->name('admin.recycle_cashier');

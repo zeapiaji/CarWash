@@ -105,7 +105,7 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->user->id}}">Sunting</a><a
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->user->id}}">Pulihkan</a><a
                                             class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>

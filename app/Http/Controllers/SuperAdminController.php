@@ -139,7 +139,7 @@ class SuperAdminController extends Controller
         Staff::where('user_id', $id)->delete();
 
         User::find($id)->delete();
-
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
         return redirect('/manage-admin');
     }
 
@@ -278,7 +278,7 @@ class SuperAdminController extends Controller
     {
         Staff::where('subsidiary_id', $id)->update(['subsidiary_id' => null]);
         Subsidiary::find($id)->delete();
-
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
         return redirect()->back();
     }
     public function recycle_subsidiary()

@@ -139,6 +139,8 @@ class AdminController extends Controller
         User::find($id)->delete();
         Car::where('user_id', $id)->delete();
 
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
+
         return redirect('/manage-admin');
     }
 
@@ -215,6 +217,8 @@ class AdminController extends Controller
     {
         User::find($id)->delete();
         Car::where('user_id', $id)->delete();
+
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
 
         return redirect('/manage-member');
     }
@@ -377,6 +381,9 @@ class AdminController extends Controller
     {
         Staff::where('user_id', $id)->delete();
 
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
+
+
         return redirect('/manage-cashier');
     }
 
@@ -516,7 +523,7 @@ class AdminController extends Controller
         } catch (\Throwable $th) {
             return 'Keluarkan terlebih dahulu member dari doorsmeer!';
         }
-
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
         return redirect('/doorsmeer/');
     }
 
