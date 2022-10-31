@@ -4,7 +4,7 @@
 @include('staff.partials.head')
 
 <body>
-
+@include('sweetalert::alert')
     <main class="main" id="top">
         <div class="container-fluid" data-layout="container">
             <script>

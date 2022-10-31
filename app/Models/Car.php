@@ -31,7 +31,6 @@ class Car extends Authenticatable
      */
     public function car_type()
     {
-        return $this->belongsTo(CarType::class, 'type_id');
+        return $this->belongsTo(CarType::class);
     }
-
 }

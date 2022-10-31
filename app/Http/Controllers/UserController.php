@@ -13,7 +13,6 @@ class UserController extends Controller
     public function landing_page()
     {
         $plans = Plans::all();
-
         return view('member.pages.index', compact('plans'));
     }
 }

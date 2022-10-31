@@ -31,6 +31,5 @@ class CarTypesSeeder extends Seeder
         CarType::create([
             'name' => 'Van',
         ]);
-
     }
 }

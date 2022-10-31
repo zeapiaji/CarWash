@@ -15,11 +15,11 @@ class CarsSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <= 25; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             Car::create([
                 'user_id' => $i,
-                'number_plate' => 'D 123'.$i.' JKL',
-                'name' => 'Supra '.$i,
+                'number_plate' => 'D 123' . $i . ' JKL',
+                'name' => 'Supra ' . $i,
                 'type_id' => random_int(1, 4),
             ]);
         }

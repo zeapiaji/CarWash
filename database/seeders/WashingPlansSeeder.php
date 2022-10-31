@@ -15,10 +15,10 @@ class WashingPlansSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <= 25; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             WashingPlans::create([
-                'name' => 'Paket '.$i,
-                'plan_id' => random_int(1,4),
+                'name' => 'Paket ' . $i,
+                'plan_id' => random_int(1, 4),
             ]);
         }
     }

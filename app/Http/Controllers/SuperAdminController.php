@@ -7,6 +7,8 @@ use App\Models\Staff;
 use App\Models\Gender;
 use App\Models\Subsidiary;
 use App\Exports\AdminExport;
+use App\Http\Requests\adminRequest;
+use App\Http\Requests\updateAdminRequest;
 use App\Imports\AdminImport;
 use App\Models\CarType;
 use App\Models\PlanFeature;
@@ -14,9 +16,14 @@ use App\Models\Plans;
 use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Models\Role as ModelsRole;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class SuperAdminController extends Controller
 {
@@ -52,22 +59,22 @@ class SuperAdminController extends Controller
 
     public function add_admin()
     {
-        $role = ModelsRole::whereNotIn('name',['member'])->get();
+        $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
         $subsidiaries = Subsidiary::all();
         $gender = Gender::all();
         return view('staff.pages.manage_admin.add', compact('role', 'gender', 'subsidiaries'));
     }
 
-    public function create_admin(Request $request)
+    public function create_admin(adminRequest $request)
     {
         $user = User::create([
-            'name' => $request -> name,
-            'email' => $request -> email,
-            'phone' => $request -> phone,
-            'birth' => $request -> birth,
-            'gender_id' => $request -> gender,
-            'address' => $request -> address,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'birth' => $request->birth,
+            'gender_id' => $request->gender,
+            'address' => $request->address,
             'password' => Hash::make($request['password']),
         ])->assignRole('admin');
 
@@ -75,6 +82,7 @@ class SuperAdminController extends Controller
             'user_id' => $user->id,
             'subsidiary_id' => $request->subsidiary,
         ]);
+        Alert::success('Berhasil', 'Admin telah ditambahkan');
 
         return redirect('/manage-admin');
     }
@@ -99,17 +107,26 @@ class SuperAdminController extends Controller
     public function update_admin(Request $request, $id)
     {
         $data = User::find($id);
-        $data -> name = $request -> name;
-        $data -> email = $request -> email;
-        $data -> phone = $request -> phone;
-        $data -> birth = $request -> birth;
-        $data -> address = $request -> address;
-        $data -> gender_id = $request -> gender;
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->birth = $request->birth;
+        $data->address = $request->address;
+        $data->gender_id = $request->gender;
         $data->save();
 
-        // Change role
-        Staff::where('user_id', $id)->first()->syncRoles($request->role);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:25',
+            'email' => 'required|unique:users,email',
+            'phone' => 'required|unique:users,phone|min:10|max:13',
+            'birth' => 'required',
+            'address' => 'required|min:5|max:100',
+            'gender' => 'required',
+        ]);
 
+        // dd($data);
+        Staff::where('user_id', $id)->first()->syncRoles($request->role);
+        Alert::success('Berhasil', 'Data admin telah diubah');
         return redirect('/manage-admin');
     }
 
@@ -122,7 +139,7 @@ class SuperAdminController extends Controller
         Staff::where('user_id', $id)->delete();
 
         User::find($id)->delete();
-
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
         return redirect('/manage-admin');
     }
 
@@ -144,7 +161,7 @@ class SuperAdminController extends Controller
 
     public function recycle_admin()
     {
-        $data = User::onlyTrashed()->get();
+        $data = User::role('admin')->onlyTrashed()->get();
 
         return view('staff.pages.manage_admin.recovery', compact('data'));
     }
@@ -229,10 +246,11 @@ class SuperAdminController extends Controller
         $path = $request->file('path')->store('public/img/subsidiaries');
 
         Subsidiary::create([
-            'name' => $request -> name,
+            'name' => $request->name,
             'img_path' => $path,
-            'location' => $request -> location,
+            'location' => $request->location,
         ]);
+        Alert::success('Berhasil', 'Cabang telah ditambahkan');
 
         return redirect()->back();
     }
@@ -251,6 +269,7 @@ class SuperAdminController extends Controller
         $data->name = $request->name;
         $data->location = $request->location;
         $data->save();
+        Alert::success('Berhasil', 'Data cabang telah diubah');
 
         return redirect('/manage-subsidiaries');
     }
@@ -259,13 +278,13 @@ class SuperAdminController extends Controller
     {
         Staff::where('subsidiary_id', $id)->update(['subsidiary_id' => null]);
         Subsidiary::find($id)->delete();
-
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
         return redirect()->back();
     }
     public function recycle_subsidiary()
     {
-         $data = User::onlyTrashed()->get();
-         $totalSubsidiaries = $data->count();
+        $data = User::onlyTrashed()->get();
+        $totalSubsidiaries = $data->count();
         return view('staff.pages.manage_subsidiaries.recovery', compact('data', 'totalSubsidiaries'));
     }
 
@@ -334,7 +353,7 @@ class SuperAdminController extends Controller
     /**
      * Pricing
      *
-    */
+     */
     public function pricing()
     {
         $carType = CarType::all();
@@ -363,7 +382,7 @@ class SuperAdminController extends Controller
         $washingPlans->name = $request->feature;
         $washingPlans->price = $request->price;
         $washingPlans->save();
-
+        Alert::success('Berhasil', 'Harga pencucian telah diubah');
         return redirect('/pricing');
     }
 
@@ -384,6 +403,7 @@ class SuperAdminController extends Controller
                 'type_id' => $request->car_type
             ]);
         };
+        Alert::success('Berhasil', 'Harga pencucian telah ditambahkan');
 
         return redirect('/pricing');
     }

@@ -311,7 +311,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
 
-            <div role="tabpanel" class="tab-pane active" id="plan-1">
+            {{--  <div role="tabpanel" class="tab-pane active" id="plan-1">
                 <div class="row">
                     @foreach ($plans as $item )
                     <div class="col-md-3 col-sm-6">
@@ -331,7 +331,7 @@
                     </div>
                     @endforeach
                 </div>
-            </div>
+            </div>  --}}
 
         </div>
     </div>

@@ -11,6 +11,8 @@ use App\Models\Gender;
 use App\Models\CarType;
 use App\Exports\MemberExport;
 use App\Exports\CashierExport;
+use App\Http\Requests\cashierRequest;
+use App\Http\Requests\memberRequest;
 use App\Imports\MemberImport;
 use App\Models\Doormeer;
 use App\Models\Subsidiary;
@@ -20,6 +22,12 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role as ModelsRole;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Contracts\Role;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
+
+
 
 class AdminController extends Controller
 {
@@ -40,8 +48,8 @@ class AdminController extends Controller
 
         $admin = Auth::user()->staff;
         $data = Staff::where('subsidiary_id', $admin->subsidiary_id)
-        ->whereNotIn('user_id', [$admin->user_id])
-        ->get();
+            ->whereNotIn('user_id', [$admin->user_id])
+            ->get();
 
         $doorsmeer = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
         $history = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
@@ -56,9 +64,9 @@ class AdminController extends Controller
         if ($staff->hasRole('super_admin')) {
             $data = Staff::all();
 
-            return view('staff.pages.manage_cashier.index', compact('data'));
-
-        } elseif($staff->hasRole('admin')) {
+            return view('staff.pages.
+            manage_cashier.index', compact('data'));
+        } elseif ($staff->hasRole('admin')) {
             $subs = Auth::user()->staff;
             $data = User::role('cashier')->get();
             $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
@@ -66,11 +74,13 @@ class AdminController extends Controller
                 ->get();
 
             $gender = Gender::all();
+            // example:
+
 
             return view('staff.pages.manage_cashier.index', compact('data'));
         }
-
     }
+
 
     // Member
     public function manage_member()
@@ -92,13 +102,14 @@ class AdminController extends Controller
     // Edit
     public function edit_member($id)
     {
-        $data = User::role('member')->where('id', $id)->first();
+        $data = User::find($id)->first();
+        // dd($data);
         $car_type = CarType::all();
         $gender = Gender::all();
         return view('staff.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
     }
 
-    public function update_member(Request $request)
+    public function update_member(memberRequest $request)
     {
         $data = User::find($request->id);
 
@@ -115,6 +126,7 @@ class AdminController extends Controller
         $car->type_id = $request->type;
         $car->number_plate = $request->number_plate;
         $car->save();
+        Alert::success('Berhasil', 'data member telah diubah    ');
 
         return redirect('/manage-member');
     }
@@ -124,6 +136,8 @@ class AdminController extends Controller
     {
         User::find($id)->delete();
         Car::where('user_id', $id)->delete();
+
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
 
         return redirect('/manage-admin');
     }
@@ -201,6 +215,8 @@ class AdminController extends Controller
     {
         User::find($id)->delete();
         Car::where('user_id', $id)->delete();
+
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
 
         return redirect('/manage-member');
     }
@@ -292,26 +308,26 @@ class AdminController extends Controller
     }
 
 
-    public function store_cashier(Request $request)
+    public function store_cashier(cashierRequest $request)
     {
-           $user = User::create([
+        $user = User::create([
 
             'name'        => $request->name,
             'email'       => $request->email,
-            'password'    => hash::make($request['password']),
+            'password' => Hash::make($request['password']),
             'phone'       => $request->phone,
             'birth'       => $request->birth,
             'address'     => $request->address,
             'gender_id'   => $request->gender,
         ])->assignRole('cashier');
         Staff::create([
-            'user_id'       => $user->id,
+            'user_id' => $user->id,
             'subsidiary_id' => $request->subsidiary,
         ]);
 
+        Alert::success('Berhasil', 'Kasir telah ditambahkan');
         return redirect('/manage-cashier');
     }
-
 
 
     public function edit_cashier($id)
@@ -331,15 +347,29 @@ class AdminController extends Controller
         $data = User::find($request->id);
         $data->name = $request->name;
         $data->email = $request->email;
-        // $data->password = Hash::make($request['password']);
         $data->birth = $request->birth;
         $data->phone = $request->phone;
-        // $data->selectedRole = $request->role;
         $data->address = $request->address;
         $data->gender_id = $request->gender;
         $data->save();
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:25',
+            'email' => 'required|unique:users,email',
+            'phone' => 'required|unique:users,phone|min:10|max:13',
+            'birth' => 'required',
+            'address' => 'required|min:5|max:100',
+            'gender' => 'required',
+            'subsidiary' => 'required',
+
+        ]);
+
+
         Staff::where('user_id', $id)->first()->syncRoles($request->role);
+
+        // alert::toast('success');
+        Alert::success('Berhasil', 'Data kasir telah diubah');
+
 
         return redirect('/manage-cashier');
     }
@@ -349,8 +379,10 @@ class AdminController extends Controller
     {
         Staff::where('user_id', $id)->delete();
 
-        return redirect('/manage-cashier');
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
 
+
+        return redirect('/manage-cashier');
     }
 
     public function multiple_delete_cashier(Request $request)
@@ -478,7 +510,7 @@ class AdminController extends Controller
         $data = Doormeer::find($id);
         $data->name = $request->name;
         $data->save();
-
+        Alert::success('Berhasil', 'Doorsmeer telah diubah');
         return redirect('/doorsmeer/');
     }
 
@@ -489,7 +521,7 @@ class AdminController extends Controller
         } catch (\Throwable $th) {
             return 'Keluarkan terlebih dahulu member dari doorsmeer!';
         }
-
+        Alert::info('Berhasil', 'Data dipindahkan ke sampah');
         return redirect('/doorsmeer/');
     }
 
@@ -505,6 +537,7 @@ class AdminController extends Controller
             'name' => $request->name,
             'subsidiary_id' => $admin->subsidiary_id,
         ]);
+        Alert::success('Berhasil', 'Doorsmeer telah ditambahkan');
 
         return redirect('/doorsmeer/');
     }

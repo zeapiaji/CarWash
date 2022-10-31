@@ -15,10 +15,10 @@ class PlansSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 5; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             # code...
             Plans::create([
-                'name' => 'Paket'. $i,
+                'name' => 'Paket' . $i,
                 'price' => random_int(20000, 5000000)
             ]);
         }

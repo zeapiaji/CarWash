@@ -16,10 +16,10 @@ class DoormeerSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <= 20 ; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             Doormeer::create([
-                'name' => 'doorsmeer'.$i,
-                'subsidiary_id' => random_int(1,5),
+                'name' => 'doorsmeer' . $i,
+                'subsidiary_id' => random_int(1, 5),
             ]);
         }
     }

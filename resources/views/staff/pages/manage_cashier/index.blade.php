@@ -2,11 +2,10 @@
 @section('content')
 
 @include('staff.partials.menu')
-<!--  -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+@include('sweetalert::alert')
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
@@ -22,9 +21,7 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                     </div>
                 </div>
                 <div id="table-customers-replace-element">
-                        <a href="input/cashier" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
-
-
+                        <a href="/cashier/input" class="btn btn-falcon-default btn-sm mx-2">Tambah</a>
 
                     <a class="btn btn-falcon-default btn-sm" id="export" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -169,5 +166,26 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
     });
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
 
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+
+</script>
 @endsection

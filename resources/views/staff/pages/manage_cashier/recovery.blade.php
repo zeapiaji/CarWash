@@ -78,17 +78,19 @@
                         </td>
 
                         <td class="name align-middle white-space-nowrap py-2">
-                            {{--  <a href="/detail/cashier/{{$item->user->id}}"> --}}
-                            <div class="d-flex d-flex align-items-center">
-                                <div class="avatar avatar-xl me-2">
-                                    <div class="avatar-name rounded-circle">
-                                        <span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
+                            <a href="/detail/cashier/{{$item->id}}">
+                                <div class="d-flex d-flex align-items-center">
+                                    <div class="avatar avatar-xl me-2">
+                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
+                                    </div>
                                 </div>
-                                <div class="flex-1">
-                                    <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
-                                </div>
-                            </div>
                             </a>
+                        </td>
+
+                          <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a>
                         </td>
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
                         <td class="email align-middle py-2"><a
@@ -103,10 +105,8 @@
                                         class="fas fa-ellipsis-h fs--1"></span></button>
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
-                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item"
-                                            href="/recovery/cashier/{{$item->user->id}}">Pulihkan</a><a
-                                            class="dropdown-item text-danger"
-                                            href="/forcedelete/cashier/{{$item->user->id}}">Hapus</a></div>
+                                    <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->user->id}}">Pulihkan</a><a
+                                            class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

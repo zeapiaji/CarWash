@@ -14,42 +14,38 @@
                     @csrf
                     <div class="col-lg-6">
                         <label class="form-label" for="name">Nama</label>
-                        <input class="form-control" id="name" name="name" type="text" value="{{$data->name}}" />
+                        <input class="form-control @error('name')is-invalid
+
+                        @enderror" id="name" name="name" type="text" value="{{$data->name}}" />
+
                         <div class="mt-3">
                             <label class="form-label" for="email">Email</label>
-                            <input class="form-control" id="email" name="email" type="email" value="{{$data->email}}" />
-                        </div>
-                        {{--  <div class="mt-3">
-                            <label class="form-label" for="password">Password</label>
-                            <div class="input-group">
-                            <input class="form-control" id="pass" name="password" type="password" value="{{$data->password}}" />
-                                <span id="mybutton" onclick="change()" class="input-group-text">
+                            <input class="form-control @error('email')is-invalid
 
-                                <!-- icon mata bawaan bootstrap  -->
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path fill-rule="evenodd"
-                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                </svg>
-                            </span>
-                      </div>
-                        </div>  --}}
+                            @enderror" id="email" name="email" type="email" value="{{$data->email}}" />
+
+                        </div>
                         <div class="mt-3">
                             <label class="form-label" for="address">Alamat</label>
-                        <textarea class="form-control" id="address" name="address" cols="30"
+                        <textarea class="form-control @error('address')is-invalid
+
+                        @enderror" id="address" name="address" cols="30"
                             rows="3">{{$data->address}}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mt">
                             <label class="form-label" for="phone">Telepon</label>
-                            <input class="form-control" id="phone" name="phone" type="number"
+                            <input class="form-control @error('phone')is-invalid
+
+                            @enderror" id="phone" name="phone" type="number"
                                 value="{{$data->phone}}" />
                         </div>
                         <div class="mt-3">
                             <label class="form-label" for="gender">Jenis kelamin</label>
-                            <select class="form-select" name="gender" aria-label="Default select example">
+                            <select class="form-select @error('gender')is-invalid
+
+                            @enderror" name="gender" aria-label="Default select example">
                                 @foreach ($gender as $q)
                                 <option value="{{ $q->id }}" name="gender">{{ $q->name }}</option>
                                 @endforeach
@@ -57,7 +53,9 @@
                         </div>
                         <div class="mt-3">
                            <label class="form-label" for="bootstrap-wizard-gender">Jabatan</label>
-                                <select class="form-select" name="role" id="bootstrap-wizard-gender">
+                                <select class="form-select @error('subsidiary')is-invalid
+
+                                @enderror" name="role" id="bootstrap-wizard-gender">
                                     {{--  <option>Pilih level ...</option>  --}}
                                     {{-- @dd($data->model_has_role) --}}
                                     @foreach ($role as $item)
@@ -69,7 +67,9 @@
                         </div>
                         <div class="mt-3">
                             <label class="form-label" for="datepicker">Tanggal lahir</label>
-                            <input class="form-control datetimepicker" id="datepicker" name="birth" type="text"
+                            <input class="form-control datetimepicker @error('birth')is-invalid
+
+                            @enderror" id="datepicker" name="birth" type="text"
                                 placeholder="d/m/y" data-options='{"disableMobile":true}' value="{{ $data ->birth }}"/>
                         </div>
                     </div>
