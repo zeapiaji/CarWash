@@ -17,6 +17,7 @@ class Doormeer extends Model
         'subsidiary_id',
     ];
 
+
     /**
      * Get the user that owns the Doormeer
      *

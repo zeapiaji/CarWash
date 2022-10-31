@@ -8,9 +8,8 @@
             <div class="col-md">
                 <h5 class="mb-2 mb-md-0"></h5>
             </div>
-            <div class="col-auto"><button class="btn btn-falcon-default btn-sm me-1 mb-2 mb-sm-0" type="button"><span
-                        class="fas fa-arrow-down me-1"> </span>Download (.pdf)</button><a
-                    class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="/entry/wash/done/{{$doorsmeer->id}}" type="button"><span
+            <div class="col-auto">
+                    class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="" type="button"><span
                         class="fas fa-dollar-sign me-1"></span>Terima Pembayaran</a></div>
         </div>
     </div>

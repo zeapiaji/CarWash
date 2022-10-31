@@ -2,10 +2,10 @@
 
 namespace App\Exports;
 
-use App\Models\Staff;
 use App\Models\User;
-use Auth;
+use App\Models\Staff;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromView;
 
 

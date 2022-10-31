@@ -35,6 +35,7 @@ Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
     Route::get('/entry/list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+    Route::get('/export/invoice/{id}', [CashierController::class, 'export_invoice']);
 });
 
 Route::prefix('doorsmeer')->group(function() {

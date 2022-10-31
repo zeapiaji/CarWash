@@ -15,6 +15,7 @@
                   container.classList.add('container-fluid');
                 }
               </script>
+
             @include('staff.partials.sidebar')
 
             @include('staff.partials.navbar')

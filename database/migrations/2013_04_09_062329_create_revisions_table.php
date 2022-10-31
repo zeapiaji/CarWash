@@ -16,12 +16,13 @@ class CreateRevisionsTable extends Migration
             $table->string('revisionable_type');
             $table->unsignedBigInteger('revisionable_id');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('subsidiary_id')->nullable();
             $table->string('key');
             $table->text('old_value')->nullable();
             $table->text('new_value')->nullable();
             $table->timestamps();
 
-            $table->index(array('revisionable_id', 'revisionable_type'));
+            $table->index(array('revisionable_id', 'revisionable_type', 'subsidiary_id'));
         });
     }
 

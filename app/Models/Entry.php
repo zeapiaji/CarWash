@@ -18,6 +18,8 @@ class Entry extends Model
         'subsidiary_id'
     ];
 
+    protected $revisionCreationsEnabled = true;
+
     /**
      * Get the user that owns the Entry
      *

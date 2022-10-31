@@ -34,10 +34,6 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-    public function dashboard()
-    {
-        return view('staff.pages.dashboard_admin.dashboard');
-    }
 
     public function dashboard_table()
     {
@@ -48,7 +44,7 @@ class AdminController extends Controller
         ->get();
 
         $doorsmeer = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
-        $history = Doormeer::find(Auth::user()->staff->subsidiary_id);
+        $history = Doormeer::where('subsidiary_id', $admin->subsidiary_id)->get();
         // dd($history);
 
         return view('staff.pages.dashboard_admin.dashboard', compact('data', 'doorsmeer', 'history'));

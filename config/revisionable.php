@@ -8,6 +8,6 @@ return [
     */
     'model' => Venturecraft\Revisionable\Revision::class,
 
-    'additional_fields' => [],
+    'additional_fields' => ['subsidiary_id'],
 
 ];

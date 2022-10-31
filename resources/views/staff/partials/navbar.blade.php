@@ -34,8 +34,6 @@
                 </a>
             <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                    <a class="dropdown-item" href="/edit/cashier/{{ Auth::user()->id}}">Profil &amp; akun</a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
