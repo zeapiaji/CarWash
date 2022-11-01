@@ -24,21 +24,32 @@
                     <div class="row g-3">
                         <div class="col-lg-6">
                             <label class="form-label" for="name">Nama</label>
-                            <input class="form-control" id="name" name="name" type="text" value="{{$data->name}}" />
+                            <input class="form-control @error('name')is-invalid
+
+                            @enderror" id="name" name="name" type="text" value="{{ $data->name }}" />
+
                             <div class="mt-3">
                                 <label class="form-label" for="email">Email</label>
-                                <input class="form-control" id="email" name="email" type="email"
+                                <input class="form-control @error('email')is-invalid
+
+                                @enderror" id="email" name="email" type="email"
                                     value="{{$data->email}}" />
+
                             </div>
                             <div class="mt-3">
                                 <label class="form-label" for="phone">Telepon</label>
-                                <input class="form-control" id="phone" name="phone" type="number"
+                                <input class="form-control @error('phone')is-invalid
+
+                                @enderror" id="phone" name="phone" type="number"
                                     value="{{$data->phone}}" />
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            {{-- role --}}
                             <label class="form-label" for="bootstrap-wizard-gender">Jabatan</label>
-                                <select class="form-select" name="role" id="bootstrap-wizard-gender">
+                                <select class="form-select @error('role')is-invalid
+
+                                @enderror" name="role" id="bootstrap-wizard-gender">
                                     <option>Pilih level ...</option>
                                     {{-- @dd($data->model_has_role) --}}
                                     @foreach ($role as $item)
@@ -49,12 +60,16 @@
                                 </select>
                             <div class="mt-3">
                                 <label class="form-label" for="datepicker">Tanggal Lahir</label>
-                                <input class="form-control datetimepicker" id="datepicker" type="text" placeholder="d/m/y"
+                                <input class="form-control datetimepicker @error('birth')is-invalid
+
+                                @enderror" id="datepicker" type="text" placeholder="d/m/y"
                                     value="{{$data->birth}}" name="birth" data-options='{"disableMobile":true}' />
                             </div>
                             <div class="mt-3">
                                 <label class="form-label" for="bootstrap-wizard-gender">Gender</label>
-                                <select class="form-select" name="gender" id="bootstrap-wizard-gender">
+                                <select class="form-select @error('gender_id')is-invalid
+
+                                @enderror" name="gender" id="bootstrap-wizard-gender">
                                     <option>Pilih gender ...</option>
                                     @foreach ($gender as $item)
                                     <option value="{{$item->id}}" name="gender"
@@ -66,7 +81,9 @@
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label" for="address">Alamat</label>
-                            <textarea class="form-control" id="address" name="address" cols="30"
+                            <textarea class="form-control @error('address')is-invalid
+
+                            @enderror" id="address" name="address" cols="30"x
                                 rows="3">{{$data->address}}</textarea>
                         </div>
                         <div class="col-12 d-flex justify-content-end">

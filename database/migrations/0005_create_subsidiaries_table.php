@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('location');
-            $table->string('img_path');
             $table->timestamps();
             $table->softDeletes();
         });

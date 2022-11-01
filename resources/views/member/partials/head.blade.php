@@ -8,7 +8,7 @@
     <meta name="description" content="Auto Plus" />
     <meta name="keywords"
         content="car wash, html template, car wash template, auto plus, car repair, auto wash, auto detail, auto detailing, car, cleaning, mechanic, repair, wash, car service, workshop">
-    <link rel="icon" type="image/icon" href="{{asset('member/assets/images/favicon/favicon.ico')}}"> <!-- favicon-icon -->
+    <link rel="icon" type="image/png" href="{{asset('member/assets/images/icons/map.png')}}"> <!-- favicon-icon -->
     <!-- theme style -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700|Poppins:400,500,700">
@@ -25,6 +25,13 @@
     <!-- magnify popup css -->
     <link rel="stylesheet" type="text/css" href="{{asset('member/assets/css/datepicker.css')}}" />
     <!-- datepicker css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('member/assets/css/style.css')}}" /> <!-- custom css -->
+    <link rel="stylesheet" type="text/css" href="{{asset('member/assets/css/style.css')}}" />
+
+    <style>
+        html {
+  scroll-behavior: smooth;
+}
+    </style>
+    <!-- custom css -->
     <!-- end theme style -->
 </head>

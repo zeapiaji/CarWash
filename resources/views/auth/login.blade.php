@@ -93,34 +93,27 @@
                                     </div>
                                     <!--/.bg-holder-->
                                     <div class="z-index-1 position-relative"><a
-                                            class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                                            href="../../../index.html">falcon</a>
-                                        <p class="opacity-75 text-white">With the power of Falcon, you can now focus
-                                            only on functionaries for your digital products, while leaving the UI design
-                                            on us!</p>
+                                            class="link-light mb-4 font-sans-serif fs-4 d-inline-block"
+                                            href="/"><img src="{{asset('member/assets/images/logo-white.png')}}" alt="logo"></a>
+                                        <p class="opacity-75 text-white"></p>
                                     </div>
                                 </div>
                                 <div class="mt-3 mb-4 mt-md-4 mb-md-5 light">
-                                    <p class="text-white">Don't have an account?<br><a
-                                            class="text-decoration-underline link-light" href="/register">Get
-                                            started!</a></p>
-                                    <p class="mb-0 mt-4 mt-md-5 fs--1 fw-semi-bold text-white opacity-75">Read our <a
-                                            class="text-decoration-underline text-white" href="#!">terms</a> and <a
-                                            class="text-decoration-underline text-white" href="#!">conditions </a></p>
+                                    <p class="text-white">Tidak punya akun?<br><a
+                                            class="text-decoration-underline link-light" href="/register">Mulai sekarang!</a></p>
                                 </div>
                             </div>
                             <div class="col-md-7 d-flex flex-center">
                                 <div class="p-4 p-md-5 flex-grow-1">
                                     <div class="row flex-between-center">
-                                        <div class="col-auto">
-                                            <h3>Account Login</h3>
+                                        <div class="text-center">
+                                            <h3>Login</h3>
                                         </div>
                                     </div>
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label class="form-label" for="email">Email
-                                                address
                                             </label>
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
@@ -151,32 +144,14 @@
                                                         id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                                     <label class="form-check-label" for="remember">
-                                                        {{ __('Remember Me') }}
+                                                        {{ __('Ingat saya') }}
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-auto">@if (Route::has('password.request'))
-                                                <a class="fs--1" href="{{ route('password.request') }}">
-                                                    {{ __('Forgot Password?') }}
-                                                </a>
-                                                @endif</div>
                                         </div>
                                         <div class="mb-3"><button class="btn btn-primary d-block w-100 mt-3"
-                                                type="submit" name="submit">Log in</button></div>
+                                                type="submit" name="submit">Masuk</button></div>
                                     </form>
-                                    <div class="position-relative mt-4">
-                                        <hr class="bg-300" />
-                                        <div class="divider-content-center">or log in with</div>
-                                    </div>
-                                    <div class="row g-2 mt-2">
-                                        <div class="col-sm-6"><a
-                                                class="btn btn-outline-google-plus btn-sm d-block w-100" href="#"><span
-                                                    class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span>
-                                                google</a></div>
-                                        <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100"
-                                                href="#"><span class="fab fa-facebook-square me-2"
-                                                    data-fa-transform="grow-8"></span> facebook</a></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

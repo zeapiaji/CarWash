@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Car extends Authenticatable
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, RevisionableTrait;
 
     protected $fillable = [
         'user_id',
@@ -32,5 +33,4 @@ class Car extends Authenticatable
     {
         return $this->belongsTo(CarType::class, 'type_id');
     }
-
 }

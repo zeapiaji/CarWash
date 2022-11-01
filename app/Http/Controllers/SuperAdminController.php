@@ -9,7 +9,14 @@ use App\Models\Subsidiary;
 use App\Exports\AdminExport;
 use App\Http\Requests\adminRequest;
 use App\Http\Requests\updateAdminRequest;
+use App\Http\Requests\adminRequest;
+use App\Http\Requests\updateAdminRequest;
 use App\Imports\AdminImport;
+use App\Models\CarType;
+use App\Models\PlanFeature;
+use App\Models\Plans;
+use App\Models\Transaction;
+use App\Models\WashingPlans;
 use App\Models\CarType;
 use App\Models\PlanFeature;
 use App\Models\Plans;
@@ -18,10 +25,15 @@ use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\Return_;
 use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Models\Role as ModelsRole;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -60,14 +72,14 @@ class SuperAdminController extends Controller
 
     public function add_admin()
     {
-        $role = ModelsRole::whereNotIn('name', ['member'])->get();
+        $role = ModelsRole::whereNotIn('name',  ['member'])->get();
 
         $subsidiaries = Subsidiary::all();
         $gender = Gender::all();
         return view('staff.pages.manage_admin.add', compact('role', 'gender', 'subsidiaries'));
     }
 
-    public function create_admin(adminRequest $request)
+    public function create_admin(adminadminRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -83,6 +95,7 @@ class SuperAdminController extends Controller
             'user_id' => $user->id,
             'subsidiary_id' => $request->subsidiary,
         ]);
+        Alert::success('Berhasil', 'Admin telah ditambahkan');
         Alert::success('Berhasil', 'Admin telah ditambahkan');
 
         return redirect('/manage-admin');
@@ -162,7 +175,7 @@ class SuperAdminController extends Controller
 
     public function recycle_admin()
     {
-        $data = User::role('admin')->onlyTrashed()->get();
+        $data = User::role('admin')->role('admin')->onlyTrashed()->get();
 
         return view('staff.pages.manage_admin.recovery', compact('data'));
     }
@@ -247,6 +260,7 @@ class SuperAdminController extends Controller
             'location' => $request->location,
         ]);
         Alert::success('Berhasil', 'Cabang telah ditambahkan');
+        Alert::success('Berhasil', 'Cabang telah ditambahkan');
 
         return redirect()->back();
     }
@@ -265,6 +279,7 @@ class SuperAdminController extends Controller
         $data->name = $request->name;
         $data->location = $request->location;
         $data->save();
+        Alert::success('Berhasil', 'Data cabang telah diubah');
         Alert::success('Berhasil', 'Data cabang telah diubah');
 
         return redirect('/manage-subsidiaries');

@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CeoController;
-use App\Http\Controllers\CashierController;
-use App\Http\Controllers\EntryController;
-use App\Http\Controllers\GeneralController;
-use App\Http\Controllers\SuperAdminController;
+use App\Models\Entry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CeoController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EntryController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CashierController;
+use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\SuperAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,34 +24,55 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register-member', [GeneralController::class, 'register_member'])->name('register-member');
-
+Route::get('/', [UserController::class, 'landing_page']);
 Route::post('/image/user/{id}', [GeneralController::class, 'image']);
 
+Route::get('/history/transaction', [AdminController::class, 'history_member']);
+Route::get('/history/transaction/{id}', [AdminController::class, 'history_transaction']);
+Route::get('/transaction/download/{id}', [AdminController::class, 'transaction_download']);
 Route::middleware(['role:member'])->group(function () {
-    //
+    Route::prefix('member')->group(function () {
+        Route::get('/edit/car/{id}', [MemberController::class, 'edit_car_member']);
+        Route::post('/update/car', [MemberController::class, 'update_car_member']);
+        Route::get('/edit/{id}', [MemberController::class, 'edit_member']);
+        Route::post('/update', [MemberController::class, 'update_member']);
+        Route::get('/delete', [MemberController::class, 'delete_member']);
+    });
+    Route::get('/member-home', [MemberController::class, 'member_home'])->name('member.home');
 });
 
 Route::middleware(['role:cashier'])->group(function () {
     Route::get('/cashier-dashboard', [CashierController::class, 'cashier_dashboard'])->name('cashier.dashboard');
     Route::get('/transaction', [CashierController::class, 'transaction'])->name('cashier.transaction');
-    Route::get('/queue', [CashierController::class, 'queue'])->name('cashier.queue');
+    Route::get('/entry/list', [CashierController::class, 'entry_list'])->name('cashier.entry_list');
+    Route::get('/export/invoice/{id}', [CashierController::class, 'export_invoice']);
+});
+
+Route::prefix('doorsmeer')->group(function () {
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/', [AdminController::class, 'manage_doorsmeer']);
+        Route::get('/add', [AdminController::class, 'add_doorsmeer']);
+        Route::get('/edit/{id}', [AdminController::class, 'edit_doorsmeer']);
+        Route::post('/store', [AdminController::class, 'store_doorsmeer']);
+        Route::post('/update/{id}', [AdminController::class, 'update_doorsmeer']);
+        Route::get('/delete/{id}', [AdminController::class, 'delete_doorsmeer']);
+        Route::post('/multiple/delete', [AdminController::class, 'multiple_delete_doorsmeer'])->name('multiple_delete_doorsmeer');
+
+    });
 });
 
 Route::middleware(['role:admin|super_admin'])->group(function () {
-    // Dashboard
-    Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
     // cashier
-    Route::get('/admin-dashboard', [AdminController::class, 'dashboard_table'])->name('admin.dashboardtable');
+    Route::get('/admin-dashboard', [AdminController::class, 'dashboard_table'])->name('admin.dashboard');
 
     Route::get('/manage-cashier', [AdminController::class, 'manage_cashier'])->name('admin.managecashier');
     Route::get('/detail/cashier/{id}', [AdminController::class, 'detail_cashier'])->name('admin.detailcashier');
-    Route::get('/add/cashier', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
-    Route::post('/create-cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
+    Route::get('/cashier/input', [AdminController::class, 'input_cashier'])->name('admin.inputcashier');
+    Route::post('/create/cashier', [AdminController::class, 'store_cashier'])->name('admin.storecashier');
     Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
     Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
 
-    Route::get('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('admin.deletecashier');
+    Route::delete('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('delete.cashier');
     Route::post('/multiple-delete/cashier', [AdminController::class, 'multiple_delete_cashier'])->name('admin.multiple-delete-cashier');
 
     Route::get('/recycle-cashier', [AdminController::class, 'recycle_cashier'])->name('admin.recycle_cashier');
@@ -58,6 +82,10 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::post('/multiple-force-delete-cashier', [AdminController::class, 'multiple_force_delete_cashier'])->name('admin.multiple-force-delete-cashier');
     Route::post('/recovery-all-cashier', [AdminController::class, 'recovery_all_cashier'])->name('admin.recovery-all-cashier');
     Route::get('/force-delete-all-cashier', [AdminController::class, 'force_delete_all_cashier'])->name('admin.force-delete-all-cashier');
+
+    Route::get('/export-cashier-xlsx', [AdminController::class, 'export_cashier_xlsx'])->name('cashier.export-cashier-xlsx');
+    Route::get('/export-cashier-csv', [AdminController::class, 'export_cashier_csv'])->name('cashier.export-cashier-csv');
+    Route::get('/export-cashier-pdf', [AdminController::class, 'export_cashier_pdf'])->name('cashier.export-cashier-pdf');
 
     // Member
     Route::get('/manage-member', [AdminController::class, 'manage_member'])->name('admin.managemember');
@@ -77,11 +105,11 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::post('/recovery-all-member', [AdminController::class, 'recovery_all_member'])->name('admin.recovery-all-member');
     Route::get('/force-delete-all-member', [AdminController::class, 'force_delete_all_member'])->name('admin.force-delete-all-member');
 
-    // Export & Import
+    // Export
     Route::get('/export-member-xlsx', [AdminController::class, 'export_member_xlsx'])->name('admin.export-member-xlsx');
     Route::get('/export-member-csv', [AdminController::class, 'export_member_csv'])->name('admin.export-member-csv');
     Route::get('/export-member-pdf', [AdminController::class, 'export_member_pdf'])->name('admin.export-member-pdf');
-   
+
 
     // Washing Data
     Route::get('/admin-washing-data', [AdminController::class, 'admin_washing_data'])->name('admin.washingdata');
@@ -91,17 +119,22 @@ Route::middleware(['role:ceo'])->group(function () {
     Route::get('/ceo-dashboard', [CeoController::class, 'dashboard'])->name('ceo.dashboard');
 });
 
-Route::middleware(['role:super_admin'])->group(function() {
-    Route::get('/superadmin-dashboard', [SuperAdminController::class,'dashboard'])->name('superadmin.dashboard');
+Route::middleware(['role:super_admin||admin||cashier'])->group(function () {
+    Route::get('/transaction/subsidiary/{id}', [SuperAdminController::class, 'transaction_subsidiary']);
+    Route::get('/washing/subsidiary/{id}', [SuperAdminController::class, 'washing_subsidiary']);
+});
 
-    Route::get('/manage-admin', [SuperAdminController::class,'manage_admin'])->name('superadmin.manageadmin');
-    Route::get('/detail/admin/{id}', [SuperAdminController::class,'detail_admin'])->name('superadmin.detail.admin');
+Route::middleware(['role:super_admin'])->group(function () {
+    Route::get('/superadmin-dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 
-    Route::get('/add/admin' , [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
-    Route::post('/create/admin' , [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
-    Route::get('/edit/admin/{id}',[SuperAdminController::class,'edit_admin'])->name('superadmin.edit.admin');
-    Route::post('/update/admin/{id}',[SuperAdminController::class,'update_admin'])->name('superadmin.update.admin');
-    Route::get('/delete/admin/{id}',[SuperAdminController::class,'delete_admin'])->name('superadmin.delete.admin');
+    Route::get('/manage-admin', [SuperAdminController::class, 'manage_admin'])->name('superadmin.manageadmin');
+    Route::get('/detail/admin/{id}', [SuperAdminController::class, 'detail_admin'])->name('superadmin.detail.admin');
+
+    Route::get('/add/admin', [SuperAdminController::class, 'add_admin'])->name('superadmin.add.admin');
+    Route::post('/create/admin', [SuperAdminController::class, 'create_admin'])->name('superadmin.create.admin');
+    Route::get('/edit/admin/{id}', [SuperAdminController::class, 'edit_admin'])->name('superadmin.edit.admin');
+    Route::post('/update/admin/{id}', [SuperAdminController::class, 'update_admin'])->name('superadmin.update.admin');
+    Route::get('/delete/admin/{id}', [SuperAdminController::class, 'delete_admin'])->name('superadmin.delete.admin');
     Route::post('/multiple-delete-admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
 
     Route::get('/recycle-admin', [SuperAdminController::class, 'recycle_admin'])->name('superadmin.recycle-admin');
@@ -115,9 +148,30 @@ Route::middleware(['role:super_admin'])->group(function() {
 
 
     // Pricing
-    Route::get('/pricing', [AdminController::class,'pricing'])->name('admin.pricing');
+    Route::get('/pricing', [SuperAdminController::class, 'pricing']);
+    Route::prefix('/pricing')->group(function () {
+        Route::get('/{id}', [SuperAdminController::class, 'manage_pricing']);
+        Route::get('/edit/{id}', [SuperAdminController::class, 'edit_pricing']);
+        Route::get('/edit/price/{id}', [SuperAdminController::class, 'edit_price']);
+        Route::post('/update/pricing/{id}', [SuperAdminController::class, 'update_pricing']);
+        Route::post('/update/price/{id}', [SuperAdminController::class, 'update_price']);
+        Route::get('/delete/{id}', [SuperAdminController::class, 'delete_pricing']);
+        Route::get('/multiple-delete', [SuperAdminController::class, 'multiple_delete_pricing'])->name('multiple_delete_pricing');
+        Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
+        Route::get('/add/pricing-2', [SuperAdminController::class, 'add_pricing_2'])->name('admin.add.pricing.2');
+        Route::get('/add/pricing-3', [SuperAdminController::class, 'add_pricing_3'])->name('admin.add.pricing.3');
+        Route::get('/add/pricing-4', [SuperAdminController::class, 'add_pricing_4'])->name('admin.add.pricing.4');
+        Route::get('/add/pricing-1', [SuperAdminController::class, 'add_pricing_1'])->name('admin.add.pricing.1');
+    });
+    Route::post('/create/pricing-1', [SuperAdminController::class, 'create_pricing_1'])->name('admin.create.pricing.1');
+    Route::post('/create/pricing-2', [SuperAdminController::class, 'create_pricing_2'])->name('admin.create.pricing.2');
+    Route::post('/create/pricing-3', [SuperAdminController::class, 'create_pricing_3'])->name('admin.create.pricing.3');
+    Route::post('/create/pricing-4', [SuperAdminController::class, 'create_pricing_4'])->name('admin.create.pricing.4');
 
-    Route::get('/superadmin-washing-data', [SuperAdminController::class,'superadmin_washing_data'])->name('superadmin.washingdata');
+
+
+    Route::get('/all-transaction', [SuperAdminController::class, 'all_transaction']);
+    Route::get('/superadmin-washing-data', [SuperAdminController::class, 'superadmin_washing_data'])->name('superadmin.washingdata');
 
     // Subsidiary
     Route::get('/show-subsidiaries', [SuperAdminController::class, 'show_subsidiary'])->name('superadmin.show.subsidiary');
@@ -131,28 +185,31 @@ Route::middleware(['role:super_admin'])->group(function() {
     Route::post('/update/subsidiary/{id}', [SuperAdminController::class, 'update_subsidiary'])->name('superadmin.update.subsidiary');
     Route::get('/delete/subsidiary/{id}', [SuperAdminController::class, 'delete_subsidiary'])->name('superadmin.delete.subsidiary');
 
-    // Export & Import
-    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('admin.export-admin-xlsx');
-    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('admin.export-admin-csv');
-    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('admin.export-admin-pdf');
-    
+    // Route::get('/recycle-subsidiary', [SuperAdminController::class, 'recycle_subsidiary'])->name('superadmin.recycle-subsidiary');
+    // Route::post('/multiple-recovery-subsidiary', [SuperAdminController::class, 'multiple_recovery_subsidiary'])->name('superadmin.multiple-recovery-subsidiary');
+    Route::get('/recycle-subsidiary', [SuperAdminController::class, 'recycle_subsidiary'])->name('superadmin.recyclesubsidiary');
+    Route::post('/recovery/subsidiary/{id}', [SuperAdminController::class, 'recovery_subsidiary'])->name('superadmin.recoversubsidiary');
+    Route::post('/forcedelete/subsidiary/{id}', [SuperAdminController::class, 'force_delete_subsidiary'])->name('superadmin.forcedeletesubsidiary');
+    Route::post('/multiple-recovery-subsidiary', [SuperAdminController::class, 'multiple_recovery_subsidiary'])->name('superadmin.multiple-recovery-subsidiary');
+    Route::post('/multiple-force-delete-subsidiary', [SuperAdminController::class, 'multiple_force_delete_subsidiary'])->name('superadmin.multiple-force-delete-subsidiary');
+    Route::post('/recovery-all-subsidiary', [SuperAdminController::class, 'recovery_all_subsidiary'])->name('superadmin.recovery-all-subsidiary');
+    Route::post('/force-delete-all-subsidiary', [SuperAdminController::class, 'force_delete_all_subsidiary'])->name('superadmin.force-delete-all-subsidiary');
+
+    // Export t
+    Route::get('/export-admin-xlsx', [SuperAdminController::class, 'export_admin_xlsx'])->name('superadmin.export-admin-xlsx');
+    Route::get('/export-admin-csv', [SuperAdminController::class, 'export_admin_csv'])->name('superadmin.export-admin-csv');
+    Route::get('/export-admin-pdf', [SuperAdminController::class, 'export_admin_pdf'])->name('superadmin.export-admin-pdf');
 });
 
-// Route::middleware(['role:cashier|admin|ceo|super_admin'])->group(function() {
-//     Route::get('/editprofile/staff/id', [GeneralController::class, 'editprofile'])->name('editprofile');
-// });
-
-Route::get('/', function () {
-    return view('member.pages.index');
+Route::prefix('entry')->group(function () {
+    Route::get('/customer', [EntryController::class, 'entry_customer'])->name('entry.customer');
+    Route::post('/customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.customer_post');
+    Route::get('/wash/{id}/entry/{entryId}', [EntryController::class, 'entry_wash'])->name('entry.wash');
+    Route::get('/wash/payment/{id}', [EntryController::class, 'entry_wash_payment'])->name('entry.wash.payment');
+    Route::get('/wash/done/{id}', [EntryController::class, 'entry_wash_done'])->name('entry.wash.done');
+    Route::get('/wash/cancel/{id}', [EntryController::class, 'entry_wash_cancel'])->name('entry.wash.cancel');
+    Route::get('/delete/{id}', [EntryController::class, 'entry_delete'])->name('entry.delete');
 });
-
-    Route::get('/entry-dashboard', [EntryController::class, 'dashboard'])->name('entry.dashboard');
-    Route::get('/entry-customer', [EntryController::class, 'entry_customer'])->name('entry.entry_customer');
-    Route::post('/entry-customer-post', [EntryController::class, 'entry_customer_post'])->name('entry.entry_customer_post');
-
-    Route::get('/entry-customer-non-member', [EntryController::class, 'entry_customer_non_member'])->name('entry.entry_customer_non_member');
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Entry extends Model
 {
-    use HasFactory;
+    use HasFactory, RevisionableTrait;
 
     protected $fillable = [
         'user_id',
-        'status_id'
+        'status_id',
+        'plan_id',
+        'subsidiary_id'
     ];
+
+    protected $revisionCreationsEnabled = true;
 
     /**
      * Get the user that owns the Entry
@@ -33,5 +38,25 @@ class Entry extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * Get the subsidiary that owns the Entry
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subsidiary(): BelongsTo
+    {
+        return $this->belongsTo(Subsidiary::class, 'subsidiary_id');
+    }
+
+    /**
+     * Get the plan that owns the Entry
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function plans(): BelongsTo
+    {
+        return $this->belongsTo(Plans::class, 'plan_id');
     }
 }

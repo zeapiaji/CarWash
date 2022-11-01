@@ -8,16 +8,16 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Falcon | Dashboard &amp; Web App Template</title>
+    <title>Car Wash</title>
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('admin/assets/img/favicons/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('admin/assets/img/favicons/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/assets/img/favicons/favicon-16x16.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/assets/img/favicons/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('member/assets/images/icons/map.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('member/assets/images/icons/map.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('member/assets/images/icons/map.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('member/assets/images/icons/map.png')}}">
     <link rel="manifest" href="{{ asset('admin/assets/img/favicons/manifest.json') }}">
-    <meta name="msapplication-TileImage" content="{{asset('admin/assets/img/favicons/mstile-150x150.png')}}">
+    <meta name="msapplication-TileImage" content="{{asset('member/assets/images/icons/map.png')}}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/overlayscrollbars/OverlayScrollbars.min.js') }}"></script>
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/leaflet.markercluster/MarkerCluster.Default.css')}}">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" id="style-rtl" href="{{ asset('admin/assets/css/theme-rtl.min.css')}}">
     <link rel="stylesheet" id="style-default" href="{{ asset('admin/assets/css/theme.min.css')}}">
     <link rel="stylesheet" id="user-style-rtl" href="{{ asset('admin/assets/css/user-rtl.min.css')}}">

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('washing_plans', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('plan_id');
-            $table->string('feature');
             $table->timestamps();
 
             $table->foreign('plan_id')->references('id')->on('plans');

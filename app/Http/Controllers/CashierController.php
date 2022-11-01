@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entry;
+use App\Models\Staff;
+use App\Models\Doormeer;
+use App\Exports\InvoiceExport;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+
 class CashierController extends Controller
 {
 
@@ -17,6 +24,7 @@ class CashierController extends Controller
 
     public function cashier_dashboard()
     {
+
         return view('staff.pages.cashier.index');
     }
 
@@ -25,9 +33,21 @@ class CashierController extends Controller
         return view('staff.cashier.pages.transaction.index');
     }
 
-    public function queue()
+    public function entry_list()
     {
-        return view('staff.cashier.pages.queue.index');
+        $cashier = Auth::user()->staff;
+        $entry = Entry::where('subsidiary_id', $cashier->subsidiary_id)->where('status_id', 1)->get();
+        $emptyDoorsmeer = Doormeer::where('subsidiary_id', $cashier->subsidiary_id)->where('user_id', null)->get();
+        $doorsmeer = Doormeer::where('subsidiary_id', $cashier->subsidiary_id)->get();
+        $onDoorsmeer = Entry::where('subsidiary_id', $cashier->subsidiary_id)->where('status_id', 2)->count();
+
+        return view('staff.pages.cashier.entry_list', compact('entry','cashier', 'emptyDoorsmeer','doorsmeer', 'onDoorsmeer'));
     }
+
+    public function export_invoice($id)
+    {
+        return Excel::download(new InvoiceExport($id), 'invoice.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
 
 }

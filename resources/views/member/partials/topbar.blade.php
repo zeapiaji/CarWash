@@ -5,9 +5,9 @@
             <div class="col-md-6 col-sm-6">
                 <div class="info-bar">
                     <ul>
-                        <li><i class="fa fa-envelope" aria-hidden="true"></i> info@carwash.com</li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i> carwash@gmail.com</li>
                         <li>|</li>
-                        <li><i class="fa fa-phone" aria-hidden="true"></i>(+01) 123 456 7890</li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i>(+62) 821 111 2222</li>
                     </ul>
                 </div>
             </div>
@@ -15,12 +15,6 @@
                 <div class="top-bar-right">
                     <div class="top-menu hidden-sm">
                         <ul>
-                            <li><a href="#">Schedule</a></li>
-                            <li>|</li>
-                            <li><a href="#">News</a></li>
-                            <li>|</li>
-                            <li><a href="#">Faq</a></li>
-                            <li>|</li>
                             <li>
                             @if (Route::has('login'))
                                 <a href="{{ route('login') }}">

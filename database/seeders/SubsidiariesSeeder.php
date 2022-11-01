@@ -14,11 +14,10 @@ class SubsidiariesSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i<=5; $i++){
+        for ($i = 1; $i <= 5; $i++) {
             Subsidiary::create([
-                'name' => 'cabang'. $i,
-                'location' => 'lokasi'. $i,
-                'img_path' => 'path'. $i,
+                'name' => 'cabang' . $i,
+                'location' => 'lokasi' . $i,
             ]);
         }
     }

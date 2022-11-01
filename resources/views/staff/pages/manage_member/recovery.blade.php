@@ -80,9 +80,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="car align-middle pt-2">{{$item->car->name}}
+                        <td class="car align-middle pt-2">{{$item->car->name?? ''}}
                         </td>
-                        <td class="number-plate align-middle py-2">{{$item->car->number_plate}}
+                        <td class="number-plate align-middle py-2">{{$item->car->number_plate?? ''}}
                         </td>
                         <td class="email align-middle py-2"><a href="mailto:{{$item->email}}">{{$item -> email}}</a>
                         </td>
