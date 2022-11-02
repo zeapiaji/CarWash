@@ -166,7 +166,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="bootstrap-wizard-gender">Jenis Kelamin</label>
                                         <select class="form-select" name="gender" id="bootstrap-wizard-gender">
-                                            <option>Pilih jenis kelaminmu ...</option>
+                                            <option value="">Pilih jenis kelaminmu ...</option>
                                             @foreach ($gender as $item)
                                             <option value="{{$item->id}}" name="gender">{{$item->name}}</option>
                                             @endforeach

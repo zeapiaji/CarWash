@@ -9,7 +9,6 @@
                 <h5 class="mb-2 mb-md-0"></h5>
             </div>
             <div class="col-auto">
-                <a class="btn btn-falcon-default btn-sm me-1 mb-2 mb-sm-0" href="/transaction/download/{{$transaction->id}}" type="button"><span class="fas fa-arrow-down me-1"> </span>Download (.pdf)</a>
                 <a class="btn btn-falcon-success btn-sm mb-2 mb-sm-0" href="{{URL::previous()}}"
                     type="button">Kembali</a></div>
         </div>

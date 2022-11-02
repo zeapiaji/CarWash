@@ -12,6 +12,7 @@ use App\Models\Subsidiary;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use function PHPUnit\Framework\returnSelf;
 
 class EntryController extends Controller
@@ -48,6 +49,7 @@ class EntryController extends Controller
                     'plan_id' => $request->plan,
                     'subsidiary_id' => $request->subsidiary,
                 ]);
+
             } catch (\Throwable $th) {
                 return back()->withErrors([
                     'email' => 'Anda sudah dalam antrian.',
@@ -55,11 +57,12 @@ class EntryController extends Controller
             }
 
             Auth::logout();
-            return back();
+            Alert::success('Berhasil', 'Anda berhasil mengantri!');
+            return redirect()->back();
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email/Password salah.',
         ])->onlyInput('email');
     }
 

@@ -3,39 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Plans;
 use App\Models\Staff;
 use App\Models\Gender;
+use App\Models\CarType;
 use App\Models\Subsidiary;
+use App\Models\PlanFeature;
+use App\Models\Transaction;
 use App\Exports\AdminExport;
-use App\Http\Requests\adminRequest;
-use App\Http\Requests\updateAdminRequest;
-use App\Http\Requests\adminRequest;
-use App\Http\Requests\updateAdminRequest;
 use App\Imports\AdminImport;
-use App\Models\CarType;
-use App\Models\PlanFeature;
-use App\Models\Plans;
-use App\Models\Transaction;
-use App\Models\WashingPlans;
-use App\Models\CarType;
-use App\Models\PlanFeature;
-use App\Models\Plans;
-use App\Models\Transaction;
 use App\Models\WashingPlans;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
+use App\Http\Requests\adminRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpParser\Node\Stmt\Return_;
-use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Role;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\updateAdminRequest;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role as ModelsRole;
-use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert;
-
-use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 class SuperAdminController extends Controller
@@ -79,7 +67,7 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_admin.add', compact('role', 'gender', 'subsidiaries'));
     }
 
-    public function create_admin(adminadminRequest $request)
+    public function create_admin(adminRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -255,12 +243,11 @@ class SuperAdminController extends Controller
 
     public function create_subsidiary(Request $request)
     {
-        Subsidiary::create([
+        $subsidiary = Subsidiary::create([
             'name' => $request->name,
             'location' => $request->location,
         ]);
-        Alert::success('Berhasil', 'Cabang telah ditambahkan');
-        Alert::success('Berhasil', 'Cabang telah ditambahkan');
+        toast('Cabang '.$subsidiary->name.' telah ditambahkan!', 'success');
 
         return redirect()->back();
     }
@@ -380,7 +367,7 @@ class SuperAdminController extends Controller
     public function manage_pricing($id)
     {
         $washingPlans = WashingPlans::where('plan_id', $id)->get();
-        dd($washingPlans);
+
         $price = Plans::find($id);
 
         return view('staff.pages.manage_pricing.type', compact('washingPlans', 'price'));

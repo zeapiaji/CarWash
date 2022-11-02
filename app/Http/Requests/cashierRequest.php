@@ -28,25 +28,26 @@ class cashierRequest extends FormRequest
         return [
             'name' => 'required|max:25',
             'email' => 'required|unique:users,email',
-            'password' => 'required',
-            'phone' => 'required|unique:users,phone|min:10|max:13',
+            'phone' => 'required|unique:users,phone|min:11|max:12',
             'birth' => 'required',
-            'address' => 'required|min:5|max:100',
+            'address' => 'required|min:8|max:100',
             'gender' => 'required',
-            'subsidiary' => 'required',
-            // 'role' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'name.required'     => 'Kolom : nama harus diisi',
-            'email.required'    => 'Kolom : email harus diisi',
-            'password.required' => 'Kolom : password harus diisi',
-            'phone.required'    => 'kolom : telepon harus diisi',
-            'birth.required'    => 'kolom : tanggal lahir harus diisi',
-            'address.required'  => 'Kolom : alamat harus diisi',
-            'gender.required' => 'Kolom : gender harus diisi',
+            'name.required'     => 'Nama harus diisi!',
+            'email.required'    => 'Email harus diisi!',
+            'phone.required'    => 'Telepon harus diisi!',
+            'phone.min'    => 'Telepon minimal 11 digit!',
+            'phone.max'    => 'Telepon maksimal 12 digit!',
+            'birth.required'    => 'Tanggal lahir harus diisi!',
+            'address.required'  => 'Alamat harus diisi!',
+            'address.min'  => 'Alamat minimal 8 huruf!',
+            'address.max'  => 'Alamat maksimal 100 huruf!',
+            'gender.required' => 'Gender harus diisi!',
+            'email.unique' => 'Email sudah dipakai!',
         ];
     }
 }

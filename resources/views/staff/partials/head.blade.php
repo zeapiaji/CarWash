@@ -35,8 +35,7 @@
     <link rel="stylesheet" id="style-default" href="{{ asset('admin/assets/css/theme.min.css')}}">
     <link rel="stylesheet" id="user-style-rtl" href="{{ asset('admin/assets/css/user-rtl.min.css')}}">
     <link rel="stylesheet" id="user-style-default" href="{{ asset('admin/assets/css/user.min.css')}}">
-    <link href="{{asset('admin/vendors/dropzone/dropzone.min.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('admin/vendors/flatpickr/flatpickr.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/vendors/flatpickr/flatpickr.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/choices/choices.min.css')}}">
 
     <style>

@@ -136,6 +136,7 @@
                         <div class="display-4 fs-2 mb-1 fw-normal font-sans-serif text-warning">{{$item->user->name ?? 'Kosong'}}</div>
                         <div class="fs-0 mb-0 fw-bolder">{{$item->user->car->number_plate ?? ''}}</div>
                         <p class="fs--2">{{$item->user->car->name ?? ''}} &nbsp; <strong>{{$item->user->car->car_type->name ?? ''}}</strong></p>
+                        @if (!$item->user == null)
                         <div class="mt-3">
                             <div class="d-flex flex-row-reverse">
                                 <div class="d-flex">
@@ -146,6 +147,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

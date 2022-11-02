@@ -5,7 +5,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@include('sweetalert::alert')
+{{-- @include('sweetalert::alert') --}}
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
@@ -43,13 +43,6 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
             <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
                 <thead class="bg-200 text-900">
                     <tr>
-                        <th>
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select"
-                                    type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
-                            </div>
-                        </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
@@ -61,13 +54,6 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
-                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-
                         <td class="name align-middle white-space-nowrap py-2">
                             <a href="/detail/cashier/{{$item->user->id}}">
                                 <div class="d-flex d-flex align-items-center">

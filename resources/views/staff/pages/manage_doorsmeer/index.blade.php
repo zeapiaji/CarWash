@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col d-none d-sm-block">
                 <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
-                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Doorsmeer</h4>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Doorsmeer Cabang {{Auth::user()->staff->subsidiary->name}}</h4>
             </div>
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total Doorsmeer</h6>
@@ -50,45 +50,18 @@
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-lg table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
+            <table class="table table-striped fs--1 mb-0 " id="customers-table">
                 <thead class="bg-200 text-900">
                     <tr>
-                        <th>
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select"
-                                    type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
-                            </div>
-                        </th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nomor</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
                     {{-- @dd($data) --}}
                     @foreach ($doorsmeer as $item)
-                    <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
-                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-
-                        <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/admin/{{$item->id}}">
-                                <div class="d-flex d-flex align-items-center">
-                                    <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle">
-                                            <span>{{mb_substr($item->name, 0, 2)}}</span></div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="mb-0 fs--1">{{$item->name}}</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </td>
-
+                    <tr class="">
+                        <td class="name align-middle white-space-nowrap py-2"><h5 class="fs--1">{{$item->name}}</h5></td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -134,7 +107,7 @@
 
             Swal.fire({
                 icon: 'warning',
-                title: 'Are you sure you want to delete selected record(s)?',
+                title: 'Apakah anda yakin ingin menghapus Doorsmeer yang dipilih?',
                 showDenyButton: false,
                 showCancelButton: true,
                 confirmButtonText: 'Yes'

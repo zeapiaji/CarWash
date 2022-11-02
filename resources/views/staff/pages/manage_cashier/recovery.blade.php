@@ -48,40 +48,26 @@
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table"
-                data-list='{"valueNames":["name","email","phone","gender"],"page":10,"pagination":true}'>
+            <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
                 <thead class="bg-200 text-900">
                     <tr>
-                        <th>
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select"
-                                    type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
-                            </div>
-                        </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Telepon</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Email</th>
-                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Jenis Kelamin</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="gender">Jenis Kelamin</th>
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
-                    {{-- @dd($data) --}}
+                        {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->user->id}}"
-                                    value="{{$item->user->id}}" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-
                         <td class="name align-middle white-space-nowrap py-2">
-                            <a href="/detail/cashier/{{$item->id}}">
+                            <a href="/detail/cashier/{{$item->user->id}}">
                                 <div class="d-flex d-flex align-items-center">
                                     <div class="avatar avatar-xl me-2">
-                                        <div class="avatar-name rounded-circle"><span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
+                                        <div class="avatar-name rounded-circle">
+                                            <span>{{mb_substr($item->user->name, 0, 2)}}</span></div>
                                     </div>
                                     <div class="flex-1">
                                         <h5 class="mb-0 fs--1">{{$item->user->name}}</h5>
@@ -89,14 +75,9 @@
                                 </div>
                             </a>
                         </td>
-
-                          <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a>
-                        </td>
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
-                        <td class="email align-middle py-2"><a
-                                href="mailto:{{$item->user->email}}">{{$item ->user->email}}</a></td>
-                        <td class="gender align-middle py-2">{{$item->user->gender->name}}</td>
-
+                        <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a></td>
+                        <td class="gender align-middle py-2">{{$item -> user->gender -> name}}</td>
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
@@ -106,7 +87,7 @@
                                 <div class="dropdown-menu dropdown-menu-end border py-0"
                                     aria-labelledby="customer-dropdown-0">
                                     <div class="bg-white rounded-2 py-2"><a class="dropdown-item" href="/recovery/cashier/{{$item->user->id}}">Pulihkan</a><a
-                                            class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->user->id}}">Hapus</a></div>
+                                        class="dropdown-item text-danger" href="/forcedelete/cashier/{{$item->user->id}}">Hapus</a></div>
                                 </div>
                             </div>
                         </td>

@@ -13,9 +13,9 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
                         class="fas fa-ellipsis-h"></span></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/edit/employe/{{$data->id}}}">Sunting</a>
+                    <a class="dropdown-item" href="/edit/cashier/{{$data->id}}}">Sunting</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="/delete/employe/{{$data->id}}">Hapus Member</a>
+                    <a class="dropdown-item text-danger" href="/delete/cashier/{{$data->id}}">Hapus Kasir</a>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                         <p class="fw-semi-bold mb-1">Jenis Kelamin</p>
                     </div>
                     <div class="col">
-                        <p class="mb-1" style="width: 200px">{{$gender->name}}</p>
+                        <p class="mb-1" style="width: 200px">{{$data->gender->name}}</p>
                     </div>
                 </div>
                 <div class="row">

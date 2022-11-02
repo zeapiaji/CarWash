@@ -3,11 +3,21 @@
 
 @include('staff.partials.menu')
 
-<div class="row g-0">
+<div class="row g-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="col d-none d-sm-block">
+                    <span class="fas fa-user" style="color: #344050; font-size:20px;"></span>
+                    <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Edit Kasir {{$data->name}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-8 pe-lg-2">
         <div class="card mb-3">
             <div class="card-header">
-                <h5 class="mb-0"></h5>
+                <h5 class="mb-0">Data Akun</h5>
             </div>
             <div class="card-body bg-light">
                 <form action="/update/cashier/{{ $data->id }}" method="POST" class="row g-3">
@@ -76,24 +86,22 @@
                     <div class="col-lg-6">
                     </div>
                     <div class="col-12 d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit">Update</button>
+                        <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
+                        <button class="btn btn-primary" type="submit">Perbarui</button>
                     </div>
                 </form>
             </div>
         </div>
-      
+
     </div>
     <div class="col-lg-4 ps-lg-2">
-        
-            
-           
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">Area Berbahaya</h5>
                 </div>
                 <div class="card-body bg-light">
-                    <p class="fs--1">Akun admin dengan email {{$data->email}} akan dihapus.</p>
-                    <a class="btn btn-falcon-danger d-block" href="/delete/admin/{{$data->id}}">Hapus Admin</a>
+                    <p class="fs--1">Akun dengan email {{$data->email}} akan dihapus.</p>
+                    <a class="btn btn-falcon-danger d-block" href="/delete/cashier/{{$data->id}}">Hapus Kasir</a>
                 </div>
             </div>
     </div>

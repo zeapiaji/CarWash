@@ -12,7 +12,7 @@
             <div class="col-auto ps-4 ms-2">
                 <div class="ps-2">
                     <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span
-                            class="text-primary fas fa-envelope"></span></div>
+                            class="text-primary fas fa-file-invoice-dollar"></span></div>
                 </div>
             </div>
             <div class="col">

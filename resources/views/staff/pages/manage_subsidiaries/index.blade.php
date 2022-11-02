@@ -54,13 +54,6 @@
             <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden" id="customers-table">
                 <thead class="bg-200 text-900">
                     <tr>
-                        <th>
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select"
-                                    type="checkbox"
-                                    data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
-                            </div>
-                        </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         {{-- <th class="sort pe-1 align-middle white-space-nowrap" data-sort="admin">Admin</th> --}}
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="location">Lokasi</th>
@@ -70,13 +63,6 @@
                 <tbody class="list" id="table-customers-body">
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}"
-                                    value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-
                         <td class="name align-middle white-space-nowrap py-2">
                             <a href="/detail/subsidiary/{{$item->id}}">
                                 <div class="d-flex d-flex align-items-center">

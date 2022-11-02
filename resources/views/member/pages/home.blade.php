@@ -125,7 +125,7 @@
                 <h5 class="mb-0">Area Berbahaya</h5>
             </div>
             <div class="card-body bg-light">
-                <p class="fs--1">Akun dengan email {{Auth::user()->email}} akun dihapus.</p>
+                <p class="fs--1">Akun anda akan dihapus.</p>
                 <a class="btn btn-falcon-danger d-block" href="/member/delete/">Hapus Akun</a>
             </div>
         </div>

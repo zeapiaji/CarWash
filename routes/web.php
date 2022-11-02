@@ -10,6 +10,7 @@ use App\Http\Controllers\EntryController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SuperAdminController;
 
 /*
@@ -56,7 +57,7 @@ Route::prefix('doorsmeer')->group(function () {
         Route::post('/store', [AdminController::class, 'store_doorsmeer']);
         Route::post('/update/{id}', [AdminController::class, 'update_doorsmeer']);
         Route::get('/delete/{id}', [AdminController::class, 'delete_doorsmeer']);
-        Route::post('/multiple/delete', [AdminController::class, 'multiple_delete_doorsmeer'])->name('multiple_delete_doorsmeer');
+        Route::get('/multiple/delete', [AdminController::class, 'multiple_delete_doorsmeer'])->name('multiple_delete_doorsmeer');
 
     });
 });
@@ -72,7 +73,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/edit/cashier/{id}', [AdminController::class, 'edit_cashier'])->name('admin.editcashier');
     Route::post('/update/cashier/{id}', [AdminController::class, 'update_cashier'])->name('admin.updatecashier');
 
-    Route::delete('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('delete.cashier');
+    Route::get('/delete/cashier/{id}', [AdminController::class, 'delete_cashier'])->name('delete.cashier');
     Route::post('/multiple-delete/cashier', [AdminController::class, 'multiple_delete_cashier'])->name('admin.multiple-delete-cashier');
 
     Route::get('/recycle-cashier', [AdminController::class, 'recycle_cashier'])->name('admin.recycle_cashier');
@@ -212,4 +213,4 @@ Route::prefix('entry')->group(function () {
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
