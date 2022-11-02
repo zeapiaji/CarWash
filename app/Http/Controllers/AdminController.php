@@ -66,8 +66,7 @@ class AdminController extends Controller
         if ($staff->hasRole('super_admin')) {
             $data = Staff::all();
 
-            return view('staff.pages.
-            manage_cashier.index', compact('data'));
+            return view('staff.pages.manage_cashier.index', compact('data'));
         } elseif ($staff->hasRole('admin')) {
             $subs = Auth::user()->staff;
             $data = User::role('cashier')->get();
@@ -524,6 +523,7 @@ class AdminController extends Controller
             return 'Keluarkan terlebih dahulu member dari doorsmeer!';
         }
         Alert::info('Berhasil', 'Data dipindahkan ke sampah');
+
         return redirect('/doorsmeer/');
     }
 
@@ -549,5 +549,23 @@ class AdminController extends Controller
         Doormeer::whereIn('id', $request->get('selected'))->delete();
 
         return response("Data yang dipilih berhasil dihapus!", 200);
+    }
+
+
+    public function export_cashier_xlsx()
+    {
+        return Excel::download(new CashierExport, 'cashier.xlsx');
+    }
+
+    public function export_cashier_csv()
+    {
+        return Excel::download(new CashierExport, 'cashier.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
+
+    public function export_cashier_pdf()
+    {
+        return Excel::download(new CashierExport, 'cashier.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 }
