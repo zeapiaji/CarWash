@@ -107,6 +107,29 @@
             </div>
         </div>
         <div class="col-lg-4 ps-lg-2">
+            @role('super_admin')
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Cabang</h5>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="fs--1">Masukan calon kasir ke cabang yang akan dipilih.</p>
+                    <select class="form-select js-choice
+                    @error('subsidiary')is-invalid
+
+                    @enderror" id="subsidiary" name="subsidiary" data-options='{"removeItemButton":true,"placeholder":true}'>
+                        <option value="">Pilih cabang ...</option>
+                        @foreach ($subsidiaries as $item)
+
+                        <option value="{{$item->id}}" name="subsidiary"
+                            {{(old('subsidiary') == $item -> id) ? 'selected' : ''}} > {{ $item->name }}
+                        </option>
+
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            @endrole
             <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="mb-0">Password Akun</h5>

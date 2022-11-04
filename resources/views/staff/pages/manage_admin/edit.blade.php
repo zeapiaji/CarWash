@@ -14,6 +14,7 @@
 </div>
 <form action="/update/admin/{{$data->id}}" method="POST">
     @csrf
+    <input type="hidden" name="password" value="{{$data->password}}">
     <div class="row g-3">
         <div class="col-lg-8 pe-lg-2">
             <div class="card mb-3">
@@ -24,53 +25,50 @@
                     <div class="row g-3">
                         <div class="col-lg-6">
                             <label class="form-label" for="name">Nama</label>
-                            <input class="form-control @error('name')is-invalid
-
-                            @enderror" id="name" name="name" type="text" value="{{ $data->name }}" />
-
+                            <input class="form-control @error('name')is-invalid @enderror" id="name" name="name"
+                                type="text" value="{{ $data->name }}" />
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <div class="mt-3">
                                 <label class="form-label" for="email">Email</label>
-                                <input class="form-control @error('email')is-invalid
-
-                                @enderror" id="email" name="email" type="email"
-                                    value="{{$data->email}}" />
-
+                                <input class="form-control @error('email')is-invalid @enderror" id="email" name="email"
+                                    type="email" value="{{$data->email}}" />
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                             <div class="mt-3">
                                 <label class="form-label" for="phone">Telepon</label>
-                                <input class="form-control @error('phone')is-invalid
-
-                                @enderror" id="phone" name="phone" type="number"
-                                    value="{{$data->phone}}" />
+                                <input class="form-control @error('phone')is-invalid @enderror" id="phone" name="phone"
+                                    type="number" value="{{$data->phone}}" />
+                                @error('phone')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            {{-- role --}}
-                            <label class="form-label" for="bootstrap-wizard-gender">Jabatan</label>
-                                <select class="form-select @error('role')is-invalid
-
-                                @enderror" name="role" id="bootstrap-wizard-gender">
-                                    <option>Pilih level ...</option>
-                                    {{-- @dd($data->model_has_role) --}}
-                                    @foreach ($role as $item)
-                                    <option value="{{$item->name}}" name="role"
-                                        {{ ($item->id == $selectedRole) ? 'selected' : ''}}>{{$item->name}}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            <div class="mt-3">
-                                <label class="form-label" for="datepicker">Tanggal Lahir</label>
-                                <input class="form-control datetimepicker @error('birth')is-invalid
-
-                                @enderror" id="datepicker" type="text" placeholder="d/m/y"
-                                    value="{{$data->birth}}" name="birth" data-options='{"disableMobile":true}' />
+                            <label class="form-label" for="datepicker">Tanggal Lahir</label>
+                            <input class="form-control datetimepicker @error('birth')is-invalid @enderror"
+                                id="datepicker" type="text" placeholder="d/m/y" value="{{$data->birth}}" name="birth"
+                                data-options='{"disableMobile":true}' />
+                            @error('birth')
+                            <div class="invalid-feedback">
+                                {{$message}}
                             </div>
+                            @enderror
                             <div class="mt-3">
                                 <label class="form-label" for="bootstrap-wizard-gender">Gender</label>
                                 <select class="form-select @error('gender_id')is-invalid
 
                                 @enderror" name="gender" id="bootstrap-wizard-gender">
-                                    <option>Pilih gender ...</option>
+                                    <option value="">Pilih gender ...</option>
                                     @foreach ($gender as $item)
                                     <option value="{{$item->id}}" name="gender"
                                         {{ ($item->id == $data->gender_id) ? 'selected' : ''}}>{{$item->name}}
@@ -81,10 +79,13 @@
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label" for="address">Alamat</label>
-                            <textarea class="form-control @error('address')is-invalid
-
-                            @enderror" id="address" name="address" cols="30"x
-                                rows="3">{{$data->address}}</textarea>
+                            <textarea class="form-control @error('address')is-invalid @enderror" id="address"
+                                name="address" cols="30" x rows="3">{{$data->address}}</textarea>
+                            @error('address')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             <a class="btn btn-secondary mx-3" href="{{ URL::previous()}}">Batal</a>
@@ -112,6 +113,30 @@
                         </div>
                         <div class="col-auto">
                             <p>{{$data->staff->subsidiary->location}}</p>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="bootstrap-wizard-gender">Jabatan</label>
+                            <select class="form-select @error('role')is-invalid @enderror" name="role"
+                                id="bootstrap-wizard-gender">
+                                <option value="">Pilih jabatan ...</option>
+                                @foreach ($role as $item)
+                                <option value="{{$item->name}}" name="role"
+                                    {{ ($item->id == $selectedRole) ? 'selected' : ''}}>{{$item->name}}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="bootstrap-wizard-gender">Ganti Cabang</label>
+                            <select class="form-select @error('subsidiary')is-invalid @enderror" name="subsidiary"
+                                id="bootstrap-wizard-gender">
+                                <option value="">Pilih Cabang ...</option>
+                                @foreach ($subsidiary as $item)
+                                <option value="{{$item->name}}" name="role"
+                                    {{ ($item->id == $data->staff->subsidiary_id) ? 'selected' : ''}}>{{$item->name}}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

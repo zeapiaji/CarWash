@@ -131,7 +131,6 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Pembersihan Manual</h5>
                         </a>
-                        <p>Dengan Pembersihan .</p>
                     </div>
                 </div>
             </div>
@@ -146,8 +145,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Pemulihan Lampu Depan</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+
                     </div>
                 </div>
             </div>
@@ -162,8 +160,6 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Penghapusan Goresan</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
                     </div>
                 </div>
             </div>
@@ -178,8 +174,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Penghapusan Tar</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+
                     </div>
                 </div>
             </div>
@@ -194,8 +189,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Penghilang Bau</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+
                     </div>
                 </div>
             </div>
@@ -210,8 +204,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Pembersihan Mesin</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+
                     </div>
                 </div>
             </div>
@@ -226,8 +219,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Penyikatan Kerak Mobil</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+
                     </div>
                 </div>
             </div>
@@ -242,8 +234,7 @@
                         <a href="services-details.html">
                             <h5 class="service-heading">Layanan Valet</h5>
                         </a>
-                        <p>Lorem ipsum dolor sit amet cons elit aenean commodo ligula egetetsg cum sociis natoque
-                            enatib.</p>
+
                     </div>
                 </div>
             </div>
@@ -316,7 +307,7 @@
                         <div class="pricing-block text-center">
                             <h6 class="pricing-heding">Paket {{$item->id}}</h6>
                             <div class="pricing-price-block">
-                                <h2 class="pricing-price">{{$item->price}} K</h2>
+                                <h2 class="pricing-price">{{mb_substr($item->price, 0, 3)}} K</h2>
                             </div>
                             <div class="pricing-dtl">
                                 <ul>

@@ -16,6 +16,7 @@ use App\Exports\MemberExport;
 use App\Imports\MemberImport;
 use App\Exports\CashierExport;
 use App\Exports\TransactionExport;
+use App\Http\Requests\adminRequest;
 use App\Http\Requests\memberRequest;
 use Database\Seeders\DoormeerSeeder;
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +68,8 @@ class AdminController extends Controller
     {
         $staff = User::find(Auth::user()->id);
         if ($staff->hasRole('super_admin')) {
-            $data = Staff::all();
+            $admin = User::select('id')->role('admin')->get();
+            $data = Staff::whereNotIn('user_id', $admin)->get();
 
             return view('staff.pages.manage_cashier.index', compact('data'));
         } elseif ($staff->hasRole('admin')) {
@@ -88,7 +90,6 @@ class AdminController extends Controller
     public function manage_member()
     {
         $data = User::role('member')->get();
-        // dd($data);
         $totalUser = $data->count();
 
         return view('staff.pages.manage_member.index', compact('data', 'totalUser'));
@@ -105,16 +106,15 @@ class AdminController extends Controller
     public function edit_member($id)
     {
         $data = User::find($id)->first();
-        // dd($data);
         $car_type = CarType::all();
         $gender = Gender::all();
+
         return view('staff.pages.manage_member.edit', compact('data', 'car_type', 'gender'));
     }
 
     public function update_member(memberRequest $request)
     {
         $data = User::find($request->id);
-
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
@@ -128,7 +128,7 @@ class AdminController extends Controller
         $car->type_id = $request->type;
         $car->number_plate = $request->number_plate;
         $car->save();
-        toast('data member telah diubah    ');
+        toast('Member berhasil diubah!', 'success');
 
         return redirect('/manage-member');
     }
@@ -187,17 +187,22 @@ class AdminController extends Controller
     // Soft Delete
     public function delete_member($id)
     {
+        $role = Auth::user();
         $user = User::find($id);
-        if ($user->hasRole('member')) {
+        if ($role->hasRole('member')) {
             Car::where('user_id', $id)->delete();
             Auth::logout();
             $user->delete();
-        } elseif($user->hasRole('super_admin')) {
+
+            toast('Akun anda berhasil dihapus!', 'info');
+
+        return redirect('/manage-member');
+        } elseif($role->hasRole('super_admin')) {
             Car::where('user_id', $id)->delete();
             $user->delete();
         }
 
-        toast('Data dipindahkan ke sampah');
+        toast('Data dipindahkan ke sampah', 'success');
 
         return redirect('/manage-member');
     }
@@ -222,7 +227,8 @@ class AdminController extends Controller
         User::withTrashed()->restore();
         Car::withTrashed()->restore();
 
-        return response("Data yang dipilih berhasil dihapus!", 200);
+        toast('Semua Member berhasil dipulihkan!', 'success');
+        return redirect('/manage-member');
     }
 
     public function forcedelete_member($id)
@@ -238,7 +244,8 @@ class AdminController extends Controller
         Car::onlyTrashed()->forceDelete();
         User::onlyTrashed()->forceDelete();
 
-        return response("Data yang dipilih berhasil dihapus!", 200);
+        toast('Semua Member berhasil dihapus permanen!', 'info');
+        return redirect('/manage-member');
     }
 
     //Staff
@@ -253,14 +260,15 @@ class AdminController extends Controller
     {
         $role = ModelsRole::WhereNotIn('name', ['member'])->get();
         $gender = Gender::all();
+        $subsidiaries = Subsidiary::all();
 
-        return view('staff.pages.manage_cashier.input', compact('gender', 'gender'));
+        return view('staff.pages.manage_cashier.input', compact('gender', 'gender', 'subsidiaries'));
     }
 
 
     public function store_cashier(cashierRequest $request)
     {
-        // dd($request->password);
+        $role = Auth::user();
         $user = User::create([
             'name'        => $request->name,
             'email'       => $request->email,
@@ -270,10 +278,17 @@ class AdminController extends Controller
             'address'     => $request->address,
             'gender_id'   => $request->gender,
         ])->assignRole('cashier');
+        if ($role->hasRole('admin')) {
         Staff::create([
             'user_id' => $user->id,
             'subsidiary_id' => Auth::user()->staff->subsidiary_id,
         ]);
+        } elseif ($role->hasRole('super_admin')) {
+            Staff::create([
+                'user_id' => $user->id,
+                'subsidiary_id' => $request->subsidiary,
+            ]);
+        }
 
         toast('Kasir '.$user->name.' berhasil ditambahkan!', 'success');
         return redirect('/manage-cashier');
@@ -283,16 +298,20 @@ class AdminController extends Controller
     public function edit_cashier($id)
     {
         $data = User::find($id);
-        $role = ModelsRole::whereNotIn('name', ['member'])->get();
+        $role = ModelsRole::whereNotIn('name', ['member', 'super_admin', 'ceo'])->get();
 
         $gender = Gender::all();
         $selectedRole = $data->roles->first()->id;
 
-        return view('staff.pages.manage_cashier.edit', compact('data', 'gender', 'role', 'selectedRole'));
+        $subsidiary = Subsidiary::all();
+
+        return view('staff.pages.manage_cashier.edit', compact('data', 'gender', 'role', 'selectedRole', 'subsidiary'));
     }
-    public function update_cashier(Request $request, $id)
+
+    public function update_cashier(adminRequest $request, $id)
     {
         $data = User::find($request->id);
+        $role = $data;
         $data->name = $request->name;
         $data->email = $request->email;
         $data->birth = $request->birth;
@@ -301,23 +320,12 @@ class AdminController extends Controller
         $data->gender_id = $request->gender;
         $data->save();
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:25',
-            'email' => 'required|unique:users,email',
-            'phone' => 'required|unique:users,phone|min:10|max:13',
-            'birth' => 'required',
-            'address' => 'required|min:5|max:100',
-            'gender' => 'required',
-            'subsidiary' => 'required',
-
+        Staff::where('user_id', $id)->update([
+            'subsidiary_id' => $request->subsidiary
         ]);
 
-
-        Staff::where('user_id', $id)->first()->syncRoles($request->role);
-
-        // alert::toast('success');
-        toast('Data kasir telah diubah');
-
+        User::find($id)->syncRoles($request->role);
+        toast('Data '.$role->name.' telah diubah');
 
         return redirect('/manage-cashier');
     }
@@ -335,7 +343,11 @@ class AdminController extends Controller
     public function recycle_cashier()
     {
         $admin = Auth::user();
-        $data = Staff::where('subsidiary_id', $admin->staff->subsidiary_id)->onlyTrashed()->get();
+        if ($admin->hasRole('admin')) {
+            $data = Staff::where('subsidiary_id', $admin->staff->subsidiary_id)->onlyTrashed()->get();
+        }elseif ($admin->hasRole('super_admin')) {
+            $data = Staff::onlyTrashed()->get();
+        }
 
         return view('staff.pages.manage_cashier.recovery', compact('data'));
     }
@@ -351,7 +363,12 @@ class AdminController extends Controller
 
     public function recovery_all_cashier()
     {
-        Staff::where('subsidiary_id', Auth::user()->staff->subsidiary_id)->withTrashed()->restore();
+        $role = Auth::user();
+        if ($role->hasRole('admin')) {
+            Staff::where('subsidiary_id', Auth::user()->staff->subsidiary_id)->withTrashed()->restore();
+        }elseif ($role->hasRole('super_admin')) {
+            Staff::withTrashed()->restore();
+        }
 
         toast('Semua Kasir berhasil dipulihkan!', 'success');
         return redirect('/manage-cashier');
@@ -369,7 +386,12 @@ class AdminController extends Controller
 
     public function force_delete_all_cashier()
     {
-        Staff::onlyTrashed()->where('subsidiary_id', Auth::user()->staff->subsidiary_id)->forceDelete();
+        $role = Auth::user();
+        if ($role->hasRole('admin')) {
+            Staff::onlyTrashed()->where('subsidiary_id', Auth::user()->staff->subsidiary_id)->forceDelete();
+        }elseif ($role->hasRole('super_admin')) {
+            Staff::onlyTrashed()->forceDelete();
+        }
 
         toast('Semua Kasir berhasil dihapus permanen!');
         return redirect('/manage-cashier');
@@ -407,19 +429,37 @@ class AdminController extends Controller
 
     public function export_cashier_xlsx()
     {
-        return Excel::download(new CashierExport, 'cashier-cabang-'.Auth::user()->staff->subsidiary->name.'.xlsx');
+        $auth = Auth::user();
+        if ($auth->hasRole('admin')) {
+            return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.xlsx');
+        }elseif ($auth->hasRole('super_admin')) {
+            return Excel::download(new CashierExport, 'kasir.xlsx');
+        }
+
     }
 
     public function export_cashier_csv()
     {
-        return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.csv', \Maatwebsite\Excel\Excel::CSV, [
-            'Content-Type' => 'text/csv',
-        ]);
+        $auth = Auth::user();
+        if ($auth->hasRole('admin')) {
+            return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.csv', \Maatwebsite\Excel\Excel::CSV, [
+                'Content-Type' => 'text/csv',
+            ]);
+        }elseif ($auth->hasRole('super_admin')) {
+            return Excel::download(new CashierExport, 'kasir.csv', \Maatwebsite\Excel\Excel::CSV, [
+                'Content-Type' => 'text/csv',
+            ]);
+        }
     }
 
     public function export_cashier_pdf()
     {
-        return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        $auth = Auth::user();
+        if ($auth->hasRole('admin')) {
+            return Excel::download(new CashierExport, 'kasir-cabang-'.Auth::user()->staff->subsidiary->name.'.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        }elseif ($auth->hasRole('super_admin')) {
+            return Excel::download(new CashierExport, 'kasir.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        }
     }
 
 

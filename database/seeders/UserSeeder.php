@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => 'member' . $i,
                 'email' => 'member' . $i . '@gmail.com',
-                'phone' => '12420908' . $i,
+                'phone' => '1111111111' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => 'kasir' . $i,
                 'email' => 'kasir' . $i . '@gmail.com',
-                'phone' => '1312261' . $i,
+                'phone' => '2222222222' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => 'admin' . $i,
                 'email' => 'admin' . $i . '@gmail.com',
-                'phone' => '1242090288' . $i,
+                'phone' => '33333333333' . $i,
                 'address' => 'Jl. Katapang Andir No.Km 4, Sukamukti, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921',
                 'birth' => Carbon::parse('2000-12-28'),
                 'gender_id' => random_int(1, 2),

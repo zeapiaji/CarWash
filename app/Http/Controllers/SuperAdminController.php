@@ -16,6 +16,7 @@ use App\Models\WashingPlans;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Requests\adminRequest;
+use App\Http\Requests\SubsidiaryRequest;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Contracts\Role;
@@ -96,19 +97,20 @@ class SuperAdminController extends Controller
 
         // $totalEmployee = User::role('cashier')->get();
         $totalEmployee = Staff::where('subsidiary_id', $data->staff->subsidiary_id)->count();
-        // dd($data);
 
         $gender = Gender::all();
-        $role = ModelsRole::whereNotIn('name', ['member'])->get();
 
+        $role = ModelsRole::whereNotIn('name', ['member', 'super_admin', 'ceo'])->get();
         $selectedRole = $data->roles->first()->id;
+        $subsidiary = Subsidiary::all();
 
-        return view('staff.pages.manage_admin.edit', compact('data', 'gender', 'totalEmployee', 'role', 'selectedRole'));
+        return view('staff.pages.manage_admin.edit', compact('data', 'gender', 'totalEmployee', 'role', 'selectedRole', 'subsidiary'));
     }
 
-    public function update_admin(Request $request, $id)
+    public function update_admin(adminRequest $request, $id)
     {
         $data = User::find($id);
+        $admin = $data;
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
@@ -117,27 +119,13 @@ class SuperAdminController extends Controller
         $data->gender_id = $request->gender;
         $data->save();
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:25',
-            'email' => 'required|unique:users,email',
-            'phone' => 'required|unique:users,phone|min:10|max:13',
-            'birth' => 'required',
-            'address' => 'required|min:5|max:100',
-            'gender' => 'required',
-        ]);
-
-        // dd($data);
-        Staff::where('user_id', $id)->first()->syncRoles($request->role);
-        Alert::success('Berhasil', 'Data admin telah diubah');
+        User::find($id)->syncRoles($request->role);
+        toast('Admin '. $admin->name. ' berhasil diubah!', 'success');
         return redirect('/manage-admin');
     }
 
     public function delete_admin($id)
     {
-        Staff::where('user_id', $id)->update([
-            'subsidiary_id' => null,
-        ]);
-
         Staff::where('user_id', $id)->delete();
 
         User::find($id)->delete();
@@ -163,7 +151,7 @@ class SuperAdminController extends Controller
 
     public function recycle_admin()
     {
-        $data = User::role('admin')->role('admin')->onlyTrashed()->get();
+        $data = User::role('admin')->onlyTrashed()->get();
 
         return view('staff.pages.manage_admin.recovery', compact('data'));
     }
@@ -176,28 +164,12 @@ class SuperAdminController extends Controller
         return back();
     }
 
-    public function multiple_recovery_admin(Request $request)
-    {
-        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->restore();
-        User::withTrashed()->whereIn('id', $request->get('selected'))->restore();
-
-        return response("Akun yang dipilih berhasil dipulihkan.", 200);
-    }
-
-    public function multiple_force_delete_admin(Request $request)
-    {
-        Staff::withTrashed()->whereIn('user_id', $request->get('selected'))->forceDelete();
-        User::withTrashed()->whereIn('id', $request->get('selected'))->forceDelete();
-
-        return response("Akun yang dipilih berhasil dihapus.", 200);
-    }
-
     public function recovery_all_admin()
     {
         Staff::onlyTrashed()->restore();
         User::onlyTrashed()->restore();
 
-        return response("Semua admin berhasil dipulihkan.", 200);
+        toast('Semua Admin berhasil dipulihkan!', 'success');
     }
 
     public function force_delete_all_admin()
@@ -205,7 +177,7 @@ class SuperAdminController extends Controller
         Staff::onlyTrashed()->forceDelete();
         User::onlyTrashed()->forceDelete();
 
-        return response("Semua admin berhasil hapus.", 200);
+        toast('Semua Admin berhasil dihapus!', 'info');
     }
 
     public function superadmin_washing_data()
@@ -241,7 +213,7 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_subsidiaries.add');
     }
 
-    public function create_subsidiary(Request $request)
+    public function create_subsidiary(SubsidiaryRequest $request)
     {
         $subsidiary = Subsidiary::create([
             'name' => $request->name,
@@ -249,7 +221,7 @@ class SuperAdminController extends Controller
         ]);
         toast('Cabang '.$subsidiary->name.' telah ditambahkan!', 'success');
 
-        return redirect()->back();
+        return redirect('/manage-subsidiaries');
     }
 
     public function edit_subsidiary($id)
@@ -260,7 +232,7 @@ class SuperAdminController extends Controller
         return view('staff.pages.manage_subsidiaries.edit', compact('data', 'staff'));
     }
 
-    public function update_subsidiary(Request $request, $id)
+    public function update_subsidiary(SubsidiaryRequest $request, $id)
     {
         $data = Subsidiary::find($id);
         $data->name = $request->name;
@@ -394,7 +366,9 @@ class SuperAdminController extends Controller
         $washingPlans->save();
 
         $plans = Plans::find($id);
-        $plans->name = $request->price;
+        $plans-> price = $request->price;
+
+        // dd($plans);
 
 
         Alert::success('Berhasil', 'Harga pencucian telah diubah');

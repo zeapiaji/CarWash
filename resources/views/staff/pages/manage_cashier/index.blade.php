@@ -5,7 +5,24 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{-- @include('sweetalert::alert') --}}
+@include('sweetalert::alert')
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col d-none d-sm-block">
+                <span class="fas fa-users" style="color: #344050; font-size:20px;"></span>
+                <h4 class="d-none d-sm-inline-block fw-bolder ms-1">Kelola Kasir</h4>
+            </div>
+            <div class="col-auto d-none d-sm-block">
+                <h6 class="d-none d-sm-inline-block ms-1">Total Kasir</h6>
+                <span class="fw-bolder mx-1" style="font-size:20px">|</span>
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$data->count()}}}'>0</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="card mb-3" id="customersTable"
 data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination":true}'>
     <div class="card-header">
@@ -47,6 +64,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Telepon</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="gender">Jenis Kelamin</th>
+                        @role('super_admin')
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="cabang">Cabang</th>
+                        @endrole
                         <th class="align-middle no-sort"></th>
                     </tr>
                 </thead>
@@ -70,6 +90,9 @@ data-list='{"valueNames":["name","phone","email","gender"],"page":10,"pagination
                         <td class="phone align-middle py-2">{{$item->user->phone}}</td>
                         <td class="email align-middle py-2"><a href="mailto:{{$item->user->email}}">{{$item->user->email}}</a></td>
                         <td class="gender align-middle py-2">{{$item -> user->gender -> name}}</td>
+                        @role('super_admin')
+                        <td class="cabang align-middle py-2" data-sort="cabang">{{$item->subsidiary->name ?? ''}}</td>
+                        @endrole
                         <td class="align-middle white-space-nowrap py-2 text-end">
                             <div class="dropdown font-sans-serif position-static"><button
                                     class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"

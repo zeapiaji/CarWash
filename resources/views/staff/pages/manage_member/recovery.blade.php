@@ -28,15 +28,9 @@
                 <input type="search" class="form-control search-input search"  placeholder="cari..">
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
-                <div class="d-none" id="table-customers-actions">
-                    <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-member" data-route="{{ route('admin.multiple-recovery-member')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="multiple-force-delete-member" data-route="{{ route('admin.multiple-force-delete-member')}}">Hapus Permanen</button>
-                    </div>
-                </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-member" data-route="{{ route('admin.recovery-all-member')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-member" data-route="{{ route('admin.force-delete-all-member')}}">Hapus Permanen Semua</button>
+                    <a class="btn btn-falcon-default btn-sm text-success ms-2" href="recovery-all-member">Pulihkan Semua</a>
+                    <a class="btn btn-falcon-default btn-sm text-danger ms-2" href="force-delete-all-member">Hapus Permanen Semua</a>
                 </div>
             </div>
         </div>
@@ -47,10 +41,6 @@
             data-list='{"valueNames":["name","car","number-plate","email","phone"],"page":10,"pagination":true}'>
                 <thead class="bg-200 text-900">
                     <tr>
-                        <th>
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check-all" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/></div>
-                        </th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Nama</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="car">Mobil</th>
                         <th class="sort pe-1 align-middle white-space-nowrap" data-sort="number-plate">Plat Nomor</th>
@@ -63,12 +53,6 @@
                     {{--  @dd($data)  --}}
                     @foreach ($data as $item)
                     <tr class="btn-reveal-trigger">
-                        <td class="align-middle py-2" style="width: 28px;">
-                            <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                <input class="form-check-input check" type="checkbox" id="customer-{{$item->id}}" value="{{$item->id}}" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-
                         <td class="name align-middle white-space-nowrap py-2">
                             <div class="d-flex d-flex align-items-center">
                                 <div class="avatar avatar-xl me-2">

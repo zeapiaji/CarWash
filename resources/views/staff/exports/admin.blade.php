@@ -16,7 +16,7 @@
         <td>{{$item->address}}</td>
         <td>{{$item->birth}}</td>
         <td>{{$item->gender->name}}</td>
-        <td>{{$item->staff->subsidiary->name}}</td>
+        <td>{{$item->staff->subsidiary->name ?? ''}}</td>
     </tr>
     @endforeach
 </table>

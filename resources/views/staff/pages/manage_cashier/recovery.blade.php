@@ -15,7 +15,7 @@
             <div class="col-auto d-none d-sm-block">
                 <h6 class="d-none d-sm-inline-block ms-1">Total kasir</h6>
                 <span class="fw-bolder mx-1" style="font-size:20px">|</span>
-
+                <h6 class="d-none d-sm-inline-block" data-countup='{"endValue":{{$data->count()}}}'>0</h6>
             </div>
         </div>
     </div>
@@ -28,20 +28,9 @@
                 <input type="search" class="form-control search-input search" placeholder="cari..">
             </div>
             <div class="col-8 col-sm-auto text-end ps-2">
-                <div class="d-none" id="table-customers-actions">
-                    <div class="d-flex">
-                        <button class="btn btn-falcon-default btn-sm text-success ms-2" id="multiple-recovery-cashier"
-                            data-route="{{ route('admin.multiple-recovery-cashier')}}">Pulihkan</button>
-                        <button class="btn btn-falcon-default btn-sm text-danger ms-2"
-                            id="multiple-force-delete-cashier"
-                            data-route="{{ route('admin.multiple-force-delete-cashier')}}">Hapus Permanen</button>
-                    </div>
-                </div>
                 <div id="table-customers-replace-element">
-                    <button class="btn btn-falcon-default btn-sm text-success ms-2" id="recovery-all-cashier"
-                        data-route="{{ route('admin.recovery-all-cashier')}}">Pulihkan Semua</button>
-                    <button class="btn btn-falcon-default btn-sm text-danger ms-2" id="force-delete-all-cashier"
-                        data-route="{{ route('admin.force-delete-all-cashier')}}">Hapus Permanen Semua</button>
+                    <a class="btn btn-falcon-default btn-sm text-success ms-2" href="recovery-all-cashier">Pulihkan Semua</a>
+                    <a class="btn btn-falcon-default btn-sm text-danger ms-2" href="force-delete-all-cashier">Hapus Permanen Semua</a>
                 </div>
             </div>
         </div>

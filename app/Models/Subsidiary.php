@@ -25,7 +25,7 @@ class Subsidiary extends Model
      */
     public function staff()
     {
-        return $this->hasOne(Staff::class);
+        return $this->hasOne(Staff::class, 'subsidiary_id');
     }
 
     /**

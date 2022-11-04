@@ -24,12 +24,22 @@
                     <div class="row g-3">
                         <div class="col-lg-12">
                             <label class="form-label" for="name">Nama</label>
-                            <input class="form-control" id="name" name="name" type="text" value="{{$data->name}}" />
+                            <input class="form-control @error('name') is-invalid @enderror" id="name" name="name" type="text" value="{{$data->name}}" />
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
                         </div>
                         <div class="col-lg-12">
-                            <label class="form-label" for="address">Lokasi</label>
-                            <textarea class="form-control" id="address" name="location" cols="30"
+                            <label class="form-label" for="location">Lokasi</label>
+                            <textarea class="form-control @error('location') is-invalid @enderror" id="location" name="location" cols="30"
                                 rows="3">{{$data->location}}</textarea>
+                            @error('location')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                 </div>

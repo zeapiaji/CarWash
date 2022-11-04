@@ -17,12 +17,16 @@ class CashierExport implements FromView
     */
     public function view(): View
     {
-        $data = User::role('cashier')->get();
-        $subs = Auth::user()->staff;
-        $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
-            ->whereNotIn('user_id', [$subs->user_id])
-            ->get();
-
-            return view('staff.exports.cashier', compact('data'));
+        $auth = Auth::user();
+        if ($auth->hasRole('admin')) {
+            $data = User::role('cashier')->get();
+            $subs = Auth::user()->staff;
+            $data = Staff::where('subsidiary_id', $subs->subsidiary_id)
+                ->whereNotIn('user_id', [$subs->user_id])
+                ->get();
+        }elseif ($auth->hasRole('super_admin')) {
+            $data = User::role('cashier')->get();
+        }
+        return view('staff.exports.cashier', compact('data'));
     }
 }

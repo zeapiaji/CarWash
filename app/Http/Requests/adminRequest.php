@@ -24,37 +24,36 @@ class adminRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:25',
-            'email' => 'required|unique:users,email',
-            'phone' => 'required|unique:users,phone|min:10|max:13',
+            'name' => 'required|max:25|min:5|unique:users,name,'.$this->id,
+            'email' => 'required|unique:users,email,'.$this->id.'|email:rfc,dns|min:5|max:20',
+            'phone' => 'required|unique:users,phone,'.$this->id.'|min:11|max:13',
             'birth' => 'required',
             'gender' => 'required',
             'address' => 'required|min:5|max:100',
             'password' => 'required',
             'subsidiary' => 'required',
-
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'Kolom : Nama wajib diisi.',
-            'email.required' => 'Kolom : Email wajib diisi.',
-            'phone.required' => 'Kolom : Telepon wajib diisi.',
-            'birth.required' => 'Kolom : Tanggal lahir wajib diisi.',
-            'gender.required' => 'Kolom : Gender wajib diisi.',
-            'address.required' => 'Kolom : Alamat wajib diisi.',
-            'password.required' => 'Kolom : Password wajib diisi.',
-            'subsidiary.required' => 'Kolom : Cabang wajib diisi.',
-
-
-            // 'custom' => [
-            //     'name' => [
-            //         'required' => 'We need to know your email address!',
-            //         'max' => 'Your email address is too long!'
-            //     ],
-            // ],
-
+            'name.required' => 'Nama harus diisi!',
+            'name.unique' => 'Nama telah digunakan!',
+            'name.max' => 'Nama maksimal 25 huruf!',
+            'name.min' => 'Nama minimal 5 huruf!',
+            'email.required' => 'Email harus diisi!',
+            'email.min' => 'Email minimal 5 huruf!',
+            'email.max' => 'Email maksimal 20 huruf!',
+            'email.unique' => 'Email telah digunakan!',
+            'email.email' => 'Format email salah!',
+            'phone.required' => 'Telepon harus diisi.',
+            'phone.min' => 'Telepon minimal 11 digit.',
+            'phone.max' => 'Telepon maksimal 13 digit.',
+            'birth.required' => 'Tanggal lahir harus diisi.',
+            'gender.required' => 'Gender harus diisi.',
+            'address.required' => 'Alamat harus diisi.',
+            'password.required' => 'Password harus diisi.',
+            'subsidiary.required' => 'Cabang harus diisi.',
         ];
     }
 }

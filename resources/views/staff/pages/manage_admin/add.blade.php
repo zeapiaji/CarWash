@@ -144,13 +144,6 @@
                     @error('subsidiary')is-invalid
 
                     @enderror" id="subsidiary" name="subsidiary" data-options='{"removeItemButton":true,"placeholder":true}'>
-
-                    {{--  <option>Pilih cabang ...</option>
-                    @foreach ($subsidiaries as $item)
-                    <option value="{{$item->id}}" name="subsidiary">{{$item->name}}
-                        </option> --}}
-
-
                         <option value="">Pilih cabang ...</option>
                         @foreach ($subsidiaries as $item)
 
@@ -160,15 +153,6 @@
 
                         @endforeach
                     </select>
-
-                    @error('subsidiary')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
                 </div>
             </div>
             <div class="card mb-3">

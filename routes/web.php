@@ -79,9 +79,7 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::get('/recycle-cashier', [AdminController::class, 'recycle_cashier'])->name('admin.recycle_cashier');
     Route::get('/forcedelete/cashier/{id}', [AdminController::class, 'forcedelete_cashier'])->name('admin.forcedeletecashier');
     Route::get('/recovery/cashier/{id}', [AdminController::class, 'recovery_cashier'])->name('admin.recoverycashier');
-    Route::post('/multiple-recovery-cashier', [AdminController::class, 'multiple_recovery_cashier'])->name('admin.multiple-recovery-cashier');
-    Route::post('/multiple-force-delete-cashier', [AdminController::class, 'multiple_force_delete_cashier'])->name('admin.multiple-force-delete-cashier');
-    Route::post('/recovery-all-cashier', [AdminController::class, 'recovery_all_cashier'])->name('admin.recovery-all-cashier');
+    Route::get('/recovery-all-cashier', [AdminController::class, 'recovery_all_cashier'])->name('admin.recovery-all-cashier');
     Route::get('/force-delete-all-cashier', [AdminController::class, 'force_delete_all_cashier'])->name('admin.force-delete-all-cashier');
 
     Route::get('/export-cashier-xlsx', [AdminController::class, 'export_cashier_xlsx'])->name('cashier.export-cashier-xlsx');
@@ -96,14 +94,10 @@ Route::middleware(['role:admin|super_admin'])->group(function () {
     Route::post('/update/member', [AdminController::class, 'update_member'])->name('admin.updatemember');
 
     Route::get('/delete/member/{id}', [AdminController::class, 'delete_member'])->name('admin.deletemember');
-    Route::post('/multiple-delete/member', [AdminController::class, 'multiple_delete_member'])->name('admin.multiple-delete-member');
-
     Route::get('/recycle-member', [AdminController::class, 'recycle_member'])->name('admin.recycle_member');
     Route::get('/forcedelete/member/{id}', [AdminController::class, 'forcedelete_member'])->name('admin.forcedeletemember');
     Route::get('/recovery/member/{id}', [AdminController::class, 'recovery_member'])->name('admin.recoverymember');
-    Route::post('/multiple-recovery-member', [AdminController::class, 'multiple_recovery_member'])->name('admin.multiple-recovery-member');
-    Route::post('/multiple-force-delete-member', [AdminController::class, 'multiple_force_delete_member'])->name('admin.multiple-force-delete-member');
-    Route::post('/recovery-all-member', [AdminController::class, 'recovery_all_member'])->name('admin.recovery-all-member');
+    Route::get('/recovery-all-member', [AdminController::class, 'recovery_all_member'])->name('admin.recovery-all-member');
     Route::get('/force-delete-all-member', [AdminController::class, 'force_delete_all_member'])->name('admin.force-delete-all-member');
 
     // Export
@@ -139,12 +133,10 @@ Route::middleware(['role:super_admin'])->group(function () {
     Route::post('/multiple-delete-admin', [SuperAdminController::class, 'multiple_delete_admin'])->name('superadmin.multiple-delete-admin');
 
     Route::get('/recycle-admin', [SuperAdminController::class, 'recycle_admin'])->name('superadmin.recycle-admin');
-    Route::post('/recovery/admin/{id}', [SuperAdminController::class, 'recovery_admin'])->name('superadmin.recoveradmin');
-    Route::post('/forcedelete/admin/{id}', [SuperAdminController::class, 'force_delete_admin'])->name('superadmin.forcedeleteadmin');
-    Route::post('/multiple-recovery-admin', [SuperAdminController::class, 'multiple_recovery_admin'])->name('superadmin.multiple-recovery-admin');
-    Route::post('/multiple-force-delete-admin', [SuperAdminController::class, 'multiple_force_delete_admin'])->name('superadmin.multiple-force-delete-admin');
-    Route::post('/recovery-all-admin', [SuperAdminController::class, 'recovery_all_admin'])->name('superadmin.recovery-all-admin');
-    Route::post('/force-delete-all-admin', [SuperAdminController::class, 'force_delete_all_admin'])->name('superadmin.force-delete-all-admin');
+    Route::get('/recovery/admin/{id}', [SuperAdminController::class, 'recovery_admin'])->name('superadmin.recoveradmin');
+    Route::get('/forcedelete/admin/{id}', [SuperAdminController::class, 'force_delete_admin'])->name('superadmin.forcedeleteadmin');
+    Route::get('/recovery-all-admin', [SuperAdminController::class, 'recovery_all_admin'])->name('superadmin.recovery-all-admin');
+    Route::get('/force-delete-all-admin', [SuperAdminController::class, 'force_delete_all_admin'])->name('superadmin.force-delete-all-admin');
 
 
 

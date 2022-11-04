@@ -181,8 +181,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link dropdown-indicator collapsed" href="#subsidiary" role="button"
-                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="manage_admin">
+                    <a class="nav-link " href="/manage-subsidiaries">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-building"></span>
@@ -190,28 +189,6 @@
                             <span class="nav-link-text ps-1">Cabang</span>
                         </div>
                     </a>
-                    <ul class="nav false collapse" id="subsidiary" style="">
-                        <li class="nav-item ms-2">
-                            <a class="nav-link" href="/manage-subsidiaries" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-user-cog"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Kelola</span>
-                                </div>
-                            </a><!-- more inner pages-->
-                        </li>
-                        <li class="nav-item ms-2">
-                            <a class="nav-link" href="/recycle-subsidiary" aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    <span class="nav-link-icon">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </span>
-                                    <span class="nav-link-text ps-1">Tempat Sampah</span>
-                                </div>
-                            </a><!-- more inner pages-->
-                        </li>
-                    </ul>
                 </li>
 
                 @endrole
